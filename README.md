@@ -1,6 +1,6 @@
 # spring6-sandbox
 
-Spring 6 (and Spring Boot 3) will upgrade to use Jakarta EE 9+ and Java 17 as the new code baseline. Aligned with the competitors, such as Micronaut, Quarkus, Spring 6 will bring built-in native building support which currently is an experiemental project. At the same time, a lot of long-deprecated features will be removed.
+Spring 6 (and Spring Boot 3) will upgrade to use Jakarta EE 9+ and Java 17 as the new code baseline. Aligned with the competitors, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/), Spring 6 will bring built-in native building support which currently is [an experiemental project](https://github.com/spring-projects-experimental/spring-native/releases/tag/0.11.0). At the same time, a lot of long-deprecated features will be removed.
 
 
 
