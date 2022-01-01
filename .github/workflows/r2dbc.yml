@@ -1,14 +1,14 @@
-name: vanilla-reactive
+name: r2dbc
 
 on:
   push:
     paths:
-      - "vanilla-reactive/**"
+      - "r2dbc/**"
     branches:
       - master
   pull_request:
     paths:
-      - "vanilla-reactive/**"
+      - "r2dbc/**"
     types:
       - opened
       - synchronize
@@ -37,5 +37,5 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn clean install --file vanilla-reactive/pom.xml
+        run: mvn clean install --file r2dbc/pom.xml
 
