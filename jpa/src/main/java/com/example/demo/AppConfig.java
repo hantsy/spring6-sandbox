@@ -1,8 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.domain.JpaConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,5 +21,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
                 )
         }
 )
+@Import(JpaConfig.class)
 public class AppConfig {
 }
