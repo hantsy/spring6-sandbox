@@ -1,11 +1,15 @@
-package com.example.demo;
+package com.example.demo.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.function.RouterFunction;
@@ -17,6 +21,16 @@ import static org.springframework.web.servlet.function.RouterFunctions.route;
 
 @Configuration
 @EnableWebMvc
+@ComponentScan(
+        basePackageClasses = WebConfig.class,
+        useDefaultFilters = false,
+        includeFilters = {
+                @ComponentScan.Filter(
+                        type = FilterType.ANNOTATION,
+                        classes = {RestController.class, RestControllerAdvice.class}
+                )
+        }
+)
 public class WebConfig implements WebMvcConfigurer {
 
     @Autowired

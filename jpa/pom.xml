@@ -359,7 +359,6 @@
                                 <containerId>jetty11x</containerId>
                                 <type>embedded</type>
                             </container>
-
                             <configuration>
                                 <properties>
                                     <cargo.servlet.port>8080</cargo.servlet.port>

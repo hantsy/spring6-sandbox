@@ -6,7 +6,7 @@
     <groupId>com.example</groupId>
     <artifactId>spring6-sample-jdbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>spring6-sample-jdbc</name>
     <description>Spring 6 WebMvc/Jdbc example(without Spring Boot)</description>
@@ -14,8 +14,19 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>17</maven.compiler.release>
+
+        <!-- maven plugins -->
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+        <cargo-maven3-plugin.version>1.9.9</cargo-maven3-plugin.version>
+
+        <!-- API and frameworks -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M1</spring-framework.version>
+        <tomcat.version>10.0.14</tomcat.version>
+
+        <skip.unit.tests>true</skip.unit.tests>
+        <skip.integration.tests>true</skip.integration.tests>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +71,15 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>1.16.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -100,33 +120,10 @@
             <artifactId>postgresql</artifactId>
             <version>42.3.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core-jakarta</artifactId>
-            <version>5.6.3.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-            <version>5.6.3.Final</version>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Required by Hibernate -->
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>3.0.0</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
         </dependency>
 
         <!-- Jakarta EE 9 compatible Servlet container, eg. Tomcat 10, Eclipse Jetty 11 -->
@@ -195,6 +192,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
@@ -225,7 +232,7 @@
                     <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>com.example.demo.Application</mainClass>
+                            <mainClass>com.example.demo.DemoApplicationInitializer</mainClass>
                         </manifest>
                     </archive>
 
@@ -242,7 +249,68 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>tomcat</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven3-plugin</artifactId>
+                        <version>${cargo-maven3-plugin.version}</version>
+                        <configuration>
+                            <container>
+                                <containerId>tomcat10x</containerId>
+                                <artifactInstaller>
+                                    <groupId>org.apache.tomcat</groupId>
+                                    <artifactId>tomcat</artifactId>
+                                    <version>${tomcat.version}</version>
+                                </artifactInstaller>
+                            </container>
 
+                            <configuration>
+                                <properties>
+                                    <!-- <cargo.servlet.port>8080</cargo.servlet.port>-->
+                                    <cargo.logging>low</cargo.logging>
+                                </properties>
+                            </configuration>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>jetty</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven3-plugin</artifactId>
+                        <version>${cargo-maven3-plugin.version}</version>
+                        <configuration>
+                            <container>
+                                <containerId>jetty11x</containerId>
+                                <type>embedded</type>
+                            </container>
+                            <configuration>
+                                <properties>
+                                    <cargo.servlet.port>8080</cargo.servlet.port>
+                                    <cargo.logging>low</cargo.logging>
+                                </properties>
+                            </configuration>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>asm</groupId>
+                                <artifactId>asm</artifactId>
+                                <version>3.3.1</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
     <repositories>
         <repository>
             <id>spring-snapshots</id>

@@ -1,6 +1,7 @@
-package com.example.demo;
+package com.example.demo.web;
 
-import com.example.demo.jdbc.Post;
+import com.example.demo.Jackson2ObjectMapperConfig;
+import com.example.demo.domain.model.Post;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

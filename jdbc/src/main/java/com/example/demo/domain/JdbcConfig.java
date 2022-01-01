@@ -1,4 +1,4 @@
-package com.example.demo.jdbc;
+package com.example.demo.domain;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

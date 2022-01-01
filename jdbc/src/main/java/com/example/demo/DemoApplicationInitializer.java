@@ -1,16 +1,16 @@
 package com.example.demo;
 
-import com.example.demo.jdbc.JdbcConfig;
-import com.example.demo.jpa.JpaConfig;
+import com.example.demo.domain.JdbcConfig;
+import com.example.demo.web.WebConfig;
 import jakarta.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class Application extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class DemoApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class, DataSourceConfig.class, JdbcConfig.class, JpaConfig.class};
+        return new Class[]{AppConfig.class, DataSourceConfig.class, JdbcConfig.class};
     }
 
     @Override
