@@ -5,6 +5,7 @@ import com.example.demo.domain.JdbcConfig;
 import com.example.demo.domain.model.CreatePostCommand;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.Status;
+import com.example.demo.domain.model.UpdatePostCommand;
 import com.example.demo.domain.repository.PostRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -32,34 +33,34 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * @author hantsy
  */
-@Disabled//see: https://github.com/testcontainers/testcontainers-java/discussions/4841
 @Slf4j
 @SpringJUnitConfig(classes = {DataSourceConfig.class, JdbcConfig.class, PostRepositoryTestWithTestcontainers.TestConfig.class})
-@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
+//@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
 public class PostRepositoryTestWithTestcontainers {
 
-    static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            var container = new PostgreSQLContainer("postgres:12")
-                    .withInitScript("init.sql");
-            container.start();
-            log.info(" container.getFirstMappedPort():: {}", container.getFirstMappedPort());
-            configurableApplicationContext
-                    .addApplicationListener((ApplicationListener<ContextClosedEvent>) event -> container.stop());
-            var env = configurableApplicationContext.getEnvironment();
-            var props = env.getPropertySources();
-            props.addFirst(
-                    new MapPropertySource("testdatasource",
-                            Map.of("datasource.url", container.getJdbcUrl(),
-                                    "datasource.username", container.getUsername(),
-                                    "datasource.password", container.getPassword()
-                            )
-                    )
-            );
-        }
-    }
+//see: https://github.com/testcontainers/testcontainers-java/discussions/4841
+//    static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
+//
+//        @Override
+//        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+//            var container = new PostgreSQLContainer("postgres:12")
+//                    .withInitScript("init.sql");
+//            container.start();
+//            log.info(" container.getFirstMappedPort():: {}", container.getFirstMappedPort());
+//            configurableApplicationContext
+//                    .addApplicationListener((ApplicationListener<ContextClosedEvent>) event -> container.stop());
+//            var env = configurableApplicationContext.getEnvironment();
+//            var props = env.getPropertySources();
+//            props.addFirst(
+//                    new MapPropertySource("testdatasource",
+//                            Map.of("datasource.url", container.getJdbcUrl(),
+//                                    "datasource.username", container.getUsername(),
+//                                    "datasource.password", container.getPassword()
+//                            )
+//                    )
+//            );
+//        }
+//    }
 
     @Autowired
     PostRepository posts;
@@ -84,10 +85,10 @@ public class PostRepositoryTestWithTestcontainers {
 
         var countByStatus = posts.countByStatus();
 
-        assertThat(countByStatus.get(0).get("status")).isEqualTo(Status.DRAFT);
+        assertThat(countByStatus.get(0).get("status")).isEqualTo(Status.DRAFT.name());
         var item2 = countByStatus.get(1);
         assertThat(item2.get("cnt")).isEqualTo(1L);
-        assertThat(item2.get("status")).isEqualTo(Status.PENDING_MODERATION);
+        assertThat(item2.get("status")).isEqualTo(Status.PENDING_MODERATION.name());
 
     }
 
@@ -97,11 +98,15 @@ public class PostRepositoryTestWithTestcontainers {
         var id = this.posts.save(data);
         var saved = this.posts.findById(id);
         assertThat(saved.status()).isEqualTo(Status.DRAFT);
+
+        var updatedCnt = this.posts.update(id, new UpdatePostCommand("updated test", "updated content", Status.PENDING_MODERATION));
+        assertThat(updatedCnt).isEqualTo(1);
+        var updated = this.posts.findById(id);
+        assertThat(updated.status()).isEqualTo(Status.PENDING_MODERATION);
     }
 
     @Configuration
     @ComponentScan(basePackageClasses = {JdbcConfig.class})
-    @Import(DataSourceConfig.class)
     static class TestConfig {
     }
 

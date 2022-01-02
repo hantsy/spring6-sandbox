@@ -64,10 +64,10 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public UUID save(CreatePostCommand p) {
-        var sql = "INSERT INTO  posts (title, content, status) VALUES (:title, :content, :status)";
+        var sql = "INSERT INTO  posts (title, content, status) VALUES (:title, :content, CAST(:status as post_status))";
         var keyHolder = new GeneratedKeyHolder();
         var paramSource = new MapSqlParameterSource(
-                Map.of("title", p.title(), "content", p.content(), "status", Status.DRAFT)
+                Map.of("title", p.title(), "content", p.content(), "status", Status.DRAFT.name())
         );
         var cnt = this.client.update(sql, paramSource, keyHolder, new String[]{"id"});
         return keyHolder.getKeyAs(UUID.class);
@@ -75,9 +75,9 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public int[] saveAll(List<Post> data) {
-        var sql = "INSERT INTO  posts (title, content, status) VALUES (:title, :content, :status)";
+        var sql = "INSERT INTO  posts (title, content, status) VALUES (:title, :content, CAST(:status as post_status))";
         MapSqlParameterSource[] params = data.stream()
-                .map(p -> new MapSqlParameterSource(Map.of("title", p.title(), "content", p.content(), "status", p.status())))
+                .map(p -> new MapSqlParameterSource(Map.of("title", p.title(), "content", p.content(), "status", p.status().name())))
                 .toList()
                 .toArray(new MapSqlParameterSource[0]);
         return this.client.batchUpdate(sql, params);
@@ -85,11 +85,11 @@ public class JdbcPostRepository implements PostRepository {
 
     @Override
     public Integer update(UUID id, UpdatePostCommand p) {
-        var sql = "UPDATE posts set title=:title, content=:content, status=:status WHERE id=:id";
+        var sql = "UPDATE posts set title=:title, content=:content, status=CAST(:status as post_status) WHERE id=:id";
         Map<String, ? extends Serializable> params = Map.of(
                 "title", p.title(),
                 "content", p.content(),
-                "status", p.status(),
+                "status", p.status().name(),
                 "id", id
 
         );

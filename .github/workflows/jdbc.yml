@@ -34,14 +34,15 @@ jobs:
       - name: Build with Maven
         run: mvn -B -q clean package --file jdbc/pom.xml
         
-      - name: Unit Tests
-        run: mvn -B -q clean test --file jdbc/pom.xml -Put
-
       - name: Start up PostgreSQL in Docker
         run: |
           docker-compose up -d postgres
           sleep 5
           docker ps -a
+          
+      - name: Unit Tests
+        run: mvn -B -q clean test --file jdbc/pom.xml -Put
+
       - name: Integration Tests
         run: mvn -B -q clean verify --file jdbc/pom.xml -Pit
 
