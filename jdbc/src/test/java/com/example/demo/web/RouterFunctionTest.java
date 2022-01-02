@@ -37,6 +37,9 @@ public class RouterFunctionTest {
 
     WebTestClient client;
 
+    @Autowired
+    PostRepository posts;
+
     @BeforeEach
     public void setup() {
         this.client = MockMvcWebTestClient.bindToApplicationContext(ctx)
