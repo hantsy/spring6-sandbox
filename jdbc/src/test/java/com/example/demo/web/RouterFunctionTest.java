@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,16 +36,21 @@ public class RouterFunctionTest {
     @Autowired
     WebApplicationContext ctx;
 
-    WebTestClient client;
+    WebTestClient rest;
 
     @Autowired
     PostRepository posts;
 
     @BeforeEach
     public void setup() {
-        this.client = MockMvcWebTestClient.bindToApplicationContext(ctx)
+        this.rest = MockMvcWebTestClient.bindToApplicationContext(ctx)
                 .configureClient()
                 .build();
+    }
+
+    @AfterEach
+    public void teardown() {
+        reset(this.posts);
     }
 
     @Test
