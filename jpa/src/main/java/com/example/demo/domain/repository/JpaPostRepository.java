@@ -19,7 +19,7 @@ import java.util.stream.Stream;
 
 @Repository
 @Transactional
-public class JpaPostRepositoryImpl implements PostRepository {
+public class JpaPostRepository implements PostRepository {
 
     @PersistenceContext
     EntityManager entityManager;
