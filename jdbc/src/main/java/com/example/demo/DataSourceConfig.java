@@ -6,18 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 import javax.sql.DataSource;
 
 @Configuration
 @PropertySource(value = "classpath:/datasource.properties", ignoreResourceNotFound = true)
-@EnableTransactionManagement(proxyTargetClass = true)
-public class DataSourceConfig implements TransactionManagementConfigurer {
+public class DataSourceConfig {
 
     private static final String ENV_DATASOURCE_PASSWORD = "datasource.password";
     private static final String ENV_DATASOURCE_USERNAME = "datasource.username";
@@ -43,16 +38,6 @@ public class DataSourceConfig implements TransactionManagementConfigurer {
         bds.setUsername(env.getProperty(ENV_DATASOURCE_USERNAME));
         bds.setPassword(env.getProperty(ENV_DATASOURCE_PASSWORD));
         return bds;
-    }
-
-    @Bean
-    public PlatformTransactionManager txManager() {
-        return new DataSourceTransactionManager(defaultDataSource());
-    }
-
-    @Override
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
-        return txManager();
     }
 
 //    @Bean

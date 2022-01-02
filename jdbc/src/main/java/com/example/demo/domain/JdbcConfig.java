@@ -22,13 +22,13 @@ public class JdbcConfig {
         return new NamedParameterJdbcTemplate(dataSource);
     }
 
-    @Bean
-    TransactionAwareDataSourceProxy transactionAwareDataSourceProxy(DataSource dataSource) {
-        return new TransactionAwareDataSourceProxy(dataSource);
-    }
+//    @Bean
+//    TransactionAwareDataSourceProxy transactionAwareDataSourceProxy(DataSource dataSource) {
+//        return new TransactionAwareDataSourceProxy(dataSource);
+//    }
 
     @Bean
-    PlatformTransactionManager jdbcTransactionManager(DataSource dataSource) {
+    PlatformTransactionManager transactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 

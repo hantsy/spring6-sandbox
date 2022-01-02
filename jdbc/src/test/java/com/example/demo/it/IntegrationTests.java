@@ -16,7 +16,7 @@ public class IntegrationTests {
         this.client = WebTestClient
                 .bindToServer()
                 .responseTimeout(Duration.ofSeconds(5))
-                .baseUrl("http://localhost:" + 8080)
+                .baseUrl("http://localhost:" + 8080 + "/demo")
                 .build();
     }
 

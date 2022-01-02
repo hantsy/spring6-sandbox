@@ -1,3 +1,3 @@
 -- initialize the sample data.
 DELETE FROM posts;
-INSERT INTO  posts (title, content) VALUES ('R2dbc is refined', 'R2dbc is now part of Spring framework core');
+INSERT INTO  posts (title, content) VALUES ('Spring 6 and Jdbc', 'Review the Jdbc features in Spring framework 6.0');
