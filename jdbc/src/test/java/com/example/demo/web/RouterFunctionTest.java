@@ -49,7 +49,7 @@ public class RouterFunctionTest {
 
     @Test
     public void getGetAllPosts() throws Exception {
-        when(this.posts.findByKeyword(anyString(), any(), anyInt(), anyInt()))
+        when(this.posts.findAll())
                 .thenReturn(List.of(
                                 new Post("test", "content of test1"),
                                 new Post("test2", "content of test2")
@@ -63,7 +63,7 @@ public class RouterFunctionTest {
                 .expectStatus().isOk()
                 .expectBodyList(Post.class).hasSize(2);
 
-        verify(this.posts, times(1)).findByKeyword("", null, 0, 10);
+        verify(this.posts, times(1)).findAll();
         verifyNoMoreInteractions(this.posts);
     }
 
