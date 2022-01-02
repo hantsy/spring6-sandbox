@@ -44,4 +44,4 @@ jobs:
           sleep 5
           docker ps -a
       - name: Integration Tests
-        run: mvn -B -q clean verify --file jpa/pom.xml -Pit
+        run: mvn -B -q clean verify --file jpa/pom.xml -Pit-jetty

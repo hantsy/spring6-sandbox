@@ -18,13 +18,23 @@
         <!-- maven plugins -->
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.9.9</cargo-maven3-plugin.version>
 
         <!-- API and frameworks -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M1</spring-framework.version>
+
+        <!-- Apache Tomcat -->
         <tomcat.version>10.0.14</tomcat.version>
+
+        <!-- Eclipse Jetty -->
         <jetty.version>11.0.7</jetty.version>
+
+        <!-- WildFly preview for Jakarta EE 9 -->
+        <wildfly.version>26.0.0.Final</wildfly.version>
+        <wildfly-maven-plugin.version>2.1.0.Final</wildfly-maven-plugin.version>
+        <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -371,11 +381,6 @@
         <profile>
             <id>wildfly</id>
             <!-- see: https://github.com/hantsy/jakartaee9-starter-boilerplate/blob/master/pom.xml#L630 -->
-            <properties>
-                <wildfly.version>26.0.0.Final</wildfly.version>
-                <wildfly-maven-plugin.version>2.1.0.Final</wildfly-maven-plugin.version>
-                <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -394,7 +399,7 @@
             </properties>
         </profile>
         <profile>
-            <id>it</id>
+            <id>it-tomcat</id>
             <properties>
                 <tomcat.home>${project.build.directory}/apache-tomcat-${tomcat.version}</tomcat.home>
                 <skip.unit.tests>true</skip.unit.tests>
@@ -459,6 +464,145 @@
                                 <phase>post-integration-test</phase>
                                 <goals>
                                     <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>it-jetty</id>
+            <properties>
+                <jetty.home>${project.build.directory}/jetty-home-${jetty.version}</jetty.home>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven-dependency-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.eclipse.jetty</groupId>
+                                            <artifactId>jetty-home</artifactId>
+                                            <version>${jetty.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.cargo</groupId>
+                        <artifactId>cargo-maven3-plugin</artifactId>
+                        <version>${cargo-maven3-plugin.version}</version>
+                        <configuration>
+                            <container>
+                                <containerId>jetty11x</containerId>
+                                <type>installed</type>
+                                <home>${jetty.home}</home>
+                            </container>
+
+                            <configuration>
+                                <type>standalone</type>
+                                <properties>
+                                    <cargo.servlet.port>8080</cargo.servlet.port>
+                                    <cargo.logging>low</cargo.logging>
+                                </properties>
+                            </configuration>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start-server</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop-server</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>stop</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>it-wildfly</id>
+            <properties>
+                <wildfly.home>${project.build.directory}/wildfly-preview-${wildfly.version}</wildfly.home>
+                <wildfly.serverConfig>standalone-full.xml</wildfly.serverConfig>
+                <skip.unit.tests>true</skip.unit.tests>
+                <skip.integration.tests>false</skip.integration.tests>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven-dependency-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.wildfly</groupId>
+                                            <artifactId>wildfly-preview-dist</artifactId>
+                                            <version>${wildfly.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>${wildfly-maven-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>start-server</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>start</goal>
+                                    <goal>deploy-only</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>stop-server</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>undeploy</goal>
+                                    <goal>shutdown</goal>
                                 </goals>
                             </execution>
                         </executions>
