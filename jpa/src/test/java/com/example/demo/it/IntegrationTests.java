@@ -15,8 +15,8 @@ public class IntegrationTests {
     public void setup() {
         this.client = WebTestClient
                 .bindToServer()
-                .responseTimeout(Duration.ofSeconds(5))
-                .baseUrl("http://localhost:" + 8080)
+                .responseTimeout(Duration.ofMillis(5000))
+                .baseUrl("http://localhost:" + 8080 + "/demo") // add context path to url in a servlet container.
                 .build();
     }
 

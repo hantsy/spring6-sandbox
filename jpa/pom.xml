@@ -25,6 +25,7 @@
         <spring-framework.version>6.0.0-M1</spring-framework.version>
         <tomcat.version>10.0.14</tomcat.version>
 
+        <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
     </properties>
@@ -247,6 +248,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>io.projectreactor.netty</groupId>
+            <artifactId>reactor-netty</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
@@ -272,23 +278,15 @@
                 <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <skipTests>${skip.unit.tests}</skipTests>
+                    <includes>
+                        <include>**/*Test*.java</include>
+                    </includes>
+                    <excludes>
+                        <!-- test containers test fail in Github actions-->
+                        <!--                                <exclude>**/*TestContainersTest.java</exclude>-->
+                        <exclude>**/it/IntegrationTests.java</exclude>
+                    </excludes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>test</phase>
-                        <id>unit-test</id>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <excludes>
-                                <!-- test containers test fail in Github actions-->
-                                <!--                                <exclude>**/*TestContainersTest.java</exclude>-->
-                                <exclude>**/it/IntegrationTests.java</exclude>
-                            </excludes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -296,24 +294,11 @@
                 <version>${maven-failsafe-plugin.version}</version>
                 <configuration>
                     <skipITs>${skip.integration.tests}</skipITs>
+                    <includes>
+                        <include>**/it/IntegrationTests.java</include>
+                    </includes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>integration-test</phase>
-                        <id>integration-test</id>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <include>**/it/IntegrationTests.java</include>
-                            </includes>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
-
         </plugins>
     </build>
     <profiles>
@@ -382,13 +367,39 @@
             </properties>
         </profile>
         <profile>
-            <id>it-tomcat</id>
+            <id>it</id>
             <properties>
+                <tomcat.home>${project.build.directory}/apache-tomcat-${tomcat.version}</tomcat.home>
                 <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
             </properties>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>unpack</id>
+                                <phase>process-test-resources</phase>
+                                <goals>
+                                    <goal>unpack</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.apache.tomcat</groupId>
+                                            <artifactId>tomcat</artifactId>
+                                            <version>${tomcat.version}</version>
+                                            <type>zip</type>
+                                            <overWrite>false</overWrite>
+                                            <outputDirectory>${project.build.directory}</outputDirectory>
+                                        </artifactItem>
+                                    </artifactItems>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven3-plugin</artifactId>
@@ -396,10 +407,12 @@
                         <configuration>
                             <container>
                                 <containerId>tomcat10x</containerId>
-                                <type>embedded</type>
+                                <type>installed</type>
+                                <home>${tomcat.home}</home>
                             </container>
 
                             <configuration>
+                                <type>standalone</type>
                                 <properties>
                                     <cargo.servlet.port>8080</cargo.servlet.port>
                                     <cargo.logging>low</cargo.logging>
@@ -412,7 +425,6 @@
                                 <phase>pre-integration-test</phase>
                                 <goals>
                                     <goal>start</goal>
-                                    <goal>deploy</goal>
                                 </goals>
                             </execution>
                             <execution>
