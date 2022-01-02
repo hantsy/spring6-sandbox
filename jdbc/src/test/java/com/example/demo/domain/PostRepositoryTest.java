@@ -1,7 +1,6 @@
-package com.example.demo.testcontainers;
+package com.example.demo.domain;
 
 import com.example.demo.DataSourceConfig;
-import com.example.demo.domain.JdbcConfig;
 import com.example.demo.domain.model.CreatePostCommand;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.Status;
@@ -10,23 +9,13 @@ import com.example.demo.domain.repository.PostRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.core.env.MapPropertySource;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,9 +23,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@SpringJUnitConfig(classes = {DataSourceConfig.class, JdbcConfig.class, PostRepositoryTestWithTestcontainers.TestConfig.class})
+@SpringJUnitConfig(classes = {DataSourceConfig.class, JdbcConfig.class, PostRepositoryTest.TestConfig.class})
 //@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
-public class PostRepositoryTestWithTestcontainers {
+public class PostRepositoryTest {
 
 //see: https://github.com/testcontainers/testcontainers-java/discussions/4841
 //    static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
