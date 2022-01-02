@@ -19,12 +19,19 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
         <cargo-maven3-plugin.version>1.9.9</cargo-maven3-plugin.version>
+        <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
 
         <!-- API and frameworks -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M1</spring-framework.version>
+
+        <!-- Apache Tomcat -->
         <tomcat.version>10.0.14</tomcat.version>
 
+        <!-- Eclipse Jetty  -->
+        <jetty.version>11.0.7</jetty.version>
+
+        <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
     </properties>
@@ -316,7 +323,7 @@
                                 <artifactInstaller>
                                     <groupId>org.eclipse.jetty</groupId>
                                     <artifactId>jetty-home</artifactId>
-                                    <version>11.0.7</version>
+                                    <version>${jetty.version}</version>
                                 </artifactInstaller>
                             </container>
                             <configuration>
@@ -340,7 +347,7 @@
         <profile>
             <id>it</id>
             <properties>
-                <tomcat.home>${project.build.directory}/apache-tomcat-${tomcat.version}</tomcat.home>
+                <jetty.home>${project.build.directory}/jetty-home-${jetty.version}</jetty.home>
                 <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
             </properties>
@@ -349,6 +356,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
+                        <version>${maven-dependency-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>unpack</id>
@@ -359,9 +367,9 @@
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>
-                                            <groupId>org.apache.tomcat</groupId>
-                                            <artifactId>tomcat</artifactId>
-                                            <version>${tomcat.version}</version>
+                                            <groupId>org.eclipse.jetty</groupId>
+                                            <artifactId>jetty-home</artifactId>
+                                            <version>${jetty.version}</version>
                                             <type>zip</type>
                                             <overWrite>false</overWrite>
                                             <outputDirectory>${project.build.directory}</outputDirectory>
@@ -377,9 +385,9 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>tomcat10x</containerId>
+                                <containerId>jetty11x</containerId>
                                 <type>installed</type>
-                                <home>${tomcat.home}</home>
+                                <home>${jetty.home}</home>
                             </container>
 
                             <configuration>

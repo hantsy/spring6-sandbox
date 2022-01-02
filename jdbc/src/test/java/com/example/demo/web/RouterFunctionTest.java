@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
+import com.example.demo.domain.repository.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,18 +18,19 @@ import org.springframework.web.servlet.function.ServerRequest;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.servlet.function.ServerResponse.ok;
 
 /**
  * @author hantsy
  */
-@SpringJUnitConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, PostRouterFunctionTest.TestConfig.class})
+@SpringJUnitConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, RouterFunctionTest.TestConfig.class})
 @ExtendWith(MockitoExtension.class)
-public class PostRouterFunctionTest {
+public class RouterFunctionTest {
 
     @Autowired
     WebApplicationContext ctx;
@@ -43,14 +45,23 @@ public class PostRouterFunctionTest {
     }
 
     @Test
-    public void getAllPostsWillBeOk() throws Exception {
-        this.client
-                .get().uri("/posts").accept(APPLICATION_JSON)
+    public void getGetAllPosts() throws Exception {
+        when(this.posts.findByKeyword(anyString(), any(), anyInt(), anyInt()))
+                .thenReturn(List.of(
+                                new Post("test", "content of test1"),
+                                new Post("test2", "content of test2")
+                        )
+                );
+
+        this.rest
+                .get()
+                .uri("/posts")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.length()").isEqualTo(1)
-                .jsonPath("$[0].title").isEqualTo("test");
+                .expectBodyList(Post.class).hasSize(2);
+
+        verify(this.posts, times(1)).findByKeyword("", null, 0, 10);
+        verifyNoMoreInteractions(this.posts);
     }
 
 
@@ -58,11 +69,8 @@ public class PostRouterFunctionTest {
     static class TestConfig {
 
         @Bean
-        PostHandler postHandler() {
-            var handler = mock(PostHandler.class);
-            given(handler.all(any(ServerRequest.class)))
-                    .willReturn(ok().body(List.of(new Post("test", "content"))));
-            return handler;
+        PostRepository mockedPostRepository() {
+          return mock(PostRepository.class);
         }
     }
 

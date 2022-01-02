@@ -24,11 +24,6 @@ jobs:
         with:
           distribution: "zulu"
           java-version: 17
-      - name: Start up PostgreSQL in Docker
-        run: |
-          docker-compose up -d postgres
-          sleep 5
-          docker ps -a
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
@@ -37,5 +32,16 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn clean install --file jdbc/pom.xml
+        run: mvn -B -q clean package --file jdbc/pom.xml
+        
+      - name: Unit Tests
+        run: mvn -B -q clean test --file jdbc/pom.xml -Put
+
+      - name: Start up PostgreSQL in Docker
+        run: |
+          docker-compose up -d postgres
+          sleep 5
+          docker ps -a
+      - name: Integration Tests
+        run: mvn -B -q clean verify --file jdbc/pom.xml -Pit
 
