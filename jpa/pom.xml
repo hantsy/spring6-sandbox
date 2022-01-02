@@ -357,7 +357,11 @@
                         <configuration>
                             <container>
                                 <containerId>jetty11x</containerId>
-                                <type>embedded</type>
+                                <artifactInstaller>
+                                    <groupId>org.eclipse.jetty</groupId>
+                                    <artifactId>jetty-home</artifactId>
+                                    <version>11.0.7</version>
+                                </artifactInstaller>
                             </container>
                             <configuration>
                                 <properties>
@@ -366,13 +370,6 @@
                                 </properties>
                             </configuration>
                         </configuration>
-                        <dependencies>
-                            <dependency>
-                                <groupId>asm</groupId>
-                                <artifactId>asm</artifactId>
-                                <version>3.3.1</version>
-                            </dependency>
-                        </dependencies>
                     </plugin>
                 </plugins>
             </build>

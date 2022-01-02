@@ -16,7 +16,7 @@ import java.util.Properties;
 
 
 @Configuration
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 @PropertySource(value = "classpath:/jpa.properties", ignoreResourceNotFound = true)
 public class JpaConfig {
 
