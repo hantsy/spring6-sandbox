@@ -7,40 +7,36 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
  * @author hantsy
  */
 @SpringJUnitWebConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, TestDataConfig.class})
-public class RouterFunctionTest {
+public class RouterFunctionTestWithMockMvcWebTestClient {
 
     @Autowired
     WebApplicationContext ctx;
 
-    MockMvc rest;
+    WebTestClient rest;
 
     @Autowired
     PostRepository posts;
 
     @BeforeEach
     public void setup() {
-        this.rest = webAppContextSetup(ctx)
-                .addDispatcherServletCustomizer(s -> s.setEnableLoggingRequestDetails(true))
+        this.rest = MockMvcWebTestClient
+                .bindToApplicationContext(ctx)
+                .configureClient()
                 .build();
     }
 
@@ -58,15 +54,15 @@ public class RouterFunctionTest {
                         )
                 );
 
-        this.rest.perform(get("/posts").accept(MediaType.APPLICATION_JSON))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.size()", equalTo(2))
-                );
+        this.rest
+                .get()
+                .uri("/posts")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(Post.class).hasSize(2);
 
         verify(this.posts, times(1)).findAll();
         verifyNoMoreInteractions(this.posts);
     }
-
 
 }

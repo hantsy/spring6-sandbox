@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
+@Slf4j
 @Configuration
 @PropertySource(value = "classpath:/datasource.properties", ignoreResourceNotFound = true)
 public class DataSourceConfig {
@@ -33,11 +35,12 @@ public class DataSourceConfig {
     @Bean
     @Profile("default")
     public DataSource defaultDataSource() {
-        DriverManagerDataSource bds = new DriverManagerDataSource();
-        bds.setUrl(env.getProperty(ENV_DATASOURCE_URL));
-        bds.setUsername(env.getProperty(ENV_DATASOURCE_USERNAME));
-        bds.setPassword(env.getProperty(ENV_DATASOURCE_PASSWORD));
-        return bds;
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setUrl(env.getProperty(ENV_DATASOURCE_URL));
+        dataSource.setUsername(env.getProperty(ENV_DATASOURCE_USERNAME));
+        dataSource.setPassword(env.getProperty(ENV_DATASOURCE_PASSWORD));
+        log.debug("exposing a Datasource bean...");
+        return dataSource;
     }
 
 //    @Bean
