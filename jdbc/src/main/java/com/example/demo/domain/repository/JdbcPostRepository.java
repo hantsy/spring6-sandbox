@@ -30,7 +30,9 @@ public class JdbcPostRepository implements PostRepository {
             rs.getObject("id", UUID.class),
             rs.getString("title"),
             rs.getString("content"),
-            rs.getObject("status", Status.class),
+            //see: https://github.com/pgjdbc/pgjdbc/issues/2387
+            //rs.getObject("status", Status.class),
+            Status.valueOf(rs.getString("status")),
             rs.getObject("created_at", LocalDateTime.class)
     );
 
