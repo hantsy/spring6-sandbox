@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import io.r2dbc.postgresql.codec.Json;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -21,7 +20,7 @@ public class DataInitializer {
         this.databaseClient
                 .sql("INSERT INTO  posts (title, content) VALUES (:title, :content)")
                 .filter((statement, executeFunction) -> statement.returnGeneratedValues("id").execute())
-                .bind("title", "My first Spring 6 post")
+                .bind("title", "Spring 6 and R2dbc")
                 .bind("content", "content of my Spring 6 reactive post")
                 .fetch()
                 .first()
