@@ -3,6 +3,7 @@ package com.example.demo.web;
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -45,6 +45,11 @@ public class RouterFunctionTest {
                 .build();
     }
 
+    @AfterEach
+    public void teardown() {
+        reset(this.posts);
+    }
+
     @Test
     public void testGetAllPosts() throws Exception {
         given(this.posts.findAll())
@@ -69,7 +74,7 @@ public class RouterFunctionTest {
         @Bean
         @Profile("mock")
         PostRepository mockedPostRepository() {
-           return mock( PostRepository.class);
+            return mock(PostRepository.class);
         }
     }
 
