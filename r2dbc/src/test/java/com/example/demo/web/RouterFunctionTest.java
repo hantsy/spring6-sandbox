@@ -1,11 +1,15 @@
-package com.example.demo;
+package com.example.demo.web;
 
+import com.example.demo.Jackson2ObjectMapperConfig;
+import com.example.demo.domain.Post;
+import com.example.demo.domain.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -16,19 +20,21 @@ import reactor.core.publisher.Flux;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 /**
  * @author hantsy
  */
-@SpringJUnitConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, PostRouterFunctionTest.TestConfig.class})
-@ExtendWith(MockitoExtension.class)
-public class PostRouterFunctionTest {
+@SpringJUnitConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, RouterFunctionTest.TestConfig.class})
+public class RouterFunctionTest {
 
     @Autowired
     RouterFunction<ServerResponse> routerFunction;
+
+    @Autowired
+    PostRepository posts;
 
     WebTestClient client;
 
@@ -41,7 +47,9 @@ public class PostRouterFunctionTest {
     }
 
     @Test
-    public void getAllPostsWillBeOk() throws Exception {
+    public void testGetAllPosts() throws Exception {
+        given(this.posts.findAll())
+                .willReturn(Flux.just(Post.builder().title("test").content("content").build()));
         this.client
                 .get().uri("/posts").accept(APPLICATION_JSON)
                 .exchange()
@@ -49,18 +57,19 @@ public class PostRouterFunctionTest {
                 .expectBody()
                 .jsonPath("$.length()").isEqualTo(1)
                 .jsonPath("$[0].title").isEqualTo("test");
+
+        verify(this.posts, times(1)).findAll();
+        verifyNoMoreInteractions(this.posts);
     }
 
 
     @Configuration
+    @ComponentScan
     static class TestConfig {
 
         @Bean
-        PostHandler postHandler() {
-            var handler = mock(PostHandler.class);
-            given(handler.all(any(ServerRequest.class)))
-                    .willReturn(ok().body(Flux.just(Post.builder().title("test").content("content").build()), Post.class));
-            return handler;
+        PostRepository mockedPostRepository() {
+           return mock( PostRepository.class);
         }
     }
 

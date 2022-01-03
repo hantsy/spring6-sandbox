@@ -44,7 +44,7 @@ public class IntegrationTests {
     }
 
     @Test
-    public void getAllPostsWillBeOk() throws Exception {
+    public void testGetAllPosts() throws Exception {
         this.client
                 .get().uri("/posts")
                 .exchange()

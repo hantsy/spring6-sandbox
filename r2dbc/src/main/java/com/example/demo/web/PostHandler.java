@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.web;
 
+import com.example.demo.domain.Post;
+import com.example.demo.domain.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;

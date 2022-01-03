@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.domain;
 
 import lombok.*;
 
@@ -26,7 +26,7 @@ public class Post {
 
     private LocalDateTime createdAt;
 
-    enum Status {
+    public enum Status {
         DRAFT, PENDING_MODERATION, PUBLISHED;
     }
 

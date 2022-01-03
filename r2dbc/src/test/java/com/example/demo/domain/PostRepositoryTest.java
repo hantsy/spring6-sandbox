@@ -1,12 +1,12 @@
-package com.example.demo;
+package com.example.demo.domain;
 
-import jakarta.inject.Inject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import reactor.test.StepVerifier;
 
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@SpringJUnitConfig(classes = {DatabaseConfig.class, PostRepositoryTest.TestConfig.class})
+@SpringJUnitConfig(classes = {R2dbcConfig.class, PostRepositoryTest.TestConfig.class})
 public class PostRepositoryTest {
 
     //@Inject
@@ -80,6 +80,7 @@ public class PostRepositoryTest {
                 .verifyComplete();
     }
 
+    @Configuration
     @ComponentScan
     static class TestConfig {
     }

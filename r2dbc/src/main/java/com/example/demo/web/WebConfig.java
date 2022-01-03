@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

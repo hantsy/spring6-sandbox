@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.domain;
 
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
@@ -8,41 +8,26 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.r2dbc.connection.R2dbcTransactionManager;
-import org.springframework.r2dbc.connection.TransactionAwareConnectionFactoryProxy;
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator;
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer;
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.transaction.ReactiveTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.reactive.TransactionalOperator;
 
 /**
  * @author hantsy
  */
 @Configuration
-public class DatabaseConfig {
+@EnableTransactionManagement
+public class R2dbcConfig {
 
     @Bean
     public ConnectionFactory connectionFactory() {
 
         // 1. using ConnectionFactories.get from url
         //ConnectionFactory factory = ConnectionFactories.get("r2dbc:h2:mem:///test?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE");
-
-        // 2. using r2dbc drivers provided tools to create a connection factory.
-
-        //  H2
-        //see: https://github.com/spring-projects/spring-data-r2dbc/issues/269
-//        return new H2ConnectionFactory(
-//                H2ConnectionConfiguration.builder()
-//                        //.inMemory("testdb")
-//                        .file("./testdb")
-//                        .username("user")
-//                        .password("password").build()
-//        );
-//
-//        return H2ConnectionFactory.inMemory("testdb");
-
-
 
         // postgres
         return new PostgresqlConnectionFactory(
@@ -54,11 +39,6 @@ public class DatabaseConfig {
                         .codecRegistrar(EnumCodec.builder().withEnum("post_status", Post.Status.class).build())
                         .build()
         );
-    }
-
-    @Bean
-    TransactionAwareConnectionFactoryProxy transactionAwareConnectionFactoryProxy(ConnectionFactory connectionFactory) {
-        return new TransactionAwareConnectionFactoryProxy(connectionFactory);
     }
 
     @Bean

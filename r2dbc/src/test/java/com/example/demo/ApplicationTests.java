@@ -31,7 +31,7 @@ public class ApplicationTests {
     }
 
     @Test
-    public void getAllPostsWillBeOk() throws Exception {
+    public void testGetAllPosts() throws Exception {
         this.rest
             .get()
             .uri("/posts")

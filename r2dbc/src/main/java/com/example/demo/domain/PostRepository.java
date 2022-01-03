@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.domain;
 
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -15,9 +16,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.BiFunction;
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
-@Slf4j
 public class PostRepository {
 
     public static final BiFunction<Row, RowMetadata, Post> MAPPING_FUNCTION = (row, rowMetaData) -> Post.builder()
