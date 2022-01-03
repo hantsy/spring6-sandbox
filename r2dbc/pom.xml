@@ -4,16 +4,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>spring6-sample-vanilla-reactive</artifactId>
+    <artifactId>spring6-sample-r2dbc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring6-sample-vanilla-reactive</name>
-    <description>Spring 6 Webflux Reactor example(without Spring Boot)</description>
+    <name>spring6-sample-r2dbc</name>
+    <description>Spring 6 Webflux Reactor/R2dbc example(without Spring Boot)</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>17</maven.compiler.release>
+
+        <!-- maven plugins -->
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+
+        <!-- runtime deps -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M1</spring-framework.version>
     </properties>
@@ -200,6 +205,11 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
             </plugin>
             <!-- Maven Assembly Plugin -->
             <plugin>
