@@ -1,20 +1,19 @@
 package com.example.demo.web;
 
 import com.example.demo.Jackson2ObjectMapperConfig;
-import com.example.demo.domain.Post;
-import com.example.demo.domain.PostRepository;
+import com.example.demo.domain.model.Post;
+import com.example.demo.domain.repository.PostRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 
@@ -22,12 +21,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 /**
  * @author hantsy
  */
 @SpringJUnitConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, RouterFunctionTest.TestConfig.class})
+@ActiveProfiles("mock")
 public class RouterFunctionTest {
 
     @Autowired
@@ -68,6 +67,7 @@ public class RouterFunctionTest {
     static class TestConfig {
 
         @Bean
+        @Profile("mock")
         PostRepository mockedPostRepository() {
            return mock( PostRepository.class);
         }

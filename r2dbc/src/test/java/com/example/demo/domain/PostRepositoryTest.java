@@ -1,5 +1,8 @@
 package com.example.demo.domain;
 
+import com.example.demo.domain.model.Post;
+import com.example.demo.domain.model.Status;
+import com.example.demo.domain.repository.PostRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,12 +43,12 @@ public class PostRepositoryTest {
     public void testSaveAll() {
 
         var data = Post.builder().title("test").content("content")
-                .status(Post.Status.PENDING_MODERATION)
+                .status(Status.PENDING_MODERATION)
                 .build();
         var data1 = Post.builder().title("test1").content("content1").build();
 
         var result = posts.saveAll(List.of(data, data1)).log("[Generated result]")
-                .doOnNext(id -> log.info("generated id: {}", id));
+                .doOnNext(id -> log.debug("generated id: {}", id));
 
         assertThat(result).isNotNull();
         result.as(StepVerifier::create)
@@ -54,13 +57,13 @@ public class PostRepositoryTest {
 
         StepVerifier.create(posts.countByStatus())
                 .consumeNextWith(r -> {
-                    log.info("data: {}", r);
-                    assertThat(r.get("status")).isEqualTo(Post.Status.DRAFT);
+                    log.debug("data: {}", r);
+                    assertThat(r.get("status")).isEqualTo(Status.DRAFT);
                 })
                 .consumeNextWith(r -> {
-                    log.info("data: {}", r);
+                    log.debug("data: {}", r);
                     assertThat(r.get("cnt")).isEqualTo(1L);
-                    assertThat(r.get("status")).isEqualTo(Post.Status.PENDING_MODERATION);
+                    assertThat(r.get("status")).isEqualTo(Status.PENDING_MODERATION);
                 })
                 .verifyComplete();
     }
@@ -68,14 +71,14 @@ public class PostRepositoryTest {
     @Test
     public void testInsertAndQuery() {
         var data = Post.builder().title("test").content("content")
-                .status(Post.Status.PENDING_MODERATION)
+                .status(Status.PENDING_MODERATION)
                 .build();
         this.posts.save(data)
                 .flatMap(id -> this.posts.findById(id))
                 .as(StepVerifier::create)
                 .consumeNextWith(r -> {
-                    log.info("result data: {}", r);
-                    assertThat(r.getStatus()).isEqualTo(Post.Status.PENDING_MODERATION);
+                    log.debug("result data: {}", r);
+                    assertThat(r.getStatus()).isEqualTo(Status.PENDING_MODERATION);
                 })
                 .verifyComplete();
     }

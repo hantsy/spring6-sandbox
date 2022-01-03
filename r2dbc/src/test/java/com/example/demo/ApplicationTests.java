@@ -1,7 +1,9 @@
 package com.example.demo;
 
 
+import com.example.demo.Application;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -22,7 +24,7 @@ public class ApplicationTests {
 
     WebTestClient rest;
 
-    @BeforeAll
+    @BeforeEach
     public void setup() {
         this.rest = WebTestClient
             .bindToApplicationContext(this.context)

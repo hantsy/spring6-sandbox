@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.domain.model;
 
 import lombok.*;
 
@@ -25,9 +25,5 @@ public class Post {
     private Status status = Status.DRAFT;
 
     private LocalDateTime createdAt;
-
-    public enum Status {
-        DRAFT, PENDING_MODERATION, PUBLISHED;
-    }
 
 }

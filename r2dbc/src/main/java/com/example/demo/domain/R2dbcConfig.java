@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.domain.model.Status;
 import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
 import io.r2dbc.postgresql.codec.EnumCodec;
@@ -36,7 +37,7 @@ public class R2dbcConfig {
                         .database("blogdb")
                         .username("user")
                         .password("password")
-                        .codecRegistrar(EnumCodec.builder().withEnum("post_status", Post.Status.class).build())
+                        .codecRegistrar(EnumCodec.builder().withEnum("post_status", Status.class).build())
                         .build()
         );
     }

@@ -1,12 +1,13 @@
-package com.example.demo.domain;
+package com.example.demo.domain.repository;
 
+import com.example.demo.domain.model.Post;
+import com.example.demo.domain.model.Status;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -19,18 +20,19 @@ import java.util.function.BiFunction;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class PostRepository {
+public class R2dbcPostRepository implements PostRepository {
 
     public static final BiFunction<Row, RowMetadata, Post> MAPPING_FUNCTION = (row, rowMetaData) -> Post.builder()
             .id(row.get("id", UUID.class))
             .title(row.get("title", String.class))
             .content(row.get("content", String.class))
-            .status(row.get("status", Post.Status.class))
+            .status(row.get("status", Status.class))
             .createdAt(row.get("created_at", LocalDateTime.class))
             .build();
 
     private final DatabaseClient databaseClient;
 
+    @Override
     public Flux<Post> findByTitleContains(String name) {
         return this.databaseClient
                 .sql("SELECT * FROM posts WHERE title LIKE :title")
@@ -39,6 +41,7 @@ public class PostRepository {
                 .all();
     }
 
+    @Override
     public Flux<Post> findAll() {
         return this.databaseClient
                 .sql("SELECT * FROM posts")
@@ -48,18 +51,20 @@ public class PostRepository {
     }
 
     // see: https://stackoverflow.com/questions/64267699/spring-data-r2dbc-and-group-by
+    @Override
     public Flux<Map<Object, Object>> countByStatus() {
         return this.databaseClient
                 .sql("SELECT count(*) as cnt, status FROM posts group by status")
                 .map((row, rowMetadata) -> {
                     Long cnt = row.get("cnt", Long.class);
-                    Post.Status s = row.get("status", Post.Status.class);
+                    Status s = row.get("status", Status.class);
 
                     return Map.<Object, Object>of("cnt", cnt, "status", s);
                 })
                 .all();
     }
 
+    @Override
     public Mono<Post> findById(UUID id) {
         return this.databaseClient
                 .sql("SELECT * FROM posts WHERE id=:id")
@@ -68,6 +73,7 @@ public class PostRepository {
                 .one();
     }
 
+    @Override
     public Mono<UUID> save(Post p) {
         return this.databaseClient.sql("INSERT INTO  posts (title, content, status) VALUES (:title, :content, :status)")
                 .filter((statement, executeFunction) -> statement.returnGeneratedValues("id").execute())
@@ -79,6 +85,7 @@ public class PostRepository {
                 .map(r -> (UUID) r.get("id"));
     }
 
+    @Override
     public Flux<UUID> saveAll(List<Post> data) {
         return this.databaseClient.inConnectionMany(connection -> {
 
@@ -93,6 +100,7 @@ public class PostRepository {
         });
     }
 
+    @Override
     public Mono<Integer> update(Post p) {
         return this.databaseClient.sql("UPDATE posts set title=:title, content=:content, metadata=:metadata, status=:status WHERE id=:id")
                 .bind("title", p.getTitle())
@@ -103,6 +111,7 @@ public class PostRepository {
                 .rowsUpdated();
     }
 
+    @Override
     public Mono<Integer> deleteById(UUID id) {
         return this.databaseClient.sql("DELETE FROM posts WHERE id=:id")
                 .bind("id", id)
@@ -110,6 +119,7 @@ public class PostRepository {
                 .rowsUpdated();
     }
 
+    @Override
     public Mono<Integer> deleteAll() {
         return this.databaseClient.sql("DELETE FROM posts")
                 .fetch()
