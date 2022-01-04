@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
@@ -23,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@SpringJUnitConfig(classes = {DataSourceConfig.class, JdbcConfig.class, PostRepositoryTest.TestConfig.class})
+@SpringJUnitConfig(classes = {DataSourceConfig.class, JdbcConfig.class, TestConfig.class})
 //@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
 public class PostRepositoryTest {
 
@@ -92,11 +90,6 @@ public class PostRepositoryTest {
         assertThat(updatedCnt).isEqualTo(1);
         var updated = this.posts.findById(id);
         assertThat(updated.status()).isEqualTo(Status.PENDING_MODERATION);
-    }
-
-    @Configuration
-    @ComponentScan(basePackageClasses = {JdbcConfig.class})
-    static class TestConfig {
     }
 
 }
