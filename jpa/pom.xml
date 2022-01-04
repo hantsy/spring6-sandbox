@@ -21,9 +21,10 @@
         <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.9.9</cargo-maven3-plugin.version>
 
-        <!-- API and frameworks -->
+        <!-- runtime deps -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M1</spring-framework.version>
+        <postgresql.version>42.3.1</postgresql.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.0.14</tomcat.version>
@@ -92,6 +93,14 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Postgres Jdbc Driver -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -135,7 +144,6 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -405,6 +413,13 @@
                 <skip.unit.tests>true</skip.unit.tests>
                 <skip.integration.tests>false</skip.integration.tests>
             </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
@@ -428,6 +443,26 @@
                                             <outputDirectory>${project.build.directory}</outputDirectory>
                                         </artifactItem>
                                     </artifactItems>
+                                </configuration>
+                            </execution>
+                            <!-- Install Postgres Jdbc driver into Tomcat/lib -->
+                            <execution>
+                                <id>copy</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.postgresql</groupId>
+                                            <artifactId>postgresql</artifactId>
+                                            <version>${postgresql.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <outputDirectory>${tomcat.home}/lib</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
