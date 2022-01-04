@@ -331,8 +331,44 @@
     <profiles>
         <profile>
             <id>tomcat</id>
+            <properties>
+                <tomcat.home>${project.build.directory}/cargo/installs/tomcat-${tomcat.version}/apache-tomcat-${tomcat.version}</tomcat.home>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <scope>provided</scope>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <!-- Install Postgres Jdbc driver into Tomcat/lib -->
+                            <execution>
+                                <id>copy</id>
+                                <phase>process-classes</phase>
+                                <goals>
+                                    <goal>copy</goal>
+                                </goals>
+                                <configuration>
+                                    <artifactItems>
+                                        <artifactItem>
+                                            <groupId>org.postgresql</groupId>
+                                            <artifactId>postgresql</artifactId>
+                                            <version>${postgresql.version}</version>
+                                            <type>jar</type>
+                                            <overWrite>false</overWrite>
+                                        </artifactItem>
+                                    </artifactItems>
+                                    <outputDirectory>${tomcat.home}/lib</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven3-plugin</artifactId>
@@ -346,7 +382,6 @@
                                     <version>${tomcat.version}</version>
                                 </artifactInstaller>
                             </container>
-
                             <configuration>
                                 <properties>
                                     <!-- <cargo.servlet.port>8080</cargo.servlet.port>-->
@@ -354,6 +389,14 @@
                                 </properties>
                             </configuration>
                         </configuration>
+                        <executions>
+                            <execution>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
