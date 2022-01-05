@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.object.BatchSqlUpdate;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.jdbc.object.MappingSqlQueryWithParameters;
 import org.springframework.jdbc.object.SqlUpdate;
@@ -18,6 +19,7 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,27 +38,30 @@ public class SimpleJdbcTest {
     @SneakyThrows
     @BeforeEach
     public void setup() {
-        var deleted = new DeleteAllPosts(this.dataSource).go();
+        var deleted = new DeleteAll(this.dataSource).update();
         log.debug("deleted posts: {}", deleted);
+    }
+
+    public void testSaveAllAndQuery() {
+        var data = List.of(
+                new Post("test", "test content"),
+                new Post("test 1", "test content 1")
+        );
+        var savedCount = new SaveAll(this.dataSource).go(data);
+        assertThat(savedCount.length).isEqualTo(2);
+
+        var allPosts = new FindAll(dataSource).execute();
+        assertThat(allPosts).isNotNull();
+        assertThat(allPosts).isNotEmpty();
+        assertThat(allPosts.size()).isEqualTo(2);
     }
 
     @Test
     public void testSaveAndQuery() {
-
-        var insertedId = new InsertNewPost(dataSource).go("test", "test content");
-
+        var insertedId = new Save(dataSource).go("test", "test content");
         assertThat(insertedId).isNotNull();
 
-        var allPosts = new FindAllPosts(dataSource).execute();
-
-        assertThat(allPosts).isNotNull();
-        assertThat(allPosts).isNotEmpty();
-
-        assertThat(allPosts.get(0).title()).isEqualTo("test");
-        assertThat(allPosts.get(0).content()).isEqualTo("test content");
-
-        var result = new FindPostById(dataSource).findObject(insertedId);
-
+        var result = new FindById(dataSource).findObject(insertedId);
         assertThat(result).isNotNull();
         assertThat(result.title()).isEqualTo("test");
         assertThat(result.content()).isEqualTo("test content");
@@ -64,24 +69,21 @@ public class SimpleJdbcTest {
 
 }
 
-class DeleteAllPosts {
+class DeleteAll extends SqlUpdate {
     final String sqlDelAllPosts = "DELETE FROM posts";
-    SqlUpdate sqlUpdate;
 
-    public DeleteAllPosts(DataSource dataSource) {
-        this.sqlUpdate = new SqlUpdate(dataSource, sqlDelAllPosts);
-    }
-
-    public int go() {
-        return this.sqlUpdate.update();
+    public DeleteAll(DataSource dataSource) {
+        setDataSource(dataSource);
+        setSql(sqlDelAllPosts);
+        compile();
     }
 }
 
-class InsertNewPost {
+class Save {
 
     SimpleJdbcInsert simpleJdbcInsert;
 
-    public InsertNewPost(DataSource dataSource) {
+    public Save(DataSource dataSource) {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("posts")
                 .usingColumns("title", "content")
@@ -97,9 +99,23 @@ class InsertNewPost {
     }
 }
 
-class FindPostById extends MappingSqlQueryWithParameters<Post> {
+class SaveAll extends BatchSqlUpdate {
+    public SaveAll(DataSource dataSource) {
+        super(dataSource, "INSERT INTO posts(title, content) VALUES (?, ?)");
+        declareParameter(new SqlParameter("title", Types.VARCHAR));
+        declareParameter(new SqlParameter("content", Types.VARCHAR));
+        compile();
+    }
 
-    public FindPostById(DataSource ds) {
+    public int[] go(List<Post> posts) {
+        posts.forEach(p -> this.update(p.title(), p.content()));
+        return this.flush();
+    }
+}
+
+class FindById extends MappingSqlQueryWithParameters<Post> {
+
+    public FindById(DataSource ds) {
         super(ds, "SELECT * FROM posts WHERE id = ?");
         declareParameter(new SqlParameter("id", Types.OTHER));
         compile();
@@ -111,9 +127,9 @@ class FindPostById extends MappingSqlQueryWithParameters<Post> {
     }
 }
 
-class FindAllPosts extends MappingSqlQuery<Post> {
+class FindAll extends MappingSqlQuery<Post> {
 
-    public FindAllPosts(DataSource ds) {
+    public FindAll(DataSource ds) {
         super(ds, "SELECT * FROM posts");
         compile();
     }
