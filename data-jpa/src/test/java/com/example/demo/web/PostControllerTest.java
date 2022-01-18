@@ -86,7 +86,7 @@ public class PostControllerTest {
 
     @Test
     public void testGetPostById() throws Exception {
-        when(this.posts.findById(any()))
+        when(this.posts.findById(any(UUID.class)))
                 .thenReturn(Optional.of(Post.builder().title("test").content("content of test").build()));
 
         var id = UUID.randomUUID();

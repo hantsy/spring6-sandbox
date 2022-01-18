@@ -1,6 +1,5 @@
 package com.example.demo.web;
 
-import com.example.demo.AppConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,6 +16,8 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
+// To make Spring Data's `Sort`, `Pageable` and QueryDsl PredicatesArgument resolvable in the controller method arguments.
+// add @EnableSpringDataWebSupport to enable it.
 @ComponentScan(
         basePackageClasses = WebConfig.class,
         useDefaultFilters = false,
