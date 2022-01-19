@@ -25,6 +25,7 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M2</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
+        <querydsl.version>5.0.0</querydsl.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.0.14</tomcat.version>
@@ -132,15 +133,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>1.9.7</version>
-        </dependency>
 
         <!-- Jakarta EE 9 API, enable @Inject support -->
         <dependency>
@@ -162,7 +154,7 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
-        <!-- Jdbc and Postgres drivers -->
+        <!-- Postgres Jdbc driver and Spring Data JPA -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -183,7 +175,29 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Required by Hibernate -->
+        <!-- QueryDsl -->
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+            <classifier>jakarta</classifier>
+            <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa-codegen</artifactId>
+            <classifier>jakarta</classifier>
+            <optional>true</optional>
+            <version>${querydsl.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+            <classifier>jakarta</classifier>
+            <optional>true</optional>
+            <version>${querydsl.version}</version>
+        </dependency>
+
+        <!-- Required by Hibernate at runtime-->
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
@@ -311,6 +325,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessors>
+                        <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
+                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                        <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                    </annotationProcessors>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
