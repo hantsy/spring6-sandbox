@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -182,25 +183,25 @@ public class PostControllerTest {
 
     @Test
     public void testDeletePostById() throws Exception {
-        when(this.posts.customDeleteById(any(UUID.class))).thenReturn(1);
+        doNothing().when(this.posts).deleteById(any(UUID.class));
 
         var id = UUID.randomUUID();
         this.rest.perform(delete("/posts/{id}", id))
                 .andExpect(status().isNoContent());
 
-        verify(this.posts, times(1)).customDeleteById(id);
+        verify(this.posts, times(1)).deleteById(id);
         verifyNoMoreInteractions(this.posts);
     }
 
     @Test
     public void testDeletePostById_nonExisting() throws Exception {
-        when(this.posts.customDeleteById(any(UUID.class))).thenReturn(0);
+        doThrow(EmptyResultDataAccessException.class).when(this.posts).deleteById(any(UUID.class));
 
         var id = UUID.randomUUID();
         this.rest.perform(delete("/posts/{id}", id))
                 .andExpect(status().isNotFound());
 
-        verify(this.posts, times(1)).customDeleteById(id);
+        verify(this.posts, times(1)).deleteById(id);
         verifyNoMoreInteractions(this.posts);
     }
 

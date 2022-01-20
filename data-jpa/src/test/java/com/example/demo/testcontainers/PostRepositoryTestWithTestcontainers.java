@@ -66,8 +66,8 @@ public class PostRepositoryTestWithTestcontainers {
     @SneakyThrows
     @BeforeEach
     public void setup() {
-        var deleted = this.posts.customDeleteAll();
-        log.debug("Deleted posts: {}", deleted);
+       log.debug("setup tests, clear data ...");
+       this.posts.deleteAll();
     }
 
     @Test

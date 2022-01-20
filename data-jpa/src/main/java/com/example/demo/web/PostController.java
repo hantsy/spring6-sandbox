@@ -6,6 +6,7 @@ import com.example.demo.domain.repository.PostRepository;
 import com.example.demo.domain.repository.Specifications;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
@@ -66,10 +67,10 @@ public class PostController {
 
     @DeleteMapping(value = "{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteById(@PathVariable UUID id) {
-        var deleted = posts.customDeleteById(id);
-        if (deleted > 0) {
+        try {
+            posts.deleteById(id);
             return noContent().build();
-        } else {
+        } catch (EmptyResultDataAccessException e) {
             return notFound().build();
         }
     }

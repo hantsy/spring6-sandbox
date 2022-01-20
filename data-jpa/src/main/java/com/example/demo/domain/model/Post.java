@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(value = AuditingEntityListener.class) //to fill the auditing fields.
 public class Post implements Serializable {
 
     @Id
@@ -34,8 +36,9 @@ public class Post implements Serializable {
     @Column(name = "content")
     private String content;
 
-    @CollectionTable(name = "post_labels")
-    @ElementCollection
+    @CollectionTable(name = "post_labels", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name="label")
+    @ElementCollection()
     @Builder.Default
     private Set<String> labels = new HashSet<>();
 
