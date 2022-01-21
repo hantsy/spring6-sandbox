@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.example.demo.DataJpaConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.QPost;
 import com.example.demo.domain.model.Status;
@@ -11,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +29,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 @DataJpaTest
 public class PostRepositoryTest {
+
+    @TestConfiguration
+    @Import(DataJpaConfig.class)
+    static class TestConfig {
+    }
 
     //@Inject
     @Autowired
@@ -78,6 +86,10 @@ public class PostRepositoryTest {
         this.posts.findById(saved.getId()).ifPresent(
                 p -> {
                     assertThat(p.getStatus()).isEqualTo(Status.DRAFT);
+
+                    //assert Spring Data JPA Auditing
+                    assertThat(p.getCreatedAt()).isNotNull();
+                    assertThat(p.getCreatedBy()).isNotNull();
                 }
         );
     }
