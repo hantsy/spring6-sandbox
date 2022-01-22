@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.CriteriaDelete;
 import jakarta.persistence.criteria.Root;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
+import java.util.Set;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,7 +22,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
     @Override
     public List<Post> findPostByLabels(String... labels) {
         return this.entityManager.createQuery("select distinct p from Post p join fetch p.labels label where label in (:l)", Post.class)
-                .setParameter("l", Arrays.stream(labels).collect(Collectors.toSet()))
+                .setParameter("l", Set.of(labels))
                 .getResultList();
     }
 
