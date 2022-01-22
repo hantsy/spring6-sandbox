@@ -42,6 +42,8 @@ public class PostRepositoryTest {
     @SneakyThrows
     @BeforeEach
     public void setup() {
+        // The bulk delete will fail due to the relation of `@ElementCollection` `labels`,
+        // see: https://hibernate.atlassian.net/browse/HHH-5529
 //        var deleted = this.posts.customDeleteAll();
 //        log.debug("Deleted posts: {}", deleted);
         this.posts.deleteAll();
