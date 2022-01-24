@@ -1,5 +1,7 @@
-package com.example.demo.domain;
+package com.example.demo.testcontainers;
 
+import com.example.demo.DataSourceConfig;
+import com.example.demo.domain.JdbcConfig;
 import com.example.demo.domain.model.CreatePostCommand;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.Status;
@@ -13,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.test.context.ContextConfiguration;
@@ -29,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@SpringJUnitConfig(classes = {JdbcConfig.class, TestConfig.class})
+@SpringJUnitConfig(classes = {PostRepositoryTestWithTestContainers.TestConfig.class})
 @ContextConfiguration(initializers = PostRepositoryTestWithTestContainers.TestContainerInitializer.class)
 public class PostRepositoryTestWithTestContainers {
 
@@ -61,6 +66,13 @@ public class PostRepositoryTestWithTestContainers {
         }
     }
 
+    @Configuration
+    @Import(DataSourceConfig.class)
+    @ComponentScan(basePackageClasses = {JdbcConfig.class})
+    static class TestConfig {
+    }
+
+
     @Autowired
     PostRepository posts;
 
@@ -73,7 +85,6 @@ public class PostRepositoryTestWithTestContainers {
 
     @Test
     public void testSaveAll() {
-
         var data = new Post("test", "content", Status.PENDING_MODERATION);
         var data1 = new Post("test1", "content1");
 

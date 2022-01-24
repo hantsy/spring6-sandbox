@@ -16,7 +16,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass = true)
 public class JdbcConfig {
 
     @Bean
@@ -53,5 +53,10 @@ public class JdbcConfig {
         initializer.setDatabasePopulator(databasePopulator);
         return initializer;
     }
+//
+//    @Bean
+//    PostRepository postRepository(NamedParameterJdbcTemplate client) {
+//        return new JdbcPostRepository(client);
+//    }
 }
 
