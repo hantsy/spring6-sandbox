@@ -53,6 +53,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-bom</artifactId>
+                <version>2022.0.0-M1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-bom -->
             <dependency>
@@ -130,15 +137,15 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
-        <!-- Jdbc and Postgres drivers -->
+        <!-- Spring Data Jdbc and Postgres drivers -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jdbc</artifactId>
         </dependency>
 
         <!-- Jakarta EE 9 compatible Servlet container, eg. Tomcat 10, Eclipse Jetty 11 -->
