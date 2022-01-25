@@ -11,29 +11,23 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
 
-@Document
+@Document("comments")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post implements Serializable {
+public class Comment implements Serializable {
 
     @Id
-    UUID id;
-
-    //@Field(name = "title", targetType = FieldType.STRING, write = Field.Write.ALWAYS)
-    private String title;
+    String id;
     private String content;
-    @Builder.Default
-    private Set<String> labels = new HashSet<>();
-    @Builder.Default
-    private Status status = Status.DRAFT;
     @CreatedDate
     private LocalDateTime createdAt;
     @CreatedBy
     private String createdBy;
+
+    public static Comment of(String content) {
+        return Comment.builder().content(content).build();
+    }
 }

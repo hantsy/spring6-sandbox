@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class PostCallback implements BeforeConvertCallback<Post> {
-    
+public class PostSlugCallback implements BeforeConvertCallback<Post> {
+
     @Override
     public Post onBeforeConvert(Post entity, String collection) {
         if (entity.getId() == null) { // only convert when being persisted.
