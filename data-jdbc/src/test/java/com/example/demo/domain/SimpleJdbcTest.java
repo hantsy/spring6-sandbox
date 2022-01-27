@@ -38,8 +38,10 @@ public class SimpleJdbcTest {
     @SneakyThrows
     @BeforeEach
     public void setup() {
-        var deleted = new DeleteAll(this.dataSource).update();
-        log.debug("deleted posts: {}", deleted);
+        var deletedLabels = new DeleteAllLabels(this.dataSource).update();
+        var deleted = new DeleteAllPosts(this.dataSource).update();
+        var deletedUsers = new DeleteAllUsers(this.dataSource).update();
+        log.debug("deleted posts: {}, labels: {}, users: {}", deleted, deletedLabels, deletedUsers);
     }
 
     public void testSaveAllAndQuery() {
@@ -69,12 +71,32 @@ public class SimpleJdbcTest {
 
 }
 
-class DeleteAll extends SqlUpdate {
-    final String sqlDelAllPosts = "DELETE FROM posts";
+class DeleteAllPosts extends SqlUpdate {
+    final String sqlDelete = "DELETE FROM posts";
 
-    public DeleteAll(DataSource dataSource) {
+    public DeleteAllPosts(DataSource dataSource) {
         setDataSource(dataSource);
-        setSql(sqlDelAllPosts);
+        setSql(sqlDelete);
+        compile();
+    }
+}
+
+class DeleteAllLabels extends SqlUpdate {
+    final String sqlDelete = "DELETE FROM post_labels";
+
+    public DeleteAllLabels(DataSource dataSource) {
+        setDataSource(dataSource);
+        setSql(sqlDelete);
+        compile();
+    }
+}
+
+class DeleteAllUsers extends SqlUpdate {
+    final String sqlDelete = "DELETE FROM users";
+
+    public DeleteAllUsers(DataSource dataSource) {
+        setDataSource(dataSource);
+        setSql(sqlDelete);
         compile();
     }
 }

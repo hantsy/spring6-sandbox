@@ -33,8 +33,10 @@ public class JdbcTemplateTest {
     @SneakyThrows
     @BeforeEach
     public void setup() {
+        var deletedLabels = this.template.update("DELETE FROM post_labels");
         var deleted = this.template.update("DELETE FROM posts");
-        log.debug("deleted posts: {}", deleted);
+        var deletedUsers = this.template.update("DELETE FROM users");
+        log.debug("deleted posts: {}, labels: {}, users: {}", deleted, deletedLabels, deletedUsers);
     }
 
     @Test

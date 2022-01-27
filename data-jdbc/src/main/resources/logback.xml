@@ -38,9 +38,9 @@
         <appender-ref ref="Console"/>
     </root>
     <logger name="org.springframework.web" level="debug"/>
-    <logger name="org.springframework.data" level="DEBUG">
+    <logger name="org.springframework.data.jdbc" level="DEBUG">
     </logger>
-    <logger name="org.springframework.jdbc" level="DEBUG">
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="TRACE">
     </logger>
     <logger name="reactor.util" level="INFO">
     </logger>

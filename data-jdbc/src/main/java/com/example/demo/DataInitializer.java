@@ -1,37 +1,50 @@
 package com.example.demo;
 
+import com.example.demo.domain.model.Label;
+import com.example.demo.domain.model.Post;
+import com.example.demo.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
-
-import java.util.Collections;
-import java.util.Map;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
+@Profile("dev")
 public class DataInitializer {
 
-    private final NamedParameterJdbcTemplate template;
+    private final JdbcAggregateTemplate template;
     private final TransactionTemplate tx;
 
     @EventListener(value = ContextRefreshedEvent.class)
     public void init() throws Exception {
         log.info("start data initialization...");
         tx.executeWithoutResult(status -> {
-            var delSql = "DELETE FROM posts";
-            var deleted = this.template.update(delSql, Collections.emptyMap());
-            log.debug("deleted rows : {}", deleted);
-            var sql = "INSERT INTO  posts (title, content) VALUES (:title, :content)";
-            var params = Map.of("title", "My first Spring 6 post", "content", "content of my Spring 6 reactive post");
-            var inserted = this.template.update(sql, params);
-            if (inserted > 0) {
-                log.debug("inserted rows : {}", inserted);
-            }
+            this.template.deleteAll(Label.class);
+            this.template.deleteAll(Post.class);
+            this.template.deleteAll(User.class);
+
+            var user = User.of("Hantsy", "hantsy@example.com");
+            var savedUser = this.template.save(user);
+
+            var post = Post.builder()
+                    .title("Getting Started with Spring Data Jdbc")
+                    .content("The content of Getting Started with Spring Data Jdbc")
+                    .moderator(AggregateReference.to(savedUser.getId()))
+                    .build();
+            post.addLabel("Spring");
+            post.addLabel("Spring Data Jdbc");
+
+            var savedPost = this.template.save(post);
+
+            var foundPost = this.template.findById(savedPost.getId(), Post.class);
+            log.debug("found post by id: {}", foundPost);
         });
     }
 }

@@ -23,7 +23,7 @@ import static org.springframework.web.servlet.function.RouterFunctions.route;
         basePackageClasses = WebConfig.class,
         useDefaultFilters = false,
         includeFilters = {
-                @ComponentScan.Filter(type = FilterType.REGEX, pattern ="^(com\\.example\\.demo\\.web\\.)(.+)$")
+                @ComponentScan.Filter(type = FilterType.REGEX, pattern ="^(com\\.example\\.demo\\.web\\.)(.*Handler)$")
         }
 )
 public class WebConfig implements WebMvcConfigurer {
