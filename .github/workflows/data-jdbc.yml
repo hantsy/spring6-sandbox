@@ -1,14 +1,14 @@
-name:data-jdbc
+name: data-jdbc
 
 on:
   push:
     paths:
-      - "data-jpa/**"
+      - "data-jdbc/**"
     branches:
       - master
   pull_request:
     paths:
-      - "data-jpa/**"
+      - "data-jdbc/**"
     types:
       - opened
       - synchronize
