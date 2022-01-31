@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+
+dl dt {
+    font-weight: bold;
+}
+
+dl dt, dl dd {
+    padding: 10px !important;
+}
+
+.logo {
+    width: 46px;
+    height: 46px;
+    padding: 1px;
+}
+
+.page-header {
+    display: block;
+    margin: 20px 5px 20px 5px;
+}
+
+ul.actions {
+    list-style-type: none;
+    display: flex;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-direction: row;
+}
+
+ul.actions li {
+    margin-right: 2px;
+}
