@@ -4,14 +4,14 @@
     <html lang="en">
     <head>
         <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>${title?html}</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+              crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"/>
 
         <link href="<@spring.url '/css/main.css'/>" rel="stylesheet"/>
     </head>
@@ -20,7 +20,7 @@
     <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
         <div class="container-md">
             <a class="navbar-brand mr-2" href="<@spring.url '/posts'/>">
-                <img class="logo" src="<@spring.url '/images/spring.svg'/>">
+                <img class="logo" src="<@spring.url '/images/spring.svg'/>" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

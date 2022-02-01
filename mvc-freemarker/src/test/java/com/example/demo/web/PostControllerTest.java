@@ -1,45 +1,40 @@
 package com.example.demo.web;
 
 import com.example.demo.Jackson2ObjectMapperConfig;
-import com.example.demo.domain.model.Post;
+import com.example.demo.domain.model.PostSummary;
 import com.example.demo.domain.repository.PostRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
-/**
- * @author hantsy
- */
 @SpringJUnitWebConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, TestDataConfig.class})
-public class RouterFunctionTest {
+public class PostControllerTest {
 
     @Autowired
     WebApplicationContext ctx;
 
-    MockMvc rest;
+    MockMvc mockMvc;
 
     @Autowired
     PostRepository posts;
 
     @BeforeEach
     public void setup() {
-        this.rest = webAppContextSetup(ctx)
+        this.mockMvc = webAppContextSetup(ctx)
                 .addDispatcherServletCustomizer(s -> s.setEnableLoggingRequestDetails(true))
                 .build();
     }
@@ -50,22 +45,38 @@ public class RouterFunctionTest {
     }
 
     @Test
-    public void getGetAllPosts() throws Exception {
-        when(this.posts.findAll())
+    public void testPostList() throws Exception {
+        when(this.posts.findBy())
                 .thenReturn(List.of(
-                                Post.of("test", "content of test1"),
-                                Post.of("test2", "content of test2")
+                                new PostSummary(UUID.randomUUID(), "test", LocalDateTime.now()),
+                                new PostSummary(UUID.randomUUID(), "test2", LocalDateTime.now())
                         )
                 );
 
-        this.rest.perform(get("/posts").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/posts"))
                 .andExpectAll(
                         status().isOk(),
-                        jsonPath("$.size()", equalTo(2))
+                        xpath("//table//tbody//tr").exists()
                 );
 
-        verify(this.posts, times(1)).findAll();
+        verify(this.posts, times(1)).findBy();
         verifyNoMoreInteractions(this.posts);
+    }
+
+    @Test
+    public void createPost() throws Exception {
+        mockMvc.perform(post("/posts")
+                        .param("title", "First post")
+                        .param("content", "Description of my first post"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/posts"));
+    }
+
+    @Test
+    public void createPostForm() throws Exception {
+        mockMvc.perform(get("/posts/new"))
+                .andExpect(xpath("//input[@name='title']").exists())
+                .andExpect(xpath("//textarea[@name='content']").exists());
     }
 
 

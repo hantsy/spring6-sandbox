@@ -6,7 +6,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <form id="form" role="form" class="needs-validation" novalidate action="<@spring.url '/posts'/>" method="post">
+            <form id="form" role="form" class="needs-validation" novalidate="true" action="<@spring.url '/posts'/>" method="post">
 
                 <@spring.bind "post.title"/>
                 <div class="mb-3">
@@ -16,7 +16,7 @@
                            type="text"
                            class="form-control form-control-lg <#if spring.status.errorMessages?size gt 0>is-invalid</#if>"
                            name="${spring.status.expression}"
-                           value="${spring.status.value?default('')}" required></input>
+                           value="${spring.status.value?default('')}" required="true"></input>
                     <div class="invalid-feedback">
                         <#list spring.status.errorMessages as error> <p>${error}</p> </#list>
                     </div>
@@ -31,7 +31,7 @@
                             class="form-control <#if spring.status.errorMessages?size gt 0>is-invalid</#if>"
                             name="${spring.status.expression}"
                             value="${spring.status.value?default('')}"
-                            rows="8" required></textarea>
+                            rows="8" required="true"></textarea>
                     <div class="invalid-feedback">
                         <#list spring.status.errorMessages as error> <p>${error}</p> </#list>
                     </div>

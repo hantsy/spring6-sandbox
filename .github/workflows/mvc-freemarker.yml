@@ -1,0 +1,48 @@
+name: mvc-freemarker
+
+on:
+  push:
+    paths:
+      - "mvc-freemarker/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "mvc-freemarker/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: 17
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build with Maven
+        run: mvn -B -q clean package --file mvc-freemarker/pom.xml
+        
+      - name: Start up PostgreSQL in Docker
+        run: |
+          docker-compose up -d postgres
+          sleep 5
+          docker ps -a
+          
+      - name: Unit Tests
+        run: mvn -B -q clean test --file mvc-freemarker/pom.xml -Put
+
+      - name: Integration Tests
+        run: mvn -B -q clean verify --file mvc-freemarker/pom.xml -Pit
+

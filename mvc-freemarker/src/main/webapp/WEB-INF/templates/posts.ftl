@@ -33,10 +33,8 @@
                             </li>
                             <li>
                                 <form action="<@spring.url '/posts/'+p.id() />" method="post">
-                                    <input type="hidden" name="_method" value="DELETE"></input>
-                                    <button type="submit" class="btn btn-sm btn-danger"><i
-                                                class="bi bi-trash"></i></span>
-                                    </button>
+                                    <input type="hidden" name="_method" value="DELETE"/>
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
                                 </form>
                             </li>
                         </ul>

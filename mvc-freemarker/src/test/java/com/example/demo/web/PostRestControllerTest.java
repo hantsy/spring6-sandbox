@@ -7,36 +7,37 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
-import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.test.web.servlet.client.MockMvcWebTestClient;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 /**
  * @author hantsy
  */
 @SpringJUnitWebConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, TestDataConfig.class})
-public class RouterFunctionTestWithMockMvcWebTestClient {
+public class PostRestControllerTest {
 
     @Autowired
     WebApplicationContext ctx;
 
-    WebTestClient rest;
+    MockMvc rest;
 
     @Autowired
     PostRepository posts;
 
     @BeforeEach
     public void setup() {
-        this.rest = MockMvcWebTestClient
-                .bindToApplicationContext(ctx)
-                .configureClient()
+        this.rest = webAppContextSetup(ctx)
+                .addDispatcherServletCustomizer(s -> s.setEnableLoggingRequestDetails(true))
                 .build();
     }
 
@@ -54,15 +55,15 @@ public class RouterFunctionTestWithMockMvcWebTestClient {
                         )
                 );
 
-        this.rest
-                .get()
-                .uri("/posts")
-                .exchange()
-                .expectStatus().isOk()
-                .expectBodyList(Post.class).hasSize(2);
+        this.rest.perform(get("/api/posts").accept(MediaType.APPLICATION_JSON))
+                .andExpectAll(
+                        status().isOk(),
+                        jsonPath("$.size()", equalTo(2))
+                );
 
         verify(this.posts, times(1)).findAll();
         verifyNoMoreInteractions(this.posts);
     }
+
 
 }

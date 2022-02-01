@@ -24,11 +24,17 @@ import static org.springframework.http.ResponseEntity.*;
 public class PostRestController {
     private final PostRepository posts;
 
-    @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<PostSummary>> getAll(@RequestParam(defaultValue = "") String q,
+    @GetMapping(value = "search", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<Page<PostSummary>> searchByKeyword(@RequestParam(defaultValue = "") String q,
                                                     @RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "10") int size) {
         var data = this.posts.findByTitleContains(q, PageRequest.of(page, size));
+        return ok(data);
+    }
+
+    @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getAll() {
+        var data = this.posts.findAll();
         return ok(data);
     }
 
