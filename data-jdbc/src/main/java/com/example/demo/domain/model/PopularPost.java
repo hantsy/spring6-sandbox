@@ -3,6 +3,7 @@ package com.example.demo.domain.model;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ public record PopularPost(
         UUID id,
         String title,
         String content,
-        @CreatedDate
+        @CreatedDate @Column("created_at")
         LocalDateTime createdAt,
         @Version
         Long version
