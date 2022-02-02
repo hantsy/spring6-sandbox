@@ -4,6 +4,7 @@ import com.example.demo.domain.DataJdbcConfig;
 import com.example.demo.domain.JdbcConfig;
 import com.example.demo.web.WebConfig;
 import jakarta.servlet.Filter;
+import jakarta.servlet.MultipartConfigElement;
 import jakarta.servlet.ServletRegistration;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -47,7 +48,13 @@ public class DemoApplicationInitializer extends AbstractAnnotationConfigDispatch
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        //...
+        // Multipart config
+        // Optionally also set maxFileSize, maxRequestSize, fileSizeThreshold
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp"));
+
+        // Enable logging request details
+        registration.setInitParameter("enableLoggingRequestDetails", "true");
+
     }
 
 }
