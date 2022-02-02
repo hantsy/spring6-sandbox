@@ -43,3 +43,12 @@ CREATE TABLE IF NOT EXISTS persistable_posts (
     version BIGINT,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS popular_posts (
+    id UUID DEFAULT uuid_generate_v4(),
+    title VARCHAR(255),
+    content VARCHAR(255),
+    created_at TIMESTAMP NOT NULL DEFAULT LOCALTIMESTAMP,
+    version BIGINT,
+    PRIMARY KEY (id)
+);

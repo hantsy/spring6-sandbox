@@ -5,15 +5,17 @@ import com.example.demo.domain.model.*;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.OptimisticLockingFailureException;
+import org.springframework.data.domain.Persistable;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
 
@@ -41,6 +43,8 @@ public class JdbcAggregateTemplateTest {
         this.template.deleteAll(User.class);
 
         this.template.deleteAll(VersionedPost.class);
+        this.template.deleteAll(PersistablePost.class);
+        this.template.deleteAll(PopularPost.class);
     }
 
     @Test
@@ -89,6 +93,28 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
+    @DisplayName("test saving record entity")
+    public void testInsertPopularPosts() {
+        var data = new PopularPost(null, "test", "test content", LocalDateTime.now(), 0L);
+        var inserted = this.template.insert(data);
+        assertThat(inserted.id()).isNotNull();
+        assertThat(inserted.title()).isEqualTo("test");
+        assertThat(inserted.content()).isEqualTo("test content");
+        assertThat(inserted.createdAt()).isNotNull();
+        assertThat(inserted.version()).isGreaterThanOrEqualTo(0L);
+
+        var existed = this.template.findById(inserted.id(), PopularPost.class);
+        assertThat(existed.title()).isEqualTo("test");
+        assertThat(existed.content()).isEqualTo("test content");
+
+        var updated = this.template.update(new PopularPost(existed.id(), "updated test", "updated content", existed.createdAt(), existed.version()));
+        assertThat(updated.title()).isEqualTo("updated test");
+        assertThat(updated.content()).isEqualTo("updated content");
+        assertThat(updated.version()).isGreaterThanOrEqualTo(1L);
+    }
+
+
+    @Test
     public void testSaveAllAndQuery() {
         var data = Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build();
         var data1 = Post.builder().title("test1").content("content1").build();
@@ -121,6 +147,7 @@ public class JdbcAggregateTemplateTest {
         log.debug("found post by id: {}", foundPost);
         assertThat(foundPost.getTitle()).isEqualTo("test");
         assertThat(foundPost.getContent()).isEqualTo("test content");
+        assertThat(foundPost.getCreatedAt()).isNotNull();
         assertThat(foundPost.getLabels().size()).isEqualTo(2);
         assertThat(foundPost.getModerator().getId()).isEqualTo(savedUser.getId());
     }
