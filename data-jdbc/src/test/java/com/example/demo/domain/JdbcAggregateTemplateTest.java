@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Persistable;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
@@ -48,7 +47,7 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
-    public void testVersionedPosts() {
+    public void givenEntityWithVersion_whenSetVersionValue_andSave_thenExecuteUpdateActionAndThrowsException() {
         var data = new VersionedPost();
         data.setTitle("test");
         data.setContent("test content");
@@ -58,7 +57,7 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
-    public void testInsertVersionedPosts() {
+    public void givenEntityWithVersion_whenSetVersionValue_andInsert_thenIgnoreVersionAndInsertCorrectly() {
         var data = new VersionedPost();
         data.setTitle("test");
         data.setContent("test content");
@@ -70,7 +69,7 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
-    public void testPersistablePosts() {
+    public void givenEntityImplementsPersistableInterface_whenIsNewReturnTrue_andSave_thenExecuteUpdateActionAndThrowsException() {
         var data = new PersistablePost();
         data.setTitle("test");
         data.setContent("test content");
@@ -80,7 +79,7 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
-    public void testInsertPersistablePosts() {
+    public void givenEntityImplementsPersistableInterface_whenIsNewReturnTrue_andInsert_thenIgnoreIsNewCheckAndInsertCorrectly() {
         var data = new PersistablePost();
         data.setTitle("test");
         data.setContent("test content");
@@ -95,7 +94,7 @@ public class JdbcAggregateTemplateTest {
     @Test
     @DisplayName("test saving record entity")
     public void testInsertPopularPosts() {
-        var data = new PopularPost(null, "test", "test content", LocalDateTime.now(), 0L);
+        var data = new PopularPost(null, "test", "test content", LocalDateTime.now(), null);
         var inserted = this.template.insert(data);
         assertThat(inserted.id()).isNotNull();
         assertThat(inserted.title()).isEqualTo("test");
@@ -115,7 +114,7 @@ public class JdbcAggregateTemplateTest {
 
 
     @Test
-    public void testSaveAllAndQuery() {
+    public void whenSavePostList_thenFindAll() {
         var data = Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build();
         var data1 = Post.builder().title("test1").content("content1").build();
         this.template.save(data);
@@ -127,7 +126,7 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
-    public void testSaveAndQuery() {
+    public void whenSavePostWithLabelAndExternalRef_thenFindByIdGetAllRelations() {
         var user = User.of("testuesr", "test@example.com");
         var savedUser = tx.execute(__ -> this.template.save(user));
         log.debug("saved user: {}", savedUser);
