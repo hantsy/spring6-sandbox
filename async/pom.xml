@@ -357,7 +357,7 @@
                     <excludes>
                         <!-- test containers test fail in Github actions-->
                         <!--                                <exclude>**/*TestContainersTest.java</exclude>-->
-                        <exclude>**/it/IntegrationTests.java</exclude>
+                        <exclude>**/it/*IntegrationTests.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -368,7 +368,7 @@
                 <configuration>
                     <skipITs>${skip.integration.tests}</skipITs>
                     <includes>
-                        <include>**/it/IntegrationTests.java</include>
+                        <include>**/it/*IntegrationTests.java</include>
                     </includes>
                 </configuration>
                 <executions>

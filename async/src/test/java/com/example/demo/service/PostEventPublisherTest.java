@@ -35,7 +35,7 @@ public class PostEventPublisherTest {
 
     @Test
     public void testEventPublish() {
-        this.eventPublisher.publishPostCreated(new PostCreated(UUID.randomUUID(), LocalDateTime.now()));
+        this.eventPublisher.publishPostCreated(new PostCreated(UUID.randomUUID(), "test", LocalDateTime.now()));
 
         Awaitility.await().atMost(Duration.ofMillis(500))
                 .untilAsserted(() -> assertThat(handler.getEvents().size()).isEqualTo(1));

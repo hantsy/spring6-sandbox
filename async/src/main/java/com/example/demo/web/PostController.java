@@ -6,23 +6,21 @@ import com.example.demo.service.PostCreated;
 import com.example.demo.service.PostEventPublisher;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
-import static org.springframework.http.ResponseEntity.*;
+import static org.springframework.http.ResponseEntity.created;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/posts")
-@Validated
+@Validated//does not work on record.
 public class PostController {
     private final PostRepository posts;
     private final PostEventPublisher eventPublisher;
@@ -37,7 +35,7 @@ public class PostController {
         var data = Post.builder().title(dto.title()).content(dto.content()).build();
         var saved = this.posts.save(data);
         //publishing an event.
-        this.eventPublisher.publishPostCreated(new PostCreated(saved.getId(), saved.getCreatedAt()));
+        this.eventPublisher.publishPostCreated(new PostCreated(saved.getId(), saved.getTitle(), saved.getCreatedAt()));
         return created(URI.create("/posts/" + saved.getId())).build();
     }
 }

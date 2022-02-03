@@ -1,6 +1,5 @@
 package com.example.demo.web;
 
-
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;

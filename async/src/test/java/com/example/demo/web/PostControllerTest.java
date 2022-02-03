@@ -91,7 +91,7 @@ public class PostControllerTest {
         verify(this.posts, times(1)).readAllBy();
         verifyNoMoreInteractions(this.posts);
     }
-    
+
     @Test
     public void testCreatePost() throws Exception {
         var id = UUID.randomUUID();
@@ -106,7 +106,7 @@ public class PostControllerTest {
                 .andExpect(header().string("Location", "/posts/" + id));
 
         verify(this.posts, times(1)).save(any(Post.class));
-        verify(this.eventPublisher, times(1)).publishPostCreated(any(PostCreated.class));
+        verify(this.eventPublisher, times(1)).publishPostCreated(isA(PostCreated.class));
         verifyNoMoreInteractions(this.posts);
         verifyNoMoreInteractions(this.eventPublisher);
     }
