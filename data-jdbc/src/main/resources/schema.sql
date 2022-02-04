@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS popular_posts (
     title VARCHAR(255),
     content VARCHAR(255),
     created_at TIMESTAMP NOT NULL DEFAULT LOCALTIMESTAMP,
+    created_by VARCHAR(255),
     version BIGINT,
     PRIMARY KEY (id)
 );

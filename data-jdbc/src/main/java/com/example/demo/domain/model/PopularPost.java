@@ -1,5 +1,6 @@
 package com.example.demo.domain.model;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
@@ -15,8 +16,12 @@ public record PopularPost(
         UUID id,
         String title,
         String content,
-        @CreatedDate @Column("created_at")
+        @CreatedDate
+        @Column("created_at")
         LocalDateTime createdAt,
+        @CreatedBy
+        @Column("created_by")
+        String createdBy,
         @Version
         Long version
 ) {

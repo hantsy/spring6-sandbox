@@ -94,19 +94,20 @@ public class JdbcAggregateTemplateTest {
     @Test
     @DisplayName("test saving record entity")
     public void testInsertPopularPosts() {
-        var data = new PopularPost(null, "test", "test content", LocalDateTime.now(), null);
+        var data = new PopularPost(null, "test", "test content", null, null, null);
         var inserted = this.template.insert(data);
         assertThat(inserted.id()).isNotNull();
         assertThat(inserted.title()).isEqualTo("test");
         assertThat(inserted.content()).isEqualTo("test content");
         assertThat(inserted.createdAt()).isNotNull();
+        assertThat(inserted.createdBy()).isEqualTo("hantsy");
         assertThat(inserted.version()).isGreaterThanOrEqualTo(0L);
 
         var existed = this.template.findById(inserted.id(), PopularPost.class);
         assertThat(existed.title()).isEqualTo("test");
         assertThat(existed.content()).isEqualTo("test content");
 
-        var updated = this.template.update(new PopularPost(existed.id(), "updated test", "updated content", existed.createdAt(), existed.version()));
+        var updated = this.template.update(new PopularPost(existed.id(), "updated test", "updated content", existed.createdAt(), existed.createdBy(), existed.version()));
         assertThat(updated.title()).isEqualTo("updated test");
         assertThat(updated.content()).isEqualTo("updated content");
         assertThat(updated.version()).isGreaterThanOrEqualTo(1L);

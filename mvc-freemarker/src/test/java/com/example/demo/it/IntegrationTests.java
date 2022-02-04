@@ -14,6 +14,7 @@ public class IntegrationTests {
     @BeforeEach
     public void setup() {
         this.client = WebTestClient
+                //.bindToServer(new ReactorClientHttpConnector(HttpClient.create().followRedirect(true)))
                 .bindToServer()
                 .responseTimeout(Duration.ofSeconds(5))
                 .baseUrl("http://localhost:" + 8080 + "/demo")
