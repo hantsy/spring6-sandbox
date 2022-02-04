@@ -29,7 +29,9 @@ public class IntegrationTests {
         this.client
                 .get().uri("/posts")
                 .exchange()
-                .expectStatus().isOk();
+                .expectStatus()
+                .is3xxRedirection()
+                .expectHeader().location("http://localhost:" + 8080 + "/demo/login");
     }
 
 }
