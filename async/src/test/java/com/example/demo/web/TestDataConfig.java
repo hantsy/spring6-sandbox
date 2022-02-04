@@ -32,7 +32,7 @@ class TestDataConfig {
         return mock(SseEventBroadcaster.class);
     }
 
-    @Bean// will disable mock on async
+    @Bean// will disable @Async on mock
     public Executor mockedExecutor() {
         return mock(Executor.class);
     }
