@@ -19,7 +19,8 @@ public class DemoApplicationInitializer extends AbstractAnnotationConfigDispatch
                 Jackson2ObjectMapperConfig.class,
                 DataSourceConfig.class,
                 DataJdbcConfig.class,
-                JdbcConfig.class
+                JdbcConfig.class,
+                SecurityConfig.class
         };
     }
 
