@@ -43,7 +43,7 @@
             <dependency>
                 <groupId>io.r2dbc</groupId>
                 <artifactId>r2dbc-bom</artifactId>
-                <version>Arabba-SR11</version>
+                <version>Borca-RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
