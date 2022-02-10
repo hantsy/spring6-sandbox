@@ -34,8 +34,9 @@ public class R2dbcPostRepository implements PostRepository {
 
     @Override
     public Flux<Post> findByTitleContains(String name) {
+        var sql = "SELECT * FROM posts WHERE title LIKE :title";
         return this.databaseClient
-                .sql("SELECT * FROM posts WHERE title LIKE :title")
+                .sql(sql)
                 .bind("title", "%" + name + "%")
                 .map(MAPPING_FUNCTION)
                 .all();
@@ -43,8 +44,9 @@ public class R2dbcPostRepository implements PostRepository {
 
     @Override
     public Flux<Post> findAll() {
+        var sql = "SELECT * FROM posts";
         return this.databaseClient
-                .sql("SELECT * FROM posts")
+                .sql(sql)
                 .filter((statement, executeFunction) -> statement.fetchSize(10).execute())
                 .map(MAPPING_FUNCTION)
                 .all();
@@ -53,8 +55,9 @@ public class R2dbcPostRepository implements PostRepository {
     // see: https://stackoverflow.com/questions/64267699/spring-data-r2dbc-and-group-by
     @Override
     public Flux<Map<Object, Object>> countByStatus() {
+        var sql = "SELECT count(*) as cnt, status FROM posts group by status";
         return this.databaseClient
-                .sql("SELECT count(*) as cnt, status FROM posts group by status")
+                .sql(sql)
                 .map((row, rowMetadata) -> {
                     Long cnt = row.get("cnt", Long.class);
                     Status s = row.get("status", Status.class);
@@ -66,8 +69,9 @@ public class R2dbcPostRepository implements PostRepository {
 
     @Override
     public Mono<Post> findById(UUID id) {
+        var sql = "SELECT * FROM posts WHERE id=:id";
         return this.databaseClient
-                .sql("SELECT * FROM posts WHERE id=:id")
+                .sql(sql)
                 .bind("id", id)
                 .map(MAPPING_FUNCTION)
                 .one();
@@ -75,7 +79,8 @@ public class R2dbcPostRepository implements PostRepository {
 
     @Override
     public Mono<UUID> save(Post p) {
-        return this.databaseClient.sql("INSERT INTO  posts (title, content, status) VALUES (:title, :content, :status)")
+        var sql = "INSERT INTO  posts (title, content, status) VALUES (:title, :content, :status)";
+        return this.databaseClient.sql(sql)
                 .filter((statement, executeFunction) -> statement.returnGeneratedValues("id").execute())
                 .bind("title", p.getTitle())
                 .bind("content", p.getContent())
@@ -87,22 +92,39 @@ public class R2dbcPostRepository implements PostRepository {
 
     @Override
     public Flux<UUID> saveAll(List<Post> data) {
+        if(data == null || data.isEmpty()) {
+            throw new IllegalArgumentException("The parameter is invalid");
+        }
+        var sql = "INSERT INTO  posts (title, content, status) VALUES ($1, $2, $3)";
         return this.databaseClient.inConnectionMany(connection -> {
 
-            var statement = connection.createStatement("INSERT INTO  posts (title, content, status) VALUES ($1, $2, $3)")
+            var statement = connection.createStatement(sql)
                     .returnGeneratedValues("id");
+            var len = data.size();
 
-            for (var p : data) {
-                statement.bind(0, p.getTitle()).bind(1, p.getContent()).bind(2, p.getStatus()).add();
+            if (len > 1) {
+                for (Post p : data.subList(0, len - 1)) {
+                    statement.bind(0, p.getTitle())
+                            .bind(1, p.getContent())
+                            .bind(2, p.getStatus())
+                            .add();
+                }
             }
+            var last = data.get(len - 1);
+
+            statement.bind(0, last.getTitle())
+                    .bind(1, last.getContent())
+                    .bind(2, last.getStatus())
+                    .add();
 
             return Flux.from(statement.execute()).flatMap(result -> result.map((row, rowMetadata) -> row.get("id", UUID.class)));
         });
     }
 
     @Override
-    public Mono<Integer> update(Post p) {
-        return this.databaseClient.sql("UPDATE posts set title=:title, content=:content, metadata=:metadata, status=:status WHERE id=:id")
+    public Mono<Long> update(Post p) {
+        var sql = "UPDATE posts set title=:title, content=:content, metadata=:metadata, status=:status WHERE id=:id";
+        return this.databaseClient.sql(sql)
                 .bind("title", p.getTitle())
                 .bind("content", p.getContent())
                 .bind("status", p.getStatus())
@@ -112,16 +134,18 @@ public class R2dbcPostRepository implements PostRepository {
     }
 
     @Override
-    public Mono<Integer> deleteById(UUID id) {
-        return this.databaseClient.sql("DELETE FROM posts WHERE id=:id")
+    public Mono<Long> deleteById(UUID id) {
+        var sql = "DELETE FROM posts WHERE id=:id";
+        return this.databaseClient.sql(sql)
                 .bind("id", id)
                 .fetch()
                 .rowsUpdated();
     }
 
     @Override
-    public Mono<Integer> deleteAll() {
-        return this.databaseClient.sql("DELETE FROM posts")
+    public Mono<Long> deleteAll() {
+        var sql = "DELETE FROM posts";
+        return this.databaseClient.sql(sql)
                 .fetch()
                 .rowsUpdated();
     }

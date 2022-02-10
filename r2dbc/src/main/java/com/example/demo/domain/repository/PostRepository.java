@@ -22,9 +22,9 @@ public interface PostRepository {
 
     Flux<UUID> saveAll(List<Post> data);
 
-    Mono<Integer> update(Post p);
+    Mono<Long> update(Post p);
 
-    Mono<Integer> deleteById(UUID id);
+    Mono<Long> deleteById(UUID id);
 
-    Mono<Integer> deleteAll();
+    Mono<Long> deleteAll();
 }
