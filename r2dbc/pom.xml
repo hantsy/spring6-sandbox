@@ -108,8 +108,9 @@
         </dependency>
 
         <!-- R2dbc and Postgres drivers -->
+        <!-- Since 0.9 r2dbc-postgresql changed the groupId to `org.postgresql` -->
         <dependency>
-            <groupId>io.r2dbc</groupId>
+            <groupId>org.postgresql</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
         </dependency>
         <dependency>
