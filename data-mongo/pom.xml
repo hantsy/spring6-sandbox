@@ -160,7 +160,7 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-core</artifactId>
-            <version>${mongo-dirver.version}</version>
+            <version>${mongo-driver.version}</version>
         </dependency>
 
         <!-- QueryDsl -->
