@@ -27,7 +27,7 @@
         <postgresql.version>42.3.3</postgresql.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.0.17</tomcat.version>
+        <tomcat.version>10.0.18</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>11.0.8</jetty.version>
