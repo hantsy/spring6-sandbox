@@ -24,6 +24,8 @@
         <!-- API and frameworks -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M3</spring-framework.version>
+        <postgresql.version>42.3.3</postgresql.version>
+        <spring-data.version>2022.0.0-M3</spring-data.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.0.18</tomcat.version>
@@ -34,7 +36,7 @@
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <postgresql.version>42.3.3</postgresql.version>
+
     </properties>
 
     <dependencyManagement>
@@ -56,7 +58,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-bom</artifactId>
-                <version>2022.0.0-M1</version>
+                <version>${spring-data.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
