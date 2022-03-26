@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.data.repository.query.SecurityEvaluationContextExtension;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -38,29 +38,28 @@ public class SecurityConfig {
         return (web) -> web.ignoring().antMatchers("/css/**", "/images/**");
     }
 
-    @Configuration
+    @Bean
     @Order(1)
-    public static class ApiWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .antMatcher("/api/**")
-                    .authorizeHttpRequests(authorize -> authorize
-                            .anyRequest().hasRole("ADMIN")
-                    )
-                    .httpBasic(withDefaults());
-        }
+    SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http
+                .antMatcher("/api/**")
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().hasRole("ADMIN")
+                )
+                .httpBasic(withDefaults());
+
+        return http.build();
     }
 
-    @Configuration
-    public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    @Bean
+    SecurityFilterChain formLoginFilterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().authenticated()
+                )
+                .formLogin(withDefaults());
 
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeHttpRequests(authorize -> authorize
-                            .anyRequest().authenticated()
-                    )
-                    .formLogin(withDefaults());
-        }
+        return http.build();
     }
+
 }

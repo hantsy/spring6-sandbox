@@ -17,8 +17,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
+import static com.mongodb.assertions.Assertions.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -80,7 +82,9 @@ public class PostRepositoryTest {
     public void testInsertAndQuery() {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
-        this.posts.findById(saved.getId()).ifPresent(
+        var post = this.posts.findById(saved.getId());
+        assertTrue(post.isPresent());
+        post.ifPresent(
                 p -> {
                     assertThat(p.getStatus()).isEqualTo(Status.DRAFT);
 
@@ -95,7 +99,9 @@ public class PostRepositoryTest {
     public void testInsertAndQuery_QueryDSL() {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
-        this.posts.findOne(QPost.post.id.eq(saved.getId())).ifPresent(
+        var post = this.posts.findOne(QPost.post.id.eq(saved.getId()));
+        assertTrue(post.isPresent());
+        post.ifPresent(
                 p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
         );
     }
@@ -105,7 +111,9 @@ public class PostRepositoryTest {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         var probe = Post.builder().id(saved.getId()).build();
-        this.posts.findOne(Example.of(probe, ExampleMatcher.matching().withIgnorePaths("status"))).ifPresent(
+        var post = this.posts.findOne(Example.of(probe, ExampleMatcher.matching().withIgnorePaths("status")));
+        assertTrue(post.isPresent());
+        post.ifPresent(
                 p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
         );
     }
