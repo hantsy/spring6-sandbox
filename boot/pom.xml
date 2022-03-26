@@ -67,6 +67,8 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+            <!-- version 5.6.7.Final broke jpamodelgen -->
+            <version>5.6.5.Final</version>
             <optional>true</optional>
         </dependency>
 
@@ -141,9 +143,9 @@
                 <configuration>
                     <release>${java.version}</release>
                     <annotationProcessors>
-                        <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
-                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-                        <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
+                        <annotationProcessor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</annotationProcessor>
+                        <annotationProcessor>com.querydsl.apt.jpa.JPAAnnotationProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
