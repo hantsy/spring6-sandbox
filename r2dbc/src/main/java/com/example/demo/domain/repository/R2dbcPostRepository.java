@@ -114,8 +114,8 @@ public class R2dbcPostRepository implements PostRepository {
 
             statement.bind(0, last.getTitle())
                     .bind(1, last.getContent())
-                    .bind(2, last.getStatus())
-                    .add();
+                    .bind(2, last.getStatus());
+                   // .add(); // remove add in the last binding.
 
             return Flux.from(statement.execute()).flatMap(result -> result.map((row, rowMetadata) -> row.get("id", UUID.class)));
         });
