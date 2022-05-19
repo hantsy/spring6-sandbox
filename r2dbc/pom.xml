@@ -23,7 +23,7 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M4</spring-framework.version>
         <r2dbc.version>Borca-SR1</r2dbc.version>
-        <reactor.version>2020.0.18</reactor.version>
+        <reactor.version>2022.0.0-M2 </reactor.version>
         <junit.version>5.8.2</junit.version>
         <jackson.version>2.13.2</jackson.version>
     </properties>
