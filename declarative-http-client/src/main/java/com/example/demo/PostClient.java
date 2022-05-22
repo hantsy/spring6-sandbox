@@ -24,7 +24,7 @@ public interface PostClient {
     @PutExchange("/{id}")
     Mono<ResponseEntity<Void>> update(@PathVariable UUID id, @RequestBody Post post);
 
-    //@DeleteExchange("/{id}")
+    @DeleteExchange("/{id}")
     Mono<ResponseEntity<Void>> delete(@PathVariable UUID id);
 
 }

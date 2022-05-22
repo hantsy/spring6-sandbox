@@ -1,7 +1,7 @@
 package com.example.demo;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.common.Json;
 import com.github.tomakehurst.wiremock.http.Body;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import lombok.SneakyThrows;
@@ -18,14 +18,9 @@ import java.util.UUID;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringJUnitConfig(classes = {ClientConfig.class, Jackson2ObjectMapperConfig.class})
+@SpringJUnitConfig(classes = {ClientConfig.class})
 @WireMockTest(httpPort = 8080)
 public class PostClientTest {
-
-    @Autowired
-    ObjectMapper objectMapper;
-
-
     @Autowired
     PostClient postClient;
 
@@ -47,7 +42,7 @@ public class PostClientTest {
                 .willReturn(
                         aResponse()
                                 .withHeader("Content-Type", "application/json")
-                                .withResponseBody(Body.fromJsonBytes(objectMapper.writeValueAsBytes(data)))
+                                .withResponseBody(Body.fromJsonBytes(Json.toByteArray(data)))
                 )
         );
 
@@ -68,7 +63,7 @@ public class PostClientTest {
                 .willReturn(
                         aResponse()
                                 .withHeader("Content-Type", "application/json")
-                                .withResponseBody(Body.fromJsonBytes(objectMapper.writeValueAsBytes(data)))
+                                .withResponseBody(Body.fromJsonBytes(Json.toByteArray(data)))
                 )
         );
 
@@ -94,7 +89,7 @@ public class PostClientTest {
 
         stubFor(post("/posts")
                 .withHeader("Content-Type", equalTo("application/json"))
-                .withRequestBody(equalToJson(objectMapper.writeValueAsString(data)))
+                .withRequestBody(equalToJson(Json.write(data)))
                 .willReturn(
                         aResponse()
                                 .withHeader("Location", "/posts/" + id)
@@ -108,6 +103,52 @@ public class PostClientTest {
                         entity -> {
                             assertThat(entity.getHeaders().getLocation()).isEqualTo("/posts/" + id);
                             assertThat(entity.getStatusCode().value()).isEqualTo(201);
+                        }
+                )
+                .verifyComplete();
+    }
+
+    @SneakyThrows
+    @Test
+    public void testUpdatePost() {
+        var id = UUID.randomUUID();
+        var data = new Post(null, "title1", "content1", Status.DRAFT, null);
+
+        stubFor(put("/posts/" + id)
+                .withHeader("Content-Type", equalTo("application/json"))
+                .withRequestBody(equalToJson(Json.write(data)))
+                .willReturn(
+                        aResponse()
+                                .withStatus(204)
+                )
+        );
+
+        postClient.save(data)
+                .as(StepVerifier::create)
+                .consumeNextWith(
+                        entity -> {
+                            assertThat(entity.getStatusCode().value()).isEqualTo(204);
+                        }
+                )
+                .verifyComplete();
+    }
+
+    @SneakyThrows
+    @Test
+    public void testDeletePostById() {
+        var id = UUID.randomUUID();
+        stubFor(delete("/posts/" + id)
+                .willReturn(
+                        aResponse()
+                                .withStatus(204)
+                )
+        );
+
+        postClient.delete(id)
+                .as(StepVerifier::create)
+                .consumeNextWith(
+                        entity -> {
+                            assertThat(entity.getStatusCode().value()).isEqualTo(204);
                         }
                 )
                 .verifyComplete();
