@@ -27,7 +27,7 @@
         <postgresql.version>42.3.5</postgresql.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.0.20</tomcat.version>
+        <tomcat.version>10.0.21</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>11.0.9</jetty.version>
@@ -148,12 +148,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core-jakarta</artifactId>
-            <version>5.6.8.Final</version>
+            <version>5.6.9.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-            <version>5.6.8.Final</version>
+            <version>5.6.9.Final</version>
             <optional>true</optional>
         </dependency>
 
