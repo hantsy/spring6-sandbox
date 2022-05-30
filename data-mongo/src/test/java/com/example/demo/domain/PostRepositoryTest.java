@@ -17,11 +17,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.mongodb.assertions.Assertions.assertTrue;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.data.domain.ExampleMatcher.matching;
 
 /**
  * @author hantsy
@@ -110,8 +110,11 @@ public class PostRepositoryTest {
     public void testInsertAndQuery_QueryByExample() {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
-        var probe = Post.builder().id(saved.getId()).build();
-        var post = this.posts.findOne(Example.of(probe, ExampleMatcher.matching().withIgnorePaths("status")));
+        var probe = Post.builder().title("test").build();
+        var matcher = matching().withIgnorePaths("status", "slug")
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+        var post = this.posts.findOne(Example.of(probe, matcher));
         assertTrue(post.isPresent());
         post.ifPresent(
                 p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
@@ -123,7 +126,7 @@ public class PostRepositoryTest {
         var data = List.of(
                 Post.builder().title("test").content("content").labels(Set.of("java17", "spring6")).build(),
                 Post.builder().title("test1").content("content1").labels(Set.of("spring6")).build());
-        data.forEach(this.posts::save);
+        this.posts.saveAll(data).forEach(saved -> log.debug("saved: {}", saved));
 
         var results = posts.findPostByLabels("spring");
         assertThat(results.size()).isEqualTo(0);
