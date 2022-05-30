@@ -15,7 +15,7 @@
     <description>Spring6 WebMvc/Spring Boot 3 example</description>
     <properties>
         <java.version>17</java.version>
-        <testcontainers.version>1.17.1</testcontainers.version>
+        <testcontainers.version>1.17.2</testcontainers.version>
         <querydsl.version>5.0.0</querydsl.version>
 
         <!-- maven plugins -->
