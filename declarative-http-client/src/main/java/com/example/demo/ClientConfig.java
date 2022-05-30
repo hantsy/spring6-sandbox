@@ -1,10 +1,12 @@
 package com.example.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.http.codec.cbor.Jackson2CborDecoder;
+import org.springframework.http.codec.json.Jackson2JsonDecoder;
 import org.springframework.http.codec.json.Jackson2JsonEncoder;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
@@ -20,7 +22,7 @@ public class ClientConfig {
                 .codecs(clientCodecConfigurer -> {
                             clientCodecConfigurer
                                     .defaultCodecs()
-                                    .jackson2JsonDecoder(new Jackson2CborDecoder(objectMapper));
+                                    .jackson2JsonDecoder(new Jackson2JsonDecoder(objectMapper));
                             clientCodecConfigurer
                                     .defaultCodecs()
                                     .jackson2JsonEncoder(new Jackson2JsonEncoder(objectMapper));
@@ -29,10 +31,12 @@ public class ClientConfig {
                 .build();
     }
 
+    @SneakyThrows
     @Bean
     PostClient postClient(WebClient webClient) {
         var httpServiceProxyFactory = new HttpServiceProxyFactory(new WebClientAdapter(webClient));
         httpServiceProxyFactory.setConversionService(new DefaultFormattingConversionService());
+        httpServiceProxyFactory.afterPropertiesSet();
         return httpServiceProxyFactory.createClient(PostClient.class);
     }
 

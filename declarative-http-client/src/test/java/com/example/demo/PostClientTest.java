@@ -1,6 +1,10 @@
 package com.example.demo;
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.tomakehurst.wiremock.common.Json;
 import com.github.tomakehurst.wiremock.http.Body;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
@@ -18,16 +22,33 @@ import java.util.UUID;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringJUnitConfig(classes = {ClientConfig.class})
+@SpringJUnitConfig(
+        classes = {
+                ClientConfig.class,
+                Jackson2ObjectMapperConfig.class
+        }
+)
 @WireMockTest(httpPort = 8080)
 public class PostClientTest {
+
+    static {
+        ObjectMapper wireMockObjectMapper = Json.getObjectMapper();
+        wireMockObjectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        wireMockObjectMapper.disable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS);
+        wireMockObjectMapper.disable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS);
+
+        JavaTimeModule module = new JavaTimeModule();
+        wireMockObjectMapper.registerModule(module);
+    }
     @Autowired
     PostClient postClient;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
     @SneakyThrows
     @BeforeEach
     public void setup() {
-
     }
 
     @SneakyThrows
@@ -38,7 +59,6 @@ public class PostClientTest {
                 new Post(UUID.randomUUID(), "title2", "content2", Status.PUBLISHED, LocalDateTime.now())
         );
         stubFor(get("/posts")
-                .withHeader("Accept", equalTo("application/json"))
                 .willReturn(
                         aResponse()
                                 .withHeader("Content-Type", "application/json")
@@ -50,6 +70,9 @@ public class PostClientTest {
                 .as(StepVerifier::create)
                 .expectNextCount(2)
                 .verifyComplete();
+
+        verify(getRequestedFor(urlEqualTo("/posts"))
+                .withHeader("Accept", equalTo("application/json")));
     }
 
     @SneakyThrows
@@ -59,7 +82,6 @@ public class PostClientTest {
         var data = new Post(id, "title1", "content1", Status.DRAFT, LocalDateTime.now());
 
         stubFor(get("/posts/" + id)
-                .withHeader("Accept", equalTo("application/json"))
                 .willReturn(
                         aResponse()
                                 .withHeader("Content-Type", "application/json")
@@ -79,6 +101,10 @@ public class PostClientTest {
                         }
                 )
                 .verifyComplete();
+
+        verify(getRequestedFor(urlEqualTo("/posts/" + id))
+                .withHeader("Accept", equalTo("application/json"))
+        );
     }
 
     @SneakyThrows
@@ -88,8 +114,6 @@ public class PostClientTest {
         var data = new Post(null, "title1", "content1", Status.DRAFT, null);
 
         stubFor(post("/posts")
-                .withHeader("Content-Type", equalTo("application/json"))
-                .withRequestBody(equalToJson(Json.write(data)))
                 .willReturn(
                         aResponse()
                                 .withHeader("Location", "/posts/" + id)
@@ -101,11 +125,16 @@ public class PostClientTest {
                 .as(StepVerifier::create)
                 .consumeNextWith(
                         entity -> {
-                            assertThat(entity.getHeaders().getLocation()).isEqualTo("/posts/" + id);
+                            assertThat(entity.getHeaders().getLocation().toString()).isEqualTo("/posts/" + id);
                             assertThat(entity.getStatusCode().value()).isEqualTo(201);
                         }
                 )
                 .verifyComplete();
+
+        verify(postRequestedFor(urlEqualTo("/posts"))
+                .withHeader("Content-Type", equalTo("application/json"))
+                .withRequestBody(equalToJson(Json.write(data)))
+        );
     }
 
     @SneakyThrows
@@ -115,15 +144,13 @@ public class PostClientTest {
         var data = new Post(null, "title1", "content1", Status.DRAFT, null);
 
         stubFor(put("/posts/" + id)
-                .withHeader("Content-Type", equalTo("application/json"))
-                .withRequestBody(equalToJson(Json.write(data)))
                 .willReturn(
                         aResponse()
                                 .withStatus(204)
                 )
         );
 
-        postClient.save(data)
+        postClient.update(id, data)
                 .as(StepVerifier::create)
                 .consumeNextWith(
                         entity -> {
@@ -131,6 +158,11 @@ public class PostClientTest {
                         }
                 )
                 .verifyComplete();
+
+        verify(putRequestedFor(urlEqualTo("/posts/" + id))
+                .withHeader("Accept", equalTo("application/json"))
+                .withRequestBody(equalToJson(Json.write(data)))
+        );
     }
 
     @SneakyThrows
@@ -152,5 +184,9 @@ public class PostClientTest {
                         }
                 )
                 .verifyComplete();
+
+        verify(deleteRequestedFor(urlEqualTo("/posts/" + id))
+                .withHeader("Accept", equalTo("application/json"))
+        );
     }
 }
