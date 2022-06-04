@@ -21,13 +21,7 @@ jobs:
         with:
           java-version: "17"
           distribution: "zulu"
-      - name: Cache Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Set up Database
         run: |
           docker-compose up -d postgres
@@ -36,7 +30,7 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file boot/pom.xml -Put
 
-    # ommits code quality analysis
+    # commits code quality analysis
   intergration-test:
     runs-on: ubuntu-latest
     needs: [build]
@@ -50,14 +44,7 @@ jobs:
         with:
           java-version: "17"
           distribution: "zulu"
-
-      - name: Cache Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Set up Database
         run: |
           docker-compose up -d postgres
@@ -79,14 +66,7 @@ jobs:
         with:
           java-version: "17"
           distribution: "zulu"
-          
-      - name: Cache Maven repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          cache: "maven"
       - name: Build with Maven(Build Docker Image)
         run: |
           mvn spring-boot:build-image  --file boot/pom.xml -DskipTests
