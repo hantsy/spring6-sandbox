@@ -66,9 +66,9 @@
 
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
             <!-- version 5.6.7.Final broke jpamodelgen -->
-            <version>5.6.10.Final</version>
+            <version>6.1.1.Final</version>
             <optional>true</optional>
         </dependency>
 
