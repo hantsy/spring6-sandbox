@@ -5,8 +5,10 @@ import io.r2dbc.postgresql.PostgresqlConnectionConfiguration;
 import io.r2dbc.postgresql.PostgresqlConnectionFactory;
 import io.r2dbc.postgresql.codec.EnumCodec;
 import io.r2dbc.spi.ConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.r2dbc.connection.R2dbcTransactionManager;
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator;
@@ -22,7 +24,23 @@ import org.springframework.transaction.reactive.TransactionalOperator;
  */
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:r2dbc.properties")
 public class R2dbcConfig {
+
+    @Value("${r2dbc.host}")
+    private String host;
+
+    @Value("${r2dbc.port}")
+    private int port;
+
+    @Value("${r2dbc.username}")
+    private String username;
+
+    @Value("${r2dbc.password}")
+    private String password;
+
+    @Value("${r2dbc.database}")
+    private String database;
 
     @Bean
     public ConnectionFactory connectionFactory() {
@@ -33,10 +51,11 @@ public class R2dbcConfig {
         // postgres
         return new PostgresqlConnectionFactory(
                 PostgresqlConnectionConfiguration.builder()
-                        .host("localhost")
-                        .database("blogdb")
-                        .username("user")
-                        .password("password")
+                        .host(host)
+                        .port(port)
+                        .database(database)
+                        .username(username)
+                        .password(password)
                         .codecRegistrar(EnumCodec.builder().withEnum("post_status", Status.class).build())
                         .build()
         );
