@@ -34,7 +34,7 @@
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <postgresql.version>42.4.1</postgresql.version>
+        <postgresql.version>42.4.2</postgresql.version>
     </properties>
 
     <dependencyManagement>
