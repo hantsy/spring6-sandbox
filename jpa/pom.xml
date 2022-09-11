@@ -25,6 +25,7 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M5</spring-framework.version>
         <postgresql.version>42.5.0</postgresql.version>
+        <hibernate.version>6.1.3.Final</hibernate.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.0.23</tomcat.version>
@@ -147,13 +148,13 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core-jakarta</artifactId>
-            <version>5.6.11.Final</version>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen-jakarta</artifactId>
-            <version>5.6.11.Final</version>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>${hibernate.version}</version>
             <optional>true</optional>
         </dependency>
 
