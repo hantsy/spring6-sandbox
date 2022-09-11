@@ -19,12 +19,12 @@
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
         <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
-        <cargo-maven3-plugin.version>1.9.13</cargo-maven3-plugin.version>
+        <cargo-maven3-plugin.version>1.10.1</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M5</spring-framework.version>
-        <postgresql.version>42.4.0</postgresql.version>
+        <postgresql.version>42.5.0</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
 
         <!-- Apache Tomcat -->
@@ -79,7 +79,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.8.2</version>
+                <version>5.9.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -212,7 +212,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>7.0.4.Final</version>
+            <version>7.0.5.Final</version>
         </dependency>
 
         <!-- Jakarta EE 9 compatible Servlet container, eg. Tomcat 10, Eclipse Jetty 11 -->
@@ -234,12 +234,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.36</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.7.36</version>
+            <version>2.0.0</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -260,7 +260,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>4.6.1</version>
+            <version>4.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
