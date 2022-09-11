@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <testcontainers.version>1.17.3</testcontainers.version>
         <querydsl.version>5.0.0</querydsl.version>
+        <rest-assured.version>5.2.0</rest-assured.version>
 
         <!-- maven plugins -->
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -34,6 +35,13 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured-bom</artifactId>
+                <version>5.2.0</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -133,6 +141,16 @@
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>spring-mock-mvc</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
