@@ -80,7 +80,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>6.1.2.Final</version>
+            <version>${hibernate.version}</version>
             <optional>true</optional>
         </dependency>
 
@@ -194,7 +194,7 @@
                         <include>**/*Test*.java</include>
                     </includes>
                     <excludes>
-                        <exclude>**/it/IntegrationTests.java</exclude>
+                        <exclude>**/it/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -205,8 +205,11 @@
                 <configuration>
                     <skipITs>${skip.integration.tests}</skipITs>
                     <includes>
-                        <include>**/it/IntegrationTests.java</include>
+                        <include>**/it/*.java</include>
                     </includes>
+                    <excludes>
+                        <exclude></exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>
