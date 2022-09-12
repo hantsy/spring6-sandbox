@@ -15,7 +15,12 @@ public class IntegrationTestsWithRestAssured {
 
     @BeforeEach
     public void setup() {
-        RestAssured.port = 8080;
+        var baseUrl = "http://localhost:8080";
+        if (System.getenv().containsKey("BASE_API_URL")) {
+            baseUrl = System.getenv("BASE_API_URL");
+        }
+        log.debug("baseUrl is: {}", baseUrl);
+        RestAssured.baseURI = baseUrl;
     }
 
     @AfterEach
