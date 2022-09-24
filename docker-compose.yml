@@ -22,3 +22,13 @@ services:
       - ./data/mongo:/data/db
     ports:
       - "27017:27017"
+      
+  artemis:
+    image: qoricode/activemq-artemis
+    environment:
+      ARTEMIS_USERNAME: user
+      ARTEMIS_PASSWORD: password
+    volumes:
+      - ./data/artemis:/var/lib/artemis/data
+    ports:
+      - "6161:61616"    
