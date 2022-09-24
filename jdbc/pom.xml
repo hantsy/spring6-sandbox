@@ -29,7 +29,7 @@
         <tomcat.version>10.0.23</tomcat.version>
 
         <!-- Eclipse Jetty  -->
-        <jetty.version>11.0.11</jetty.version>
+        <jetty.version>11.0.12</jetty.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
