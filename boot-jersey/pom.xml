@@ -48,7 +48,7 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -111,6 +111,13 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>ut</id>
+            <properties>
+                <skip.unit.tests>false</skip.unit.tests>
+                <skip.integration.tests>true</skip.integration.tests>
+            </properties>
+        </profile>
         <profile>
             <id>it</id>
             <properties>
