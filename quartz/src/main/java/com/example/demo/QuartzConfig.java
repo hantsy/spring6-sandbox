@@ -1,11 +1,16 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.*;
 
 @Configuration
 public class QuartzConfig {
+
+    @Autowired
+    Greeting greeting;
+
     @Bean
     JobDetailFactoryBean counterJobDetailFactoryBean() {
         var jobFactory = new JobDetailFactoryBean();
@@ -16,7 +21,8 @@ public class QuartzConfig {
     @Bean
     MethodInvokingJobDetailFactoryBean greetingJobDetailFactoryBean() {
         var jobFactory = new MethodInvokingJobDetailFactoryBean();
-        jobFactory.setTargetBeanName("greeting");
+        //jobFactory.setTargetBeanName("greeting");
+        jobFactory.setTargetObject(greeting);
         jobFactory.setTargetMethod("sayHello");
         return jobFactory;
     }
