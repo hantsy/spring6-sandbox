@@ -1,0 +1,41 @@
+name: hibernate
+
+on:
+  push:
+    paths:
+      - "hibernate/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "hibernate/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 17
+          cache: "maven"
+
+      - name: Build with Maven
+        run: mvn -B -q clean package --file hibernate/pom.xml
+        
+      - name: Unit Tests
+        run: mvn -B -q clean test --file hibernate/pom.xml -Put
+
+      - name: Start up PostgreSQL in Docker
+        run: |
+          docker-compose up -d postgres
+          sleep 5
+          docker ps -a
+      - name: Integration Tests
+        run: mvn -B -q clean verify --file hibernate/pom.xml -Pit-jetty
