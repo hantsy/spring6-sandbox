@@ -25,6 +25,7 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M6</spring-framework.version>
         <postgresql.version>42.5.0</postgresql.version>
+        <spring-data.version>2022.0.0-M6</spring-data.version>
     </properties>
 
     <dependencyManagement>
@@ -46,7 +47,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-bom</artifactId>
-                <version>2022.0.0-M6</version>
+                <version>${spring-data.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
