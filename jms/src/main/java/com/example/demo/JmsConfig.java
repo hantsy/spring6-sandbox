@@ -16,7 +16,7 @@ public class JmsConfig {
     @Bean
     public CachingConnectionFactory connectionFactory() {
         return new CachingConnectionFactory(
-                new ActiveMQConnectionFactory("tcp://localhost:6161", "user", "password")
+                new ActiveMQConnectionFactory("tcp://0.0.0.0:6161", "user", "password")
         );
     }
 
