@@ -2,7 +2,7 @@ package com.example.demo.testcontainers;
 
 import com.example.demo.DataSourceConfig;
 import com.example.demo.domain.JdbcConfig;
-import com.example.demo.domain.model.PopularPost;
+import com.example.demo.domain.model.RecordPost;
 import com.example.demo.domain.repository.PopularPostRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -75,7 +75,7 @@ public class PopularPostRepositoryTestWithTestcontainers {
 
     @Test
     public void testInsertAndQuery() {
-        var data = new PopularPost(null, "test", "test content", null, null, null);
+        var data = new RecordPost(null, "test", "test content", null, null, null);
         var inserted = this.posts.save(data);
         assertThat(inserted.id()).isNotNull();
         assertThat(inserted.title()).isEqualTo("test");
@@ -87,7 +87,7 @@ public class PopularPostRepositoryTestWithTestcontainers {
         assertThat(existed.title()).isEqualTo("test");
         assertThat(existed.content()).isEqualTo("test content");
 
-        var updated = this.posts.save(new PopularPost(existed.id(), "updated test", "updated content", existed.createdAt(), existed.createdBy(), existed.version()));
+        var updated = this.posts.save(new RecordPost(existed.id(), "updated test", "updated content", existed.createdAt(), existed.createdBy(), existed.version()));
         assertThat(updated.title()).isEqualTo("updated test");
         assertThat(updated.content()).isEqualTo("updated content");
         assertThat(updated.version()).isGreaterThanOrEqualTo(1L);

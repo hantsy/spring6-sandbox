@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Table("popular_posts")
-public record PopularPost(
+public record RecordPost(
         @Id
         UUID id,
         String title,
