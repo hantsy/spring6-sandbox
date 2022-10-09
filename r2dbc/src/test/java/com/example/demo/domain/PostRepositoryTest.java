@@ -80,11 +80,8 @@ public class PostRepositoryTest {
 
     @Test
     public void testSaveAll() {
-
-        var data = Post.builder().title("test").content("content")
-                .status(Status.PENDING_MODERATION)
-                .build();
-        var data1 = Post.builder().title("test1").content("content1").build();
+        var data = Post.of("test","content", Status.PENDING_MODERATION);
+        var data1 = Post.of("test1","content1");
 
         var result = posts.saveAll(List.of(data, data1)).log("[Generated result]")
                 .doOnNext(id -> log.debug("generated id: {}", id));
@@ -93,31 +90,17 @@ public class PostRepositoryTest {
         result.as(StepVerifier::create)
                 .expectNextCount(2)
                 .verifyComplete();
-
-        StepVerifier.create(posts.countByStatus())
-                .consumeNextWith(r -> {
-                    log.debug("data: {}", r);
-                    assertThat(r.get("status")).isEqualTo(Status.DRAFT);
-                })
-                .consumeNextWith(r -> {
-                    log.debug("data: {}", r);
-                    assertThat(r.get("cnt")).isEqualTo(1L);
-                    assertThat(r.get("status")).isEqualTo(Status.PENDING_MODERATION);
-                })
-                .verifyComplete();
     }
 
     @Test
     public void testInsertAndQuery() {
-        var data = Post.builder().title("test").content("content")
-                .status(Status.PENDING_MODERATION)
-                .build();
+        var data = Post.of("test","content", Status.PENDING_MODERATION);
         this.posts.save(data)
                 .flatMap(id -> this.posts.findById(id))
                 .as(StepVerifier::create)
                 .consumeNextWith(r -> {
                     log.debug("result data: {}", r);
-                    assertThat(r.getStatus()).isEqualTo(Status.PENDING_MODERATION);
+                    assertThat(r.status()).isEqualTo(Status.PENDING_MODERATION);
                 })
                 .verifyComplete();
     }

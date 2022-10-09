@@ -1,29 +1,14 @@
 package com.example.demo.domain.model;
 
-import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/**
- * @author hantsy
- */
-@Data
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Post {
+public record Post(UUID id, String title, String content, Status status, LocalDateTime createdAt) {
+    public static Post of(String title, String content) {
+        return new Post(null, title, content, Status.DRAFT, LocalDateTime.now());
+    }
 
-    private UUID id;
-
-    private String title;
-
-    private String content;
-
-    @Builder.Default
-    private Status status = Status.DRAFT;
-
-    private LocalDateTime createdAt;
-
+    public static Post of(String title, String content, Status status) {
+        return new Post(null, title, content, status, LocalDateTime.now());
+    }
 }

@@ -17,9 +17,13 @@ public class DataInitializer {
     @EventListener(value = ContextRefreshedEvent.class)
     public void init() throws Exception {
         log.info("start data initialization...");
+        var insertSql = """
+                INSERT INTO  posts (title, content)
+                VALUES (:title, :content)
+                """;
         this.databaseClient
-                .sql("INSERT INTO  posts (title, content) VALUES (:title, :content)")
-                .filter((statement, executeFunction) -> statement.returnGeneratedValues("id").execute())
+                .sql(insertSql)
+                .filter((statement, __) -> statement.returnGeneratedValues("id").execute())
                 .bind("title", "Spring 6 and R2dbc")
                 .bind("content", "content of my Spring 6 reactive post")
                 .fetch()

@@ -47,18 +47,13 @@ public class PostHandler {
                         (data) -> {
                             Post p = (Post) data[0];
                             Post p2 = (Post) data[1];
-                            if (p2 != null && StringUtils.hasText(p2.getTitle())) {
-                                p.setTitle(p2.getTitle());
-                            }
-
-                            if (p2 != null && StringUtils.hasText(p2.getContent())) {
-                                p.setContent(p2.getContent());
-                            }
-
-                            if (p2 != null && p2.getStatus() != null) {
-                                p.setStatus(p2.getStatus());
-                            }
-                            return p;
+                            return new Post(
+                                    p.id(),
+                                    p2 != null && StringUtils.hasText(p2.title()) ? p2.title() : p.title(),
+                                    p2 != null && StringUtils.hasText(p2.content()) ? p2.content() : p.content(),
+                                    p2 != null && p2.status() != null ? p2.status() : p.status(),
+                                    p.createdAt()
+                            );
                         },
                         existed,
                         req.bodyToMono(Post.class)

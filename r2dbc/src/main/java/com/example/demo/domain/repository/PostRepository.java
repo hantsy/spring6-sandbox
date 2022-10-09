@@ -13,9 +13,6 @@ public interface PostRepository {
 
     Flux<Post> findAll();
 
-    // see: https://stackoverflow.com/questions/64267699/spring-data-r2dbc-and-group-by
-    Flux<Map<Object, Object>> countByStatus();
-
     Mono<Post> findById(UUID id);
 
     Mono<UUID> save(Post p);

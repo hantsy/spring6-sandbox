@@ -51,9 +51,9 @@ public class RouterFunctionTest {
     }
 
     @Test
-    public void testGetAllPosts() throws Exception {
+    public void testGetAllPosts() {
         given(this.posts.findAll())
-                .willReturn(Flux.just(Post.builder().title("test").content("content").build()));
+                .willReturn(Flux.just(Post.of("test", "content")));
         this.client
                 .get().uri("/posts").accept(APPLICATION_JSON)
                 .exchange()
