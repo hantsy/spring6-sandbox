@@ -8,13 +8,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.OptimisticLockingFailureException;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
 
@@ -53,7 +53,9 @@ public class JdbcAggregateTemplateTest {
         data.setContent("test content");
         data.setVersion(1L);
         // the version is set, `save` method will execute a `update` action.
-        assertThatThrownBy(() -> this.template.save(data)).isInstanceOf(DbActionExecutionException.class);
+        // see: https://github.com/spring-projects/spring-data-relational/issues/1337
+        // throws  OptimisticLockingFailureException instead of general DbActionExecutionException
+        assertThatThrownBy(() -> this.template.save(data)).isInstanceOf(OptimisticLockingFailureException.class);
     }
 
     @Test
