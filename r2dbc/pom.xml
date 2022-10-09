@@ -22,7 +22,7 @@
         <!-- runtime deps -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-M6</spring-framework.version>
-        <r2dbc.version>Borca-SR1</r2dbc.version>
+        <r2dbc.version>Borca-SR2</r2dbc.version>
         <reactor.version>2022.0.0-M4</reactor.version>
         <junit.version>5.9.1</junit.version>
         <jackson.version>2.13.4</jackson.version>
@@ -171,12 +171,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.1</version>
+            <version>1.4.3</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.1</version>
+            <version>1.4.3</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
