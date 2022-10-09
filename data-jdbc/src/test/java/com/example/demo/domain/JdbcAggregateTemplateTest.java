@@ -59,6 +59,17 @@ public class JdbcAggregateTemplateTest {
     }
 
     @Test
+    public void givenEntityWithVersion_whenSetVersionValue_andDelete_thenExecuteDeletionActionAndThrowsException() {
+        var data = new VersionedPost();
+        data.setTitle("test");
+        data.setContent("test content");
+        data.setVersion(1L);
+        data.setId(UUID.randomUUID());
+
+        assertThatThrownBy(() -> this.template.delete(data, VersionedPost.class)).isInstanceOf(OptimisticLockingFailureException.class);
+    }
+
+    @Test
     public void givenEntityWithVersion_whenSetVersionValue_andInsert_thenIgnoreVersionAndInsertCorrectly() {
         var data = new VersionedPost();
         data.setTitle("test");
