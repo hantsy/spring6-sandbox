@@ -25,7 +25,7 @@
         <r2dbc.version>Borca-SR2</r2dbc.version>
         <reactor.version>2022.0.0-M4</reactor.version>
         <junit.version>5.9.1</junit.version>
-        <jackson.version>2.13.4</jackson.version>
+        <jackson.version>2.13.4.20221013</jackson.version>
     </properties>
 
     <dependencyManagement>
