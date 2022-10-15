@@ -28,7 +28,7 @@ jobs:
       - name: Start up Apache Artemis
         run: |
           docker-compose up -d artemis
-          sleep 5
+          sleep 10
           docker ps -a
       - name: Build with Maven
         run: mvn clean install --file jms/pom.xml
