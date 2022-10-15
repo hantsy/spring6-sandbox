@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>spring6-sample-declarative-http-client</artifactId>
+    <artifactId>spring6-sample-problem-details</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spring6-sample-declarative-http-client</name>
-    <description>Spring 6 Declarative HttpClient example(without Spring Boot)</description>
+    <name>spring6-sample-problem-details</name>
+    <description>Spring 6 Problem Detail example(without Spring Boot)</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -17,17 +17,16 @@
 
         <!-- maven plugins -->
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
-        <cargo-maven3-plugin.version>1.9.11</cargo-maven3-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-RC1</spring-framework.version>
-
-        <!-- skip tests by default -->
-        <skip.unit.tests>true</skip.unit.tests>
-        <skip.integration.tests>true</skip.integration.tests>
+        <r2dbc.version>Borca-SR2</r2dbc.version>
+        <reactor.version>2022.0.0-RC1</reactor.version>
+        <netty.version>5.0.0.Alpha5</netty.version>
+        <junit.version>5.9.1</junit.version>
+        <jackson.version>2.13.4.20221013</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -47,11 +46,26 @@
                 <scope>import</scope>
             </dependency>
 
+            <dependency>
+                <groupId>io.r2dbc</groupId>
+                <artifactId>r2dbc-bom</artifactId>
+                <version>${r2dbc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-bom -->
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2022.0.0-RC1</version>
+                <version>${reactor.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty5-bom</artifactId>
+                <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -59,7 +73,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.9.1</version>
+                <version>${junit.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -67,26 +81,17 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.13.4.20221013</version>
+                <version>${jackson.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers-bom -->
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>1.17.5</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- Postgres Jdbc Driver -->
-            <dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>${postgresql.version}</version>
-                <scope>runtime</scope>
             </dependency>
 
         </dependencies>
@@ -98,26 +103,21 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webflux</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.projectreactor.netty</groupId>
-            <artifactId>reactor-netty</artifactId>
-        </dependency>
-
-        <!-- Jakarta EE 9 API, enable @Inject support -->
+        <!-- Jakarta EE 9 API -->
         <dependency>
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.0.Final</version>
         </dependency>
 
         <!-- Jackson -->
@@ -134,15 +134,33 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
 
-        <!-- Hibernate Validator 7.x switched to Jakarta EE 9 -->
+        <!-- R2dbc and Postgres drivers -->
+        <!-- Since 0.9 r2dbc-postgresql changed the groupId to `org.postgresql` -->
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
+            <groupId>io.r2dbc</groupId>
+            <artifactId>r2dbc-spi</artifactId>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>8.0.0.Final</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>r2dbc-postgresql</artifactId>
+            <version>1.0.0.RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-r2dbc</artifactId>
+        </dependency>
+
+        <!-- Netty runtime -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-buffer</artifactId>
+            <version>4.1.82.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.projectreactor.netty</groupId>
+            <artifactId>reactor-netty</artifactId>
         </dependency>
 
         <!-- Lombok -->
@@ -208,42 +226,35 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <dependency>
-            <groupId>com.github.tomakehurst</groupId>
-            <artifactId>wiremock-jre8</artifactId>
-            <version>2.34.0</version>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.5.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>demo</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <parameters>true</parameters>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -277,23 +288,9 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.1.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <mainClass>com.example.demo.Application</mainClass>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
+
     <repositories>
         <repository>
             <id>spring-snapshots</id>
