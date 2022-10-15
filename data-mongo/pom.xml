@@ -28,7 +28,7 @@
         <spring-framework.version>6.0.0-RC1</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <mongo-driver.version>4.7.1</mongo-driver.version>
+        <mongo-driver.version>4.7.2</mongo-driver.version>
         <spring-data.version>2022.0.0-M6</spring-data.version>
 
         <!-- Apache Tomcat -->
@@ -75,7 +75,7 @@
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2022.0.0-M2 </version>
+                <version>2022.0.0-RC1</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -91,7 +91,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.13.4</version>
+                <version>2.13.4.20221013</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -232,12 +232,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.3</version>
+            <version>1.4.4</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.3</version>
+            <version>1.4.4</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
