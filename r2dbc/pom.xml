@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -23,7 +22,8 @@
         <jakartaee-api.version>9.1.0</jakartaee-api.version>
         <spring-framework.version>6.0.0-RC1</spring-framework.version>
         <r2dbc.version>Borca-SR2</r2dbc.version>
-        <reactor.version>2022.0.0-M4</reactor.version>
+        <reactor.version>2022.0.0-RC1</reactor.version>
+        <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.9.1</junit.version>
         <jackson.version>2.13.4</jackson.version>
     </properties>
@@ -58,6 +58,13 @@
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
                 <version>${reactor.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty5-bom</artifactId>
+                <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -141,7 +148,6 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-buffer</artifactId>
-            <version>4.1.82.Final</version>
         </dependency>
 
         <dependency>
