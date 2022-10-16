@@ -1,8 +1,6 @@
 package com.example.demo;
 
 
-import com.example.demo.Application;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,7 @@ public class ApplicationTests {
             .get()
             .uri("/posts")
             .exchange()
-            .expectStatus().isOk();  
+            .expectStatus().isOk();
     }
 
 }
