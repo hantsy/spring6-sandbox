@@ -2,7 +2,6 @@ package com.example.demo;
 
 import io.rsocket.core.RSocketServer;
 import io.rsocket.transport.netty.server.TcpServerTransport;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.http.codec.cbor.Jackson2CborDecoder;
 import org.springframework.http.codec.cbor.Jackson2CborEncoder;
@@ -14,10 +13,6 @@ import org.springframework.web.util.pattern.PathPatternRouteMatcher;
 @ComponentScan
 @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class Application {
-
-    @Value("${server.port:8080}")
-    private int port = 8080;
-
     public static void main(String[] args) throws Exception {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
                 Application.class)) {
