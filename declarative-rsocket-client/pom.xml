@@ -140,6 +140,10 @@
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-cbor</artifactId>
+        </dependency>
 
         <!-- R2dbc and Postgres drivers -->
         <!-- Since 0.9 r2dbc-postgresql changed the groupId to `org.postgresql` -->
