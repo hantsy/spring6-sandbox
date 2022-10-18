@@ -22,7 +22,8 @@ public class Application {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
                 Application.class)) {
             var rSocketServer = context.getBean(RSocketServer.class);
-            rSocketServer.bindNow(TcpServerTransport.create("localhost", 7000));
+            rSocketServer.bind(TcpServerTransport.create("localhost", 7000))
+                    .block();
         }
     }
 
