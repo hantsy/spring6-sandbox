@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.reactive.result.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.Map;
+
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -19,4 +21,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(problemDetail);
     }
 
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("message", exception.getMessage()));
+    }
 }

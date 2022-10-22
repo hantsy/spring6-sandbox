@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import reactor.netty.DisposableServer;
-import reactor.netty.http.server.HttpServer;
+import reactor.netty5.DisposableServer;
+import reactor.netty5.http.server.HttpServer;
 
 import java.time.Duration;
 
