@@ -5,6 +5,7 @@ import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
 import com.example.demo.event.transactional.PostCreatedEvent;
 import com.example.demo.event.transactional.PostCreatedEventPublisher;
+import com.example.demo.service.PostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -44,6 +45,9 @@ public class PostControllerTest {
 
     @Autowired
     PostRepository posts;
+
+    @Autowired
+    PostService postService;
 
     @Autowired
     PostCreatedEventPublisher eventPublisher;
