@@ -35,14 +35,14 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer ignoringCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/css/**", "/images/**");
+        return (web) -> web.ignoring().requestMatchers("/css/**", "/images/**");
     }
 
     @Bean
     @Order(1)
     SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
         http
-                .antMatcher("/api/**")
+                .securityMatcher("/api/**")
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().hasRole("ADMIN")
                 )
