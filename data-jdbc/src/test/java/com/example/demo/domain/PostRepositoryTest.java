@@ -62,7 +62,7 @@ public class PostRepositoryTest {
         var data = Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build();
         var data1 = Post.builder().title("test1").content("content1").build();
 
-        var result = (List) posts.saveAll(List.of(data, data1));
+        var result = posts.saveAll(List.of(data, data1));
 
         assertThat(result).isNotNull();
         assertThat(result.size()).isEqualTo(2);

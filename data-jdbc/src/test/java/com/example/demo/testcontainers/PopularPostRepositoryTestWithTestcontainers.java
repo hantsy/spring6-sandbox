@@ -25,6 +25,7 @@ import org.testcontainers.utility.MountableFile;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author hantsy
@@ -83,7 +84,9 @@ public class PopularPostRepositoryTestWithTestcontainers {
         assertThat(inserted.createdAt()).isNotNull();
         assertThat(inserted.version()).isGreaterThanOrEqualTo(0L);
 
-        var existed = this.posts.findById(inserted.id()).get();
+        var optionalPost = this.posts.findById(inserted.id());
+        assertTrue(optionalPost.isPresent());
+        var existed = optionalPost.get();
         assertThat(existed.title()).isEqualTo("test");
         assertThat(existed.content()).isEqualTo("test content");
 
