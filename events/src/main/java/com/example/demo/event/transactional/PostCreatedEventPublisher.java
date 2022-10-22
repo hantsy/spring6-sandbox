@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class PostCreatedEventPublisher {
     private final ApplicationEventPublisher eventPublisher;
 
-    public void publishPostCreated(PostCreated event) {
+    public void publishPostCreated(PostCreatedEvent event) {
         log.debug("publishing event: {}", event);
         //this.eventPublisher.publishEvent(new PostCreatedEvent(this, event));
         this.eventPublisher.publishEvent(event);

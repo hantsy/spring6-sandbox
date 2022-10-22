@@ -1,6 +1,6 @@
 package com.example.demo.it;
 
-import com.example.demo.event.transactional.PostCreated;
+import com.example.demo.event.transactional.PostCreatedEvent;
 import com.example.demo.web.CreatePostCommand;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterEach;
@@ -40,7 +40,7 @@ public class SseIntegrationTests {
     public void testSseEndpoints() {
         var verifier = this.client.get().uri("/events")
                 .accept(MediaType.TEXT_EVENT_STREAM)
-                .exchangeToFlux(clientResponse -> clientResponse.bodyToFlux(PostCreated.class))
+                .exchangeToFlux(clientResponse -> clientResponse.bodyToFlux(PostCreatedEvent.class))
                 .log()
                 .as(StepVerifier::create)
                 .consumeNextWith(it -> assertThat(it.title()).isEqualTo("test1"))

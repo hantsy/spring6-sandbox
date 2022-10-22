@@ -1,0 +1,41 @@
+name: events
+
+on:
+  push:
+    paths:
+      - "events/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "events/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "zulu"
+          java-version: 17
+          cache: "maven"
+
+      - name: Build with Maven
+        run: mvn -B -q clean package --file events/pom.xml
+        
+      - name: Unit Tests
+        run: mvn -B -q clean test --file events/pom.xml -Put
+
+      - name: Start up PostgreSQL in Docker
+        run: |
+          docker-compose up -d postgres
+          sleep 5
+          docker ps -a
+      - name: Integration Tests
+        run: mvn -B -q clean verify --file events/pom.xml -Pit-jetty

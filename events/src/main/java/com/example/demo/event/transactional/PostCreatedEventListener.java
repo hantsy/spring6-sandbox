@@ -12,17 +12,17 @@ import java.util.concurrent.CopyOnWriteArraySet;
 @Slf4j
 public class PostCreatedEventListener {
 
-    private CopyOnWriteArraySet<PostCreated> eventStore = new CopyOnWriteArraySet<>();
+    private CopyOnWriteArraySet<PostCreatedEvent> eventStore = new CopyOnWriteArraySet<>();
 
     //@TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     @EventListener
     @Async
-    public void onPostCreated(PostCreated post) {
+    public void onPostCreated(PostCreatedEvent post) {
         log.debug("on post created: {}", post);
         this.eventStore.add(post);
     }
 
-    public Set<PostCreated> getEvents() {
+    public Set<PostCreatedEvent> getEvents() {
         return this.eventStore;
     }
 }

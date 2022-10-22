@@ -3,7 +3,7 @@ package com.example.demo.web;
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
-import com.example.demo.event.transactional.PostCreated;
+import com.example.demo.event.transactional.PostCreatedEvent;
 import com.example.demo.event.transactional.PostCreatedEventPublisher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,7 +79,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
                 .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
-        doNothing().when(this.eventPublisher).publishPostCreated(any(PostCreated.class));
+        doNothing().when(this.eventPublisher).publishPostCreated(any(PostCreatedEvent.class));
 
         var data = new CreatePostCommand("test post", "content of test");
         this.client.post().uri("/posts").body(BodyInserters.fromValue(data))
@@ -89,7 +89,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
                 .expectHeader().location("/posts/" + id);
 
         verify(this.posts, times(1)).save(any(Post.class));
-        verify(this.eventPublisher, times(1)).publishPostCreated(any(PostCreated.class));
+        verify(this.eventPublisher, times(1)).publishPostCreated(any(PostCreatedEvent.class));
         verifyNoMoreInteractions(this.posts);
         verifyNoMoreInteractions(this.eventPublisher);
     }

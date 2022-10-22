@@ -3,7 +3,7 @@ package com.example.demo.web;
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
-import com.example.demo.event.transactional.PostCreated;
+import com.example.demo.event.transactional.PostCreatedEvent;
 import com.example.demo.event.transactional.PostCreatedEventPublisher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -97,7 +97,7 @@ public class PostControllerTest {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
                 .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
-        doNothing().when(this.eventPublisher).publishPostCreated(any(PostCreated.class));
+        doNothing().when(this.eventPublisher).publishPostCreated(any(PostCreatedEvent.class));
 
         var data = new CreatePostCommand("test post", "content of test");
         this.mockMvc.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
@@ -106,7 +106,7 @@ public class PostControllerTest {
                 .andExpect(header().string("Location", "/posts/" + id));
 
         verify(this.posts, times(1)).save(any(Post.class));
-        verify(this.eventPublisher, times(1)).publishPostCreated(isA(PostCreated.class));
+        verify(this.eventPublisher, times(1)).publishPostCreated(isA(PostCreatedEvent.class));
         verifyNoMoreInteractions(this.posts);
         verifyNoMoreInteractions(this.eventPublisher);
     }

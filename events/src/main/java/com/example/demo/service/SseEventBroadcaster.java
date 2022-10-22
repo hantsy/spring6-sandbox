@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.event.transactional.PostCreated;
+import com.example.demo.event.transactional.PostCreatedEvent;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
@@ -35,7 +35,7 @@ public class SseEventBroadcaster {
 
     @SneakyThrows
     @EventListener
-    public void emitPostCreatedEvent(PostCreated event) {
+    public void emitPostCreatedEvent(PostCreatedEvent event) {
         log.debug("emitting event: {}", event);
         this.emitters.forEach(emitter -> {
             try {

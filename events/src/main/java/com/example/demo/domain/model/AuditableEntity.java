@@ -2,6 +2,7 @@ package com.example.demo.domain.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @MappedSuperclass
 @Setter
 @Getter
+@SuperBuilder()
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(value = AuditingEntityListener.class) //to fill the auditing fields.

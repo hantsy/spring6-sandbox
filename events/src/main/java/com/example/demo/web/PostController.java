@@ -2,7 +2,7 @@ package com.example.demo.web;
 
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
-import com.example.demo.event.transactional.PostCreated;
+import com.example.demo.event.transactional.PostCreatedEvent;
 import com.example.demo.event.transactional.PostCreatedEventPublisher;
 import com.example.demo.service.PostService;
 import jakarta.validation.Valid;
@@ -41,7 +41,7 @@ public class PostController {
         var data = Post.builder().title(dto.title()).content(dto.content()).build();
         var saved = this.posts.save(data);
         //publishing an event.
-        this.eventPublisher.publishPostCreated(new PostCreated(saved.getId(), saved.getTitle(), saved.getCreatedAt()));
+        this.eventPublisher.publishPostCreated(new PostCreatedEvent(saved.getId(), saved.getTitle(), saved.getCreatedAt()));
         return created(URI.create("/posts/" + saved.getId())).build();
     }
 
