@@ -17,6 +17,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Map;
 import java.util.UUID;
 
 import static org.mockito.BDDMockito.given;
@@ -94,11 +95,12 @@ public class PostControllerTest {
     // manually handling validation in the record compact constructor.
     @Test
     public void createPost_whenBodyInvalid() {
-        var body = new CreatePostCommand("test", null);
+        //var body = new CreatePostCommand("test", null); // it throws exceptions before invoking /posts
+
         this.client
                 .post().uri("/posts")
                 .contentType(APPLICATION_JSON)
-                .bodyValue(body)
+                .bodyValue(Map.of("title","test")) // will convert to CreatePostCommand in controller
                 .exchange()
                 .expectStatus().isBadRequest();
     }
