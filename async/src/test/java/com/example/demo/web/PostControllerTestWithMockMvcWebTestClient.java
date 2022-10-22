@@ -3,8 +3,6 @@ package com.example.demo.web;
 import com.example.demo.Jackson2ObjectMapperConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
-import com.example.demo.service.PostCreated;
-import com.example.demo.service.PostEventPublisher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +35,6 @@ public class PostControllerTestWithMockMvcWebTestClient {
     @Autowired
     PostRepository posts;
 
-    @Autowired
-    PostEventPublisher eventPublisher;
 
     @BeforeEach
     public void setup() {
@@ -50,7 +46,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
 
     @AfterEach
     public void teardown() {
-        reset(this.posts, this.eventPublisher);
+        reset(this.posts);
     }
 
     @Test
@@ -79,7 +75,6 @@ public class PostControllerTestWithMockMvcWebTestClient {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
                 .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
-        doNothing().when(this.eventPublisher).publishPostCreated(any(PostCreated.class));
 
         var data = new CreatePostCommand("test post", "content of test");
         this.client.post().uri("/posts").body(BodyInserters.fromValue(data))
@@ -89,8 +84,6 @@ public class PostControllerTestWithMockMvcWebTestClient {
                 .expectHeader().location("/posts/" + id);
 
         verify(this.posts, times(1)).save(any(Post.class));
-        verify(this.eventPublisher, times(1)).publishPostCreated(any(PostCreated.class));
         verifyNoMoreInteractions(this.posts);
-        verifyNoMoreInteractions(this.eventPublisher);
     }
 }

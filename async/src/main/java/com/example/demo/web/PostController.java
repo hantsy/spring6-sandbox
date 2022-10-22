@@ -2,8 +2,6 @@ package com.example.demo.web;
 
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.repository.PostRepository;
-import com.example.demo.service.PostCreated;
-import com.example.demo.service.PostEventPublisher;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,6 @@ import static org.springframework.http.ResponseEntity.created;
 @Validated//does not work on record.
 public class PostController {
     private final PostRepository posts;
-    private final PostEventPublisher eventPublisher;
 
     @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
     public CompletableFuture<List<Post>> getAll() {
@@ -34,8 +31,6 @@ public class PostController {
     public ResponseEntity<Void> create(@RequestBody @Valid CreatePostCommand dto) {
         var data = Post.builder().title(dto.title()).content(dto.content()).build();
         var saved = this.posts.save(data);
-        //publishing an event.
-        this.eventPublisher.publishPostCreated(new PostCreated(saved.getId(), saved.getTitle(), saved.getCreatedAt()));
         return created(URI.create("/posts/" + saved.getId())).build();
     }
 }
