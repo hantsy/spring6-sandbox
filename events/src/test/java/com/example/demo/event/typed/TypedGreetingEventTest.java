@@ -1,5 +1,6 @@
 package com.example.demo.event.typed;
 
+import com.example.demo.event.vanilla.GreetingEvent;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,16 @@ public class TypedGreetingEventTest {
     public void testGreetingEvents() {
         publisher.publishGreetingEvent("hello world");
 
-        Awaitility.await().atMost(Duration.ofMillis(500))
-                .untilAsserted(() ->
-                        assertThat(
-                                applicationEvents.stream()
-                                        .count()
-                        )
-                                .isEqualTo(1)
-                );
+        assertThat(applicationEvents.stream(Greeting.class).count()).isEqualTo(1);
+
+        // see: https://stackoverflow.com/questions/74063593/how-to-test-applicationevent-in-spring-integration-flow
+//        Awaitility.await().atMost(Duration.ofMillis(500))
+//                .untilAsserted(() ->
+//                        assertThat(
+//                                applicationEvents.stream()
+//                                        .count()
+//                        )
+//                                .isEqualTo(1)
+//                );
     }
 }

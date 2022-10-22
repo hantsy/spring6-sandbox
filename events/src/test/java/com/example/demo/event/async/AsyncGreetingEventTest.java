@@ -1,4 +1,4 @@
-package com.example.demo.event.vanilla;
+package com.example.demo.event.async;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,18 +10,19 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringJUnitConfig(classes = GreetingEventTest.TestConfig.class)
+@SpringJUnitConfig(classes = AsyncGreetingEventTest.TestConfig.class)
 @RecordApplicationEvents
-public class GreetingEventTest {
+public class AsyncGreetingEventTest {
 
     @Autowired
     ApplicationEvents applicationEvents;
 
     @Autowired
-    GreetingEventPublisher publisher;
+    AsyncGreetingPublisher publisher;
 
     @Configuration
-    @ComponentScan(basePackageClasses = GreetingEvent.class)
+    @ComponentScan(basePackageClasses = AsyncGreeting.class)
+    //@Import(AsyncConfig.class)  //Enabling async support will run listener on a different thread.
     static class TestConfig {
 
     }
@@ -29,6 +30,6 @@ public class GreetingEventTest {
     @Test
     public void testGreetingEvents() {
         publisher.publishGreetingEvent("hello world");
-        assertThat(applicationEvents.stream(GreetingEvent.class).count()).isEqualTo(1);
+        assertThat(applicationEvents.stream(AsyncGreeting.class).count()).isEqualTo(1);
     }
 }
