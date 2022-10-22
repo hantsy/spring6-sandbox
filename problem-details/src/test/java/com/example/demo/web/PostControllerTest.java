@@ -90,7 +90,8 @@ public class PostControllerTest {
         verifyNoMoreInteractions(this.posts);
     }
 
-    // Bean validation on Record is still not working
+    // Bean validation on Record does not work
+    // manually handling validation in the record compact constructor.
     @Test
     public void createPost_whenBodyInvalid() {
         var body = new CreatePostCommand("test", null);
