@@ -35,6 +35,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer ignoringCustomizer() {
+        // antMatchers -> requestMatchers
         return (web) -> web.ignoring().requestMatchers("/css/**", "/images/**");
     }
 
@@ -42,6 +43,7 @@ public class SecurityConfig {
     @Order(1)
     SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
         http
+                // antMatchers -> securityMatcher
                 .securityMatcher("/api/**")
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().hasRole("ADMIN")
