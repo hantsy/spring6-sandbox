@@ -21,6 +21,7 @@ public class Post extends AuditableEntity {
     private String content;
 
     @Column(name = "comments_count", columnDefinition = "BIGINT NOT NULL DEFAULT 0")
+    @Builder.Default
     private Long commentsCount = 0L;
 
     @Column(name = "status")
