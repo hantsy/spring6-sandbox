@@ -69,7 +69,7 @@ public class FileUploadController {
                                             String value = formEvent.value();
                                             // handle form field
                                             log.debug("form value: {}", value);
-                                            return Flux.just(value.trim());
+                                            return Mono.just(value);
 
                                         } else if (event instanceof FilePartEvent fileEvent) {
                                             String filename = fileEvent.filename();
@@ -85,9 +85,9 @@ public class FileUploadController {
                                                         return bytes;
                                                     });
 
-                                            return Flux.just(filename.trim());
+                                            return Mono.just(filename);
                                         } else {
-                                            return Flux.error(new RuntimeException("Unexpected event: " + event));
+                                            return Mono.error(new RuntimeException("Unexpected event: " + event));
                                         }
                                     }
                                     return partEvents; // either complete or error signal
