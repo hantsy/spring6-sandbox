@@ -77,7 +77,7 @@ public class IntegrationTests {
                 )
                 .exchangeToFlux(clientResponse -> {
                             assertThat(clientResponse.statusCode()).isEqualTo(HttpStatus.OK);
-                            return clientResponse.bodyToFlux(Object.class);
+                            return clientResponse.bodyToFlux(String.class);
                         }
                 )
                 .as(StepVerifier::create)

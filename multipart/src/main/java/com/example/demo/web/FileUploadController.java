@@ -57,8 +57,8 @@ public class FileUploadController {
     }
 
     @PostMapping("partevents")
-    public Flux<Object> handlePartsEvents(@RequestBody Flux<PartEvent> allPartsEvents) {
-        return allPartsEvents
+    public ResponseEntity<Flux<Object>> handlePartsEvents(@RequestBody Flux<PartEvent> allPartsEvents) {
+        var result = allPartsEvents
                 .windowUntil(PartEvent::isLast)
                 .concatMap(p ->
                         p.switchOnFirst(
@@ -94,6 +94,8 @@ public class FileUploadController {
                                 }
                         )
                 );
+
+        return ok().body(result);
     }
 
 }
