@@ -5,15 +5,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.client.reactive.JdkClientHttpConnector;
+import org.springframework.http.codec.multipart.FilePartEvent;
+import org.springframework.http.codec.multipart.FormPartEvent;
+import org.springframework.http.codec.multipart.PartEvent;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.netty5.DisposableServer;
 import reactor.netty5.http.server.HttpServer;
+import reactor.test.StepVerifier;
 
 import java.net.http.HttpClient;
 import java.net.http.HttpClient.Version;
 import java.util.concurrent.Executors;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
 
 /**
  * @author hantsy
@@ -44,6 +54,7 @@ public class IntegrationTests {
                 .baseUrl("http://localhost:" + this.port)
                 .defaultHeaders(headers -> headers.set("X-APIKEY", "test-key"))
                 .clientConnector(clientConnector)
+                .codecs(clientCodecConfigurer -> clientCodecConfigurer.registerDefaults(true))
                 .build();
     }
 
@@ -53,14 +64,25 @@ public class IntegrationTests {
     }
 
     @Test
-    public void testGetAllPosts() throws Exception {
-//        this.client
-//                .get().uri("/posts")
-//                .retrieve()
-//                .bodyToFlux(Post.class)
-//                .as(StepVerifier::create)
-//                .expectNextCount(2)
-//                .verifyComplete();
+    public void testPartEvents() throws Exception {
+        this.client
+                .post().uri("/partevents")
+                .contentType(MULTIPART_FORM_DATA)
+                .body(
+                        Flux.concat(
+                                FormPartEvent.create("name", "test"),
+                                FilePartEvent.create("file", new ClassPathResource("spring.png"))
+                        ),
+                        PartEvent.class
+                )
+                .exchangeToFlux(clientResponse -> {
+                            assertThat(clientResponse.statusCode()).isEqualTo(HttpStatus.OK);
+                            return clientResponse.bodyToFlux(Object.class);
+                        }
+                )
+                .as(StepVerifier::create)
+                .expectNextCount(2)
+                .verifyComplete();
     }
 
 }

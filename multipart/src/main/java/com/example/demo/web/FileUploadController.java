@@ -52,7 +52,7 @@ public class FileUploadController {
     @PostMapping("multivalues")
     public ResponseEntity handleMultivalues(@RequestBody Mono<MultiValueMap<String, Part>> parts) {
         log.debug("handling multivalues: {}", parts);
-        var partNames = parts.map(p-> p.keySet().stream().map(key-> p.getFirst(key).name()).toList()).log();
+        var partNames = parts.map(p -> p.keySet().stream().map(key -> p.getFirst(key).name()).toList()).log();
         return ok().body(partNames);
     }
 
@@ -69,7 +69,7 @@ public class FileUploadController {
                                             String value = formEvent.value();
                                             // handle form field
                                             log.debug("form value: {}", value);
-                                            return Mono.just(value);
+                                            return Flux.just(value.trim());
 
                                         } else if (event instanceof FilePartEvent fileEvent) {
                                             String filename = fileEvent.filename();
@@ -85,9 +85,9 @@ public class FileUploadController {
                                                         return bytes;
                                                     });
 
-                                            return Mono.just(filename);
+                                            return Flux.just(filename.trim());
                                         } else {
-                                            return Mono.error(new RuntimeException("Unexpected event: " + event));
+                                            return Flux.error(new RuntimeException("Unexpected event: " + event));
                                         }
                                     }
                                     return partEvents; // either complete or error signal
