@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS post_labels (
     label VARCHAR(255),
-    post UUID NOT NULL
+    posts  UUID NOT NULL
 );
 
 ALTER TABLE posts DROP CONSTRAINT IF EXISTS fk_posts_moderator;
