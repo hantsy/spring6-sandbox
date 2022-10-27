@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS post_labels (
     label VARCHAR(255),
-    post UUID NOT NULL
+    posts  UUID NOT NULL
 );
 
 ALTER TABLE posts DROP CONSTRAINT IF EXISTS fk_posts_moderator;
 ALTER TABLE posts ADD CONSTRAINT fk_posts_moderator FOREIGN KEY (moderator) REFERENCES users (id) MATCH FULL;
 
 ALTER TABLE post_labels DROP CONSTRAINT IF EXISTS fk_post_labels;
-ALTER TABLE post_labels ADD CONSTRAINT fk_post_labels FOREIGN KEY (post) REFERENCES posts (id) MATCH FULL;
+ALTER TABLE post_labels ADD CONSTRAINT fk_post_labels FOREIGN KEY (posts) REFERENCES posts (id) MATCH FULL;
 
 CREATE TABLE IF NOT EXISTS versioned_posts (
     id UUID DEFAULT uuid_generate_v4(),
