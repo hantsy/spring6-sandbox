@@ -54,11 +54,11 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.10.1</version>
 				<configuration>
-					<compilerArgs>
-						<arg>--enable-preview</arg>
-					</compilerArgs>
+					<compilerArgs>--enable-preview</compilerArgs>
 					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
+                    <source>19</source>
+                    <target>19</target>
+                </configuration>
 			</plugin>
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
