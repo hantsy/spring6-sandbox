@@ -81,6 +81,8 @@ public class IntegrationTests {
                         }
                 )
                 .as(StepVerifier::create)
+//                .consumeNextWith(it-> assertThat(it).isEqualTo("test"))
+//                .consumeNextWith(it ->assertThat(it).isEqualTo("spring.png"))
                 .expectNextCount(2)
                 .verifyComplete();
     }

@@ -2,8 +2,6 @@ package com.example.demo.web;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.*;
 import org.springframework.util.MultiValueMap;
@@ -60,39 +58,44 @@ public class FileUploadController {
     public ResponseEntity<Flux<Object>> handlePartsEvents(@RequestBody Flux<PartEvent> allPartsEvents) {
         var result = allPartsEvents
                 .windowUntil(PartEvent::isLast)
-                .concatMap(p ->
-                        p.switchOnFirst(
-                                (signal, partEvents) -> {
-                                    if (signal.hasValue()) {
-                                        PartEvent event = signal.get();
-                                        if (event instanceof FormPartEvent formEvent) {
-                                            String value = formEvent.value();
-                                            // handle form field
-                                            log.debug("form value: {}", value);
-                                            return Mono.just(value);
+                .concatMap(p -> {
+                            log.debug("contactMap boundary::");
+                            return p.switchOnFirst((signal, partEvents) -> {
+                                        if (signal.hasValue()) {
+                                            PartEvent event = signal.get();
+                                            if (event instanceof FormPartEvent formEvent) {
+                                                String value = formEvent.value();
+                                                // handle form field
+                                                log.debug("form value: {}", value);
+                                                return Mono.just(value);
 
-                                        } else if (event instanceof FilePartEvent fileEvent) {
-                                            String filename = fileEvent.filename();
-                                            log.debug("upload file name:{}", filename);
-                                            Flux<DataBuffer> contents = partEvents.map(PartEvent::content);
+                                            } else if (event instanceof FilePartEvent fileEvent) {
+                                                String filename = fileEvent.filename();
+                                                log.debug("upload file name:{}", filename);
+//                                            Flux<DataBuffer> contents = partEvents.map(PartEvent::content);
+//
+//                                            // handle file upload
+//                                            var fileBytes = DataBufferUtils.join(contents)
+//                                                    .map(dataBuffer -> {
+//                                                        byte[] bytes = new byte[dataBuffer.readableByteCount()];
+//                                                        dataBuffer.read(bytes);
+//                                                        DataBufferUtils.release(dataBuffer);
+//                                                        return bytes;
+//                                                    });
 
-                                            // handle file upload
-                                            var fileBytes = DataBufferUtils.join(contents)
-                                                    .map(dataBuffer -> {
-                                                        byte[] bytes = new byte[dataBuffer.readableByteCount()];
-                                                        dataBuffer.read(bytes);
-                                                        DataBufferUtils.release(dataBuffer);
-                                                        return bytes;
-                                                    });
+                                                return Mono.just(filename);
+                                            }
 
-                                            return Mono.just(filename);
-                                        } else {
+                                            // no signal value
                                             return Mono.error(new RuntimeException("Unexpected event: " + event));
+
                                         }
+
+                                        log.debug("return default flux");
+                                        return partEvents; // either complete or error signal
                                     }
-                                    return partEvents; // either complete or error signal
-                                }
-                        )
+                            );
+                        }
                 );
 
         return ok().body(result);
