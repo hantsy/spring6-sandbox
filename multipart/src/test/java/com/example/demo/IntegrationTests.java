@@ -14,8 +14,8 @@ import org.springframework.http.codec.multipart.PartEvent;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
-import reactor.netty5.DisposableServer;
-import reactor.netty5.http.server.HttpServer;
+import reactor.netty.DisposableServer;
+import reactor.netty.http.server.HttpServer;
 import reactor.test.StepVerifier;
 
 import java.net.http.HttpClient;

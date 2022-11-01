@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.http.server.reactive.HttpHandler;
-import org.springframework.http.server.reactive.ReactorNetty2HttpHandlerAdapter;
+import org.springframework.http.server.reactive.ReactorHttpHandlerAdapter;
 import org.springframework.web.server.adapter.WebHttpHandlerBuilder;
-import reactor.netty5.http.server.HttpServer;
+import reactor.netty.http.server.HttpServer;
 
 import java.time.Duration;
 
@@ -30,7 +30,7 @@ public class Application {
     @Profile("default")
     public HttpServer httpServer(ApplicationContext context) {
         HttpHandler handler = WebHttpHandlerBuilder.applicationContext(context).build();
-        ReactorNetty2HttpHandlerAdapter adapter = new ReactorNetty2HttpHandlerAdapter(handler);
+        ReactorHttpHandlerAdapter adapter = new ReactorHttpHandlerAdapter(handler);
         return HttpServer.create()
                 .host("localhost")
                 .port(this.port)
