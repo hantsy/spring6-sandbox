@@ -2,6 +2,7 @@ package com.example.demo.web;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.codec.multipart.*;
 import org.springframework.util.MultiValueMap;
@@ -83,7 +84,9 @@ public class FileUploadController {
 //                                                        return bytes;
 //                                                    });
 
-                                                return Mono.just(filename);
+                                                return partEvents.map(PartEvent::content)
+                                                        .map(DataBufferUtils::release)
+                                                        .then(Mono.just(filename));
                                             }
 
                                             // no signal value
