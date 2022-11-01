@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.reactive.JdkClientHttpConnector;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.http.codec.multipart.FilePartEvent;
 import org.springframework.http.codec.multipart.FormPartEvent;
 import org.springframework.http.codec.multipart.PartEvent;
@@ -43,11 +44,7 @@ public class IntegrationTests {
 
     @BeforeEach
     public void setup() {
-        var jvmHttpClient = HttpClient.newBuilder()
-                .executor(Executors.newCachedThreadPool())
-                .version(Version.HTTP_2)
-                .build();
-        var clientConnector = new JdkClientHttpConnector(jvmHttpClient);
+        var clientConnector = new ReactorClientHttpConnector();
 
         this.disposableServer = this.httpServer.bindNow();
         this.client = WebClient.builder()
