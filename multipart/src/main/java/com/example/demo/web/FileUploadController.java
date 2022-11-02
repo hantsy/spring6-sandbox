@@ -56,7 +56,7 @@ public class FileUploadController {
     }
 
     @PostMapping("partevents")
-    public ResponseEntity<Flux<Object>> handlePartsEvents(@RequestBody Flux<PartEvent> allPartsEvents) {
+    public ResponseEntity<Flux<String>> handlePartsEvents(@RequestBody Flux<PartEvent> allPartsEvents) {
         var result = allPartsEvents
                 .windowUntil(PartEvent::isLast)
                 .concatMap(p -> {
@@ -68,7 +68,7 @@ public class FileUploadController {
                                                 String value = formEvent.value();
                                                 // handle form field
                                                 log.debug("form value: {}", value);
-                                                return Mono.just(value);
+                                                return Mono.just(value + "\n");
 
                                             } else if (event instanceof FilePartEvent fileEvent) {
                                                 String filename = fileEvent.filename();
@@ -86,7 +86,7 @@ public class FileUploadController {
 
                                                 return partEvents.map(PartEvent::content)
                                                         .map(DataBufferUtils::release)
-                                                        .then(Mono.just(filename));
+                                                        .then(Mono.just(filename + "\n"));
                                             }
 
                                             // no signal value
@@ -95,7 +95,8 @@ public class FileUploadController {
                                         }
 
                                         log.debug("return default flux");
-                                        return partEvents; // either complete or error signal
+                                        //return partEvents;
+                                        return Flux.empty(); // either complete or error signal
                                     }
                             );
                         }

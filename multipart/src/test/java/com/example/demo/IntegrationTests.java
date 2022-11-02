@@ -44,6 +44,7 @@ public class IntegrationTests {
 
     @BeforeEach
     public void setup() {
+        // see: https://github.com/spring-projects/spring-framework/issues/29400
         var clientConnector = new ReactorClientHttpConnector();
 
         this.disposableServer = this.httpServer.bindNow();
