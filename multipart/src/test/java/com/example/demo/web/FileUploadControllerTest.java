@@ -104,8 +104,7 @@ public class FileUploadControllerTest {
                 )
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$.size()").isEqualTo(2);
+                .expectBodyList(String.class).hasSize(2);
     }
 
 
