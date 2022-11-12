@@ -19,10 +19,10 @@
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
-        <jakartaee-api.version>9.1.0</jakartaee-api.version>
-        <spring-framework.version>6.0.0-RC2</spring-framework.version>
+        <jakartaee-api.version>10.0.0</jakartaee-api.version>
+        <spring-framework.version>6.0.0-RC4</spring-framework.version>
         <r2dbc.version>Borca-SR2</r2dbc.version>
-        <reactor.version>2022.0.0-RC1</reactor.version>
+        <reactor.version>2022.0.0</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.9.1</junit.version>
         <jackson.version>2.14.0</jackson.version>
@@ -134,11 +134,13 @@
             <artifactId>r2dbc-spi</artifactId>
             <version>1.0.0.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.postgresql/r2dbc-postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
-            <version>1.0.0.RC1</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-r2dbc</artifactId>

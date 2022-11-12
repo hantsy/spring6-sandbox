@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
@@ -24,12 +24,13 @@
         <cargo-maven3-plugin.version>1.10.3</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
-        <jakartaee-api.version>9.1.0</jakartaee-api.version>
-        <spring-framework.version>6.0.0-RC2</spring-framework.version>
+        <jakartaee-api.version>10.0.0</jakartaee-api.version>
+        <spring-framework.version>6.0.0-RC4</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <mongo-driver.version>4.7.2</mongo-driver.version>
-        <spring-data.version>2022.0.0-RC1</spring-data.version>
+        <spring-data.version>2022.0.0-RC2</spring-data.version>
+        <reactor.version>2022.0.0</reactor.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.1</tomcat.version>
@@ -75,7 +76,7 @@
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2022.0.0-RC1</version>
+                <version>${reactor.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -317,7 +318,7 @@
                     <annotationProcessors>
                         <processor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
                         <processor>org.springframework.data.mongodb.repository.support.MongoAnnotationProcessor
-                        </processor>
+</processor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
@@ -367,7 +368,7 @@
             <properties>
                 <tomcat.home>
                     ${project.build.directory}/cargo/installs/tomcat-${tomcat.version}/apache-tomcat-${tomcat.version}
-                </tomcat.home>
+</tomcat.home>
             </properties>
             <build>
                 <plugins>

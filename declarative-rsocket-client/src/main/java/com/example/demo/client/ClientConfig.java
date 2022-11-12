@@ -7,6 +7,8 @@ import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.messaging.rsocket.RSocketStrategies;
 import org.springframework.messaging.rsocket.service.RSocketServiceProxyFactory;
 
+import java.time.Duration;
+
 @Configuration
 public class ClientConfig {
 
@@ -21,10 +23,11 @@ public class ClientConfig {
 
     @SneakyThrows
     @Bean
-    public PostClientService postClientService(RSocketRequester requester){
-        RSocketServiceProxyFactory factory = new RSocketServiceProxyFactory(requester);
-        factory.afterPropertiesSet();
-
-        return factory.createClient(PostClientService.class);
+    public PostClientService postClientService(RSocketRequester requester) {
+        RSocketServiceProxyFactory rSocketServiceProxyFactory =
+                RSocketServiceProxyFactory.builder(requester)
+                        .blockTimeout(Duration.ofMillis(5000))
+                        .build();
+        return rSocketServiceProxyFactory.createClient(PostClientService.class);
     }
 }
