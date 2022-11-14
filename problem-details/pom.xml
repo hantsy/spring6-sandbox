@@ -143,7 +143,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
-            <version>1.0.0.RC1</version>
+            <version>1.0.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
