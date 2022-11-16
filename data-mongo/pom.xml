@@ -38,9 +38,9 @@
         <!-- Eclipse Jetty -->
         <jetty.version>11.0.12</jetty.version>
 
-        <!-- WildFly preview for Jakarta EE 9 -->
+        <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>27.0.0.Final</wildfly.version>
-        <wildfly-maven-plugin.version>3.0.2.Final</wildfly-maven-plugin.version>
+        <wildfly-maven-plugin.version>4.0.0.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
