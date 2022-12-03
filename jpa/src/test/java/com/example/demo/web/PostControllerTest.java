@@ -134,8 +134,7 @@ public class PostControllerTest {
 
         var data = new CreatePostCommand("a", "a");
         this.rest.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.code", is("validation_failed")));
+                .andExpect(status().isUnprocessableEntity());
 
         verify(this.posts, times(0)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);

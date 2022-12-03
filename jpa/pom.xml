@@ -165,7 +165,7 @@
             <version>4.0.1</version>
         </dependency>
 
-        <!-- Hibernate Validator 7.x switched to Jakarta EE 9 -->
+        <!-- Hibernate Validator 8.x switched to Jakarta EE 10 -->
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
