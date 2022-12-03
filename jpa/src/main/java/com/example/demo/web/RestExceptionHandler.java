@@ -45,6 +45,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                         .toList()
         );
 
-        return ResponseEntity.of(Optional.of(problem));
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(problem);
     }
 }
