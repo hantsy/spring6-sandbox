@@ -92,8 +92,7 @@ public class JdbcTemplateTest {
         var result = this.template.queryForObject(
                 sqlQuery,
                 (rs, rowNum) -> Post.builder().title(rs.getString("title")).content(rs.getString("content")).build(),
-                new Object[]{id}
-        );
+                id);
 
         assertThat(result).isNotNull();
         assertThat(result.getTitle()).isEqualTo("test");
