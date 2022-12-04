@@ -20,8 +20,8 @@
         <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
-        <cargo-maven3-plugin.version>1.10.3</cargo-maven3-plugin.version>
+        <maven-dependency-plugin.version>3.4.0</maven-dependency-plugin.version>
+        <cargo-maven3-plugin.version>1.10.4</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
