@@ -2,13 +2,13 @@ package com.example.demo.web;
 
 
 import com.example.demo.Jackson2ObjectMapperConfig;
+import com.example.demo.ValidationConfig;
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.Status;
 import com.example.demo.domain.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -26,7 +26,8 @@ import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -35,7 +36,14 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 /**
  * @author hantsy
  */
-@SpringJUnitWebConfig(classes = {Jackson2ObjectMapperConfig.class, WebConfig.class, TestDataConfig.class})
+@SpringJUnitWebConfig(
+        classes = {
+                Jackson2ObjectMapperConfig.class,
+                ValidationConfig.class,
+                WebConfig.class,
+                TestDataConfig.class
+        }
+)
 @ActiveProfiles("test")
 public class PostControllerTest {
 
@@ -132,7 +140,7 @@ public class PostControllerTest {
     }
 
     @Test
-    @Disabled // see: https://github.com/spring-projects/spring-framework/issues/27868
+    // @Disabled // see: https://github.com/spring-projects/spring-framework/issues/27868
     public void testCreatePost_validationFailed() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
@@ -140,8 +148,7 @@ public class PostControllerTest {
 
         var data = new CreatePostCommand("a", "a");
         this.rest.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnprocessableEntity())
-                .andExpect(jsonPath("$.code", is("validation_failed")));
+                .andExpect(status().isUnprocessableEntity());
 
         verify(this.posts, times(0)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);
