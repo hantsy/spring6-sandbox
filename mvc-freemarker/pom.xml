@@ -30,7 +30,7 @@
         <spring-security.version>6.0.0</spring-security.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.2</tomcat.version>
+        <tomcat.version>10.1.4</tomcat.version>
 
         <!-- Eclipse Jetty  -->
         <jetty.version>11.0.13</jetty.version>
