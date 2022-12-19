@@ -30,7 +30,7 @@
         <querydsl.version>5.0.0</querydsl.version>
         <mongo-driver.version>4.8.1</mongo-driver.version>
         <spring-data.version>2022.0.0</spring-data.version>
-        <reactor.version>2022.0.0</reactor.version>
+        <reactor.version>2022.0.1</reactor.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.4</tomcat.version>
