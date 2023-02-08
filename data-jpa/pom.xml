@@ -18,15 +18,15 @@
         <!-- maven plugins -->
         <maven-surefire-plugin.version>3.0.0-M8</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M8</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.4.0</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.5.0</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.10.4</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.0.3</spring-framework.version>
+        <spring-framework.version>6.0.4</spring-framework.version>
         <postgresql.version>42.5.3</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <spring-data.version>2022.0.0</spring-data.version>
+        <spring-data.version>2022.0.1</spring-data.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.5</tomcat.version>
@@ -81,7 +81,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.9.1</version>
+                <version>5.9.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -203,7 +203,7 @@
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
         </dependency>
 
         <!-- Hibernate Validator 7.x switched to Jakarta EE 9 -->
@@ -278,7 +278,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.1</version>
+            <version>3.24.2</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
