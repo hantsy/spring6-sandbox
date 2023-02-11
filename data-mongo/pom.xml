@@ -28,7 +28,7 @@
         <spring-framework.version>6.0.4</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <mongo-driver.version>4.8.2</mongo-driver.version>
+        <mongo-driver.version>4.9.0</mongo-driver.version>
         <spring-data.version>2022.0.1</spring-data.version>
         <reactor.version>2022.0.1</reactor.version>
 
