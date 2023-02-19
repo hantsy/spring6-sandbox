@@ -1,4 +1,3 @@
-
 <#macro head>
 		<head>
 			<title>Spring MVC with Freemarker</title>

@@ -17,7 +17,7 @@
                            type="text"
                            class="form-control form-control-lg <#if spring.status.errorMessages?size gt 0>is-invalid</#if>"
                            name="${spring.status.expression}"
-                           value="${spring.status.value?default('')}" required></input>
+                           value="${spring.status.value!''}" required></input>
                     <div class="invalid-feedback">
                         <#list spring.status.errorMessages as error> <p>${error}</p> </#list>
                     </div>
@@ -31,8 +31,8 @@
                             id="content"
                             class="form-control <#if spring.status.errorMessages?size gt 0>is-invalid</#if>"
                             name="${spring.status.expression}"
-                            value="${spring.status.value?default('')}"
-                            rows="8" required>${spring.status.value?default('')}</textarea>
+                            value="${spring.status.value!''}"
+                            rows="8" required>${spring.status.value!''}</textarea>
                     <div class="invalid-feedback">
                         <#list spring.status.errorMessages as error> <p>${error}</p> </#list>
                     </div>
