@@ -16,10 +16,9 @@ public class ClientConfig {
 
     @Bean
     RSocketRequester rSocketRequester(RSocketStrategies strategies) {
-        RSocketRequester requester = RSocketRequester.builder()
+        return RSocketRequester.builder()
             .rsocketStrategies(strategies)
             .tcp("localhost", 7000);
-        return requester;
     }
 
     @SneakyThrows

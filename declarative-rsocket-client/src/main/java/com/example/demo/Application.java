@@ -15,10 +15,9 @@ import org.springframework.web.util.pattern.PathPatternRouteMatcher;
 public class Application {
     public static void main(String[] args) throws Exception {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-                Application.class)) {
+            Application.class)) {
             var rSocketServer = context.getBean(RSocketServer.class);
-            rSocketServer.bind(TcpServerTransport.create("localhost", 7000))
-                    .block();
+            rSocketServer.bind(TcpServerTransport.create("localhost", 7000)).block();
         }
     }
 
@@ -30,9 +29,9 @@ public class Application {
     @Bean
     public RSocketStrategies rsocketStrategies() {
         return RSocketStrategies.builder()
-                .encoders(encoders -> encoders.add(new Jackson2CborEncoder()))
-                .decoders(decoders -> decoders.add(new Jackson2CborDecoder()))
-                .routeMatcher(new PathPatternRouteMatcher())
-                .build();
+            .encoders(encoders -> encoders.add(new Jackson2CborEncoder()))
+            .decoders(decoders -> decoders.add(new Jackson2CborDecoder()))
+            .routeMatcher(new PathPatternRouteMatcher())
+            .build();
     }
 }
