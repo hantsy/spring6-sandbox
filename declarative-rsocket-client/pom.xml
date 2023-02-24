@@ -21,9 +21,7 @@
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.0.5</spring-framework.version>
-        <r2dbc.version>Borca-SR2</r2dbc.version>
         <reactor.version>2022.0.3</reactor.version>
-        <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.9.2</junit.version>
         <jackson.version>2.14.2</jackson.version>
     </properties>
@@ -41,14 +39,6 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
                 <version>${spring-framework.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>io.r2dbc</groupId>
-                <artifactId>r2dbc-bom</artifactId>
-                <version>${r2dbc.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
