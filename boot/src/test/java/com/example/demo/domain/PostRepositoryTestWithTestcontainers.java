@@ -9,11 +9,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.EmbeddedDataSourceConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -27,7 +30,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@DataJpaTest(excludeAutoConfiguration = EmbeddedDataSourceConfiguration.class)
+@DataJpaTest
+@ImportAutoConfiguration(exclude = EmbeddedDataSourceConfiguration.class)
 @Testcontainers
 public class PostRepositoryTestWithTestcontainers {
 
@@ -37,11 +41,9 @@ public class PostRepositoryTestWithTestcontainers {
 
     @DynamicPropertySource
     static void registerDynamicProperties(DynamicPropertyRegistry registry) {
-        registry.add("spring.r2dbc.url", () -> "r2dbc:postgresql://"
-            + postgreSQLContainer.getHost() + ":" + postgreSQLContainer.getFirstMappedPort()
-            + "/" + postgreSQLContainer.getDatabaseName());
-        registry.add("spring.r2dbc.username", () -> postgreSQLContainer.getUsername());
-        registry.add("spring.r2dbc.password", () -> postgreSQLContainer.getPassword());
+        registry.add("spring.datasource.url", () -> postgreSQLContainer.getJdbcUrl());
+        registry.add("spring.datasource.username", () -> postgreSQLContainer.getUsername());
+        registry.add("spring.datasource.password", () -> postgreSQLContainer.getPassword());
     }
 
     //@Inject
@@ -87,6 +89,7 @@ public class PostRepositoryTestWithTestcontainers {
 
         var updated = this.posts.updateStatus(saved.getId(), Status.PUBLISHED);
         log.debug("updated posts count: {}", updated);
+        this.posts.flush();
 
         this.posts.findById(saved.getId()).ifPresent(
             p -> {
