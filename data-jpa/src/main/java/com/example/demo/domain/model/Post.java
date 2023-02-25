@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -26,8 +25,9 @@ import java.util.UUID;
 public class Post implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
 
     @Column(name = "title")
@@ -37,7 +37,7 @@ public class Post implements Serializable {
     private String content;
 
     @CollectionTable(name = "post_labels", joinColumns = @JoinColumn(name = "post_id"))
-    @Column(name="label")
+    @Column(name = "label")
     @ElementCollection()
     @Builder.Default
     private Set<String> labels = new HashSet<>();
