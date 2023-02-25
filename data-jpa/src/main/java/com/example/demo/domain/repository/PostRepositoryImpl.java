@@ -2,10 +2,12 @@ package com.example.demo.domain.repository;
 
 import com.example.demo.domain.model.Post;
 import com.example.demo.domain.model.Post_;
+import com.example.demo.domain.model.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaDelete;
+import jakarta.persistence.criteria.CriteriaUpdate;
 import jakarta.persistence.criteria.Root;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,5 +51,23 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
         Root<Post> root = delete.from(Post.class);
         // perform update
         return this.entityManager.createQuery(delete).executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public int updateStatus(UUID id, Status status) {
+        CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+        // create update criteria
+        CriteriaUpdate<Post> update = cb.createCriteriaUpdate(Post.class);
+
+        // set the root class
+        Root<Post> root = update.from(Post.class);
+
+        // set update clauses
+        update.set(root.get(Post_.status), status);
+        update.where(cb.equal(root.get(Post_.id), id));
+
+        // perform update
+        return this.entityManager.createQuery(update).executeUpdate();
     }
 }

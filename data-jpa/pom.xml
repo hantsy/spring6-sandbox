@@ -27,7 +27,7 @@
         <postgresql.version>42.5.4</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <spring-data.version>2022.0.2</spring-data.version>
-        <hibernate.version>6.1.7.Final</hibernate.version>
+        <hibernate.version>6.2.0.CR2</hibernate.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.5</tomcat.version>

@@ -12,20 +12,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.core.env.MapPropertySource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,30 +27,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 @SpringJUnitConfig(classes = {DataSourceConfig.class, JpaConfig.class, DataJpaConfig.class, PostRepositoryTestWithTestcontainers.TestConfig.class})
-@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
+@ContextConfiguration(initializers = TestContainerInitializer.class)
 public class PostRepositoryTestWithTestcontainers {
-    static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
-
-        @Override
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            final PostgreSQLContainer container = new PostgreSQLContainer("postgres:12");
-            container.start();
-            log.info(" container.getFirstMappedPort():: {}", container.getFirstMappedPort());
-            configurableApplicationContext
-                    .addApplicationListener((ApplicationListener<ContextClosedEvent>) event -> container.stop());
-            var env = configurableApplicationContext.getEnvironment();
-            var props = env.getPropertySources();
-            props.addFirst(
-                    new MapPropertySource("testdatasource",
-                            Map.of("datasource.url", container.getJdbcUrl(),
-                                    "datasource.username", container.getUsername(),
-                                    "datasource.password", container.getPassword()
-                            )
-                    )
-            );
-
-        }
-    }
 
     //@Inject
     @Autowired
@@ -66,17 +37,18 @@ public class PostRepositoryTestWithTestcontainers {
     @SneakyThrows
     @BeforeEach
     public void setup() {
-       log.debug("setup tests, clear data ...");
-       this.posts.deleteAll();
+        log.debug("setup tests, clear data ...");
+        this.posts.deleteAll();
     }
 
     @Test
     public void testSaveAll() {
 
         var data = List.of(
-                Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
-                Post.builder().title("test1").content("content1").build());
-        data.forEach(this.posts::save);
+            Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
+            Post.builder().title("test1").content("content1").build()
+        );
+        this.posts.saveAllAndFlush(data);
 
         var results = posts.findAll();
         assertThat(results.size()).isEqualTo(2);
@@ -90,7 +62,25 @@ public class PostRepositoryTestWithTestcontainers {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         this.posts.findById(saved.getId()).ifPresent(
-                p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
+            p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
+        );
+
+    }
+
+    @Test
+    public void testUpdateStatus() {
+        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var saved = this.posts.save(data);
+
+        // update the post
+        var updateCount = this.posts.updateStatus(saved.getId(), Status.PUBLISHED);
+        log.debug("updated posts count: {}", updateCount);
+
+        this.posts.findById(saved.getId()).ifPresent(
+            p -> {
+                log.debug("after updated: {}", p);
+                assertThat(p.getStatus()).isEqualTo(Status.PUBLISHED);
+            }
         );
 
     }
