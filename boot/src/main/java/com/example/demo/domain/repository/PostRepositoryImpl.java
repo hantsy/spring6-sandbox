@@ -57,7 +57,7 @@ public class PostRepositoryImpl implements PostRepositoryCustom {
     @Transactional
     public int updateStatus(UUID id, Status status) {
         CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
-        // create delete
+        // create update criteria
         CriteriaUpdate<Post> update = cb.createCriteriaUpdate(Post.class);
         // set the root class
         Root<Post> root = update.from(Post.class);
