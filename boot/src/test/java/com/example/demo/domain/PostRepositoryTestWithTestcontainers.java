@@ -11,14 +11,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jdbc.EmbeddedDataSourceConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.util.TestPropertyValues;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.MountableFile;
 
 import java.util.List;
 
@@ -29,35 +28,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Slf4j
 @DataJpaTest(excludeAutoConfiguration = EmbeddedDataSourceConfiguration.class)
-@ContextConfiguration(initializers = PostRepositoryTestWithTestcontainers.TestContainerInitializer.class)
+@Testcontainers
 public class PostRepositoryTestWithTestcontainers {
-    static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
-        @Override
-        public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            final PostgreSQLContainer container = new PostgreSQLContainer("postgres:12");
-            container.start();
-            log.info(" container.getFirstMappedPort():: {}", container.getFirstMappedPort());
-            configurableApplicationContext
-                    .addApplicationListener((ApplicationListener<ContextClosedEvent>) event -> container.stop());
-            TestPropertyValues
-                    .of(
-                            "spring.datasource.url=" + container.getJdbcUrl(),
-                            "spring.datasource.username=" + container.getUsername(),
-                            "spring.datasource.password=" + container.getPassword()
-                    )
-                    .applyTo(configurableApplicationContext);
-//            var env = configurableApplicationContext.getEnvironment();
-//            var props = env.getPropertySources();
-//            props.addFirst(
-//                    new MapPropertySource("testdatasource",
-//                            Map.of("datasource.url", container.getJdbcUrl(),
-//                                    "datasource.username", container.getUsername(),
-//                                    "datasource.password", container.getPassword()
-//                            )
-//                    )
-//            );
-        }
+    @Container
+    static PostgreSQLContainer postgreSQLContainer = new PostgreSQLContainer<>("postgres:12")
+        .withCopyFileToContainer(MountableFile.forClasspathResource("init.sql"), "/docker-entrypoint-initdb.d/init.sql");
+
+    @DynamicPropertySource
+    static void registerDynamicProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.r2dbc.url", () -> "r2dbc:postgresql://"
+            + postgreSQLContainer.getHost() + ":" + postgreSQLContainer.getFirstMappedPort()
+            + "/" + postgreSQLContainer.getDatabaseName());
+        registry.add("spring.r2dbc.username", () -> postgreSQLContainer.getUsername());
+        registry.add("spring.r2dbc.password", () -> postgreSQLContainer.getPassword());
     }
 
     //@Inject
@@ -68,12 +52,11 @@ public class PostRepositoryTestWithTestcontainers {
     @BeforeEach
     public void setup() {
         log.debug("setup tests, clear data ...");
-        this.posts.deleteAll();
+        this.posts.customDeleteAll();
     }
 
     @Test
     public void testSaveAll() {
-
         var data = List.of(
                 Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
                 Post.builder().title("test1").content("content1").build());
@@ -94,6 +77,23 @@ public class PostRepositoryTestWithTestcontainers {
                 p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
         );
 
+    }
+
+    @Test
+    public void testUpdateStatus() {
+        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var saved = this.posts.save(data);
+        log.debug("saved post : {}", saved);
+
+        var updated = this.posts.updateStatus(saved.getId(), Status.PUBLISHED);
+        log.debug("updated posts count: {}", updated);
+
+        this.posts.findById(saved.getId()).ifPresent(
+            p -> {
+                log.debug("post after updated: {}", p);
+                assertThat(p.getStatus()).isEqualTo(Status.PUBLISHED);
+            }
+        );
     }
 
 }
