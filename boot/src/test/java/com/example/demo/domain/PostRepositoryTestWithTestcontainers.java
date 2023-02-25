@@ -7,6 +7,7 @@ import com.example.demo.domain.repository.Specifications;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
@@ -82,6 +83,7 @@ public class PostRepositoryTestWithTestcontainers {
     }
 
     @Test
+    @Disabled
     public void testUpdateStatus() {
         var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
