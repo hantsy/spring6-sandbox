@@ -60,7 +60,7 @@ public class PostRepositoryTestWithTestcontainers {
         var data = List.of(
                 Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
                 Post.builder().title("test1").content("content1").build());
-        data.forEach(this.posts::save);
+       this.posts.saveAllAndFlush(data);
 
         var results = posts.findAll();
         assertThat(results.size()).isEqualTo(2);
