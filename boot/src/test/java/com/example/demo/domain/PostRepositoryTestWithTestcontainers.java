@@ -85,7 +85,9 @@ public class PostRepositoryTestWithTestcontainers {
         var saved = this.posts.save(data);
         log.debug("saved post : {}", saved);
 
-        var updated = this.posts.updateStatus(saved.getId(), Status.PUBLISHED);
+        //var updated = this.posts.updateStatus(saved.getId(), Status.PUBLISHED);
+        saved.setStatus(Status.PUBLISHED);
+        var updated  = this.posts.save(saved);
         log.debug("updated posts count: {}", updated);
 
         this.posts.findById(saved.getId()).ifPresent(
