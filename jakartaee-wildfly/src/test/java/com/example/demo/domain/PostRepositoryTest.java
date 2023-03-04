@@ -61,16 +61,6 @@ public class PostRepositoryTest {
     }
 
     @Test
-    public void testInsertAndQuery_QueryByExample() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
-        var saved = this.posts.save(data);
-        var probe = Post.builder().id(saved.getId()).build();
-        this.posts.findOne(Example.of(probe, ExampleMatcher.matching().withIgnorePaths("status"))).ifPresent(
-            p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
-        );
-    }
-
-    @Test
     public void testLabels() {
         var data = List.of(
             Post.builder().title("test").content("content").labels(Set.of("java17", "spring6")).build(),

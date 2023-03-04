@@ -1,9 +1,9 @@
 package com.example.demo;
 
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.PropertySource;
+import jakarta.annotation.Resource;
+import jakarta.mail.Session;
+import org.springframework.context.annotation.*;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -20,4 +20,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
         }
 )
 public class AppConfig {
+
+
 }

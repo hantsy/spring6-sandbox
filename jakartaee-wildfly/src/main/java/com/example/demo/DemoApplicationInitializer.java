@@ -12,18 +12,19 @@ public class DemoApplicationInitializer extends AbstractAnnotationConfigDispatch
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{
-                AppConfig.class,
-                Jackson2ObjectMapperConfig.class,
-                ValidationConfig.class,
-                JpaConfig.class,
-                DataJpaConfig.class
+            AppConfig.class,
+            Jackson2ObjectMapperConfig.class,
+            ValidationConfig.class,
+            MailConfig.class,
+            JpaConfig.class,
+            DataJpaConfig.class
         };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{
-                WebConfig.class
+            WebConfig.class
         };
     }
 
