@@ -16,7 +16,7 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-war-plugin.version>3.3.2</maven-war-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M9</maven-failsafe-plugin.version>
@@ -25,11 +25,11 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.0.5</spring-framework.version>
+        <spring-framework.version>6.0.6</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <mongo-driver.version>4.9.0</mongo-driver.version>
-        <spring-data.version>2022.0.2</spring-data.version>
+        <spring-data.version>2022.0.3</spring-data.version>
         <reactor.version>2022.0.3</reactor.version>
 
         <!-- Apache Tomcat -->
@@ -249,7 +249,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.1.1</version>
+            <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

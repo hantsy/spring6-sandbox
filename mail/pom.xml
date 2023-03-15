@@ -23,9 +23,9 @@
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.0.5</spring-framework.version>
+        <spring-framework.version>6.0.6</spring-framework.version>
         <postgresql.version>42.5.4</postgresql.version>
-        <spring-data.version>2022.0.2</spring-data.version>
+        <spring-data.version>2022.0.3</spring-data.version>
     </properties>
 
     <dependencyManagement>
@@ -126,7 +126,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.1.1</version>
+            <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -155,7 +155,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.11.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
