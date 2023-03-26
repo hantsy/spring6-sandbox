@@ -26,15 +26,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Neo4jIntegrationTests {
 
     @Container
-    //@Neo4jServiceConnection
+    @Neo4jServiceConnection
     public static Neo4jContainer<?> NEO4J_CONTAINER = new Neo4jContainer<>(DockerImageName.parse("neo4j:4.4"))
         .withoutAuthentication();
 
-    @DynamicPropertySource
-    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
-        log.debug("url: {}", NEO4J_CONTAINER.getBoltUrl());
-        registry.add("spring.neo4j.uri", NEO4J_CONTAINER::getBoltUrl);
-    }
+//     @DynamicPropertySource
+//     private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+//         log.debug("url: {}", NEO4J_CONTAINER.getBoltUrl());
+//         registry.add("spring.neo4j.uri", NEO4J_CONTAINER::getBoltUrl);
+//     }
 
     @Autowired
     private ProductRepository productRepository;
