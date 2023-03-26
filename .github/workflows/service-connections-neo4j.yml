@@ -1,9 +1,9 @@
-name: service-connections/redis
+name: service-connections/neo4j
 
 on:
   push:
     paths:
-      - "service-connections/redis/**"
+      - "service-connections/neo4j/**"
     branches: [master]
   pull_request:
     branches: [master]
@@ -23,4 +23,4 @@ jobs:
           distribution: "zulu"
           cache: "maven"
       - name: Build with Maven
-        run: mvn -B package --file service-connections/redis/pom.xml
+        run: mvn -B package --file service-connections/neo4j/pom.xml
