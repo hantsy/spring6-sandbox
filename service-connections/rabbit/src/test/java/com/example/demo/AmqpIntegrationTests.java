@@ -2,17 +2,18 @@ package com.example.demo;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.amqp.RabbitServiceConnection;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+
+import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,6 +38,9 @@ public class AmqpIntegrationTests {
     @Autowired
     private AmqpTemplate amqpTemplate;
 
+    @Autowired
+    private GreetingListener listener;
+
     @Test
     void testServiceIsRunning() {
         assertThat(RABBITMQ_CONTAINER.isRunning()).isTrue();
@@ -49,5 +53,8 @@ public class AmqpIntegrationTests {
             DemoApplication.ROUTING_HELLO,
             new Greeting("Hello Rabbit")
         );
+
+        Awaitility.waitAtMost(Duration.ofSeconds(30))
+            .untilAsserted(() -> assertThat(this.listener.messages).containsExactly("Hello Rabbit"));
     }
 }
