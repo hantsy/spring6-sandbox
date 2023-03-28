@@ -1,9 +1,9 @@
-name: service-connections/jdbc
+name: boot-data-cassandra
 
 on:
   push:
     paths:
-      - "service-connections/jdbc/**"
+      - "boot-data-cassandra/**"
     branches: [master]
   pull_request:
     branches: [master]
@@ -23,4 +23,4 @@ jobs:
           distribution: "zulu"
           cache: "maven"
       - name: Build with Maven
-        run: mvn -B package --file service-connections/jdbc/pom.xml
+        run: mvn -B package --file boot-data-cassandra/pom.xml

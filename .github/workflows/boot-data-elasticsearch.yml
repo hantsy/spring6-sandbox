@@ -1,9 +1,9 @@
-name: service-connections/rabbit
+name: boot-data-elasticsearch
 
 on:
   push:
     paths:
-      - "service-connections/rabbit/**"
+      - "boot-data-elasticsearch/**"
     branches: [master]
   pull_request:
     branches: [master]
@@ -23,4 +23,4 @@ jobs:
           distribution: "zulu"
           cache: "maven"
       - name: Build with Maven
-        run: mvn -B package --file service-connections/rabbit/pom.xml
+        run: mvn -B package --file boot-data-elasticsearch/pom.xml
