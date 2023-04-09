@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
@@ -37,12 +36,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
  * @author hantsy
  */
 @SpringJUnitWebConfig(
-        classes = {
-                Jackson2ObjectMapperConfig.class,
-                ValidationConfig.class,
-                WebConfig.class,
-                MockDataRepositoryTestConfig.class
-        }
+    classes = {
+        Jackson2ObjectMapperConfig.class,
+        ValidationConfig.class,
+        WebConfig.class,
+        MockDataRepositoryTestConfig.class
+    }
 )
 @ActiveProfiles("test")
 public class PostControllerTest {
@@ -65,9 +64,9 @@ public class PostControllerTest {
     @BeforeEach
     public void setup() {
         this.rest = standaloneSetup(ctrl).setControllerAdvice(exceptionHandler)
-                // webAppContextSetup(ctx)
-                .addDispatcherServletCustomizer(c -> c.setEnableLoggingRequestDetails(true))
-                .build();
+            // webAppContextSetup(ctx)
+            .addDispatcherServletCustomizer(c -> c.setEnableLoggingRequestDetails(true))
+            .build();
     }
 
     @AfterEach
@@ -77,34 +76,34 @@ public class PostControllerTest {
 
     @Test
     public void tetGetAllPosts() throws Exception {
-        when(this.posts.findAll(isA(Specification.class), isA(Pageable.class)))
-                .thenReturn(new PageImpl<Post>(
-                                List.of(
-                                        Post.builder().title("test").content("content of test1").build(),
-                                        Post.builder().title("test2").content("content of test2").build()
-                                )
-                        )
-                );
+        when(this.posts.findAll(isA(Pageable.class)))
+            .thenReturn(new PageImpl<Post>(
+                    List.of(
+                        Post.builder().title("test").content("content of test1").build(),
+                        Post.builder().title("test2").content("content of test2").build()
+                    )
+                )
+            );
 
         this.rest.perform(get("/posts").accept(MediaType.APPLICATION_JSON))
-                .andExpectAll(status().isOk(), jsonPath("$.totalElements", equalTo(2)));
+            .andExpectAll(status().isOk(), jsonPath("$.totalElements", equalTo(2)));
 
-        verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
+        verify(this.posts, times(1)).findAll(isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);
     }
 
     @Test
     public void testGetPostById() throws Exception {
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().title("test").content("content of test").build()));
+            .thenReturn(Optional.of(Post.builder().title("test").content("content of test").build()));
 
         var id = UUID.randomUUID();
         this.rest.perform(get("/posts/{id}", id).accept(MediaType.APPLICATION_JSON))
-                .andExpectAll(
-                        status().isOk(),
-                        jsonPath("$.title", is("test")),
-                        jsonPath("$.content", is("content of test"))
-                );
+            .andExpectAll(
+                status().isOk(),
+                jsonPath("$.title", is("test")),
+                jsonPath("$.content", is("content of test"))
+            );
 
         verify(this.posts, times(1)).findById(id);
         verifyNoMoreInteractions(this.posts);
@@ -113,11 +112,11 @@ public class PostControllerTest {
     @Test
     public void testGetPostById_nonExisting() throws Exception {
         when(this.posts.findById(any()))
-                .thenReturn(Optional.ofNullable(null));
+            .thenReturn(Optional.ofNullable(null));
 
         var id = UUID.randomUUID();
         this.rest.perform(get("/posts/{id}", id).accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
 
         verify(this.posts, times(1)).findById(id);
         verifyNoMoreInteractions(this.posts);
@@ -127,13 +126,13 @@ public class PostControllerTest {
     public void testCreatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
+            .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
 
         var data = new CreatePostCommand("test post", "content of test");
         this.rest.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
-                .andExpect(header().exists("Location"))
-                .andExpect(header().string("Location", "/posts/" + id));
+            .andExpect(status().isCreated())
+            .andExpect(header().exists("Location"))
+            .andExpect(header().string("Location", "/posts/" + id));
 
         verify(this.posts, times(1)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);
@@ -144,11 +143,11 @@ public class PostControllerTest {
     public void testCreatePost_validationFailed() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("test").build());
+            .thenReturn(Post.builder().id(id).title("test").build());
 
         var data = new CreatePostCommand("a", "a");
         this.rest.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnprocessableEntity());
+            .andExpect(status().isUnprocessableEntity());
 
         verify(this.posts, times(0)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);
@@ -158,13 +157,13 @@ public class PostControllerTest {
     public void testUpdatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().id(id).title("test").content("content of test").build()));
+            .thenReturn(Optional.of(Post.builder().id(id).title("test").content("content of test").build()));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+            .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
 
         var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent());
+            .andExpect(status().isNoContent());
 
         verify(this.posts, times(1)).findById(id);
         verify(this.posts, times(1)).save(any(Post.class));
@@ -175,13 +174,13 @@ public class PostControllerTest {
     public void testUpdatePost_nonExisting() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.ofNullable(null));
+            .thenReturn(Optional.ofNullable(null));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+            .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
 
         var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
 
         verify(this.posts, times(1)).findById(id);
         verify(this.posts, times(0)).save(any(Post.class));
@@ -194,7 +193,7 @@ public class PostControllerTest {
 
         var id = UUID.randomUUID();
         this.rest.perform(delete("/posts/{id}", id))
-                .andExpect(status().isNoContent());
+            .andExpect(status().isNoContent());
 
         verify(this.posts, times(1)).deleteById(id);
         verifyNoMoreInteractions(this.posts);
@@ -206,7 +205,7 @@ public class PostControllerTest {
 
         var id = UUID.randomUUID();
         this.rest.perform(delete("/posts/{id}", id))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
 
         verify(this.posts, times(1)).deleteById(id);
         verifyNoMoreInteractions(this.posts);

@@ -39,6 +39,7 @@
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
+        <junit.version>5.9.2</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -77,7 +78,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.9.2</version>
+                <version>${junit.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
