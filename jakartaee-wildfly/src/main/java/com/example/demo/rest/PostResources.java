@@ -13,18 +13,26 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.UUID;
 
-@Path("posts")
+@Path("cdi")
 @RequestScope
 public class PostResources {
 
     @Inject
-    PostRepository posts;
+    PostRepository posts; // inject Spring Data Repository as CDI Beans.
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") UUID id) {
         var data = posts.findById(id).orElseThrow(() -> new PostNotFoundException(id));
+        return Response.ok(data).build();
+    }
+
+    @GET
+    @Path("")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById() {
+        var data = posts.findAll();
         return Response.ok(data).build();
     }
 }

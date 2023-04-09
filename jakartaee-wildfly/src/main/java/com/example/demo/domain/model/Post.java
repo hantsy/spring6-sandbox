@@ -36,7 +36,7 @@ public class Post implements Serializable {
 
     @CollectionTable(name = "post_labels", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "label")
-    @ElementCollection()
+    @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private Set<String> labels = new HashSet<>();
 

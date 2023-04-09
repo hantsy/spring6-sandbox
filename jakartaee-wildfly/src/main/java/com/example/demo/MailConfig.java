@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 public class MailConfig {
 
-    @Resource(lookup ="java:comp/env/mail/Session")
+    @Resource(lookup ="java:jboss/mail/Default")
     Session session;
 
     @Bean

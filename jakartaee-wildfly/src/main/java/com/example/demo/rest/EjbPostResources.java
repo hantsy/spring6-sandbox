@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.UUID;
 
-@Path("posts")
+@Path("ejb")
 @Stateless
 public class EjbPostResources {
 
@@ -24,6 +24,14 @@ public class EjbPostResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") UUID id) {
         var data = posts.findById(id);
+        return Response.ok(data).build();
+    }
+
+    @GET
+    @Path("")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getById() {
+        var data = posts.findAll();
         return Response.ok(data).build();
     }
 }

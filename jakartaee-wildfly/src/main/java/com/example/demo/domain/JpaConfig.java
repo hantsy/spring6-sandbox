@@ -3,13 +3,12 @@ package com.example.demo.domain;
 import jakarta.annotation.Resource;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.transaction.TransactionManager;
 import jakarta.transaction.UserTransaction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jndi.JndiObjectFactoryBean;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.SharedEntityManagerCreator;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
@@ -33,12 +32,15 @@ public class JpaConfig {
         return SharedEntityManagerCreator.createSharedEntityManager(entityManagerFactory);
     }
 
-    @Resource
-    UserTransaction userTransaction;
+    @Resource(lookup = "java:jboss/UserTransaction")
+    UserTransaction jbossUserTransaction;
+
+    @Resource(lookup = "java:jboss/TransactionManager")
+    TransactionManager jbossTransactionManager;
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JtaTransactionManager(userTransaction);
+    public org.springframework.transaction.TransactionManager transactionManager() {
+        return new JtaTransactionManager(jbossUserTransaction, jbossTransactionManager);
     }
 
 }
