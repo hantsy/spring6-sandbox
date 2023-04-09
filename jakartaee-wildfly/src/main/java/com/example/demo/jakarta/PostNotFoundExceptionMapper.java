@@ -1,4 +1,4 @@
-package com.example.demo.rest;
+package com.example.demo.jakarta;
 
 import com.example.demo.domain.PostNotFoundException;
 import jakarta.ws.rs.core.Response;

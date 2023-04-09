@@ -1,4 +1,4 @@
-package com.example.demo.domain.ejb;
+package com.example.demo.jakarta;
 
 import com.example.demo.domain.model.Post;
 import jakarta.ejb.Stateless;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Stateless
-public class PostService {
+public class EjbPostRepository {
 
     @PersistenceContext(name = "blogUP")
     EntityManager entityManager;

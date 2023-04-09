@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.jakarta;
 
 
 import jakarta.enterprise.context.Dependent;
@@ -8,7 +8,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.web.context.annotation.ApplicationScope;
 
 @ApplicationScope
-public class JpaCdiConfig {
+public class CdiConfig {
 
     @Produces
     @Dependent
