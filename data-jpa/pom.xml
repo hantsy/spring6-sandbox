@@ -23,12 +23,12 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.0.7</spring-framework.version>
+        <spring-framework.version>6.0.8</spring-framework.version>
         <postgresql.version>42.6.0</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <spring-data.version>2022.0.4</spring-data.version>
-        <hibernate.version>6.2.0.Final</hibernate.version>
-        <reactor.version>2022.0.5</reactor.version>
+        <spring-data.version>2022.0.5</spring-data.version>
+        <hibernate.version>6.2.1.Final</hibernate.version>
+        <reactor.version>2022.0.6</reactor.version>
         <jackson.version>2.14.2</jackson.version>
         <testcontainers.version>1.18.0</testcontainers.version>
 
@@ -36,7 +36,7 @@
         <tomcat.version>10.1.7</tomcat.version>
 
         <!-- Eclipse Jetty -->
-        <jetty.version>11.0.14</jetty.version>
+        <jetty.version>11.0.15</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>27.0.1.Final</wildfly.version>

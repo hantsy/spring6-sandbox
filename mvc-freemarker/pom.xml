@@ -23,17 +23,17 @@
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.0.7</spring-framework.version>
+        <spring-framework.version>6.0.8</spring-framework.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <reactor.version>2022.0.5</reactor.version>
-        <spring-data.version>2022.0.4</spring-data.version>
+        <reactor.version>2022.0.6</reactor.version>
+        <spring-data.version>2022.0.5</spring-data.version>
         <spring-security.version>6.0.2</spring-security.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.7</tomcat.version>
 
         <!-- Eclipse Jetty  -->
-        <jetty.version>11.0.14</jetty.version>
+        <jetty.version>11.0.15</jetty.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
