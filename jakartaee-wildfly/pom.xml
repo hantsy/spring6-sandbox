@@ -32,8 +32,8 @@
         <testcontainers.version>1.18.0</testcontainers.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>27.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>4.0.0.Final</wildfly-maven-plugin.version>
+        <wildfly.version>28.0.0.Final</wildfly.version>
+        <wildfly-maven-plugin.version>4.1.0.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
