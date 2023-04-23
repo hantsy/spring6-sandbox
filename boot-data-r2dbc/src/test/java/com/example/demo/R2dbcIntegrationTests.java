@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
-import org.springframework.boot.test.autoconfigure.r2dbc.R2dbcServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -24,11 +22,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class R2dbcIntegrationTests {
 
     @Container
-    @R2dbcServiceConnection
+    @ServiceConnection
     public static PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
 
 //    @DynamicPropertySource
-//    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+//    private static void registerR2dbcProperties(DynamicPropertyRegistry registry) {
 //        log.debug("url: {}", PG_CONTAINER.getJdbcUrl());
 //        registry.add("spring.r2dbc.url", () -> "r2dbc:postgresql://" + PG_CONTAINER.getHost() + ":" + PG_CONTAINER.getFirstMappedPort() + "/" + PG_CONTAINER.getDatabaseName());
 //        registry.add("spring.r2dbc.username", PG_CONTAINER::getUsername);

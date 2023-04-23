@@ -5,12 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
-import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
-import org.springframework.boot.test.autoconfigure.data.redis.RedisServiceConnection;
-import org.springframework.boot.test.autoconfigure.neo4j.Neo4jServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
-import org.testcontainers.containers.GenericContainer;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.Neo4jContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -26,12 +21,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Neo4jIntegrationTests {
 
     @Container
-    @Neo4jServiceConnection
+    @ServiceConnection
     public static Neo4jContainer<?> NEO4J_CONTAINER = new Neo4jContainer<>(DockerImageName.parse("neo4j:4.4"))
         .withoutAuthentication();
 
 //     @DynamicPropertySource
-//     private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+//     private static void registerNoe4jProperties(DynamicPropertyRegistry registry) {
 //         log.debug("url: {}", NEO4J_CONTAINER.getBoltUrl());
 //         registry.add("spring.neo4j.uri", NEO4J_CONTAINER::getBoltUrl);
 //     }

@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.couchbase.CouchbaseServiceCon
 import org.springframework.boot.test.autoconfigure.data.couchbase.DataCouchbaseTest;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
+import org.springframework.boot.test.autoconfigure.service.connection.ServiceConnection;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.couchbase.BucketDefinition;
@@ -32,7 +33,7 @@ public class CouchbaseIntegrationTests {
         .asCompatibleSubstituteFor(DEFAULT_IMAGE_NAME);
 
     @Container
-    @CouchbaseServiceConnection
+    @ServiceConnection
     public static CouchbaseContainer COUCHBASE_CONTAINER = new CouchbaseContainer(DEFAULT_IMAGE)
         .withCredentials("Administrator", "password")
         .withBucket(new BucketDefinition("demo").withPrimaryIndex(true))

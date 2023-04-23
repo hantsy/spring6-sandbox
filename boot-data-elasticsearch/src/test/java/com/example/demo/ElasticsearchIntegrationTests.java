@@ -5,14 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.elasticsearch.DataElasticsearchTest;
-import org.springframework.boot.test.autoconfigure.elasticsearch.ElasticsearchServiceConnection;
-import org.springframework.boot.test.autoconfigure.mongo.MongoServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.test.autoconfigure.service.connection.ServiceConnection;
 import org.testcontainers.elasticsearch.ElasticsearchContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 
 import java.math.BigDecimal;
 
@@ -24,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ElasticsearchIntegrationTests {
 
     @Container
-    @ElasticsearchServiceConnection
+    @ServiceConnection
     public static ElasticsearchContainer ES_CONTAINER = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch:7.17.9")
         .withEnv("discovery.type", "single-node");
 

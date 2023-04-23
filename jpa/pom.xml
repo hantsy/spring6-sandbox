@@ -28,7 +28,7 @@
         <hibernate.version>6.2.1.Final</hibernate.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.7</tomcat.version>
+        <tomcat.version>10.1.8</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>11.0.15</jetty.version>
@@ -214,12 +214,12 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.6</version>
+            <version>1.4.7</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.6</version>
+            <version>1.4.7</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -230,7 +230,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.2.0</version>
+            <version>5.3.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>

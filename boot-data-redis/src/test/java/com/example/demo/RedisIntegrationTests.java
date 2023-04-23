@@ -5,9 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest;
-import org.springframework.boot.test.autoconfigure.data.redis.RedisServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -23,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RedisIntegrationTests {
 
     @Container
-    @RedisServiceConnection
+    @ServiceConnection
     public static GenericContainer REDIS_CONTAINER = new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
         .withExposedPorts(6379);
 
