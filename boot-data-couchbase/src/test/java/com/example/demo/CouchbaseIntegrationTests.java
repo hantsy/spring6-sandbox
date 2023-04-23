@@ -4,13 +4,8 @@ package com.example.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.couchbase.CouchbaseServiceConnection;
 import org.springframework.boot.test.autoconfigure.data.couchbase.DataCouchbaseTest;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-
-import org.springframework.boot.test.autoconfigure.service.connection.ServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.couchbase.BucketDefinition;
 import org.testcontainers.couchbase.CouchbaseContainer;
 import org.testcontainers.junit.jupiter.Container;
