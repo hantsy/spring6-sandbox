@@ -4,11 +4,8 @@ package com.example.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.cassandra.CassandraServiceConnection;
 import org.springframework.boot.test.autoconfigure.data.cassandra.DataCassandraTest;
-import org.springframework.boot.test.autoconfigure.mongo.MongoServiceConnection;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.boot.test.autoconfigure.service.connection.ServiceConnection;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -26,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CassandraIntegrationTests {
 
     @Container
-    @CassandraServiceConnection
+    @ServiceConnection
     public static CassandraContainer<?> CASSANDRA_CONTAINER = new CassandraContainer<>(DockerImageName.parse("cassandra"))
         .withInitScript("init.cql")
         .withStartupTimeout(Duration.ofMinutes(5));
@@ -60,6 +57,4 @@ public class CassandraIntegrationTests {
             }
         );
     }
-
-
 }

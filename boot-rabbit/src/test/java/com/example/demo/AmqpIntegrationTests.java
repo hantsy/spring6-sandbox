@@ -6,7 +6,7 @@ import org.awaitility.Awaitility;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.amqp.RabbitServiceConnection;
+import org.springframework.boot.test.autoconfigure.service.connection.ServiceConnection;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -23,12 +23,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AmqpIntegrationTests {
 
     @Container
-    @RabbitServiceConnection
+    @ServiceConnection
     public static RabbitMQContainer RABBITMQ_CONTAINER = new RabbitMQContainer(DockerImageName.parse("rabbitmq:3.11-management"))
         .withAdminPassword("admin@123");
 
 //    @DynamicPropertySource
-//    private static void registerRedisProperties(DynamicPropertyRegistry registry) {
+//    private static void registerRabbitMQProperties(DynamicPropertyRegistry registry) {
 //        registry.add("spring.rabbitmq.host", RABBITMQ_CONTAINER::getHost);
 //        registry.add("spring.rabbitmq.port", RABBITMQ_CONTAINER::getFirstMappedPort);
 //        registry.add("spring.rabbitmq.username", RABBITMQ_CONTAINER::getAdminUsername);
