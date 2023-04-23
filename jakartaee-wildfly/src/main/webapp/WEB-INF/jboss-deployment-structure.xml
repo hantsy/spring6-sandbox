@@ -9,6 +9,7 @@
             and https://stackoverflow.com/questions/33223088/how-to-log-with-slf4j-from-within-a-jboss-module
             -->
 <!--            <module name="org.slf4j"/>-->
+            <module name="org.jboss.vfs"></module>
         </dependencies>
 
         <!--
