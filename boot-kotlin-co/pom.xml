@@ -17,7 +17,7 @@
         <java.version>17</java.version>
         <kotlin.version>1.8.20</kotlin.version>
         <testcontainers.version>1.18.0</testcontainers.version>
-        <kotest.version>5.5.5</kotest.version>
+        <kotest.version>5.6.1</kotest.version>
         <spring-framework.version>6.0.5</spring-framework.version>
     </properties>
     <dependencies>
