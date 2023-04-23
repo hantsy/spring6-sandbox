@@ -1,0 +1,18 @@
+# Define the services/containers to be run
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: productsdb
+      POSTGRES_USER: user
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql
+      - ./pg-initdb.d:/docker-entrypoint-initdb.d
+    labels:
+      org.springframework.boot.service-connection: postgres
+      # org.springframework.boot.ignore: true # ignore container
+
