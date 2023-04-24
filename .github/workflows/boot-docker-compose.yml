@@ -1,9 +1,9 @@
-name: docker-compose
+name: boot-docker-compose
 
 on:
   push:
     paths:
-      - "docker-compose/**"
+      - "boot-docker-compose/**"
     branches: [master]
   pull_request:
     branches: [master]
@@ -23,4 +23,4 @@ jobs:
           distribution: "zulu"
           cache: "maven"
       - name: Build with Maven
-        run: mvn -B package --file docker-compose/pom.xml
+        run: mvn -B package --file boot-docker-compose/pom.xml
