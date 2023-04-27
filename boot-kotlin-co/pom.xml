@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>17</java.version>
-        <kotlin.version>1.8.20</kotlin.version>
+        <kotlin.version>1.8.21</kotlin.version>
         <testcontainers.version>1.18.0</testcontainers.version>
         <kotest.version>5.6.1</kotest.version>
         <spring-framework.version>6.0.5</spring-framework.version>
