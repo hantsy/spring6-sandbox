@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.context.ImportTestcontainers;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.Import;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.DockerImageName;
@@ -19,7 +20,6 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-//@Import(ImportTestcontainersExampleTests.MyTestConfig.class)
 @Slf4j
 public class ImportTestcontainersExampleTests {
 
@@ -28,22 +28,25 @@ public class ImportTestcontainersExampleTests {
     static class MyTestConfig {
     }
 
-//    interface MyContainers {
-//        @Container
-//        PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
-//    }
-
-    class MyContainers {
+    interface MyContainers {
         @Container
-        @ServiceConnection // to establish service connection
-        static PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
+        @ServiceConnection
+        PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
     }
 
 //    class MyContainers {
+//        @Container
+//        @ServiceConnection // to establish service connection
+//        static PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
+//    }
+
+//    class MyContainers {
 //
-//        PostgreSQLContainer postgreSQLContainer(DynamicPropertyRegistry registry) {
-//            PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
+//        @Container
+//        static PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
 //
+//        @DynamicPropertySource
+//        static PostgreSQLContainer postgreSQLContainer(DynamicPropertyRegistry registry) {
 //            registry.add("spring.r2dbc.url", () -> "r2dbc:postgresql://" + PG_CONTAINER.getHost() + ":" + PG_CONTAINER.getFirstMappedPort() + "/" + PG_CONTAINER.getDatabaseName());
 //            registry.add("spring.r2dbc.username", PG_CONTAINER::getUsername);
 //            registry.add("spring.r2dbc.password", PG_CONTAINER::getPassword);
