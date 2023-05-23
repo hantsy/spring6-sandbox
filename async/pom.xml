@@ -26,7 +26,7 @@
         <spring-framework.version>6.0.8</spring-framework.version>
         <postgresql.version>42.6.0</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <hibernate.version>6.2.2.Final</hibernate.version>
+        <hibernate.version>6.2.3.Final</hibernate.version>
         <reactor.version>2022.0.6</reactor.version>
         <spring-data.version>2023.0.0</spring-data.version>
 
