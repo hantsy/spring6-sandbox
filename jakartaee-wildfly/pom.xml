@@ -29,7 +29,7 @@
         <hibernate.version>6.2.2.Final</hibernate.version>
         <reactor.version>2022.0.6</reactor.version>
         <jackson.version>2.15.1</jackson.version>
-        <testcontainers.version>1.18.0</testcontainers.version>
+        <testcontainers.version>1.18.1</testcontainers.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>28.0.1.Final</wildfly.version>
