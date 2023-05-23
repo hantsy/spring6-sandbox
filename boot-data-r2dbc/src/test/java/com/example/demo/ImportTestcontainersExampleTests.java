@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.context.ImportTestcontainers;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -18,7 +19,7 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import(ImportTestcontainersExampleTests.MyTestConfig.class)
+//@Import(ImportTestcontainersExampleTests.MyTestConfig.class)
 @Slf4j
 public class ImportTestcontainersExampleTests {
 
@@ -34,6 +35,7 @@ public class ImportTestcontainersExampleTests {
 
     class MyContainers {
         @Container
+        @ServiceConnection // to establish service connection
         static PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
     }
 

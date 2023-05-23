@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-@Import(TestcontainersBeanExampleTests.MyTestConfig.class)
 @Slf4j
 public class TestcontainersBeanExampleTests {
 
@@ -33,6 +32,17 @@ public class TestcontainersBeanExampleTests {
         PostgreSQLContainer<?> postgreSQLContainer() {
             return new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
         }
+
+//        @Bean
+//        PostgreSQLContainer postgreSQLContainer(DynamicPropertyRegistry registry) {
+//            PostgreSQLContainer<?> PG_CONTAINER = new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
+//
+//            registry.add("spring.r2dbc.url", () -> "r2dbc:postgresql://" + PG_CONTAINER.getHost() + ":" + PG_CONTAINER.getFirstMappedPort() + "/" + PG_CONTAINER.getDatabaseName());
+//            registry.add("spring.r2dbc.username", PG_CONTAINER::getUsername);
+//            registry.add("spring.r2dbc.password", PG_CONTAINER::getPassword);
+//
+//            return PG_CONTAINER;
+//        }
     }
 
     @Autowired
