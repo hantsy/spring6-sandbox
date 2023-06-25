@@ -15,7 +15,8 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.1.1</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
@@ -25,7 +26,7 @@
         <reactor.version>2022.0.7</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.9.3</junit.version>
-        <jackson.version>2.15.1</jackson.version>
+        <jackson.version>2.15.2</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -88,7 +89,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.18.1</version>
+                <version>1.18.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -143,7 +144,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.26</version>
+            <version>1.18.28</version>
         </dependency>
 
         <!-- logging with logback -->

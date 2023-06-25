@@ -16,8 +16,8 @@
         <maven.compiler.release>17</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.1.1</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.1.1</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.10.7</cargo-maven3-plugin.version>
 
@@ -27,10 +27,10 @@
         <postgresql.version>42.6.0</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <spring-data.version>2023.0.0</spring-data.version>
-        <hibernate.version>6.2.3.Final</hibernate.version>
+        <hibernate.version>6.2.4.Final</hibernate.version>
         <reactor.version>2022.0.7</reactor.version>
-        <jackson.version>2.15.1</jackson.version>
-        <testcontainers.version>1.18.1</testcontainers.version>
+        <jackson.version>2.15.2</jackson.version>
+        <testcontainers.version>1.18.3</testcontainers.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.9</tomcat.version>
@@ -206,7 +206,7 @@
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>4.0.2</version>
+            <version>4.0.3</version>
         </dependency>
 
         <!-- Hibernate Validator 7.x switched to Jakarta EE 9 -->
@@ -242,7 +242,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.26</version>
+            <version>1.18.28</version>
         </dependency>
 
         <!-- logging with logback -->

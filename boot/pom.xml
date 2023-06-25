@@ -15,15 +15,15 @@
     <description>Spring6 WebMvc/Spring Boot 3 example</description>
     <properties>
         <java.version>17</java.version>
-        <testcontainers.version>1.18.1</testcontainers.version>
+        <testcontainers.version>1.18.3</testcontainers.version>
         <querydsl.version>5.0.0</querydsl.version>
         <rest-assured.version>5.3.0</rest-assured.version>
-        <hibernate.version>6.2.3.Final</hibernate.version>
+        <hibernate.version>6.2.4.Final</hibernate.version>
 
         <!-- maven plugins -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.1.1</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.1.1</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
