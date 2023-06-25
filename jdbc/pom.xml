@@ -26,7 +26,7 @@
         <spring-framework.version>6.0.9</spring-framework.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.9</tomcat.version>
+        <tomcat.version>10.1.10</tomcat.version>
 
         <!-- Eclipse Jetty  -->
         <jetty.version>11.0.15</jetty.version>
