@@ -7,20 +7,18 @@ import org.springframework.context.annotation.Bean;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
+@TestConfiguration(proxyBeanMethods = false)
 public class TestDemoApplication {
-    @TestConfiguration(proxyBeanMethods = false)
-    static class MyTestConfig {
-
-        @Bean
-        @ServiceConnection
-        PostgreSQLContainer<?> postgreSQLContainer() {
-            return new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
-        }
+    
+    @Bean
+    @ServiceConnection
+    PostgreSQLContainer<?> postgreSQLContainer() {
+        return new PostgreSQLContainer<>(DockerImageName.parse("postgres:14"));
     }
-
+    
     public static void main(String[] args) {
         SpringApplication.from(DemoApplication::main)
-                .with(MyTestConfig.class)
+                .with(TestDemoApplication.class)
                 .run(args);
     }
 }
