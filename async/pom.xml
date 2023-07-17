@@ -31,7 +31,7 @@
         <spring-data.version>2023.0.1</spring-data.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.10</tomcat.version>
+        <tomcat.version>10.1.11</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>11.0.15</jetty.version>
