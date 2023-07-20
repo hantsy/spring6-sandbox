@@ -3,7 +3,7 @@ package com.example.demo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.support.CronSequenceGenerator;
+import org.springframework.scheduling.support.CronExpression;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.time.Duration;
@@ -44,7 +44,7 @@ public class CounterTest {
 
     @Test
     public void testNextExecutingTime() {
-        var next = new CronSequenceGenerator("*/10 * * * * *").next(Date.from(LocalDateTime.of(2022, 2, 1, 0, 0, 0).toInstant(ZoneOffset.UTC)));
-        assertThat(LocalDateTime.ofInstant(next.toInstant(), ZoneOffset.UTC).getSecond()).isEqualTo(10);
+        var next = CronExpression.parse("*/10 * * * * *").next(LocalDateTime.of(2022, 2, 1, 0, 0, 0));
+        assertThat(next.getSecond()).isEqualTo(10);
     }
 }
