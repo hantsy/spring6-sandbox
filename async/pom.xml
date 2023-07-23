@@ -28,7 +28,7 @@
         <querydsl.version>5.0.0</querydsl.version>
         <hibernate.version>6.2.6.Final</hibernate.version>
         <reactor.version>2022.0.9</reactor.version>
-        <spring-data.version>2023.0.1</spring-data.version>
+        <spring-data.version>2023.0.2</spring-data.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.11</tomcat.version>
