@@ -28,8 +28,8 @@
         <spring-framework.version>6.0.10</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
-        <mongo-driver.version>4.10.1</mongo-driver.version>
-        <spring-data.version>2023.0.1</spring-data.version>
+        <mongo-driver.version>4.10.2</mongo-driver.version>
+        <spring-data.version>2023.0.2</spring-data.version>
         <reactor.version>2022.0.9</reactor.version>
 
         <!-- Apache Tomcat -->
@@ -39,8 +39,8 @@
         <jetty.version>11.0.15</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>28.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>4.0.0.Final</wildfly-maven-plugin.version>
+        <wildfly.version>29.0.0.Final</wildfly.version>
+        <wildfly-maven-plugin.version>4.2.0.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
