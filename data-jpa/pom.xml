@@ -346,6 +346,7 @@
                         <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
                         <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
                     </annotationProcessors>
+                    <parameters>true</parameters>
                 </configuration>
             </plugin>
             <plugin>

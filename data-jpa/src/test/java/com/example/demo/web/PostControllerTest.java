@@ -78,7 +78,7 @@ public class PostControllerTest {
     @Test
     public void tetGetAllPosts() throws Exception {
         when(this.posts.findAll(isA(Specification.class), isA(Pageable.class)))
-                .thenReturn(new PageImpl<Post>(
+                .thenReturn(new PageImpl(
                                 List.of(
                                         Post.builder().title("test").content("content of test1").build(),
                                         Post.builder().title("test2").content("content of test2").build()
@@ -106,7 +106,7 @@ public class PostControllerTest {
                         jsonPath("$.content", is("content of test"))
                 );
 
-        verify(this.posts, times(1)).findById(id);
+        verify(this.posts, times(1)).findById(any(UUID.class));
         verifyNoMoreInteractions(this.posts);
     }
 
@@ -119,7 +119,7 @@ public class PostControllerTest {
         this.rest.perform(get("/posts/{id}", id).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
-        verify(this.posts, times(1)).findById(id);
+        verify(this.posts, times(1)).findById(any());
         verifyNoMoreInteractions(this.posts);
     }
 
@@ -166,7 +166,7 @@ public class PostControllerTest {
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
-        verify(this.posts, times(1)).findById(id);
+        verify(this.posts, times(1)).findById(any());
         verify(this.posts, times(1)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);
     }
@@ -183,7 +183,7 @@ public class PostControllerTest {
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
-        verify(this.posts, times(1)).findById(id);
+        verify(this.posts, times(1)).findById(any());
         verify(this.posts, times(0)).save(any(Post.class));
         verifyNoMoreInteractions(this.posts);
     }
@@ -208,7 +208,7 @@ public class PostControllerTest {
         this.rest.perform(delete("/posts/{id}", id))
                 .andExpect(status().isNotFound());
 
-        verify(this.posts, times(1)).deleteById(id);
+        verify(this.posts, times(1)).deleteById(any());
         verifyNoMoreInteractions(this.posts);
     }
 

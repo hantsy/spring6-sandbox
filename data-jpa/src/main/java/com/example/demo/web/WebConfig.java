@@ -18,6 +18,7 @@ import java.util.List;
 @EnableWebMvc
 // To make Spring Data's `Sort`, `Pageable` and QueryDsl PredicatesArgument resolvable in the controller method arguments.
 // add @EnableSpringDataWebSupport to enable it.
+// @EnableSpringDataWebSupport
 @ComponentScan(
         basePackageClasses = WebConfig.class,
         useDefaultFilters = false,
