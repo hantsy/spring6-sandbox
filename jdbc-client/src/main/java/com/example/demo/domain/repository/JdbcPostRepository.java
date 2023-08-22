@@ -123,6 +123,6 @@ public class JdbcPostRepository implements PostRepository {
     @Override
     public Long count() {
         var sql = "SELECT count(*) FROM posts";
-        return this.client.sql(sql).query().singleValue(Long.class);
+        return this.client.sql(sql).query().singleValue();
     }
 }
