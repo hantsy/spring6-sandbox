@@ -40,6 +40,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
     public void setup() {
         this.rest = MockMvcWebTestClient
                 .bindToController(ctrl)
+                .dispatcherServletCustomizer(dispatcherServlet -> dispatcherServlet.setEnableLoggingRequestDetails(true))
                 .configureClient()
                 .build();
     }
@@ -60,7 +61,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
                 .uri("/posts")
                 .exchange()
                 .expectStatus().isOk();
-               // .expectBody().jsonPath("$.totalElements").isEqualTo(2);
+        // .expectBody().jsonPath("$.totalElements").isEqualTo(2);
 
         verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);
