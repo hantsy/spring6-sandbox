@@ -30,7 +30,7 @@
         <hibernate.version>6.2.7.Final</hibernate.version>
         <reactor.version>2022.0.10</reactor.version>
         <jackson.version>2.15.2</jackson.version>
-        <testcontainers.version>1.18.3</testcontainers.version>
+        <testcontainers.version>1.19.0</testcontainers.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
