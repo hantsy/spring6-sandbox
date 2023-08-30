@@ -45,8 +45,8 @@ public class PostControllerTestWithMockMvcWebTestClient {
         when(this.posts.findAll(isA(Specification.class), isA(Pageable.class)))
                 .thenReturn(new PageImpl<Post>(
                                 List.of(
-                                        Post.builder().title("test").content("content of test1").build(),
-                                        Post.builder().title("test2").content("content of test2").build()
+                                        Post.builder().title("test").content("data of test1").build(),
+                                        Post.builder().title("test2").content("data of test2").build()
                                 )
                         )
                 );
@@ -56,7 +56,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
                 .uri("/posts")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody().jsonPath("$.totalElements").isEqualTo(2);
+                .expectBody().jsonPath("$.count").isEqualTo(2);
 
         verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);
