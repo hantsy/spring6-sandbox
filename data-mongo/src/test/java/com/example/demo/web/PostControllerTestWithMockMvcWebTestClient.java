@@ -58,7 +58,7 @@ public class PostControllerTestWithMockMvcWebTestClient {
                 .uri("/posts")
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody().jsonPath("$.totalElements").isEqualTo(2);
+                .expectBody().jsonPath("$.count").isEqualTo(2);
 
         verify(this.posts, times(1)).findAll(isA(Predicate.class), isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);

@@ -7,7 +7,6 @@ import com.example.demo.domain.repository.Specifications;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -28,14 +27,14 @@ public class PostController {
     private final PostRepository posts;
 
     @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Page<PostSummary>> getAll(@RequestParam(defaultValue = "") String q,
+    public ResponseEntity<PaginatedResult<PostSummary>> getAll(@RequestParam(defaultValue = "") String q,
                                                     @RequestParam(defaultValue = "") String status,
                                                     @RequestParam(defaultValue = "0") int page,
                                                     @RequestParam(defaultValue = "10") int size) {
         var postStatus = StringUtils.hasText(status) ? Status.valueOf(status) : null;
         var data = this.posts.findAll(Specifications.findByKeyword(q, postStatus), PageRequest.of(page, size))
                 .map(p -> new PostSummary(p.getTitle(), p.getCreatedAt()));
-        return ok(data);
+        return ok(PaginatedResult.of(data.getContent(), data.getTotalElements()));
     }
 
     @PostMapping(value = "", consumes = APPLICATION_JSON_VALUE)

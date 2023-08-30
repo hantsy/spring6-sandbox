@@ -87,7 +87,7 @@ public class PostControllerTest {
                 );
 
         this.rest.perform(get("/posts").accept(MediaType.APPLICATION_JSON))
-                .andExpectAll(status().isOk(), jsonPath("$.totalElements", equalTo(2)));
+                .andExpectAll(status().isOk(), jsonPath("$.count", equalTo(2)));
 
         verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);

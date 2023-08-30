@@ -75,8 +75,8 @@ public class PostControllerTestWithRestAssuredMockMvc {
         when(this.posts.findAll(isA(Specification.class), isA(Pageable.class)))
                 .thenReturn(new PageImpl<Post>(
                                 List.of(
-                                        Post.builder().title("test").content("content of test1").build(),
-                                        Post.builder().title("test2").content("content of test2").build()
+                                        Post.builder().title("test").content("data of test1").build(),
+                                        Post.builder().title("test2").content("data of test2").build()
                                 )
                         )
                 );
@@ -88,7 +88,7 @@ public class PostControllerTestWithRestAssuredMockMvc {
                 .get("/posts")
         .then()
                 .status(HttpStatus.OK)
-                .expect(jsonPath("$.totalElements", equalTo(2)));
+                .expect(jsonPath("$.count", equalTo(2)));
         //@formatter:on
 
         verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
@@ -98,7 +98,7 @@ public class PostControllerTestWithRestAssuredMockMvc {
     @Test
     public void testGetPostById() throws Exception {
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().title("test").content("content of test").build()));
+                .thenReturn(Optional.of(Post.builder().title("test").content("data of test").build()));
 
         var id = UUID.randomUUID();
 
@@ -110,7 +110,7 @@ public class PostControllerTestWithRestAssuredMockMvc {
         .then()
                 .status(HttpStatus.OK)
                 .expect(jsonPath("$.title", is("test")))
-                .expect(jsonPath("$.content", is("content of test")));
+                .expect(jsonPath("$.content", is("data of test")));
         //@formatter:on
 
         verify(this.posts, times(1)).findById(id);
@@ -141,9 +141,9 @@ public class PostControllerTestWithRestAssuredMockMvc {
     public void testCreatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
+                .thenReturn(Post.builder().id(id).title("test").content("data of test").build());
 
-        var data = new CreatePostCommand("test post", "content of test");
+        var data = new CreatePostCommand("test post", "data of test");
 
         //@formatter:off
         given()
@@ -189,11 +189,11 @@ public class PostControllerTestWithRestAssuredMockMvc {
     public void testUpdatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().id(id).title("test").content("content of test").build()));
+                .thenReturn(Optional.of(Post.builder().id(id).title("test").content("data of test").build()));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+                .thenReturn(Post.builder().id(id).title("updated test").content("updated data of test").build());
 
-        var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
+        var data = new UpdatePostCommand("updated test", "updated data of test", Status.PUBLISHED);
 
         //@formatter:off
         given()
@@ -216,9 +216,9 @@ public class PostControllerTestWithRestAssuredMockMvc {
         when(this.posts.findById(any(UUID.class)))
                 .thenReturn(Optional.ofNullable(null));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+                .thenReturn(Post.builder().id(id).title("updated test").content("updated data of test").build());
 
-        var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
+        var data = new UpdatePostCommand("updated test", "updated data of test", Status.PUBLISHED);
 
         //@formatter:off
         given()

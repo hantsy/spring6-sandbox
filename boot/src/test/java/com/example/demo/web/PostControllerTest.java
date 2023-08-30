@@ -7,7 +7,6 @@ import com.example.demo.domain.repository.PostRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -70,14 +68,14 @@ public class PostControllerTest {
         when(this.posts.findAll(isA(Specification.class), isA(Pageable.class)))
                 .thenReturn(new PageImpl<Post>(
                                 List.of(
-                                        Post.builder().title("test").content("content of test1").build(),
-                                        Post.builder().title("test2").content("content of test2").build()
+                                        Post.builder().title("test").content("data of test1").build(),
+                                        Post.builder().title("test2").content("data of test2").build()
                                 )
                         )
                 );
 
         this.rest.perform(get("/posts").accept(MediaType.APPLICATION_JSON))
-                .andExpectAll(status().isOk(), jsonPath("$.totalElements", equalTo(2)));
+                .andExpectAll(status().isOk(), jsonPath("$.count", equalTo(2)));
 
         verify(this.posts, times(1)).findAll(isA(Specification.class), isA(Pageable.class));
         verifyNoMoreInteractions(this.posts);
@@ -86,14 +84,14 @@ public class PostControllerTest {
     @Test
     public void testGetPostById() throws Exception {
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().title("test").content("content of test").build()));
+                .thenReturn(Optional.of(Post.builder().title("test").content("data of test").build()));
 
         var id = UUID.randomUUID();
         this.rest.perform(get("/posts/{id}", id).accept(MediaType.APPLICATION_JSON))
                 .andExpectAll(
                         status().isOk(),
                         jsonPath("$.title", is("test")),
-                        jsonPath("$.content", is("content of test"))
+                        jsonPath("$.content", is("data of test"))
                 );
 
         verify(this.posts, times(1)).findById(id);
@@ -117,9 +115,9 @@ public class PostControllerTest {
     public void testCreatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("test").content("content of test").build());
+                .thenReturn(Post.builder().id(id).title("test").content("data of test").build());
 
-        var data = new CreatePostCommand("test post", "content of test");
+        var data = new CreatePostCommand("test post", "data of test");
         this.rest.perform(post("/posts").content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(header().exists("Location"))
@@ -148,11 +146,11 @@ public class PostControllerTest {
     public void testUpdatePost() throws Exception {
         var id = UUID.randomUUID();
         when(this.posts.findById(any(UUID.class)))
-                .thenReturn(Optional.of(Post.builder().id(id).title("test").content("content of test").build()));
+                .thenReturn(Optional.of(Post.builder().id(id).title("test").content("data of test").build()));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+                .thenReturn(Post.builder().id(id).title("updated test").content("updated data of test").build());
 
-        var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
+        var data = new UpdatePostCommand("updated test", "updated data of test", Status.PUBLISHED);
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -167,9 +165,9 @@ public class PostControllerTest {
         when(this.posts.findById(any(UUID.class)))
                 .thenReturn(Optional.ofNullable(null));
         when(this.posts.save(any(Post.class)))
-                .thenReturn(Post.builder().id(id).title("updated test").content("updated content of test").build());
+                .thenReturn(Post.builder().id(id).title("updated test").content("updated data of test").build());
 
-        var data = new UpdatePostCommand("updated test", "updated content of test", Status.PUBLISHED);
+        var data = new UpdatePostCommand("updated test", "updated data of test", Status.PUBLISHED);
         this.rest.perform(put("/posts/{id}", id).content(objectMapper.writeValueAsBytes(data)).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 

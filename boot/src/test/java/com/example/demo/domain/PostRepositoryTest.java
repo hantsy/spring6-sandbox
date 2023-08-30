@@ -47,7 +47,7 @@ public class PostRepositoryTest {
     @Test
     public void testSaveAll() {
         var data = List.of(
-                Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
+                Post.builder().title("test").content("data").status(Status.PENDING_MODERATION).build(),
                 Post.builder().title("test1").content("content1").build());
         data.forEach(this.posts::save);
 
@@ -65,7 +65,7 @@ public class PostRepositoryTest {
     public void testSaveAllAndFindAll_QueryDSL() {
 
         var data = List.of(
-                Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
+                Post.builder().title("test").content("data").status(Status.PENDING_MODERATION).build(),
                 Post.builder().title("test1").content("content1").build());
         data.forEach(this.posts::save);
 
@@ -81,7 +81,7 @@ public class PostRepositoryTest {
 
     @Test
     public void testInsertAndQuery() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var data = Post.builder().title("test").content("test data").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         this.posts.findById(saved.getId()).ifPresent(
                 p -> {
@@ -96,7 +96,7 @@ public class PostRepositoryTest {
 
     @Test
     public void testInsertAndQuery_QueryDSL() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var data = Post.builder().title("test").content("test data").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         this.posts.findOne(QPost.post.id.eq(saved.getId())).ifPresent(
                 p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
@@ -105,7 +105,7 @@ public class PostRepositoryTest {
 
     @Test
     public void testInsertAndQuery_QueryByExample() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var data = Post.builder().title("test").content("test data").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         var probe = Post.builder().id(saved.getId()).build();
         this.posts.findOne(Example.of(probe, ExampleMatcher.matching().withIgnorePaths("status"))).ifPresent(
@@ -116,7 +116,7 @@ public class PostRepositoryTest {
     @Test
     public void testLabels() {
         var data = List.of(
-                Post.builder().title("test").content("content").labels(Set.of("java17", "spring6")).build(),
+                Post.builder().title("test").content("data").labels(Set.of("java17", "spring6")).build(),
                 Post.builder().title("test1").content("content1").labels(Set.of("spring6")).build());
         data.forEach(this.posts::save);
 

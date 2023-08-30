@@ -61,7 +61,7 @@ public class PostRepositoryTestWithTestcontainers {
     @Test
     public void testSaveAll() {
         var data = List.of(
-            Post.builder().title("test").content("content").status(Status.PENDING_MODERATION).build(),
+            Post.builder().title("test").content("data").status(Status.PENDING_MODERATION).build(),
             Post.builder().title("test1").content("content1").build());
         this.posts.saveAllAndFlush(data);
 
@@ -74,7 +74,7 @@ public class PostRepositoryTestWithTestcontainers {
 
     @Test
     public void testInsertAndQuery() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var data = Post.builder().title("test").content("test data").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         this.posts.findById(saved.getId()).ifPresent(
             p -> assertThat(p.getStatus()).isEqualTo(Status.DRAFT)
@@ -85,7 +85,7 @@ public class PostRepositoryTestWithTestcontainers {
     @Test
     @Disabled
     public void testUpdateStatus() {
-        var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
+        var data = Post.builder().title("test").content("test data").status(Status.DRAFT).build();
         var saved = this.posts.save(data);
         log.debug("saved post : {}", saved);
 

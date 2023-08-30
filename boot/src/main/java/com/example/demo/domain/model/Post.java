@@ -33,7 +33,7 @@ public class Post implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "data")
     private String content;
 
     @CollectionTable(name = "post_labels", joinColumns = @JoinColumn(name = "post_id"))
