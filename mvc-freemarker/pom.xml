@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.release>17</maven.compiler.release>
+        <maven.compiler.parameters>true</maven.compiler.parameters>
 
         <!-- maven plugins -->
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
@@ -27,7 +28,7 @@
         <postgresql.version>42.6.0</postgresql.version>
         <reactor.version>2022.0.10</reactor.version>
         <spring-data.version>2023.1.0-M2</spring-data.version>
-        <spring-security.version>6.1.2</spring-security.version>
+        <spring-security.version>6.2.0-M2</spring-security.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
