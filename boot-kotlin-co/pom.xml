@@ -14,7 +14,7 @@
     <name>boot-kotlin-co-example</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
         <kotlin.version>1.9.10</kotlin.version>
         <testcontainers.version>1.19.0</testcontainers.version>
         <kotest.version>5.7.2</kotest.version>
@@ -175,6 +175,10 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>projectlombok.org</id>
+            <url>https://projectlombok.org/edge-releases</url>
         </repository>
     </repositories>
     <pluginRepositories>
