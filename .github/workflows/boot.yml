@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "17"
-          distribution: "zulu"
+          distribution: "corretto"
           cache: "maven"
       - name: Set up Database
         run: |
@@ -43,7 +43,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "17"
-          distribution: "zulu"
+          distribution: "corretto"
           cache: "maven"
       - name: Set up Database
         run: |
@@ -65,7 +65,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: "17"
-          distribution: "zulu"
+          distribution: "corretto"
           cache: "maven"
       - name: Build with Maven(Build Docker Image)
         run: |
