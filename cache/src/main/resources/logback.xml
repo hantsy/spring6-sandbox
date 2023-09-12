@@ -7,7 +7,7 @@
               class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
-                %green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+                %green(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{10}): %msg%n%throwable
             </Pattern>
         </layout>
     </appender>
@@ -17,7 +17,7 @@
         <file>${LOGS}/app.log</file>
         <encoder
                 class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+            <Pattern>%d %p %C [%t] %m%n</Pattern>
         </encoder>
 
         <rollingPolicy
