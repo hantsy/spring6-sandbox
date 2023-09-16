@@ -31,7 +31,7 @@
         <reactor.version>2022.0.10</reactor.version>
         <jackson.version>2.15.2</jackson.version>
         <testcontainers.version>1.19.0</testcontainers.version>
-        <byte-buddy.version>1.14.5</byte-buddy.version>
+        <byte-buddy.version>1.14.8</byte-buddy.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
