@@ -52,10 +52,5 @@ public class JdbcConfig {
         initializer.setDatabasePopulator(databasePopulator);
         return initializer;
     }
-//
-//    @Bean
-//    PostRepository postRepository(NamedParameterJdbcTemplate client) {
-//        return new JdbcPostRepository(client);
-//    }
 }
 
