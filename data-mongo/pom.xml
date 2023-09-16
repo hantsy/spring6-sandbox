@@ -31,7 +31,7 @@
         <querydsl.version>5.0.0</querydsl.version>
         <mongo-driver.version>4.10.2</mongo-driver.version>
         <spring-data.version>2023.1.0-M3</spring-data.version>
-        <reactor.version>2022.0.10</reactor.version>
+        <reactor.version>2022.0.11</reactor.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
 
         <!-- Apache Tomcat -->
