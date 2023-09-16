@@ -31,6 +31,7 @@
         <reactor.version>2022.0.10</reactor.version>
         <jackson.version>2.15.2</jackson.version>
         <testcontainers.version>1.19.0</testcontainers.version>
+        <byte-buddy.version>1.14.5</byte-buddy.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
@@ -278,6 +279,21 @@
             <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!--
+          ! Need to update to most recent version of byte-buddy to support JDK21
+          see: https://github.com/mockito/mockito/issues/3037
+        -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${byte-buddy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${byte-buddy.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
@@ -395,7 +411,9 @@
         <profile>
             <id>tomcat</id>
             <properties>
-                <tomcat.home>${project.build.directory}/cargo/installs/tomcat-${tomcat.version}/apache-tomcat-${tomcat.version}</tomcat.home>
+                <tomcat.home>
+                    ${project.build.directory}/cargo/installs/tomcat-${tomcat.version}/apache-tomcat-${tomcat.version}
+                </tomcat.home>
             </properties>
             <dependencies>
                 <dependency>
