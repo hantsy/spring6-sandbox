@@ -198,6 +198,7 @@
         </dependency>
 
         <!-- Jakarta EE 9 compatible Servlet container, eg. Tomcat 10, Eclipse Jetty 11 -->
+        <!-- Jakarta EE 10 compatible Servlet container, eg. Tomcat 10.1, Eclipse Jetty 12 -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
