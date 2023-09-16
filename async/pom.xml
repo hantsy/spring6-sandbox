@@ -30,6 +30,7 @@
         <hibernate.version>6.2.7.Final</hibernate.version>
         <reactor.version>2022.0.10</reactor.version>
         <spring-data.version>2023.1.0-M3</spring-data.version>
+        <byte-buddy.version>1.14.5</byte-buddy.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
@@ -272,6 +273,20 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>5.5.0</version>
             <scope>test</scope>
+        </dependency>
+        <!--
+          ! Need to update to most recent version of byte-buddy to support JDK21
+          see: https://github.com/mockito/mockito/issues/3037
+        -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${byte-buddy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>${byte-buddy.version}</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
