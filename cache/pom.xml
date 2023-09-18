@@ -28,6 +28,11 @@
         <postgresql.version>42.6.0</postgresql.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
         <testcontainers.version>1.19.0</testcontainers.version>
+        <spring-data.version>2023.1.0-M3</spring-data.version>
+        <junit.version>5.10.0</junit.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <logback.version>1.4.11</logback.version>
+        <mockito.version>5.5.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -49,7 +54,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-bom</artifactId>
-                <version>2023.0.2</version>
+                <version>${spring-data.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -57,7 +62,15 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.0</version>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.mockito/mockito-bom -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -114,22 +127,22 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -140,7 +153,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
         <!--
