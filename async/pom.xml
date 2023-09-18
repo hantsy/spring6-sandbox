@@ -28,7 +28,7 @@
         <postgresql.version>42.6.0</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <hibernate.version>6.2.7.Final</hibernate.version>
-        <reactor.version>2022.0.10</reactor.version>
+        <reactor.version>2022.0.11</reactor.version>
         <spring-data.version>2023.1.0-M3</spring-data.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
 
