@@ -28,6 +28,13 @@
         <postgresql.version>42.6.0</postgresql.version>
         <hibernate.version>6.2.7.Final</hibernate.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
+        <lombok.version>1.18.30</lombok.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <logback.version>1.4.11</logback.version>
+        <jackson.version>2.15.2</jackson.version>
+        <testcontainers.version>1.19.0</testcontainers.version>
+        <junit.version>5.10.0</junit.version>
+        <reactor.version>2022.0.11</reactor.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
@@ -43,13 +50,8 @@
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <lombok.version>1.18.30</lombok.version>
-        <slf4j.version>2.0.9</slf4j.version>
-        <logback.version>1.4.11</logback.version>
-        <jackson.version>2.15.2</jackson.version>
-        <testcontainers.version>1.19.0</testcontainers.version>
-        <junit.version>5.10.0</junit.version>
-        <reactor.version>2022.0.11</reactor.version>
+
+        <mockito.version>5.5.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -82,6 +84,14 @@
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -233,7 +243,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
         <!--
