@@ -32,6 +32,7 @@
         <jackson.version>2.15.2</jackson.version>
         <junit.version>5.10.0</junit.version>
         <reactor.version>2022.0.11</reactor.version>
+        <lombok.version>edge-SNAPSHOT</lombok.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
@@ -189,7 +190,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>edge-SNAPSHOT</version>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!-- logging with logback -->
@@ -303,6 +304,12 @@
                 <version>3.11.0</version>
                 <configuration>
                     <annotationProcessorPaths>
+                        <annotationProcessorPath>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <optional>true</optional>
+                            <version>${lombok.version}</version>
+                        </annotationProcessorPath>
                         <annotationProcessorPath>
                             <groupId>org.hibernate.orm</groupId>
                             <artifactId>hibernate-jpamodelgen</artifactId>
