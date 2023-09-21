@@ -35,6 +35,7 @@
         <mockito.version>5.5.0</mockito.version>
         <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
         <jackson.version>2.15.2</jackson.version>
+        <reactor.version>2023.0.0-M3</reactor.version>
     </properties>
 
     <dependencyManagement>
@@ -56,7 +57,7 @@
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2023.0.0-M3</version>
+                <version>${reactor.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
