@@ -150,7 +150,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>edge-SNAPSHOT</version>
+            <version>1.18.30</version>
         </dependency>
 
         <!-- logging with logback -->
