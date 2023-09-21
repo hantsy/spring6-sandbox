@@ -34,6 +34,7 @@
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.5.0</mockito.version>
         <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
+        <jackson.version>2.15.2</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -49,6 +50,13 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
                 <version>${spring-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.projectreactor</groupId>
+                <artifactId>reactor-bom</artifactId>
+                <version>2023.0.0-M3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -111,16 +119,7 @@
             <artifactId>spring-webflux</artifactId>
         </dependency>
 
-        <!-- kotlin coroutines -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-kotlin</artifactId>
-            <version>2.15.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor.kotlin</groupId>
-            <artifactId>reactor-kotlin-extensions</artifactId>
-        </dependency>
+        <!-- Kotlin -->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
@@ -128,6 +127,13 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
+        </dependency>
+
+        <!-- kotlin coroutines -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
@@ -172,6 +178,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -222,6 +229,8 @@
         <dependency>
             <groupId>org.jetbrains.kotlinx</groupId>
             <artifactId>kotlinx-coroutines-test</artifactId>
+            <version>${kotlinx-coroutines.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
