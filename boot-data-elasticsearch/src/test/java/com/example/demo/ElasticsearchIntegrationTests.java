@@ -21,7 +21,7 @@ public class ElasticsearchIntegrationTests {
 
     @Container
     @ServiceConnection
-    public static ElasticsearchContainer ES_CONTAINER = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch")
+    public static ElasticsearchContainer ES_CONTAINER = new ElasticsearchContainer("docker.elastic.co/elasticsearch/elasticsearch:8.10.2")
         .withEnv("discovery.type", "single-node");
 
 //    @DynamicPropertySource
