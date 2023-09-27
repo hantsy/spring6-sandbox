@@ -28,14 +28,21 @@
         <postgresql.version>42.6.0</postgresql.version>
         <reactor.version>2023.0.0-M3</reactor.version>
         <spring-data.version>2023.1.0-M3</spring-data.version>
-        <spring-security.version>6.2.0-M2</spring-security.version>
+        <spring-security.version>6.2.0-M3</spring-security.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
+        <logback.version>1.4.11</logback.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <lombok.version>1.18.30</lombok.version>
+        <testcontainers.version>1.19.0</testcontainers.version>
+        <jackson.version>2.15.2</jackson.version>
+        <junit.version>5.10.0</junit.version>
+        <mockito.version>5.5.0</mockito.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
 
         <!-- Eclipse Jetty  -->
-        <jetty.version>11.0.16</jetty.version>
+        <jetty.version>12.0.1</jetty.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -85,7 +92,15 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.0</version>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -93,7 +108,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.15.2</version>
+                <version>${jackson.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -102,7 +117,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.19.0</version>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -210,29 +225,29 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!-- logging with logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -243,7 +258,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.5.0</version>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -448,7 +463,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <artifactInstaller>
                                     <groupId>org.eclipse.jetty</groupId>
                                     <artifactId>jetty-home</artifactId>
@@ -514,7 +529,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <type>installed</type>
                                 <home>${jetty.home}</home>
                             </container>
