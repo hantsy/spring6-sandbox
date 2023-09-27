@@ -32,7 +32,7 @@
         <jackson.version>2.15.2</jackson.version>
         <junit.version>5.10.0</junit.version>
         <reactor.version>2023.0.0-M3</reactor.version>
-        <lombok.version>edge-SNAPSHOT</lombok.version>
+        <lombok.version>1.18.30</lombok.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.13</tomcat.version>
@@ -265,7 +265,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.2.222</version>
+            <version>2.2.224</version>
             <scope>test</scope>
         </dependency>
         <dependency>
