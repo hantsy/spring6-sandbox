@@ -33,7 +33,7 @@
         <tomcat.version>10.1.13</tomcat.version>
 
         <!-- Eclipse Jetty  -->
-        <jetty.version>11.0.16</jetty.version>
+        <jetty.version>12.0.1</jetty.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -396,7 +396,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <artifactInstaller>
                                     <groupId>org.eclipse.jetty</groupId>
                                     <artifactId>jetty-home</artifactId>
@@ -462,7 +462,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <type>installed</type>
                                 <home>${jetty.home}</home>
                             </container>
