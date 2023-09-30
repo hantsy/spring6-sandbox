@@ -26,7 +26,7 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.1.0-M5</spring-framework.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <hibernate.version>6.2.7.Final</hibernate.version>
+        <hibernate.version>6.3.1.Final</hibernate.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
         <testcontainers.version>1.19.0</testcontainers.version>
         <jackson.version>2.15.2</jackson.version>
