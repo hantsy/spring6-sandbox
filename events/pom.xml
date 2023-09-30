@@ -489,7 +489,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <artifactInstaller>
                                     <groupId>org.eclipse.jetty</groupId>
                                     <artifactId>jetty-home</artifactId>
@@ -669,7 +669,7 @@
                         <version>${cargo-maven3-plugin.version}</version>
                         <configuration>
                             <container>
-                                <containerId>jetty11x</containerId>
+                                <containerId>jetty12x</containerId>
                                 <type>installed</type>
                                 <home>${jetty.home}</home>
                             </container>
