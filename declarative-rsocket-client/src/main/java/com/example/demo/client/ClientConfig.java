@@ -1,6 +1,5 @@
 package com.example.demo.client;
 
-import io.rsocket.transport.netty.client.TcpClientTransport;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,17 +16,18 @@ public class ClientConfig {
     @Bean
     RSocketRequester rSocketRequester(RSocketStrategies strategies) {
         return RSocketRequester.builder()
-            .rsocketStrategies(strategies)
-            .tcp("localhost", 7000);
+                .rsocketStrategies(strategies)
+                .tcp("localhost", 7000);
     }
 
     @SneakyThrows
     @Bean
     public PostClientService postClientService(RSocketRequester requester) {
         RSocketServiceProxyFactory rSocketServiceProxyFactory =
-            RSocketServiceProxyFactory.builder(requester)
-                .blockTimeout(Duration.ofMillis(5000))
-                .build();
+                RSocketServiceProxyFactory.builder()
+                        .rsocketRequester(requester)
+                        .blockTimeout(Duration.ofMillis(5000))
+                        .build();
         return rSocketServiceProxyFactory.createClient(PostClientService.class);
     }
 }
