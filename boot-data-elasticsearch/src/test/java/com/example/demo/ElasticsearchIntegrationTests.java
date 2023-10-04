@@ -18,16 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @Slf4j
 public class ElasticsearchIntegrationTests {
-    private final static String IMAGE_NAME = "docker.elastic.co/elasticsearch/elasticsearch:8.10.2";
+    private final static String IMAGE_NAME = "docker.elastic.co/elasticsearch/elasticsearch:7.17.5";
 
     @Container
     @ServiceConnection
     public static ElasticsearchContainer ES_CONTAINER = new ElasticsearchContainer(IMAGE_NAME);
-
-//    @DynamicPropertySource
-//    static void registerElasticsearchProperties(DynamicPropertyRegistry registry) {
-//        registry.add("spring.elasticsearch.uris", ES_CONTAINER::getHttpHostAddress);
-//    }
 
     @Autowired
     private ProductRepository productRepository;
