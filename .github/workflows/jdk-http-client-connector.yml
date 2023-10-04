@@ -1,0 +1,30 @@
+name: jdk-http-client-connector
+
+on:
+  push:
+    paths:
+      - "jdk-http-client-connector/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "jdk-http-client-connector/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "corretto"
+          java-version: 21
+          cache: "maven"
+
+      - name: Build with Maven
+        run: mvn -B -q clean package --file jdk-http-client-connector/pom.xml
