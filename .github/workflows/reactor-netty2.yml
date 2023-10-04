@@ -1,0 +1,36 @@
+name: reactor-netty2
+
+on:
+  push:
+    paths:
+      - "reactor-netty2/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "reactor-netty2/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "corretto"
+          java-version: 21
+          cache: "maven"
+      - name: Start up PostgreSQL in Docker
+        run: |
+          docker-compose up -d postgres
+          sleep 5
+          docker ps -a
+
+      - name: Build with Maven
+        run: mvn clean install --file reactor-netty2/pom.xml
+
