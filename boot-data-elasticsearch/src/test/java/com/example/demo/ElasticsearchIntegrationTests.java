@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 @Slf4j
 public class ElasticsearchIntegrationTests {
-    private final static String IMAGE_NAME = "docker.elastic.co/elasticsearch/elasticsearch:7.9.2";
+    private final static String IMAGE_NAME = "docker.elastic.co/elasticsearch/elasticsearch:7.17.5";
 
     @Container
     @ServiceConnection
