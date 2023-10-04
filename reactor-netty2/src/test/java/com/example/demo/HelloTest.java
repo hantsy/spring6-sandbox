@@ -43,7 +43,7 @@ public class HelloTest {
     }
 
     @Test
-    public void testGetAllPosts() throws Exception {
+    public void testGreetingFromClient() throws Exception {
         helloClient.greet("Hantsy")
                 .as(StepVerifier::create)
                 .consumeNextWith(result -> assertThat(result).isEqualTo("Hello, Hantsy"))

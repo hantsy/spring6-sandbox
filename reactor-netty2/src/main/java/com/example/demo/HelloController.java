@@ -12,8 +12,8 @@ import reactor.core.publisher.Mono;
 public class HelloController {
 
     @GetMapping
-    public Mono<String> sayHello(@RequestParam("name") String name){
-        return Mono.just("Hello, "+ name);
+    public Mono<String> sayHello(@RequestParam(name = "name", required = false) String name) {
+        return Mono.just("Hello, " + (name != null ? name : "World"));
     }
 
 }
