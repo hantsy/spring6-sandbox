@@ -160,7 +160,7 @@ public class PostClientTest {
                 .verifyComplete();
 
         verify(putRequestedFor(urlEqualTo("/posts/" + id))
-                .withHeader("Accept", equalTo("application/json"))
+                .withHeader("Content-Type", equalTo("application/json"))
                 .withRequestBody(equalToJson(Json.write(data)))
         );
     }
@@ -185,8 +185,6 @@ public class PostClientTest {
                 )
                 .verifyComplete();
 
-        verify(deleteRequestedFor(urlEqualTo("/posts/" + id))
-                .withHeader("Accept", equalTo("application/json"))
-        );
+        verify(deleteRequestedFor(urlEqualTo("/posts/" + id)));
     }
 }

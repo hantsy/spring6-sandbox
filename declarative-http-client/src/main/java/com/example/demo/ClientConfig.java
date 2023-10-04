@@ -36,9 +36,9 @@ public class ClientConfig {
     @Bean
     PostClient postClient(WebClient webClient) {
         HttpServiceProxyFactory httpServiceProxyFactory =
-                HttpServiceProxyFactory.builder(WebClientAdapter.forClient(webClient))
+                HttpServiceProxyFactory.builder()
+                        .exchangeAdapter(WebClientAdapter.create(webClient))
                         .conversionService(new DefaultFormattingConversionService())
-                        .blockTimeout(Duration.ofMillis(5000))
                         .build();
         return httpServiceProxyFactory.createClient(PostClient.class);
     }
