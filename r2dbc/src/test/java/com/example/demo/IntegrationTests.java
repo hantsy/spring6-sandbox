@@ -1,22 +1,18 @@
 package com.example.demo;
 
-import java.net.http.HttpClient;
-import java.net.http.HttpClient.Version;
-import java.util.concurrent.Executors;
-
+import com.example.demo.domain.model.Post;
+import io.netty.channel.ChannelOption;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.client.reactive.JdkClientHttpConnector;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import com.example.demo.domain.model.Post;
-
-import reactor.netty5.DisposableServer;
-import reactor.netty5.http.server.HttpServer;
+import reactor.netty.DisposableServer;
+import reactor.netty.http.client.HttpClient;
+import reactor.netty.http.server.HttpServer;
 import reactor.test.StepVerifier;
 
 /**
@@ -37,11 +33,8 @@ public class IntegrationTests {
 
     @BeforeEach
     public void setup() {
-        var jvmHttpClient = HttpClient.newBuilder()
-                .executor(Executors.newCachedThreadPool())
-                .version(Version.HTTP_2)
-                .build();
-        var clientConnector = new JdkClientHttpConnector(jvmHttpClient);
+        var reactorHttpClient = HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5_000);
+        var clientConnector = new ReactorClientHttpConnector(reactorHttpClient);
 
         this.disposableServer = this.httpServer.bindNow();
         this.client = WebClient.builder()

@@ -23,10 +23,22 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.1.0-M5</spring-framework.version>
         <reactor.version>2023.0.0-M3</reactor.version>
-        <netty.version>5.0.0.Alpha5</netty.version>
+        <netty.version>4.1.99.Final</netty.version>
         <junit.version>5.10.0</junit.version>
         <jackson.version>2.15.2</jackson.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <logback.version>1.4.11</logback.version>
+        <testcontainers.version>1.19.1</testcontainers.version>
+        <lombok.version>1.18.30</lombok.version>
+        <reactor-netty.version>1.1.11</reactor-netty.version>
+        <mockito.version>5.5.0</mockito.version>
+        <assertj-core.version>3.24.2</assertj-core.version>
+        <json-path.version>2.8.0</json-path.version>
+        <hamcrest.version>2.2</hamcrest.version>
+        <postgresql.version>42.6.0</postgresql.version>
+        <r2dbc-postgresql.version>1.0.2.RELEASE</r2dbc-postgresql.version>
+        <r2dbc-spi.version>1.0.0.RELEASE</r2dbc-spi.version>
     </properties>
 
     <dependencyManagement>
@@ -55,7 +67,7 @@
             </dependency>
             <dependency>
                 <groupId>io.netty</groupId>
-                <artifactId>netty5-bom</artifactId>
+                <artifactId>netty-bom</artifactId>
                 <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -65,6 +77,14 @@
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -80,7 +100,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.19.1</version>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -124,13 +144,13 @@
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-spi</artifactId>
-            <version>1.0.0.RELEASE</version>
+            <version>${r2dbc-spi.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.postgresql/r2dbc-postgresql -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
-            <version>1.0.2.RELEASE</version>
+            <version>${r2dbc-postgresql.version}</version>
         </dependency>
 
         <dependency>
@@ -141,8 +161,8 @@
         <!-- Netty runtime -->
         <dependency>
             <groupId>io.projectreactor.netty</groupId>
-            <artifactId>reactor-netty5</artifactId>
-            <version>2.0.0-M3</version>
+            <artifactId>reactor-netty</artifactId>
+            <version>${reactor-netty.version}</version>
         </dependency>
 
         <!-- Lombok -->
@@ -150,29 +170,29 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!-- logging with logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.9</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.4.11</version>
+            <version>${logback.version}</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -183,7 +203,6 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
         <!--
@@ -203,18 +222,18 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.24.2</version>
+            <version>${assertj-core.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
             <artifactId>json-path</artifactId>
-            <version>2.8.0</version>
+            <version>${json-path.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
+            <version>${hamcrest.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -240,7 +259,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.6.0</version>
+            <version>${postgresql.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
