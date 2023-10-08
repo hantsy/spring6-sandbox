@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.pulsar.core.PulsarTemplate;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PulsarContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -30,7 +32,7 @@ public class PulsarIntegrationTests {
 
 //    @DynamicPropertySource
 //    private static void registerKafkaProperties(DynamicPropertyRegistry registry) {
-//        registry.add("spring.kafka.bootstrap-servers", () -> KAFKA_CONTAINER.getHost() + ":" + KAFKA_CONTAINER.getFirstMappedPort());
+//        registry.add("spring.pulsar.client.service-url", () -> PULSAR_CONTAINER.getPulsarBrokerUrl());
 //    }
 
     @Autowired
