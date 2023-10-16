@@ -1,7 +1,5 @@
-package com.example.demo.domain.repository;
+package com.example.demo;
 
-import com.example.demo.domain.model.Post;
-import com.example.demo.domain.model.Status;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.RowMapper;
@@ -123,6 +121,8 @@ public class JdbcPostRepository implements PostRepository {
     @Override
     public Long count() {
         var sql = "SELECT count(*) FROM posts";
-        return this.client.sql(sql).query().singleValue();
+        var count = this.client.sql(sql).query().singleValue();
+        log.debug("count is: {}", count);
+        return (Long)count;
     }
 }

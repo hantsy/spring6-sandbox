@@ -23,9 +23,9 @@
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.1.0-M5</spring-framework.version>
+        <spring-framework.version>6.1.0-RC1</spring-framework.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <spring-data.version>2023.1.0-M3</spring-data.version>
+        <spring-data.version>2023.1.0-RC1</spring-data.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
     </properties>
 

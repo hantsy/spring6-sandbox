@@ -1,11 +1,5 @@
-package com.example.demo.testcontainers;
+package com.example.demo;
 
-import com.example.demo.DataSourceConfig;
-import com.example.demo.domain.JdbcConfig;
-import com.example.demo.domain.model.CreatePostCommand;
-import com.example.demo.domain.model.Post;
-import com.example.demo.domain.model.Status;
-import com.example.demo.domain.repository.PostRepository;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,9 +27,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author hantsy
  */
 @Slf4j
-@SpringJUnitConfig(classes = {PostRepositoryTestWithTestContainers.TestConfig.class})
-@ContextConfiguration(initializers = PostRepositoryTestWithTestContainers.TestContainerInitializer.class)
-public class PostRepositoryTestWithTestContainers {
+@SpringJUnitConfig(classes = {PostRepositoryWithTestcontainersTests.TestConfig.class})
+@ContextConfiguration(initializers = PostRepositoryWithTestcontainersTests.TestContainerInitializer.class)
+public class PostRepositoryWithTestcontainersTests {
 
     //see: https://github.com/testcontainers/testcontainers-java/discussions/4841
     static class TestContainerInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
@@ -105,8 +99,7 @@ public class PostRepositoryTestWithTestContainers {
 
     @Test
     public void testInsertAndQuery() {
-        var data = new CreatePostCommand("test", "content");
-        var id = this.posts.save(Post.of(data.title(), data.content()));
+        var id = this.posts.save(Post.of("test title", "test content"));
         var saved = this.posts.findById(id);
         assertThat(saved.status()).isEqualTo(Status.DRAFT);
 

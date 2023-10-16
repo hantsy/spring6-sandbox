@@ -19,18 +19,10 @@ public class DataSourceConfig {
     private static final String ENV_DATASOURCE_PASSWORD = "datasource.password";
     private static final String ENV_DATASOURCE_USERNAME = "datasource.username";
     private static final String ENV_DATASOURCE_URL = "datasource.url";
-    //private static final String ENV_DATASOURCE_JNDINAME = "datasource.jndi-name";
 
     @Autowired
     private Environment env;
 
-//    @Bean
-//    @Profile("h2")
-//    public DataSource embeddedDataSource() {
-//        return new EmbeddedDatabaseBuilder()
-//                .setType(EmbeddedDatabaseType.H2)
-//                .build();
-//    }
 
     @Bean
     @Profile("default")
@@ -43,14 +35,5 @@ public class DataSourceConfig {
         return dataSource;
     }
 
-//    @Bean
-//    @Profile("jndi")
-//    public DataSource jndiDataSource() throws NamingException {
-//        JndiObjectFactoryBean ds = new JndiObjectFactoryBean();
-//        ds.setJndiName(env.getProperty(ENV_DATASOURCE_JNDINAME));
-//        ds.afterPropertiesSet();
-//
-//        return (DataSource) ds.getObject();
-//    }
 
 }

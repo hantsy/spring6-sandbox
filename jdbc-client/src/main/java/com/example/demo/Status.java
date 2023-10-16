@@ -1,4 +1,4 @@
-package com.example.demo.domain.model;
+package com.example.demo;
 
 public enum Status {
     DRAFT, PENDING_MODERATION, PUBLISHED;

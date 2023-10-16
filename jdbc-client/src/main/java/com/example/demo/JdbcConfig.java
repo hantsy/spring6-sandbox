@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,10 +59,5 @@ public class JdbcConfig {
         initializer.setDatabasePopulator(databasePopulator);
         return initializer;
     }
-//
-//    @Bean
-//    PostRepository postRepository(NamedParameterJdbcTemplate client) {
-//        return new JdbcPostRepository(client);
-//    }
 }
 

@@ -1,9 +1,4 @@
-package com.example.demo.domain.repository;
-
-import com.example.demo.domain.model.CreatePostCommand;
-import com.example.demo.domain.model.Post;
-import com.example.demo.domain.model.Status;
-import com.example.demo.domain.model.UpdatePostCommand;
+package com.example.demo;
 
 import java.util.List;
 import java.util.Map;
