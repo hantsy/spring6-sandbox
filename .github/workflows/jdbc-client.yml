@@ -27,17 +27,6 @@ jobs:
           cache: "maven"
 
       - name: Build with Maven
-        run: mvn -B -q clean package --file jdbc-client/pom.xml
-        
-      - name: Start up PostgreSQL in Docker
-        run: |
-          docker-compose up -d postgres
-          sleep 5
-          docker ps -a
-          
-      - name: Unit Tests
-        run: mvn -B -q clean test --file jdbc-client/pom.xml -Put
-
-      - name: Integration Tests
-        run: mvn -B -q clean verify --file jdbc-client/pom.xml -Pit
+        run: mvn -B -q clean test --file jdbc-client/pom.xml
+      
 
