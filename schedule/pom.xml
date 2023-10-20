@@ -34,7 +34,7 @@
         <junit.version>5.10.0</junit.version>
         <mockito.version>5.6.0</mockito.version>
         <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.15.3</jackson.version>
         <reactor.version>2023.0.0-M3</reactor.version>
     </properties>
 

@@ -29,7 +29,7 @@
         <hibernate.version>6.3.1.Final</hibernate.version>
         <byte-buddy.version>1.14.8</byte-buddy.version>
         <testcontainers.version>1.19.1</testcontainers.version>
-        <jackson.version>2.15.2</jackson.version>
+        <jackson.version>2.15.3</jackson.version>
         <junit.version>5.10.0</junit.version>
         <reactor.version>2023.0.0-M3</reactor.version>
         <lombok.version>1.18.30</lombok.version>
