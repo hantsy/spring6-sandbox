@@ -19,19 +19,19 @@
         <!-- maven plugins -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
+        <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.2.1</maven-failsafe-plugin.version>
+        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.10.10</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.1.0-RC1</spring-framework.version>
+        <spring-framework.version>6.1.0-RC2</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.0.0</querydsl.version>
         <mongo-driver.version>4.11.0</mongo-driver.version>
         <spring-data.version>2023.1.0-RC1</spring-data.version>
-        <reactor.version>2023.0.0-M3</reactor.version>
+        <reactor.version>2023.0.0-RC1</reactor.version>
         <byte-buddy.version>1.14.9</byte-buddy.version>
 
         <!-- Apache Tomcat -->

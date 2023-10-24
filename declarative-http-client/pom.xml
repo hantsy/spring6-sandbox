@@ -16,15 +16,15 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
         <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.9.11</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.1.0-RC1</spring-framework.version>
-        <reactor.version>2023.0.0-M3</reactor.version>
+        <spring-framework.version>6.1.0-RC2</spring-framework.version>
+        <reactor.version>2023.0.0-RC1</reactor.version>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
