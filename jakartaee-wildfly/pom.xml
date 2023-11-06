@@ -40,7 +40,7 @@
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.10.1</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -286,7 +286,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.6.0</version>
+            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
