@@ -24,7 +24,7 @@
         <spring-framework.version>6.1.0-RC2</spring-framework.version>
         <reactor.version>2023.0.0-RC1</reactor.version>
         <netty.version>4.1.100.Final</netty.version>
-        <junit.version>5.10.0</junit.version>
+        <junit.version>5.10.1</junit.version>
         <jackson.version>2.15.3</jackson.version>
         <byte-buddy.version>1.14.9</byte-buddy.version>
         <slf4j.version>2.0.9</slf4j.version>
