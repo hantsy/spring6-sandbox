@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 
+import java.time.Duration;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -18,7 +19,10 @@ public class ScheduleConfig implements SchedulingConfigurer {
     @Override
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         taskRegistrar.setScheduler(taskScheduler());
-        taskRegistrar.addFixedDelayTask(() -> System.out.println("executing fixed delay task."), 1000L);
+        taskRegistrar.addFixedDelayTask(
+                () -> System.out.println("executing fixed delay task."),
+                Duration.ofMillis(1000)
+        );
     }
 
     @Bean(destroyMethod = "shutdown")

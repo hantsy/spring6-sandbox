@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.UUID;
 
-@ComponentScan
+@ComponentScan(basePackageClasses = Application.class)
 @Configuration
 @Slf4j
 public class Application {

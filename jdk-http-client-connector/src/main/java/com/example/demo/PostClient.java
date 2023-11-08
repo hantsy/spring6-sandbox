@@ -5,9 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -28,7 +25,7 @@ public class PostClient {
 
     }
 
-    Mono<Post> getById(@PathVariable("id") UUID id) {
+    Mono<Post> getById(UUID id) {
         return client.get()
                 .uri(uriBuilder -> uriBuilder.path("/posts/{id}").build(id))
                 .accept(MediaType.APPLICATION_JSON)
@@ -41,7 +38,7 @@ public class PostClient {
                 });
     }
 
-    Mono<ResponseEntity<Void>> save(@RequestBody Post post) {
+    Mono<ResponseEntity<Void>> save(Post post) {
         return client.post()
                 .uri("/posts")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -55,7 +52,7 @@ public class PostClient {
                 });
     }
 
-    Mono<ResponseEntity<Void>> update(@PathVariable UUID id, @RequestBody Post post) {
+    Mono<ResponseEntity<Void>> update(UUID id, Post post) {
         return client.put()
                 .uri(uriBuilder -> uriBuilder.path("/posts/{id}").build(id))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -69,7 +66,7 @@ public class PostClient {
                 });
     }
 
-    Mono<ResponseEntity<Void>> delete(@PathVariable UUID id) {
+    Mono<ResponseEntity<Void>> delete(UUID id) {
         return client.delete()
                 .uri(uriBuilder -> uriBuilder.path("/posts/{id}").build(id))
                 .exchangeToMono(response -> {

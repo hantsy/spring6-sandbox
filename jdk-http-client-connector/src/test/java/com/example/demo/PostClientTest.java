@@ -154,9 +154,7 @@ public class PostClientTest {
         postClient.update(id, data)
                 .as(StepVerifier::create)
                 .consumeNextWith(
-                        entity -> {
-                            assertThat(entity.getStatusCode().value()).isEqualTo(204);
-                        }
+                        entity -> assertThat(entity.getStatusCode().value()).isEqualTo(204)
                 )
                 .verifyComplete();
 
@@ -180,9 +178,7 @@ public class PostClientTest {
         postClient.delete(id)
                 .as(StepVerifier::create)
                 .consumeNextWith(
-                        entity -> {
-                            assertThat(entity.getStatusCode().value()).isEqualTo(204);
-                        }
+                        entity -> assertThat(entity.getStatusCode().value()).isEqualTo(204)
                 )
                 .verifyComplete();
 
