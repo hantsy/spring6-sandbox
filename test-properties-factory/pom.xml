@@ -23,7 +23,7 @@
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.1.0-RC2</spring-framework.version>
+        <spring-framework.version>6.1.0</spring-framework.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
