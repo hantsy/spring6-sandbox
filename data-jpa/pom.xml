@@ -28,7 +28,7 @@
         <querydsl.version>5.0.0</querydsl.version>
         <spring-data.version>2023.1.0</spring-data.version>
         <hibernate.version>6.3.1.Final</hibernate.version>
-        <reactor.version>2023.0.0-RC1</reactor.version>
+        <reactor.version>2023.0.0</reactor.version>
         <jackson.version>2.15.3</jackson.version>
         <testcontainers.version>1.19.1</testcontainers.version>
         <byte-buddy.version>1.14.9</byte-buddy.version>

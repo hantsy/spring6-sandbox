@@ -35,7 +35,7 @@
         <mockito.version>5.7.0</mockito.version>
         <kotlinx-coroutines.version>1.7.3</kotlinx-coroutines.version>
         <jackson.version>2.15.3</jackson.version>
-        <reactor.version>2023.0.0-RC1</reactor.version>
+        <reactor.version>2023.0.0</reactor.version>
     </properties>
 
     <dependencyManagement>
