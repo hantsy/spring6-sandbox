@@ -38,6 +38,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 /**
  * @author hantsy
  */
+@Disabled // see: https://github.com/rest-assured/rest-assured/issues/1728
 @WebMvcTest
 public class PostControllerTestWithRestAssuredMockMvc {
 
