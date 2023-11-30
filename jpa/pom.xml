@@ -30,7 +30,7 @@
         <byte-buddy.version>1.14.10</byte-buddy.version>
         <lombok.version>1.18.30</lombok.version>
         <slf4j.version>2.0.9</slf4j.version>
-        <logback.version>1.4.11</logback.version>
+        <logback.version>1.4.13</logback.version>
         <jackson.version>2.16.0</jackson.version>
         <testcontainers.version>1.19.3</testcontainers.version>
         <junit.version>5.10.1</junit.version>
