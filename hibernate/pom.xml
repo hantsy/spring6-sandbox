@@ -38,7 +38,7 @@
         <tomcat.version>10.1.16</tomcat.version>
 
         <!-- Eclipse Jetty -->
-        <jetty.version>12.0.3</jetty.version>
+        <jetty.version>12.0.4</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>30.0.0.Final</wildfly.version>
