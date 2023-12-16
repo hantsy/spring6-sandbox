@@ -37,7 +37,7 @@
         <json-path.version>2.8.0</json-path.version>
         <hamcrest.version>2.2</hamcrest.version>
         <postgresql.version>42.7.1</postgresql.version>
-        <r2dbc-postgresql.version>1.0.2.RELEASE</r2dbc-postgresql.version>
+        <r2dbc-postgresql.version>1.0.3.RELEASE</r2dbc-postgresql.version>
         <r2dbc-spi.version>1.0.0.RELEASE</r2dbc-spi.version>
     </properties>
 
