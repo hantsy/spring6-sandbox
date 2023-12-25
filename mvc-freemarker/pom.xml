@@ -34,7 +34,7 @@
         <slf4j.version>2.0.9</slf4j.version>
         <lombok.version>1.18.30</lombok.version>
         <testcontainers.version>1.19.3</testcontainers.version>
-        <jackson.version>2.16.0</jackson.version>
+        <jackson.version>2.16.1</jackson.version>
         <junit.version>5.10.1</junit.version>
         <mockito.version>5.8.0</mockito.version>
 
