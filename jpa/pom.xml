@@ -37,7 +37,7 @@
         <reactor.version>2023.0.1</reactor.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.17</tomcat.version>
+        <tomcat.version>10.1.18</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.5</jetty.version>
