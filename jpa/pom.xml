@@ -34,7 +34,7 @@
         <jackson.version>2.16.1</jackson.version>
         <testcontainers.version>1.19.3</testcontainers.version>
         <junit.version>5.10.1</junit.version>
-        <reactor.version>2023.0.1</reactor.version>
+        <reactor.version>2023.0.2</reactor.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.18</tomcat.version>

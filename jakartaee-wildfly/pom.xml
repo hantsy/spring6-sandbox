@@ -28,7 +28,7 @@
         <postgresql.version>42.7.1</postgresql.version>
         <spring-data.version>2023.1.1</spring-data.version>
         <hibernate.version>6.4.1.Final</hibernate.version>
-        <reactor.version>2023.0.1</reactor.version>
+        <reactor.version>2023.0.2</reactor.version>
         <jackson.version>2.16.1</jackson.version>
         <testcontainers.version>1.19.3</testcontainers.version>
 
