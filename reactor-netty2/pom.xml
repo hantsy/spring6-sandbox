@@ -21,7 +21,7 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.1.2</spring-framework.version>
+        <spring-framework.version>6.1.3</spring-framework.version>
         <reactor.version>2023.0.2</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.10.1</junit.version>
