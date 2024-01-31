@@ -1,0 +1,1162 @@
+repo_name: hantsy/spring6-sandbox
+report_id: 777e5e7ec2c33691f21e9c97363751cd
+version: 0.1
+repo_type: Public
+timestamp: '2024-01-31T08:58:57+00:00'
+requested_by: renovate[bot]
+provider: github
+branch: master
+detected_tools_count: 93
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox
+  detection_source: Repo Metadata
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox
+  detection_source: Repo Metadata
+- name: Kotlin
+  description: Statically typed Programming Language targeting JVM and JavaScript
+  website_url: https://kotlinlang.org/
+  open_source: true
+  hosted_saas: true
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/3750/pCfEzr6L.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox
+  detection_source: Repo Metadata
+- name: SQL
+  description: It is a domain-specific language used in programming
+  website_url: https://en.wikipedia.org/wiki/SQL
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/2271/default_068d33483bba6b81ee13fbd4dc7aab9780896a54.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-jdbc/src/main/resources/data.sql
+  detection_source: boot-data-jdbc/src/main/resources/data.sql
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 07:40:05.000000000 Z
+- name: Apache FreeMarker
+  description: A free Java-based template engine
+  website_url: http://freemarker.incubator.apache.org/index.html
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Java Tools
+  image_url: https://img.stackshare.io/service/4456/ymCgaIO0_400x400.jpg
+  detection_source_url: https://github.com/hantsy/spring6-sandbox
+  detection_source: Repo Metadata
+- name: Node.js
+  description: A platform built on Chrome's JavaScript runtime for easily building
+    fast, scalable network applications
+  website_url: http://nodejs.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: hantsy
+  last_updated_on: 2021-12-30 06:49:14.000000000 Z
+- name: Project Reactor
+  description: Library for building non-blocking applications on JVM
+  website_url: https://projectreactor.io/
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Java Tools
+  image_url: https://img.stackshare.io/service/5807/default_cbd8ab670309059d7e315252d307d409aa40d793.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:46:02.000000000 Z
+- name: QueryDSL
+  description: Unified queries for Java
+  website_url: http://www.querydsl.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/3881/da8da0c0e6dfbfc596f787ade49381a6_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: Spring Framework
+  description: An application framework and inversion of control container for the
+    Java platform
+  website_url: https://spring.io/projects/spring-framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-cassandra/pom.xml
+  detection_source: boot-data-cassandra/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-23 12:47:31.000000000 Z
+- name: ActiveMQ
+  description: A message broker written in Java together with a full JMS client
+  website_url: http://activemq.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Message Queue
+  image_url: https://img.stackshare.io/service/1062/default_08edb6f82e2c79424efc1e297ab096e50acd8e0b.jpg
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: hantsy
+  last_updated_on: 2022-09-24 15:35:22.000000000 Z
+- name: Couchbase
+  description: Document-Oriented NoSQL Database
+  website_url: http://www.couchbase.com/
+  open_source: false
+  hosted_saas: true
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1089/KMIbGY8C.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-couchbase/pom.xml
+  detection_source: boot-data-couchbase/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 12:50:28.000000000 Z
+- name: H2 Database
+  description: A relational database management system written in Java
+  website_url: http://www.h2database.com/
+  open_source: false
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/3105/h2-logo_square_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: HBase
+  description: The Hadoop database, a distributed, scalable, big data store
+  website_url: http://hbase.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1043/HBase-Twitter3.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-couchbase/pom.xml
+  detection_source: boot-data-couchbase/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 12:50:28.000000000 Z
+- name: Hibernate
+  description: Idiomatic persistence for Java and relational databases.
+  website_url: http://hibernate.org/
+  open_source: false
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Object Relational Mapper (ORM)
+  image_url: https://img.stackshare.io/service/1756/1uNl_IZX.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/hibernate/src/main/resources/hibernate.properties
+  detection_source: hibernate/src/main/resources/hibernate.properties
+  last_updated_by: hantsy
+  last_updated_on: 2022-09-25 13:13:27.000000000 Z
+- name: Kafka
+  description: Distributed, fault tolerant, high throughput pub-sub messaging system
+  website_url: http://kafka.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Message Queue
+  image_url: https://img.stackshare.io/service/1063/kazUJooF_400x400.jpg
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-kafka/pom.xml
+  detection_source: boot-kafka/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-27 10:40:10.000000000 Z
+- name: MongoDB
+  description: The database for giant ideas
+  website_url: http://www.mongodb.com/
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1030/leaf-360x360.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-mongo/pom.xml
+  detection_source: boot-data-mongo/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 07:40:05.000000000 Z
+- name: PostgreSQL
+  description: A powerful, open source object-relational database system
+  website_url: http://www.postgresql.org/
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1028/ASOhU5xJ.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-11 06:47:24.000000000 Z
+- name: Redis
+  description: Open source (BSD licensed), in-memory data structure store
+  website_url: http://redis.io/
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: In-Memory Databases
+  image_url: https://img.stackshare.io/service/1031/default_cbce472cd134adc6688572f999e9122b9657d4ba.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-redis/pom.xml
+  detection_source: boot-data-redis/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 07:40:05.000000000 Z
+- name: Spring Data
+  description: Provides a consistent approach to data access – relational, non-relational,
+    map-reduce, and beyond
+  website_url: https://spring.io/projects/spring-data
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/7624/IG6D4Ro2_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:48:17.000000000 Z
+- name: Docker Compose
+  description: Define and run multi-container applications with Docker
+  website_url: https://github.com/docker/compose
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Container Tools
+  image_url: https://img.stackshare.io/service/3136/docker-compose.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:48:17.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/.github/workflows/async.yml
+  detection_source: ".github/workflows/async.yml"
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:46:53.000000000 Z
+- name: JUnit
+  description: A programmer-oriented testing framework for Java
+  website_url: http://junit.org/
+  license: EPL-1.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Testing Frameworks
+  image_url: https://img.stackshare.io/service/2020/874086.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/src/test/resources/junit-platform.properties
+  detection_source: async/src/test/resources/junit-platform.properties
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: Logback
+  description: A logging framework for Java applications
+  website_url: https://logback.qos.ch/
+  open_source: false
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Log Management
+  image_url: https://img.stackshare.io/service/2923/05518ecaa42841e834421e9d6987b04f_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: SLF4J
+  description: Simple logging facade for Java
+  website_url: http://slf4j.org/
+  open_source: false
+  hosted_saas: false
+  category: Monitoring
+  sub_category: Log Management
+  image_url: https://img.stackshare.io/service/2805/05518ecaa42841e834421e9d6987b04f_400x400.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: Apache Camel
+  description: A versatile open source integration framework
+  website_url: https://camel.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Application Hosting
+  sub_category: Platform as a Service
+  image_url: https://img.stackshare.io/service/3276/xWt1RFo6_400x400.jpg
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/src/main/resources/application.properties
+  detection_source: async/src/main/resources/application.properties
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: Dataform
+  description: A framework for managing SQL based data operations.
+  website_url: https://dataform.co/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Analytics
+  sub_category: Business Intelligence
+  image_url: https://img.stackshare.io/service/11236/Group_22__3_.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/declarative-rsocket-client/pom.xml
+  detection_source: declarative-rsocket-client/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-10-18 14:25:44.000000000 Z
+- name: Elasticsearch
+  description: Open Source, Distributed, RESTful Search Engine
+  website_url: https://www.elastic.co/products/elasticsearch
+  version: 8.12.0
+  open_source: true
+  hosted_saas: false
+  category: Application Utilities
+  sub_category: Search as a Service
+  image_url: https://img.stackshare.io/service/841/Image_2019-05-20_at_4.58.04_PM.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: boot-data-elasticsearch/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-03-26 13:32:03.000000000 Z
+- name: Mongo
+  description: Heroku provides services and tools to build, run, and scale web applications.
+    Follow @herokustatus for platform updates. A @salesforce company.
+  website_url: http://wedesignapps.herokuapp.com
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/3519/3wgIDj3j_normal.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/docker-compose.yml
+  detection_source: docker-compose.yml
+  last_updated_by: hantsy
+  last_updated_on: 2021-12-30 06:49:14.000000000 Z
+- name: ch.qos.logback:logback-classic
+  description: Logback-classic module
+  version: 1.4.14
+  license: EPL-1.0,LGPL-2.1+
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: ch.qos.logback:logback-core
+  description: Logback-core module
+  version: 1.4.14
+  license: EPL-1.0,LGPL-2.1+
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-09-11 15:20:56.000000000 Z
+- name: com.fasterxml.jackson.core:jackson-databind
+  description: 'General data-binding functionality for Jackson: works on core streaming
+    API'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:47:48.000000000 Z
+- name: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor
+  description: Support for reading and writing Concise Binary Object Representation
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/declarative-rsocket-client/pom.xml
+  detection_source: declarative-rsocket-client/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-01 01:16:56.000000000 Z
+- name: com.fasterxml.jackson.datatype:jackson-datatype-jdk8
+  description: Add-on module for Jackson
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:47:48.000000000 Z
+- name: com.fasterxml.jackson.datatype:jackson-datatype-jsr310
+  description: Add-on module to support JSR-310
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:47:48.000000000 Z
+- name: com.fasterxml.jackson.module:jackson-module-kotlin
+  description: Add-on module for Jackson
+  version: 2.16.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/schedule/pom.xml
+  detection_source: boot-kotlin-co/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-24 14:55:14.000000000 Z
+- name: com.h2database:h2
+  description: H2 Database Engine
+  version: 2.2.224
+  license: MIT-feh
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:47:48.000000000 Z
+- name: com.jayway.jsonpath:json-path
+  description: Java port of Stefan Goessner JsonPath
+  version: 2.9.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: com.querydsl:querydsl-apt
+  version: 5.0.0
+  open_source: false
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-02-03 08:43:32.000000000 Z
+- name: com.querydsl:querydsl-jpa
+  version: 5.0.0
+  open_source: false
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-09-11 15:20:56.000000000 Z
+- name: io.netty:netty-buffer
+  description: Netty project - an event-driven asynchronous network application framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/declarative-rsocket-client/pom.xml
+  detection_source: declarative-rsocket-client/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:40:30.000000000 Z
+- name: io.projectreactor.netty:reactor-netty
+  description: Reactive Streams Netty driver
+  version: 1.1.15
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/r2dbc/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:46:02.000000000 Z
+- name: io.projectreactor:reactor-test
+  description: Reactor Test support
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:46:02.000000000 Z
+- name: io.rest-assured:rest-assured
+  description: Java DSL for easy testing of REST services
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot/pom.xml
+  detection_source: boot/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-18 05:42:38.000000000 Z
+- name: net.bytebuddy:byte-buddy
+  description: Byte Buddy is a Java library for creating Java classes at run time
+  version: 1.14.11
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-24 14:53:59.000000000 Z
+- name: net.bytebuddy:byte-buddy-agent
+  description: The Byte Buddy agent offers convenience for attaching an agent to the
+    local or a remote VM
+  version: 1.14.11
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-24 14:53:59.000000000 Z
+- name: org.apache.logging.log4j:log4j-to-slf4j
+  description: Binding between LOG4J 2 API and SLF4J
+  version: 2.22.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/jakartaee-wildfly/pom.xml
+  detection_source: jakartaee-wildfly/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-09 05:50:27.000000000 Z
+- name: org.assertj:assertj-core
+  description: Rich and fluent assertions for testing for Java
+  version: 3.25.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.awaitility:awaitility
+  description: A Java DSL for synchronizing asynchronous operations
+  version: 4.2.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.freemarker:freemarker
+  description: FreeMarker is a "template engine"; a generic tool to generate text
+    output based on templates
+  version: 2.3.32
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/mvc-freemarker/pom.xml
+  detection_source: mvc-freemarker/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-11-08 04:27:32.000000000 Z
+- name: org.glassfish.jaxb:jaxb-runtime
+  description: JAXB
+  version: 4.0.4
+  license: BSD-3-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.hamcrest:hamcrest
+  description: Core API and libraries of hamcrest matcher framework
+  version: '2.2'
+  license: DSDP
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.hibernate.validator:hibernate-validator
+  description: Hibernate's Bean Validation
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:40:46.000000000 Z
+- name: org.hibernate:hibernate-core
+  description: Hibernate's core ORM functionality
+  license: LGPL-2.0-only,GPL-3.0-or-later
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:40:46.000000000 Z
+- name: org.hibernate:hibernate-jpamodelgen
+  description: Annotation Processor to generate JPA 2 static metamodel classes
+  license: LGPL-2.0-only,GPL-3.0-or-later
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:40:46.000000000 Z
+- name: org.jetbrains.kotlin:kotlin-reflect
+  description: Kotlin Full Reflection Library
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-kotlin-co/pom.xml
+  detection_source: boot-kotlin-co/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-24 14:55:14.000000000 Z
+- name: org.jetbrains.kotlin:kotlin-stdlib
+  description: Kotlin Standard Library for JVM
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-kotlin-co/pom.xml
+  detection_source: boot-kotlin-co/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-24 14:55:14.000000000 Z
+- name: org.junit.jupiter:junit-jupiter
+  description: Module "junit-jupiter" of JUnit 5
+  license: EPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.mockito:mockito-junit-jupiter
+  description: Mockito JUnit 5 support
+  version: 5.9.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-16 04:37:54.000000000 Z
+- name: org.mongodb:mongodb-driver-core
+  description: The Java operations layer for the MongoDB Java Driver
+  version: 4.11.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/data-mongo/pom.xml
+  detection_source: data-mongo/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-11-13 03:57:34.000000000 Z
+- name: org.postgresql:postgresql
+  description: The PostgreSQL Driver JDBC4
+  version: 42.7.1
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-11 06:47:24.000000000 Z
+- name: org.projectlombok:lombok
+  description: 'Spice up your java: Automatic Resource Management'
+  version: 1.18.30
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-12 06:49:57.000000000 Z
+- name: org.quartz-scheduler:quartz
+  description: Enterprise Job Scheduler
+  version: 2.3.2
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/quartz/pom.xml
+  detection_source: quartz/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2022-09-24 08:39:21.000000000 Z
+- name: org.slf4j:jcl-over-slf4j
+  description: JCL 1.2 implemented over SLF4J
+  version: 2.0.11
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.slf4j:slf4j-api
+  description: The slf4j API
+  version: 2.0.11
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-09-02 10:31:17.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-data-jpa
+  description: Starter for using Spring Data JPA with Hibernate
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-jpa/pom.xml
+  detection_source: boot-data-jpa/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-05-23 12:33:15.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-data-mongodb
+  description: Starter for using MongoDB document-oriented database and Spring Data
+    MongoDB
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-mongo/pom.xml
+  detection_source: boot-data-mongo/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-23 12:47:31.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-data-redis
+  description: Starter for using Redis key-value data store with Spring Data Redis
+    and the Lettuce client
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-redis/pom.xml
+  detection_source: boot-data-redis/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-23 12:47:31.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-test
+  description: Starter for testing Spring Boot applications with libraries including
+    JUnit
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-cassandra/pom.xml
+  detection_source: boot-data-cassandra/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-11-24 12:24:46.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-validation
+  description: Starter for using Java Bean Validation with Hibernate Validator
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-kotlin-co/pom.xml
+  detection_source: boot-kotlin-co/pom.xml
+  last_updated_by: Hantsy Bai
+  last_updated_on: 2023-08-24 14:36:59.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-web
+  description: Starter for building web, including RESTful, applications using Spring
+    MVC
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-data-cassandra/pom.xml
+  detection_source: boot-data-cassandra/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-23 12:47:31.000000000 Z
+- name: org.springframework.data:spring-data-jpa
+  description: Spring Data module for JPA repositories
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework.data:spring-data-mongodb
+  description: MongoDB support for Spring Data
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/data-mongo/pom.xml
+  detection_source: data-mongo/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework.kafka:spring-kafka
+  description: Spring Kafka Support
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/boot-kafka/pom.xml
+  detection_source: boot-kafka/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-04-23 12:47:31.000000000 Z
+- name: org.springframework.security:spring-security-config
+  description: Spring-security-config
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/mvc-freemarker/pom.xml
+  detection_source: mvc-freemarker/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework.security:spring-security-test
+  description: Spring-security-test
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/mvc-freemarker/pom.xml
+  detection_source: mvc-freemarker/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework.security:spring-security-web
+  description: Spring-security-web
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/mvc-freemarker/pom.xml
+  detection_source: mvc-freemarker/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-aspects
+  description: Spring Aspects
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-context
+  description: Spring Context
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-context-support
+  description: Spring Context Support
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/cache/pom.xml
+  detection_source: cache/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-jdbc
+  description: Spring JDBC
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/jdbc-client/pom.xml
+  detection_source: jdbc-client/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-jms
+  description: Spring JMS
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/jakartaee-wildfly/pom.xml
+  detection_source: jakartaee-wildfly/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-messaging
+  description: Spring Messaging
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/declarative-rsocket-client/pom.xml
+  detection_source: declarative-rsocket-client/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-orm
+  description: Spring Object/Relational Mapping
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-test
+  description: Spring TestContext Framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-tx
+  description: Spring Transaction
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/quartz/pom.xml
+  detection_source: quartz/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-web
+  description: Spring Web
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/declarative-http-client/pom.xml
+  detection_source: declarative-http-client/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-webflux
+  description: Spring WebFlux
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.springframework:spring-webmvc
+  description: Spring Web MVC
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/async/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2024-01-22 01:49:55.000000000 Z
+- name: org.testcontainers:postgresql
+  description: Testcontainers is a Java library that supports JUnit tests
+  version: 1.19.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/cache/pom.xml
+  detection_source: async/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-12-11 06:47:24.000000000 Z
+- name: org.testcontainers:testcontainers
+  description: Isolated container management for Java code testing
+  version: 1.19.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/jms/pom.xml
+  detection_source: jms/pom.xml
+  last_updated_by: renovate[bot]
+  last_updated_on: 2023-11-24 12:24:46.000000000 Z
+- name: org.yaml:snakeyaml
+  description: YAML 1.1 parser and emitter for Java
+  version: '2.2'
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/hantsy/spring6-sandbox/blob/master/test-properties-factory/pom.xml
+  detection_source: test-properties-factory/pom.xml
+  last_updated_by: hantsy
+  last_updated_on: 2023-08-06 03:11:51.000000000 Z
