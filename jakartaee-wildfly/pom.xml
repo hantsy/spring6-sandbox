@@ -40,7 +40,7 @@
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <junit.version>5.10.1</junit.version>
+        <junit.version>5.10.2</junit.version>
     </properties>
 
     <dependencyManagement>
