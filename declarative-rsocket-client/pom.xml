@@ -27,7 +27,7 @@
         <netty.version>4.1.106.Final</netty.version>
         <jackson.version>2.16.1</jackson.version>
         <junit.version>5.10.1</junit.version>
-        <testcontainers.version>1.19.3</testcontainers.version>
+        <testcontainers.version>1.19.4</testcontainers.version>
     </properties>
 
     <dependencyManagement>
