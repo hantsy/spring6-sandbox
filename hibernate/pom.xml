@@ -28,7 +28,7 @@
         <postgresql.version>42.7.1</postgresql.version>
         <hibernate.version>6.4.3.Final</hibernate.version>
         <byte-buddy.version>1.14.11</byte-buddy.version>
-        <testcontainers.version>1.19.4</testcontainers.version>
+        <testcontainers.version>1.19.5</testcontainers.version>
         <jackson.version>2.16.1</jackson.version>
         <junit.version>5.10.2</junit.version>
         <reactor.version>2023.0.2</reactor.version>
