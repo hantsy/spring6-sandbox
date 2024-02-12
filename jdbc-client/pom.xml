@@ -27,7 +27,7 @@
         <postgresql.version>42.7.1</postgresql.version>
         <byte-buddy.version>1.14.11</byte-buddy.version>
 
-        <junit.version>5.10.1</junit.version>
+        <junit.version>5.10.2</junit.version>
         <jackson.version>2.16.1</jackson.version>
         <testcontainers.version>1.19.4</testcontainers.version>
         <lombok.version>1.18.30</lombok.version>
