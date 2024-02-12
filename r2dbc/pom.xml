@@ -27,7 +27,7 @@
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.16.1</jackson.version>
         <byte-buddy.version>1.14.11</byte-buddy.version>
-        <slf4j.version>2.0.11</slf4j.version>
+        <slf4j.version>2.0.12</slf4j.version>
         <logback.version>1.4.14</logback.version>
         <testcontainers.version>1.19.4</testcontainers.version>
         <lombok.version>1.18.30</lombok.version>
