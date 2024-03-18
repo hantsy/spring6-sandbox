@@ -43,7 +43,7 @@
         <jetty.version>12.0.7</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>31.0.0.Final</wildfly.version>
+        <wildfly.version>31.0.1.Final</wildfly.version>
         <wildfly-maven-plugin.version>4.2.2.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
