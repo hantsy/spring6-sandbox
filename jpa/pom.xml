@@ -51,7 +51,7 @@
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
 
-        <mockito.version>5.10.0</mockito.version>
+        <mockito.version>5.11.0</mockito.version>
     </properties>
 
     <dependencyManagement>
