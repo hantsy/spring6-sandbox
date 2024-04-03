@@ -29,7 +29,7 @@
 
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.17.0</jackson.version>
-        <testcontainers.version>1.19.5</testcontainers.version>
+        <testcontainers.version>1.19.7</testcontainers.version>
         <lombok.version>1.18.32</lombok.version>
         <mockito.version>5.11.0</mockito.version>
         <logback.version>1.5.3</logback.version>

@@ -15,7 +15,7 @@
     <description>Spring6 WebMvc/Spring Boot 3 example</description>
     <properties>
         <java.version>21</java.version>
-        <testcontainers.version>1.19.5</testcontainers.version>
+        <testcontainers.version>1.19.7</testcontainers.version>
         <querydsl.version>5.1.0</querydsl.version>
         <!-- see: https://github.com/rest-assured/rest-assured/issues/1728 -->
         <rest-assured.version>5.2.1</rest-assured.version>
