@@ -26,7 +26,7 @@
         <reactor.version>2023.0.4</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.10.2</junit.version>
-        <jackson.version>2.16.1</jackson.version>
+        <jackson.version>2.17.0</jackson.version>
     </properties>
 
     <dependencyManagement>
