@@ -29,7 +29,7 @@
         <reactor.version>2023.0.4</reactor.version>
         <byte-buddy.version>1.14.13</byte-buddy.version>
 
-        <lombok.version>1.18.30</lombok.version>
+        <lombok.version>1.18.32</lombok.version>
     </properties>
 
     <dependencyManagement>

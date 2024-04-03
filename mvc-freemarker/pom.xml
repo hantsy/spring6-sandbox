@@ -32,7 +32,7 @@
         <byte-buddy.version>1.14.13</byte-buddy.version>
         <logback.version>1.4.14</logback.version>
         <slf4j.version>2.0.12</slf4j.version>
-        <lombok.version>1.18.30</lombok.version>
+        <lombok.version>1.18.32</lombok.version>
         <testcontainers.version>1.19.5</testcontainers.version>
         <jackson.version>2.16.1</jackson.version>
         <junit.version>5.10.2</junit.version>
