@@ -24,7 +24,7 @@ jobs:
           cache: "maven"
       - name: Set up Database
         run: |
-          docker-compose up -d postgres
+          docker compose up -d postgres
           sleep 5
           docker ps -a
       - name: Build with Maven
@@ -47,7 +47,7 @@ jobs:
           cache: "maven"
       - name: Set up Database
         run: |
-          docker-compose up -d postgres
+          docker compose up -d postgres
           sleep 5
           docker ps -a
       - name: Build with Maven(E2e testing)
@@ -73,12 +73,12 @@ jobs:
           docker image ls
       - name: Run application in Docker Container
         run: |
-          docker-compose --file ./docker-compose.yml up -d postgres
+          docker compose --file ./docker-compose.yml up -d postgres
           sleep 10
-          docker-compose  --file ./docker-compose.yml --file ./boot/docker-compose.local.yml up -d app
+          docker compose  --file ./docker-compose.yml --file ./boot/docker-compose.local.yml up -d app
           sleep 10
           docker ps -a
-          docker-compose --file ./docker-compose.yml --file ./boot/docker-compose.local.yml logs
+          docker compose --file ./docker-compose.yml --file ./boot/docker-compose.local.yml logs
       - name: Build with Maven(SmokeTest)
         env:
           BASE_API_URL: http://localhost:9999

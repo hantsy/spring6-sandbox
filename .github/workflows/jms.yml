@@ -27,7 +27,7 @@ jobs:
           cache: "maven"
       - name: Start up Apache Artemis
         run: |
-          docker-compose up -d artemis
+          docker compose up -d artemis
           sleep 10
           docker ps -a
       - name: Build with Maven

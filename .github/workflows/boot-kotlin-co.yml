@@ -24,7 +24,7 @@ jobs:
           cache: "maven"
       - name: Set up Database
         run: |
-          docker-compose up -d postgres
+          docker compose up -d postgres
           sleep 5
           docker ps -a
       - name: Build with Maven
