@@ -28,7 +28,7 @@
         <jackson.version>2.16.1</jackson.version>
         <byte-buddy.version>1.14.13</byte-buddy.version>
         <slf4j.version>2.0.12</slf4j.version>
-        <logback.version>1.4.14</logback.version>
+        <logback.version>1.5.3</logback.version>
         <testcontainers.version>1.19.5</testcontainers.version>
         <lombok.version>1.18.32</lombok.version>
         <reactor-netty.version>1.1.17</reactor-netty.version>
