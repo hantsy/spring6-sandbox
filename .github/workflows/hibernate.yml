@@ -34,7 +34,7 @@ jobs:
 
       - name: Start up PostgreSQL in Docker
         run: |
-          docker-compose up -d postgres
+          docker compose up -d postgres
           sleep 5
           docker ps -a
       - name: Integration Tests
