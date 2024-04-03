@@ -31,7 +31,7 @@ jobs:
         
       - name: Start up Mongo in Docker
         run: |
-          docker-compose up -d mongodb
+          docker compose up -d mongodb
           sleep 5
           docker ps -a 
           
