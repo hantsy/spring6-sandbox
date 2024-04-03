@@ -26,7 +26,7 @@
         <spring-framework.version>6.1.5</spring-framework.version>
         <postgresql.version>42.5.0</postgresql.version>
         <byte-buddy.version>1.14.13</byte-buddy.version>
-        <testcontainers.version>1.19.5</testcontainers.version>
+        <testcontainers.version>1.19.7</testcontainers.version>
     </properties>
 
     <dependencyManagement>
