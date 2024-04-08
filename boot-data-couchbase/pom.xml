@@ -20,6 +20,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-couchbase</artifactId>
+			<exclusions>
+				<!-- exclude `com.querydsl:querydsl-apt` to void build issue -->
+				<exclusion>
+					<groupId>com.querydsl</groupId>
+					<artifactId>querydsl-apt</artifactId>
+				</exclusion>
+			</exclusions>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
