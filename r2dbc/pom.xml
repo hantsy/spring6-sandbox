@@ -23,7 +23,7 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.1.5</spring-framework.version>
         <reactor.version>2023.0.4</reactor.version>
-        <netty.version>4.1.108.Final</netty.version>
+        <netty.version>4.1.109.Final</netty.version>
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.17.0</jackson.version>
         <byte-buddy.version>1.14.13</byte-buddy.version>
