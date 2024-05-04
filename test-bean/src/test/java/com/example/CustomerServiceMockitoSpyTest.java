@@ -10,29 +10,29 @@ import static org.mockito.Mockito.*;
 
 @SpringJUnitConfig(classes = Config.class)
 class CustomerServiceMockitoSpyTest {
-
-    @MockitoSpyBean
-    CustomerService customerService;
-
     // see: https://github.com/spring-projects/spring-framework/issues/32761
 //    @MockitoSpyBean
 //    CustomerService customerServiceSpy;
 
+    // have to specify the bean name if variable name is not matched the bean name
+    @MockitoSpyBean(name = "customerService")
+    CustomerService customerServiceSpy;
+
     @Test
     public void testCustomerService() {
-        when(customerService.findByEmail("dummy@example.com"))
+        when(customerServiceSpy.findByEmail("dummy@example.com"))
                 .thenReturn(
                         new Customer("dummy first", "dummy last", "dummy@example.com")
                 );
 
         // test bean
-        var testCustomer = customerService.findByEmail("dummy@example.com");
+        var testCustomer = customerServiceSpy.findByEmail("dummy@example.com");
         assertThat(testCustomer.firstName()).isEqualTo("dummy first");
         assertThat(testCustomer.lastName()).isEqualTo("dummy last");
-        assertThat(customerService.findAll().size()).isEqualTo(2);
+        assertThat(customerServiceSpy.findAll().size()).isEqualTo(2);
 
-        verify(customerService, times(1)).findByEmail(anyString());
-        verify(customerService, times(1)).findAll();
-        verifyNoMoreInteractions(customerService);
+        verify(customerServiceSpy, times(1)).findByEmail(anyString());
+        verify(customerServiceSpy, times(1)).findAll();
+        verifyNoMoreInteractions(customerServiceSpy);
     }
 }

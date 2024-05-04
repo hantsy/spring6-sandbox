@@ -1,7 +1,6 @@
 package com.example;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.bean.override.convention.TestBean;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -16,10 +15,11 @@ class CustomerServiceTest {
 //    @Autowired
 //    CustomerService realCustomerService;
 
-    @TestBean(/*methodName = ""*/) // use methodName to specify a custom factory method.
-    // can not use custom name here,
+    // have to set `name` attribute when the variable name is not matched the bean name
     // see: https://github.com/spring-projects/spring-framework/issues/32760
-    CustomerService customerService;
+    // the `methodName` is used to specify a custom factory method if it does not follow the convention.
+    @TestBean(name="customerService"/*, methodName = ""*/)
+    CustomerService testCustomerService;
 
     // by default method name is {beanName}TestOverride
     static CustomerService customerServiceTestOverride() {
@@ -29,7 +29,7 @@ class CustomerServiceTest {
     @Test
     public void test(ApplicationContext context) {
         assertThat(context.getBean("customerService"))
-                .isSameAs(this.customerService)
+                .isSameAs(this.testCustomerService)
                 .isInstanceOf(DummyCustomerService.class);
     }
 
@@ -41,9 +41,9 @@ class CustomerServiceTest {
 //        assertThat(realCustomerService.findAll().size()).isEqualTo(2);
 
         // test bean
-        var testCustomer = customerService.findByEmail("dummy@example.com");
+        var testCustomer = testCustomerService.findByEmail("dummy@example.com");
         assertThat(testCustomer.firstName()).isEqualTo("dummy first");
         assertThat(testCustomer.lastName()).isEqualTo("dummy last");
-        assertThat(customerService.findAll().size()).isEqualTo(0);
+        assertThat(testCustomerService.findAll().size()).isEqualTo(0);
     }
 }
