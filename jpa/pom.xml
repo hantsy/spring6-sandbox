@@ -29,7 +29,7 @@
         <hibernate.version>6.5.0.Final</hibernate.version>
         <byte-buddy.version>1.14.14</byte-buddy.version>
         <lombok.version>1.18.32</lombok.version>
-        <slf4j.version>2.0.12</slf4j.version>
+        <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
         <jackson.version>2.17.0</jackson.version>
         <testcontainers.version>1.19.7</testcontainers.version>
@@ -43,7 +43,7 @@
         <jetty.version>12.0.8</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>31.0.1.Final</wildfly.version>
+        <wildfly.version>32.0.0.Final</wildfly.version>
         <wildfly-maven-plugin.version>5.0.0.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 

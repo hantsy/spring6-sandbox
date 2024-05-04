@@ -27,7 +27,7 @@
         <postgresql.version>42.7.3</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <spring-data.version>2023.1.5</spring-data.version>
-        <hibernate.version>6.4.4.Final</hibernate.version>
+        <hibernate.version>6.5.0.Final</hibernate.version>
         <reactor.version>2023.0.5</reactor.version>
         <jackson.version>2.17.0</jackson.version>
         <testcontainers.version>1.19.7</testcontainers.version>
@@ -40,7 +40,7 @@
         <jetty.version>12.0.8</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>31.0.1.Final</wildfly.version>
+        <wildfly.version>32.0.0.Final</wildfly.version>
         <wildfly-maven-plugin.version>5.0.0.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
@@ -250,12 +250,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.12</version>
+            <version>2.0.13</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.12</version>
+            <version>2.0.13</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
