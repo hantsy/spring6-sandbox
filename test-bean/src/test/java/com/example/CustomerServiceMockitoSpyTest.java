@@ -14,6 +14,7 @@ class CustomerServiceMockitoSpyTest {
     @MockitoSpyBean
     CustomerService customerService;
 
+    // see: https://github.com/spring-projects/spring-framework/issues/32761
 //    @MockitoSpyBean
 //    CustomerService customerServiceSpy;
 

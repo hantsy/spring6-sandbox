@@ -11,10 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringJUnitConfig(classes = Config.class)
 class CustomerServiceTest {
 
-    @Autowired
-    CustomerService realCustomerService;
+    // the real bean is not injected.
+    // see: https://github.com/spring-projects/spring-framework/issues/32759
+//    @Autowired
+//    CustomerService realCustomerService;
 
     @TestBean(/*methodName = ""*/) // use methodName to specify a custom factory method.
+    // can not use custom name here,
+    // see: https://github.com/spring-projects/spring-framework/issues/32760
     CustomerService customerService;
 
     // by default method name is {beanName}TestOverride
@@ -31,10 +35,10 @@ class CustomerServiceTest {
 
     @Test
     public void testCustomerService() {
-        var customer = realCustomerService.findByEmail("foobar@example.com");
-        assertThat(customer.firstName()).isEqualTo("foo");
-        assertThat(customer.lastName()).isEqualTo("bar");
-        assertThat(realCustomerService.findAll().size()).isEqualTo(2);
+//        var customer = realCustomerService.findByEmail("foobar@example.com");
+//        assertThat(customer.firstName()).isEqualTo("foo");
+//        assertThat(customer.lastName()).isEqualTo("bar");
+//        assertThat(realCustomerService.findAll().size()).isEqualTo(2);
 
         // test bean
         var testCustomer = customerService.findByEmail("dummy@example.com");
