@@ -16,6 +16,7 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
         <cargo-maven3-plugin.version>1.10.8</cargo-maven3-plugin.version>
@@ -24,6 +25,13 @@
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.1.6</spring-framework.version>
+        <junit.version>5.10.2</junit.version>
+        <lombok.version>1.18.32</lombok.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <logback.version>1.5.6</logback.version>
+        <assertj.version>3.25.3</assertj.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
+        <mockito.version>5.11.0</mockito.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -50,7 +58,14 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.2</version>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-bom</artifactId>
+                <version>${mockito.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -76,29 +91,29 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.32</version>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!-- logging with logback -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.13</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>2.0.13</version>
+            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
-            <version>1.5.6</version>
+            <version>${logback.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.5.6</version>
+            <version>${logback.version}</version>
         </dependency>
         <!-- test dependencies -->
         <dependency>
@@ -109,25 +124,12 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.11.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.25.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jayway.jsonpath</groupId>
-            <artifactId>json-path</artifactId>
-            <version>2.9.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
+            <version>${assertj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -137,7 +139,7 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>2.2</version>
+            <version>${snakeyaml.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -147,62 +149,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
+                <version>${maven-compiler-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <skipTests>${skip.unit.tests}</skipTests>
-                    <includes>
-                        <include>**/*Test*.java</include>
-                    </includes>
-                    <excludes>
-                        <!-- test containers test fail in Github actions-->
-                        <!--                                <exclude>**/*TestContainersTest.java</exclude>-->
-                        <exclude>**/it/IntegrationTests.java</exclude>
-                    </excludes>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
-                <configuration>
-                    <skipITs>${skip.integration.tests}</skipITs>
-                    <includes>
-                        <include>**/it/IntegrationTests.java</include>
-                    </includes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>ut</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <skip.unit.tests>false</skip.unit.tests>
-                <skip.integration.tests>true</skip.integration.tests>
-            </properties>
-        </profile>
-    </profiles>
     <repositories>
         <repository>
             <id>spring-snapshots</id>
