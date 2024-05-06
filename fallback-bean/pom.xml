@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>spring6-sample-test-bean</artifactId>
+    <artifactId>spring6-sample-fallback-bean</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>spring6-sample-test-bean</name>
-    <description>Spring 6 @TestBean example(without Spring Boot)</description>
+    <name>spring6-sample-fallback-bean</name>
+    <description>Spring 6 @Fallback Bean Example(without Spring Boot)</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

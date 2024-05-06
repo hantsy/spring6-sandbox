@@ -9,7 +9,7 @@
     <packaging>war</packaging>
 
     <name>spring6-sample-test-property-source-factory</name>
-    <description>Spring 6 WebMvc/Jdbc Client example(without Spring Boot)</description>
+    <description>Spring 6 Test Properties Factory example(without Spring Boot)</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
