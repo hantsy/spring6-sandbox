@@ -9,6 +9,6 @@ public class SampleListener {
 
     @EventListener
     public void init(ContextRefreshedEvent event){
-        log.debug("context refreshed event via thread:{} ", Thread.currentThread().getName());
+        log.debug("listening context refreshed event via thread:{} ", Thread.currentThread().getName());
     }
 }

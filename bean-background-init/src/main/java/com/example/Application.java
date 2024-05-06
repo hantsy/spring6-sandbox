@@ -4,11 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 import java.util.concurrent.Executor;
 
 @Configuration
 @ComponentScan
+@EnableAsync
 @Slf4j
 public class Application {
 

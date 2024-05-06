@@ -10,7 +10,9 @@ public class BackgroundBean  implements InitializingBean {
     private final BackgroundDependentBean backgroundDependentBean;
 
     @Override
-    public void afterPropertiesSet() {
+    public void afterPropertiesSet() throws InterruptedException {
         log.debug("initializing BackgroundBean via thread:{} ", Thread.currentThread().getName());
+        Thread.sleep(500);
+        log.debug("end of initializing BackgroundBean after 500ms via thread:{} ", Thread.currentThread().getName());
     }
 }
