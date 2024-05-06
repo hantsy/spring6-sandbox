@@ -6,15 +6,14 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringJUnitConfig(classes = {Config.class, DummyConfig.class})
-class DummyGreeterTest {
+@SpringJUnitConfig(classes = {PrimaryGreeterConfig.class, DummyConfig.class})
+class PrimaryGreeterTest {
 
     @Autowired
-    Printer printer;
+    Greeter greeter;
 
     @Test
     public void testCustomerService() {
-        this.printer.print();
-        assertThat(this.printer.getMessage()).isEqualTo("Hello dummy");
+        assertThat(this.greeter.greet()).isEqualTo("Hello primary");
     }
 }

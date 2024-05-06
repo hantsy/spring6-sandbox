@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 public class DummyConfig {
 
     @Bean
-    // @Primary
     public Greeter dummyGreeter() {
         return new DummyGreeter();
     }
 }
+

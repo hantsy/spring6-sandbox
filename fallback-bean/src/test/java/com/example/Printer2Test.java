@@ -6,8 +6,8 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringJUnitConfig(classes = Config.class)
-class GreeterTest {
+@SpringJUnitConfig(classes = {Config.class, DummyConfig.class})
+class Printer2Test {
 
     @Autowired
     Printer printer;
@@ -15,6 +15,6 @@ class GreeterTest {
     @Test
     public void testCustomerService() {
         this.printer.print();
-        assertThat(this.printer.getMessage()).isEqualTo("Hello fallback");
+        assertThat(this.printer.getMessage()).isEqualTo("Hello dummy");
     }
 }
