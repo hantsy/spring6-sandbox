@@ -1,0 +1,31 @@
+name: fallback-bean
+
+on:
+  push:
+    paths:
+      - "fallback-bean/**"
+    branches:
+      - master
+  pull_request:
+    paths:
+      - "fallback-bean/**"
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "corretto"
+          java-version: 21
+          cache: "maven"
+
+      - name: Build with Maven
+        run: mvn -B -q clean test --file fallback-bean/pom.xml
+        
