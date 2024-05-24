@@ -35,7 +35,7 @@
         <byte-buddy.version>1.14.14</byte-buddy.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.23</tomcat.version>
+        <tomcat.version>10.1.24</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.9</jetty.version>
