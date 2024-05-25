@@ -31,7 +31,7 @@
         <logback.version>1.5.6</logback.version>
         <assertj.version>3.25.3</assertj.version>
         <snakeyaml.version>2.2</snakeyaml.version>
-        <mockito.version>5.11.0</mockito.version>
+        <mockito.version>5.12.0</mockito.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
