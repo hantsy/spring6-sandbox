@@ -36,7 +36,7 @@
         <testcontainers.version>1.19.7</testcontainers.version>
         <jackson.version>2.17.1</jackson.version>
         <junit.version>5.10.2</junit.version>
-        <mockito.version>5.11.0</mockito.version>
+        <mockito.version>5.12.0</mockito.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.24</tomcat.version>
