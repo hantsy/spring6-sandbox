@@ -27,8 +27,8 @@
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <reactor.version>2023.0.5</reactor.version>
-        <spring-data.version>2023.0.0</spring-data.version>
-        <spring-security.version>6.2.4</spring-security.version>
+        <spring-data.version>2024.0.0</spring-data.version>
+        <spring-security.version>6.3.0</spring-security.version>
         <byte-buddy.version>1.14.14</byte-buddy.version>
         <logback.version>1.5.6</logback.version>
         <slf4j.version>2.0.13</slf4j.version>
@@ -36,7 +36,7 @@
         <testcontainers.version>1.19.7</testcontainers.version>
         <jackson.version>2.17.1</jackson.version>
         <junit.version>5.10.2</junit.version>
-        <mockito.version>5.11.0</mockito.version>
+        <mockito.version>5.12.0</mockito.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.24</tomcat.version>
