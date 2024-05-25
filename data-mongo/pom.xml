@@ -30,7 +30,7 @@
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <mongo-driver.version>5.1.0</mongo-driver.version>
-        <spring-data.version>2023.1.5</spring-data.version>
+        <spring-data.version>2023.0.0</spring-data.version>
         <reactor.version>2023.0.5</reactor.version>
         <byte-buddy.version>1.14.14</byte-buddy.version>
 
