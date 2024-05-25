@@ -36,7 +36,12 @@ public class PostRestControllerTestWithAssertableMockMvc {
 
     @BeforeEach
     public void setup() {
-        this.mvc = MockMvcTester.from(ctx);
+        this.mvc = MockMvcTester.from(ctx, builder ->
+                builder.addDispatcherServletCustomizer(dispatcherServlet ->
+                                dispatcherServlet.setEnableLoggingRequestDetails(true)
+                        )
+                        .build()
+        );
     }
 
     @AfterEach
