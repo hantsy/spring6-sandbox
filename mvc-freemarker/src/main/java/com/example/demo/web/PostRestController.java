@@ -49,7 +49,7 @@ public class PostRestController {
     public ResponseEntity<?> getById(@PathVariable UUID id) {
         return posts.findById(id)
                 .map(p -> ok(p))
-                .orElseGet(() -> notFound().build());
+                .orElseThrow( () -> new PostNotFoundException(id));
     }
 
     @PutMapping(value = "{id}", consumes = APPLICATION_JSON_VALUE)

@@ -13,6 +13,8 @@ import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -43,6 +45,37 @@ public class PostRestControllerTestWithAssertableMockMvc {
     }
 
     @Test
+    public void getGetPostById() {
+        when(this.posts.findById(any(UUID.class)))
+                .thenReturn(
+                        Optional.of(Post.of("test", "content of test1"))
+                );
+
+        assertThat(this.mvc.perform(get("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)))
+                .hasStatusOk()
+                .bodyJson().hasPath("$.title");
+
+        verify(this.posts, times(1)).findById(any(UUID.class));
+        verifyNoMoreInteractions(this.posts);
+    }
+
+    @Test
+    public void getGetPostByIdNotFoundException() {
+        when(this.posts.findById(any(UUID.class)))
+                .thenReturn(
+                        Optional.ofNullable(null)
+                );
+
+        assertThat(this.mvc.perform(get("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)))
+                // it throws a ServletException
+                .unresolvedException().hasCauseInstanceOf(PostNotFoundException.class);
+
+        verify(this.posts, times(1)).findById(any(UUID.class));
+        verifyNoMoreInteractions(this.posts);
+    }
+
+
+    @Test
     public void getGetAllPosts() throws Exception {
         when(this.posts.findAll())
                 .thenReturn(List.of(
@@ -53,7 +86,7 @@ public class PostRestControllerTestWithAssertableMockMvc {
 
         assertThat(this.mvc.perform(get("/api/posts").accept(MediaType.APPLICATION_JSON)))
                 .hasStatusOk()
-                .bodyJson().hasSize(2);
+                .bodyJson().hasPathSatisfying("$.size()", v -> v.assertThat().isEqualTo(2));
         //       .has(new Condition<MvcTestResult>());
 
         verify(this.posts, times(1)).findAll();
