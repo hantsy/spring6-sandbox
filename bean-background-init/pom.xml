@@ -30,7 +30,7 @@
         <lombok.version>1.18.32</lombok.version>
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
-        <assertj.version>3.25.3</assertj.version>
+        <assertj.version>3.26.0</assertj.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
