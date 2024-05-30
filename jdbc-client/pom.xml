@@ -25,7 +25,6 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
 
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.17.1</jackson.version>
@@ -159,21 +158,7 @@
             <artifactId>mockito-junit-jupiter</artifactId>
             <version>${mockito.version}</version>
             <scope>test</scope>
-        </dependency>
-        <!--
-          ! Need to update to most recent version of byte-buddy to support JDK21
-          see: https://github.com/mockito/mockito/issues/3037
-        -->
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>        
+        </dependency>       
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>

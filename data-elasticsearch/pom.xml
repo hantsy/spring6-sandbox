@@ -27,7 +27,6 @@
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <spring-data.version>2024.0.0</spring-data.version>
         <reactor.version>2023.0.6</reactor.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
 
         <lombok.version>1.18.32</lombok.version>
     </properties>
@@ -164,20 +163,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--
-          ! Need to update to most recent version of byte-buddy to support JDK21
-          see: https://github.com/mockito/mockito/issues/3037
-        -->
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>
 		<dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>

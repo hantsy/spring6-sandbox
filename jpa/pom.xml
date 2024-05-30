@@ -27,7 +27,6 @@
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
         <lombok.version>1.18.32</lombok.version>
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
@@ -244,21 +243,7 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!--
-          ! Need to update to most recent version of byte-buddy to support JDK21
-          see: https://github.com/mockito/mockito/issues/3037
-        -->
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy-agent</artifactId>
-            <version>${byte-buddy.version}</version>
-        </dependency>        
+        </dependency>       
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
