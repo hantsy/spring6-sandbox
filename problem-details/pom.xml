@@ -28,7 +28,7 @@
         <netty.version>5.0.0.Alpha5</netty.version>
         <junit.version>5.10.2</junit.version>
         <jackson.version>2.17.1</jackson.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
+        <byte-buddy.version>1.14.17</byte-buddy.version>
     </properties>
 
     <dependencyManagement>

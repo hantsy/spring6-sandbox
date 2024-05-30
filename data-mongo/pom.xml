@@ -32,7 +32,7 @@
         <mongo-driver.version>5.1.0</mongo-driver.version>
         <spring-data.version>2024.0.0</spring-data.version>
         <reactor.version>2023.0.6</reactor.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
+        <byte-buddy.version>1.14.17</byte-buddy.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.24</tomcat.version>

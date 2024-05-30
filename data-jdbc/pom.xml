@@ -27,7 +27,7 @@
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <spring-data.version>2024.0.0</spring-data.version>
-        <byte-buddy.version>1.14.16</byte-buddy.version>
+        <byte-buddy.version>1.14.17</byte-buddy.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.24</tomcat.version>
