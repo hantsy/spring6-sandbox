@@ -1,14 +1,14 @@
-name: jakartaee-data
+name: jakarta-data
 
 on:
   push:
     paths:
-      - "jakartaee-data/**"
+      - "jakarta-data/**"
     branches:
       - master
   pull_request:
     paths:
-      - "jakartaee-data/**"
+      - "jakarta-data/**"
     types:
       - opened
       - synchronize
@@ -27,6 +27,6 @@ jobs:
           cache: "maven"
 
       - name: Build with Maven
-        run: mvn -B -q clean test --file jakartaee-data/pom.xml
+        run: mvn -B -q clean test --file jakarta-data/pom.xml
        
 
