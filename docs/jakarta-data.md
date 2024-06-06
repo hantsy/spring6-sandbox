@@ -2,9 +2,12 @@
 
 As a Java backend developer, you could know well about the `Repository` pattern and the `Repository` related facilities that already provided in the popular frameworks, such as [Spring Data](https://spring.io/projects/spring-data), [Quarkus ORM Panache](https://quarkus.io/guides/hibernate-orm-panache), [Micronaut Data](https://micronaut-projects.github.io/micronaut-data/latest/guide/) etc. But every framework has it own advantages and limitations.
 
-[Jakarta Data](https://jakarta.ee/specifications/data/) is a new Jakarta EE specification which tries to create an universal interfaces to access relational database and none-relational database. As planned, Jakarta Data 1.0 will be included in the upcoming [Jakarta EE 11](https://jakarta.ee/specifications/platform/11/). Currently the popular Jakarta Persistence Providers, including Hibernate and Eclipse Link, have implemented this specification in the early stage (because Jakarta Data 1.0 is not released yet).
+[Jakarta Data](https://jakarta.ee/specifications/data/) is a new Jakarta EE specification which tries to create an universal interfaces to access relational database and none-relational database. 
+>　As planned, Jakarta Data 1.0 will be included in the upcoming [Jakarta EE 11](https://jakarta.ee/specifications/platform/11/). 
 
-In this post, we will use the latest Hibernate and try to adopt Jakarta Data into a Spring application.
+Currently the popular Jakarta Persistence providers including [Hibernate](https://hibernate.org) and [Eclipse Link](https://eclipse.dev/eclipselink/) have implemented this specification in the early stage (because Jakarta Data 1.0 is not released yet).
+
+In this post, we will use the latest Hibernate and try to integrating Jakarta Data into a Spring application.
 
 Generate a simple web Spring project via [Spring Intializr](https://start.spring.io). 
 
@@ -12,7 +15,9 @@ Generate a simple web Spring project via [Spring Intializr](https://start.spring
 * Dependencies: Web, ORM, Lombok, Postgres
 * Build: Maven
 
-Or just create a simple Maven Java project, check out my source codes [here](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/).
+Or just create a simple Maven Java project.
+
+> Check out the [sample codes](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/) that I used to demonstrate Jakarta Data in the post.
 
 Add the following dependencies into your project.
 
@@ -45,7 +50,7 @@ Add the following dependencies into your project.
 </dependencies>
 ```
 
-Expose a Hibernate `StatelessSession` bean. 
+Declare a Hibernate `StatelessSession` as bean. 
 
 ```java
 @Configuration
@@ -58,7 +63,7 @@ public class DataConfig {
 }
 ```
 
-Unlike the Spring Data JPA, it depends on the general JPA stateful persistence, Hibernate implements Jakarta Data using `StatelessSession`, that means there is no first-class cache here, every change on the Database will be flushed immediately.
+Unlike the Spring Data JPA which depends on the general JPA stateful persistence, Hibernate implements Jakarta Data using the `StatelessSession`, which means there is no first-class cache here, every change applied on the Database will be flushed immediately.
 
 > More about the Jakarta Data support in Hibernate, read the new branded [Hibernate Data Repositories](https://docs.jboss.org/hibernate/orm/6.6/repositories/html_single/Hibernate_Data_Repositories.html).
 
@@ -94,13 +99,13 @@ public class Post implements Serializable {
 }
 ```
 
-In the above code fragment, the `@Data`, `@Builder`, `@NoArgsConstructor` and `@AllArgsConstructor` annotations are from the [Lombok project](https://projectlombok.org/) which will modify the compiled `Post.class` and generate getters/setters and `equals`/`hashCode`, an inner builder class and a static build method, two constructors in the target `Post.class` at compile time.
+In the above code fragment, the `@Data`, `@Builder`, `@NoArgsConstructor` and `@AllArgsConstructor` annotations are from the [Lombok project](https://projectlombok.org/) which modify the compiled `Post.class` and generate getters/setters and `equals`/`hashCode`, an inner builder class and a static build method, two constructors in the target `Post.class` at compile time.
 
-The `@CreationTimestamp` is from Hibernate, it will setup the current timestamp when inserting an entity instance. Other annotations are from Jakarta Persistence, it is simple and easy to understand.
+The `@CreationTimestamp` is from Hibernate, which will set the current timestamp when inserting an entity instance. Other annotations are from Jakarta Persistence, it is simple and easy to understand.
 
-Jakarta Data also provides a series of `Repository` interfaces: `DataRepository`, `BasicRepository`, `@CrudRepository`, `@PageableRepository`, etc. If you some experience of Spring Data JPA, you know well the `Repository` interface inheritance in Spring Data umbrella projects.
+Jakarta Data also provides a series of `Repository` interfaces: `DataRepository`, `BasicRepository`, `@CrudRepository`, `@PageableRepository`, etc. If you have some experience of Spring Data JPA, you should know well the `Repository` interface inheritance in Spring Data umbrella projects.
 
-Create an `Repository` interface for `Post` entity class. Here we extends from `CrudRepository`, it has a collection of methods similar to Spring Data `CurdRepository`.
+Create a `Repository` interface for the `Post` entity class we just created. Here let it extend from `CrudRepository` which has a collection of built-in methods similar to the popular Spring Data `CurdRepository`.
 
 ```java
 @jakarta.data.repository.Repository
@@ -108,9 +113,13 @@ public interface PostRepository extends CrudRepository<Post, UUID> {
 }
 ```
 
-We annotate it with `@Repository`(from package `jakarta.data.repository`) to indicate it is a Jakarta Data Repository interface. Jakarta Data requires the implementors process the Repository at compile time. Hibernate annotation processor (from `hibernate-jpamodelgen` maven module) will scan the `@Repository` interface and generate the implementation class for the interface.
+Here annotate `PostRepository` with annotation `@Repository` to indicate it is a Jakarta Data Repository interface. 
 
-To make Lombok and other compiler annotation processors work seamlessly, we configure them via `annotationProcessorPaths` in order under the `configuration` node of Maven compiler plugin.
+> The `@Repository` annotation here is from package `jakarta.data.repository`. Do not use the one provided in Spring.
+
+Jakarta Data specification requires the implementors to process the `Repository` at compile time. Hibernate annotation processor (from `hibernate-jpamodelgen` maven module) will scan the `@Repository` interface and generate the implementation class for the interface.
+
+To make Lombok and other compiler annotation processors work seamlessly, we configure them in order under the `configuration/annotationProcessorPaths` node of Maven compiler plugin.
 
 ```xml
 <build>
@@ -138,16 +147,19 @@ To make Lombok and other compiler annotation processors work seamlessly, we conf
         // ...
 ```
 
-Open a terminal, switch to the project root, and run the following command to compile the whole project.
+Next, open a terminal window, switch to the project root, and run the following command to compile the whole project.
 
 ```bash
 mvn clean compile
 ```
-After the compiling is done, explore the `target/generated-sources/annotations` under the project root folder. 
+
+After the compilation is completed, explore the generated codes in the `target/generated-sources/annotations` folder  under the project root folder. 
 
 > If this folder is not recognized by your IDE, add it manually as a Source Set.
 
-Besides the generated meta models for the JPA entity classes, there is a new `PostRepository_.java` in the `com.example.demo.repository` package, its content looks like:
+Besides the generated meta models for the JPA entity classes, there is a new `PostRepository_.java` in the `com.example.demo.repository` package. 
+
+Open it in your editor view, it should look like:
 
 ```java 
 @Generated("org.hibernate.processor.HibernateProcessor")
@@ -398,16 +410,19 @@ public class PostRepository_ implements PostRepository {
 }
 ```
 
-There is a constructor injection depends on a Hibernate `StatelessSession` bean.
+As you see, there is a constructor injection which depends on a Hibernate `StatelessSession` bean.
 
 ```java
-@Inject
-public PostRepository_(@Nonnull StatelessSession session) {
-    this.session = session;
-}
+public class PostRepository_ implements PostRepository {
+
+    // ...
+    @Inject
+    public PostRepository_(@Nonnull StatelessSession session) {
+        this.session = session;
+    }
 ```  
 
-In the Jakarta EE/CDI environment, the Jakarta Data `@Repository` can be recognized as CDI beans directly. In a Spring application, we have to declare it as a `@Bean` in the configuration.
+In the Jakarta EE/CDI environment, the Jakarta Data `@Repository` can be recognized as CDI beans directly. In a Spring application, we have to declare it as a Spring `@Bean` in the configuration.
 
 ```java
 @Configuration
@@ -421,6 +436,7 @@ public class DataConfig {
     // ...
 }
 ```
+
 Now you can inject a `PostRepository` in other beans freely.
 
 ```java
@@ -437,7 +453,7 @@ var results = posts.findAll();
 assertThat(results.toList().size()).isEqualTo(2);
 ```
 
-Spring Data JPA allow you creating custom derived queries through a method naming convention. For example, to query all post into a `List` by a provided status parameter, add a method to the Repository interface directly.
+Spring Data JPA allows you create custom derived queries through a method naming convention. For example, to query all posts into a `List` by a provided status parameter, you can simply add a method like the following to the Repository interface.
 
 ```java
 public interface PostRepository<Post, UUID> extends JpaRepository {
@@ -446,7 +462,7 @@ public interface PostRepository<Post, UUID> extends JpaRepository {
 }
 ```
 
-In the Jakarta Data world, it provides a collection of annotations(`@Query`, `@Save`, `@Insert`, `@Update`, `@Delete`, `@Find`, `@GroupBy`, `@OrderBy`, etc.) to archive this same purpose.
+In the Jakarta Data world, it provides a collection of annotations(`@Query`, `@Save`, `@Insert`, `@Update`, `@Delete`, `@Find`, `@GroupBy`, `@OrderBy`, etc.) to archive this customization purpose.
 
 ```java 
 @jakarta.data.repository.Repository
@@ -458,6 +474,7 @@ public interface PostRepository extends CrudRepository<Post, UUID> {
 
 }    
 ```
+
 After the project is compiled, it will generate the implementation like this.
 
 ```java
@@ -489,14 +506,16 @@ public List<Post> byStatus(Status status) {
 }
 ```
 
-An example of using this method.
+The following is an example of using it.
 
 ```java
 var resultsByKeyword = posts.byStatus(Status.PENDING_MODERATION);
 assertThat(resultsByKeyword.size()).isEqualTo(1);
 ```
 
-More freely, Jakarta Data allow you using these annotations to build your repository without extending any Repository interfaces.
+More freely, Jakarta Data allows you use these annotations to build your repository without extending Repository interfaces.
+
+Create a simple interface `Blogger`, annotate it with `@Repository`.
 
 ```java
 @Repository
@@ -514,7 +533,7 @@ public interface Blogger {
 }
 ```
 
-When the project is compiled, it will generate a `Blogger_` implementation class.
+Compile the project again, it will generate a `Blogger_` implementation class.
 
 ```java
 @Generated("org.hibernate.processor.HibernateProcessor")
@@ -567,7 +586,8 @@ public class Blogger_ implements Blogger {
 
 }
 ```
-Declare a `@Bean` in the configuration as well.
+
+Declare it as a Spring `@Bean` in the configuration as well.
 
 ```java
 // in DataConfig.java
@@ -577,7 +597,7 @@ public Blogger blogger(StatelessSession statelessSession) {
 }
 ```
 
-The following example is using this `Blogger` instead. 
+The following insert and query example is using this `Blogger` instead. 
 
 ```java
 var data = Post.builder().title("test").content("test content").status(Status.DRAFT).build();
@@ -591,9 +611,9 @@ List<PostSummary> allPublished = blogger.allPublishedPosts();
 assertThat(allPublished.size()).isEqualTo(1);
 ```
 
-To experience Jakarta Data features yourself, check the complete [`PostRepositoryTest`](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/src/test/java/com/example/demo/PostRepositoryTest.java). 
+To experience more Jakarta Data features yourself, please check the complete [`PostRepositoryTest`](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/src/test/java/com/example/demo/PostRepositoryTest.java). 
 
-When I prepared the sample codes, I tried to add `@BeforeEach` hook method to clean up the sample data in the database.
+When I prepared the sample codes, I tried to add `@BeforeEach` hook method as the following to clean up the sample data for every tests.
 
 ```java
 @SneakyThrows
@@ -604,7 +624,7 @@ public void setup() {
 }
 ```
 
-And add the following method into `PostRepository` interface.
+And add a `deleteAll` method as below into `PostRepository` interface.
 
 ```java
 @Delete
@@ -612,7 +632,10 @@ And add the following method into `PostRepository` interface.
 long deleteAll();
 ```
 
-When running the tests, it will throw a Jakarta Data `TransactionException`. I have tried to configure `HibernateTransactionManager` and `JpaTransactionManager` respectively, neither resolves the issue. Spring still does not provide  transaction support for Hibernate `StatelessSession`, see issue [spring-framework#7184](https://github.com/spring-projects/spring-framework/issues/7184). A possible solution is adding Spring Transaction support for Hibernate StatelessSession from scratch, see [this gist](https://gist.github.com/jelies/5181262). I asked this question in Zulip Hibernate users channel, the Hibernate expert provided an extremely simple solution to clean up this barrier temporary, just need to add property `hibernate.allow_update_outside_transaction=true` to Hibernate configuration.
+When compiling the project and running the tests, it will throw a Jakarta Data `TransactionException`. 
 
+I have tried to configure `HibernateTransactionManager` and `JpaTransactionManager` respectively, neither resolves the issue. Spring still does not provide transaction support for Hibernate `StatelessSession`, see issue [spring-framework#7184](https://github.com/spring-projects/spring-framework/issues/7184). A possible solution is adding Spring Transaction support for Hibernate StatelessSession from scratch, see the useful example codes from [this gist](https://gist.github.com/jelies/5181262). 
 
-Check out the complete [sample project codes](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/) from my Github and experience yourself.
+I consulted this question in Zulip Hibernate users channel, the Hibernate expert provided an extremely simple solution to overcome this barrier temporarily, just need to add a property `hibernate.allow_update_outside_transaction=true` to Hibernate configuration.
+
+Check out the complete [sample project](https://github.com/hantsy/spring6-sandbox/blob/master/jakarta-data/) from my Github and taste the new Jakarta Data specification yourself.
