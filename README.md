@@ -3,6 +3,10 @@
 Spring 6 (and Spring Boot 3) will upgrade to use Jakarta EE 9+ and Java 17 as the new code baseline. Aligned with the competitors, such as [Micronaut](https://micronaut.io/), [Quarkus](https://quarkus.io/), Spring 6 adds built-in native building support which was [an experiemental project](https://github.com/spring-projects-experimental/spring-native/releases/tag/0.11.0). At the same time, a lot of long-deprecated features will be removed.
 
 
+# Docs 
+
+* [Integrating Jakarta Data with Spring](./docs/jakarta-data.md)
+
 
 # Resources
 
