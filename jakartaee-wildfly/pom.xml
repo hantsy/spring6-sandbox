@@ -19,7 +19,7 @@
         <!-- maven plugins -->
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
+        <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.10.5</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
