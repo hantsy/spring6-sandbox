@@ -26,7 +26,7 @@
         <spring-framework.version>6.2.0-M3</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
-        <spring-data.version>2024.0.0</spring-data.version>
+        <spring-data.version>2024.0.1</spring-data.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
         <reactor.version>2023.0.7</reactor.version>
         <jackson.version>2.17.1</jackson.version>
