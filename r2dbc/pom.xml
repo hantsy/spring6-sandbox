@@ -29,7 +29,7 @@
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
         <testcontainers.version>1.19.8</testcontainers.version>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <reactor-netty.version>1.1.20</reactor-netty.version>
         <mockito.version>5.12.0</mockito.version>
         <assertj-core.version>3.26.0</assertj-core.version>
