@@ -29,7 +29,7 @@
         <spring-data.version>2024.0.1</spring-data.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
         <reactor.version>2023.0.7</reactor.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.17.2</jackson.version>
         <testcontainers.version>1.19.8</testcontainers.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
