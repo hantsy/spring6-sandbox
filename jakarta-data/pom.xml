@@ -28,7 +28,7 @@
         <postgresql.version>42.7.3</postgresql.version>
         <hibernate.version>6.6.0.CR1</hibernate.version>
         <testcontainers.version>1.19.8</testcontainers.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.17.2</jackson.version>
         <junit.version>5.10.3</junit.version>
         <reactor.version>2023.0.7</reactor.version>
         <lombok.version>1.18.34</lombok.version>
