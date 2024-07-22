@@ -24,7 +24,7 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.0-M3</spring-framework.version>
+        <spring-framework.version>6.2.0-M5</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <spring-data.version>2024.0.0</spring-data.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
