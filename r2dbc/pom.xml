@@ -15,22 +15,22 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.2</maven-failsafe-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0-M5</spring-framework.version>
-        <reactor.version>2023.0.6</reactor.version>
-        <netty.version>4.1.110.Final</netty.version>
-        <junit.version>5.10.2</junit.version>
-        <jackson.version>2.17.1</jackson.version>
+        <reactor.version>2023.0.7</reactor.version>
+        <netty.version>4.1.112.Final</netty.version>
+        <junit.version>5.10.3</junit.version>
+        <jackson.version>2.17.2</jackson.version>
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
         <testcontainers.version>1.19.8</testcontainers.version>
-        <lombok.version>1.18.32</lombok.version>
-        <reactor-netty.version>1.1.19</reactor-netty.version>
+        <lombok.version>1.18.34</lombok.version>
+        <reactor-netty.version>1.1.20</reactor-netty.version>
         <mockito.version>5.12.0</mockito.version>
         <assertj-core.version>3.26.0</assertj-core.version>
         <json-path.version>2.9.0</json-path.version>

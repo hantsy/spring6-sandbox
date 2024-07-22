@@ -15,18 +15,18 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.2</maven-failsafe-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0-M5</spring-framework.version>
-        <reactor.version>2023.0.6</reactor.version>
+        <reactor.version>2023.0.7</reactor.version>
         <rsocket.version>1.1.4</rsocket.version>
-        <netty.version>4.1.110.Final</netty.version>
-        <jackson.version>2.17.1</jackson.version>
-        <junit.version>5.10.2</junit.version>
+        <netty.version>4.1.112.Final</netty.version>
+        <jackson.version>2.17.2</jackson.version>
+        <junit.version>5.10.3</junit.version>
         <testcontainers.version>1.19.8</testcontainers.version>
     </properties>
 
@@ -181,7 +181,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.32</version>
+            <version>1.18.34</version>
         </dependency>
 
         <!-- logging with logback -->

@@ -17,29 +17,29 @@
         <maven.compiler.parameters>true</maven.compiler.parameters>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
-        <maven-dependency-plugin.version>3.6.1</maven-dependency-plugin.version>
-        <cargo-maven3-plugin.version>1.10.13</cargo-maven3-plugin.version>
+        <maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.3.1</maven-failsafe-plugin.version>
+        <maven-dependency-plugin.version>3.7.1</maven-dependency-plugin.version>
+        <cargo-maven3-plugin.version>1.10.14</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0-M5</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
         <hibernate.version>6.5.2.Final</hibernate.version>
-        <lombok.version>1.18.32</lombok.version>
+        <lombok.version>1.18.34</lombok.version>
         <slf4j.version>2.0.13</slf4j.version>
         <logback.version>1.5.6</logback.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.17.2</jackson.version>
         <testcontainers.version>1.19.8</testcontainers.version>
-        <junit.version>5.10.2</junit.version>
-        <reactor.version>2023.0.6</reactor.version>
+        <junit.version>5.10.3</junit.version>
+        <reactor.version>2023.0.7</reactor.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.24</tomcat.version>
+        <tomcat.version>10.1.26</tomcat.version>
 
         <!-- Eclipse Jetty -->
-        <jetty.version>12.0.10</jetty.version>
+        <jetty.version>12.0.11</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>32.0.1.Final</wildfly.version>
