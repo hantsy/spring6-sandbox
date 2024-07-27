@@ -73,7 +73,7 @@ public class PostRestControllerTestWithAssertableMockMvc {
 
         assertThat(this.mvc.perform(get("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)))
                 // it throws a ServletException
-                .unresolvedException().hasCauseInstanceOf(PostNotFoundException.class);
+                .hasFailed().failure().hasCauseInstanceOf(PostNotFoundException.class);
 
         verify(this.posts, times(1)).findById(any(UUID.class));
         verifyNoMoreInteractions(this.posts);
