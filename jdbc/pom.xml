@@ -25,6 +25,10 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0-M6</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
+		<reactor.version>2024.0.0-M4</reactor.version>
+		<junit-jupiter.version>5.10.3</junit-jupiter.version>
+		<jackson.version>2.17.2</jackson.version>
+		<testcontainers.version>1.19.8</testcontainers.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.26</tomcat.version>
@@ -58,7 +62,7 @@
             <dependency>
                 <groupId>io.projectreactor</groupId>
                 <artifactId>reactor-bom</artifactId>
-                <version>2023.0.7</version>
+                <version>${reactor.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -66,7 +70,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.3</version>
+                <version>${junit-jupiter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -74,7 +78,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
-                <version>2.17.2</version>
+                <version>${jackson.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -83,7 +87,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.19.8</version>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
