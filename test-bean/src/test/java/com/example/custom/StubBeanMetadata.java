@@ -12,7 +12,7 @@ public class StubBeanMetadata extends OverrideMetadata {
     private StubBean stubBean;
 
     public StubBeanMetadata(StubBean stubBean, Field field, ResolvableType resolvableType) {
-        super(field, resolvableType, BeanOverrideStrategy.REPLACE_OR_CREATE_DEFINITION);
+        super(field, resolvableType, null, BeanOverrideStrategy.REPLACE_OR_CREATE_DEFINITION);
         this.stubBean = stubBean;
     }
 

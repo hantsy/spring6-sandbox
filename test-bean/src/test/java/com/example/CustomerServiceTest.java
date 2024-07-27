@@ -19,31 +19,27 @@ class CustomerServiceTest {
     // see: https://github.com/spring-projects/spring-framework/issues/32760
     // the `methodName` is used to specify a custom factory method if it does not follow the convention.
     @TestBean(name="customerService"/*, methodName = ""*/)
-    CustomerService testCustomerService;
+    CustomerService customerServiceTestBean;
 
-    // by default method name is {beanName}TestOverride
-    static CustomerService customerServiceTestOverride() {
+    // by default method name is exactly one static method named with either the name of the annotated field
+    // or the name of the bean (if specified)
+    static CustomerService customerServiceTestBean() {
         return new DummyCustomerService();
     }
 
     @Test
     public void test(ApplicationContext context) {
         assertThat(context.getBean("customerService"))
-                .isSameAs(this.testCustomerService)
+                .isSameAs(this.customerServiceTestBean)
                 .isInstanceOf(DummyCustomerService.class);
     }
 
     @Test
     public void testCustomerService() {
-//        var customer = realCustomerService.findByEmail("foobar@example.com");
-//        assertThat(customer.firstName()).isEqualTo("foo");
-//        assertThat(customer.lastName()).isEqualTo("bar");
-//        assertThat(realCustomerService.findAll().size()).isEqualTo(2);
-
         // test bean
-        var testCustomer = testCustomerService.findByEmail("dummy@example.com");
+        var testCustomer = customerServiceTestBean.findByEmail("dummy@example.com");
         assertThat(testCustomer.firstName()).isEqualTo("dummy first");
         assertThat(testCustomer.lastName()).isEqualTo("dummy last");
-        assertThat(testCustomerService.findAll().size()).isEqualTo(0);
+        assertThat(customerServiceTestBean.findAll().size()).isEqualTo(0);
     }
 }
