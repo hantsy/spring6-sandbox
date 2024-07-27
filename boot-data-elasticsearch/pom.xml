@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.1</version>
+		<version>3.4.0-M1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
@@ -15,6 +15,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
+		<maven-surefire-plugin.version>3.3.1</maven-surefire-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -76,7 +77,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.3.1</version>
+				<version>${maven-surefire-plugin.version}</version>
 				<configuration>
 					<argLine>-Dnet.bytebuddy.experimental=true</argLine>
 				</configuration>

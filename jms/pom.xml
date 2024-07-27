@@ -23,7 +23,7 @@
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.0-M5</spring-framework.version>
+        <spring-framework.version>6.2.0-M6</spring-framework.version>
         <postgresql.version>42.5.0</postgresql.version>
         <testcontainers.version>1.19.8</testcontainers.version>
     </properties>
