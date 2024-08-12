@@ -33,7 +33,7 @@
         <testcontainers.version>1.19.8</testcontainers.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.26</tomcat.version>
+        <tomcat.version>10.1.28</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.12</jetty.version>
