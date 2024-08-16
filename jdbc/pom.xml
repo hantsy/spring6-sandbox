@@ -26,7 +26,7 @@
         <spring-framework.version>6.2.0-M7</spring-framework.version>
         <postgresql.version>42.7.3</postgresql.version>
 		<reactor.version>2024.0.0-M4</reactor.version>
-		<junit-jupiter.version>5.10.3</junit-jupiter.version>
+		<junit-jupiter.version>5.11.0</junit-jupiter.version>
 		<jackson.version>2.17.2</jackson.version>
 		<testcontainers.version>1.20.1</testcontainers.version>
 
