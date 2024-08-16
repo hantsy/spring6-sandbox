@@ -27,7 +27,7 @@
         <junit.version>5.11.0</junit.version>
         <jackson.version>2.17.2</jackson.version>
         <slf4j.version>2.0.16</slf4j.version>
-        <logback.version>1.5.6</logback.version>
+        <logback.version>1.5.7</logback.version>
         <testcontainers.version>1.20.1</testcontainers.version>
         <lombok.version>1.18.34</lombok.version>
         <reactor-netty.version>1.1.21</reactor-netty.version>
