@@ -28,7 +28,7 @@
         <postgresql.version>42.7.4</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <hibernate.version>6.6.0.Final</hibernate.version>
-        <reactor.version>2024.0.0-M4</reactor.version>
+        <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
         <spring-data.version>2024.0.3</spring-data.version>
 
         <!-- Apache Tomcat -->
