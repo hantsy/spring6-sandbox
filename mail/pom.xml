@@ -27,7 +27,7 @@
         <postgresql.version>42.7.4</postgresql.version>
         <spring-data.version>2024.0.3</spring-data.version>
         <mockito.version>5.5.0</mockito.version>
-        <logback.version>1.5.7</logback.version>
+        <logback.version>1.5.8</logback.version>
         <slf4j.version>2.0.16</slf4j.version>
         <lombok.version>1.18.34</lombok.version>
         <junit.version>5.11.0</junit.version>
