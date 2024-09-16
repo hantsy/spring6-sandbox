@@ -30,7 +30,7 @@
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <mongo-driver.version>5.1.4</mongo-driver.version>
-        <spring-data.version>2024.0.3</spring-data.version>
+        <spring-data.version>2024.0.4</spring-data.version>
         <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
 
         <!-- Apache Tomcat -->
