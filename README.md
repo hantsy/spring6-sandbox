@@ -9,6 +9,7 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 ## Web
 ## Persistence
 * [Integrating Jakarta Data with Spring](./docs/jakarta-data.md)
+## Test
 ## Misc  
 
 
