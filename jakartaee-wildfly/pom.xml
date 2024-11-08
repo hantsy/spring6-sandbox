@@ -27,7 +27,7 @@
         <spring-framework.version>6.2.0-M7</spring-framework.version>
         <postgresql.version>42.7.4</postgresql.version>
         <spring-data.version>2024.0.5</spring-data.version>
-        <hibernate.version>6.6.0.Final</hibernate.version>
+        <hibernate.version>6.6.2.Final</hibernate.version>
         <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
         <jackson.version>2.18.1</jackson.version>
         <testcontainers.version>1.20.1</testcontainers.version>
