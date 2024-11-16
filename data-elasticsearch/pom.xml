@@ -27,7 +27,7 @@
         <spring-framework.version>6.2.0</spring-framework.version>
         <spring-data.version>2024.0.5</spring-data.version>
         <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
     </properties>
 
     <dependencyManagement>
