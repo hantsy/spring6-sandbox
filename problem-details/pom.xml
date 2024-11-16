@@ -164,7 +164,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.34</version>
+            <version>1.18.36</version>
         </dependency>
 
         <!-- logging with logback -->
