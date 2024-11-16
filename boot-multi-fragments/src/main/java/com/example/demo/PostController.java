@@ -44,7 +44,7 @@ public class PostController {
     }
 
     // remove comment
-    @DeleteMapping("/{id}/comments/{commentIdx}")
+    @DeleteMapping("/{id}/comments/{commentId}")
     public String removeComment() {
         return "posts/remove-comment";
     }
