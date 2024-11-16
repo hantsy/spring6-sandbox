@@ -31,7 +31,7 @@
         <jackson.version>2.18.1</jackson.version>
         <junit.version>5.11.3</junit.version>
         <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
-        <lombok.version>1.18.34</lombok.version>
+        <lombok.version>1.18.36</lombok.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>10.1.31</tomcat.version>
