@@ -26,7 +26,7 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.0</spring-framework.version>
         <postgresql.version>42.7.4</postgresql.version>
-        <spring-data.version>2024.0.5</spring-data.version>
+        <spring-data.version>2024.1.0</spring-data.version>
         <hibernate.version>6.6.2.Final</hibernate.version>
         <reactor.version>2024.0.0</reactor.version>
         <jackson.version>2.18.1</jackson.version>
