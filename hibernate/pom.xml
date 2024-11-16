@@ -30,7 +30,7 @@
         <testcontainers.version>1.20.3</testcontainers.version>
         <jackson.version>2.18.1</jackson.version>
         <junit.version>5.11.3</junit.version>
-        <reactor.version>2024.0.0-SNAPSHOT</reactor.version>
+        <reactor.version>2024.0.0</reactor.version>
         <lombok.version>1.18.36</lombok.version>
 
         <!-- Apache Tomcat -->
