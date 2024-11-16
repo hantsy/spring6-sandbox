@@ -1,12 +1,14 @@
 {
   "extends": [
-    "config:base", 
+    "config:recommended",
     "schedule:weekly"
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
-      "allowedVersions": "!/snapshot$/"
+      "allowedVersions": "!/snapshot$/",
+      "matchPackageNames": [
+        "*"
+      ]
     }
   ]
 }
