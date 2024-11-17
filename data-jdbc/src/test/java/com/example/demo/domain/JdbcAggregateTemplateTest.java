@@ -66,7 +66,7 @@ public class JdbcAggregateTemplateTest {
         data.setVersion(1L);
         data.setId(UUID.randomUUID());
 
-        assertThatThrownBy(() -> this.template.delete(data, VersionedPost.class)).isInstanceOf(OptimisticLockingFailureException.class);
+        assertThatThrownBy(() -> this.template.delete(data)).isInstanceOf(OptimisticLockingFailureException.class);
     }
 
     @Test
