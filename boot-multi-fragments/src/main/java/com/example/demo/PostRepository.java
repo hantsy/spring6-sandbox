@@ -42,18 +42,6 @@ public class PostRepository {
                         emptyList()
                 )
         );
-        id = ID_GENERATOR.getAndIncrement();
-        store.put(
-                id,
-                new Post(
-                        id,
-                        "Post 3",
-                        Author.of("Author 3"),
-                        "The content of post 3",
-                        LocalDateTime.now(),
-                        emptyList()
-                )
-        );
     }
 
     public List<Post> all() {
