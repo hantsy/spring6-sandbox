@@ -202,7 +202,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>8.0.1.Final</version>
+            <version>8.0.2.Final</version>
         </dependency>
 
         <!-- Jakarta EE 9 compatible Servlet container, eg. Tomcat 10, Eclipse Jetty 11 -->
