@@ -24,7 +24,7 @@
         <spring-framework.version>6.2.0</spring-framework.version>
         <reactor.version>2024.0.1</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
-        <junit.version>5.11.3</junit.version>
+        <junit.version>5.11.4</junit.version>
         <jackson.version>2.18.2</jackson.version>
         <testcontainers.version>1.20.3</testcontainers.version>
     </properties>
