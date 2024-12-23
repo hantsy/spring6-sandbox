@@ -21,7 +21,7 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.0</spring-framework.version>
+        <spring-framework.version>6.2.1</spring-framework.version>
         <r2dbc.version>Borca-SR2</r2dbc.version>
         <reactor.version>2024.0.1</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
