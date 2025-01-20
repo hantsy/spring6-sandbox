@@ -28,7 +28,7 @@
 
         <junit.version>5.11.4</junit.version>
         <jackson.version>2.18.2</jackson.version>
-        <testcontainers.version>1.20.3</testcontainers.version>
+        <testcontainers.version>1.20.4</testcontainers.version>
         <lombok.version>1.18.36</lombok.version>
         <mockito.version>5.14.2</mockito.version>
         <logback.version>1.5.16</logback.version>
