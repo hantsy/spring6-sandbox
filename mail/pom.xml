@@ -24,7 +24,7 @@
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.1</spring-framework.version>
-        <postgresql.version>42.7.4</postgresql.version>
+        <postgresql.version>42.7.5</postgresql.version>
         <spring-data.version>2024.1.1</spring-data.version>
         <mockito.version>5.5.0</mockito.version>
         <logback.version>1.5.16</logback.version>
