@@ -25,14 +25,14 @@
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.1</spring-framework.version>
-        <postgresql.version>42.7.4</postgresql.version>
+        <postgresql.version>42.7.5</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <hibernate.version>6.6.4.Final</hibernate.version>
-        <reactor.version>2024.0.1</reactor.version>
-        <spring-data.version>2024.1.1</spring-data.version>
+        <reactor.version>2024.0.2</reactor.version>
+        <spring-data.version>2024.1.2</spring-data.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>10.1.34</tomcat.version>
+        <tomcat.version>11.0.2</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.16</jetty.version>

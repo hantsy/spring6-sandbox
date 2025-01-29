@@ -22,7 +22,7 @@
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.1</spring-framework.version>
-        <reactor.version>2024.0.1</reactor.version>
+        <reactor.version>2024.0.2</reactor.version>
         <netty.version>4.1.117.Final</netty.version>
         <junit.version>5.11.4</junit.version>
         <jackson.version>2.18.2</jackson.version>
@@ -30,12 +30,12 @@
         <logback.version>1.5.16</logback.version>
         <testcontainers.version>1.20.4</testcontainers.version>
         <lombok.version>1.18.36</lombok.version>
-        <reactor-netty.version>1.2.1</reactor-netty.version>
+        <reactor-netty.version>1.2.2</reactor-netty.version>
         <mockito.version>5.14.2</mockito.version>
         <assertj-core.version>3.26.3</assertj-core.version>
         <json-path.version>2.9.0</json-path.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <postgresql.version>42.7.4</postgresql.version>
+        <postgresql.version>42.7.5</postgresql.version>
         <r2dbc-postgresql.version>1.0.7.RELEASE</r2dbc-postgresql.version>
         <r2dbc-spi.version>1.0.0.RELEASE</r2dbc-spi.version>
     </properties>
