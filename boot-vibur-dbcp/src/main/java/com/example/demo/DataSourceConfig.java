@@ -18,7 +18,7 @@ public class DataSourceConfig {
     public static final Logger log = LoggerFactory.getLogger(DataSourceConfig.class);
 
     @Bean(initMethod = "start", destroyMethod = "close")
-    @Profile("default")
+    @Profile({"default", "test"})
     public DataSource viburDataSource(DataSourceProperties dataSourceProperties) {
         log.debug("default dataSourceProperties: url={}, username={}, password={}, driverClassName={}",
                 dataSourceProperties.getUrl(),
