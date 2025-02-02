@@ -230,4 +230,6 @@ spring.datasource.vibur.clear-SQL-warnings=true
 spring.datasource.vibur.name=viburPool
 ```
 
+The above custom vibur properties feature is included in a [test class](https://github.com/hantsy/spring6-sandbox/blob/master/boot-vibur-dbcp/src/test/java/com/example/demo/ViburDatasourceTests.java).
+
 Check out [the complete example project](https://github.com/hantsy/spring6-sandbox/tree/master/boot-vibur-dbcp) from my GitHub account.
