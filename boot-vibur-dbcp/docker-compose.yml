@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+      POSTGRES_USER: user
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql
+      - ./pg-initdb.d:/docker-entrypoint-initdb.d
