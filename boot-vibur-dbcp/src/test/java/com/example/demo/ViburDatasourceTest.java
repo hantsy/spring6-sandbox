@@ -27,8 +27,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ActiveProfiles("vibur")
 @Testcontainers
-class ViburDatasourceTests {
-    private static final Logger log = LoggerFactory.getLogger(ViburDatasourceTests.class);
+class ViburDatasourceTest {
+    private static final Logger log = LoggerFactory.getLogger(ViburDatasourceTest.class);
 
     @Container
     static PostgreSQLContainer PG_CONTAINER = new PostgreSQLContainer("postgres:latest")

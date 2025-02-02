@@ -16,8 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Import(TestcontainersConfiguration.class)
 @SpringBootTest
 @ActiveProfiles("test")
-class DemoApplicationTests {
-    public static final Logger log = LoggerFactory.getLogger(DemoApplicationTests.class);
+class ProductRepositoryTest {
+    public static final Logger log = LoggerFactory.getLogger(ProductRepositoryTest.class);
 
     @Autowired
     ProductRepository productRepository;
