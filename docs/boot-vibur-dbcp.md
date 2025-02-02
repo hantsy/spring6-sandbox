@@ -3,7 +3,7 @@
 [Vibur DBCP](https://github.com/vibur/vibur-dbcp) is a fast, high-performance JDBC connection pool that provides SQL performance monitoring and logging capabilities.
 The Vibur project includes two modules. The first provides a general-purpose object pool. Based on this feature, it implements a JDBC connection pool.
 
-Vibur DBCP itself provides Hibernate and Spring Boot integration, but since Spring Boot 3.5, the built-in `DataSourceBuilder` has officially added Vibur DBCP support.
+Vibur DBCP itself provides Hibernate and Spring Boot integration, but since Spring Boot 3.5, the built-in `DataSourceBuilder` has officially added support for Vibur DBCP.
 
 Generate a Spring Boot from [Spring Initialzer](http://start.spring.io), and set up the project as the following
 
@@ -44,60 +44,10 @@ Set up the JDBC connection in the *application.properties*.
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/testdb
 spring.datasource.username=user
-spring.datasource.password=passowrd
-spring.datasource.driver-class-name=org.postgresql.Driverill
+spring.datasource.password=password
+spring.datasource.driver-class-name=org.postgresql.Driver
 ```
-> NOTE: At the moment I am writing this post, Spring Boot does not provide an `AutoConfiguration` class for Vibur DBCP as the existing Hiarku, etc.
-> So there is no `spring.datasource.vibur` prefix-based properties to configure Vibur DBCP.
 
-Let's create a simple test to verify the `ViburDBCPDataSource` is used.
-
-```java
-@SpringBootTest
-@ActiveProfiles("ds")
-@Testcontainers
-class ViburDatasourceTests {
-
-    @Container
-    static PostgreSQLContainer PG_CONTAINER = new PostgreSQLContainer("postgres:latest")
-            .withDatabaseName("testdb")
-            .withUsername("user")
-            .withPassword("password");
-
-    @DynamicPropertySource
-    static void setupDataSource(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", PG_CONTAINER::getJdbcUrl);
-        registry.add("spring.datasource.password", PG_CONTAINER::getPassword);
-        registry.add("spring.datasource.username", PG_CONTAINER::getUsername);
-    }
-
-    @TestConfiguration
-    static class TestConfig {
-
-        @Bean(initMethod = "start", destroyMethod = "close")
-        DataSource viburDataSource(DataSourceProperties dataSourceProperties) {
-            return DataSourceBuilder.create()
-                    .type(ViburDBCPDataSource.class)
-                    .url(dataSourceProperties.getUrl())
-                    .username(dataSourceProperties.getUsername())
-                    .password(dataSourceProperties.getPassword())
-                    .driverClassName(dataSourceProperties.getDriverClassName())
-                    .build();
-        }
-    }
-
-    @Autowired
-    DataSource dataSource;
-
-    @Test
-    void contextLoads() {
-        assertThat(dataSource).isInstanceOf(ViburDBCPDataSource.class);
-        ViburDBCPDataSource ds = (ViburDBCPDataSource) dataSource;
-        assertThat(ds.getUsername()).isEqualTo("user");
-    }
-
-}
-```
 In the `DataSource` bean declaration, when setting up the `type` to `ViburDBCPDataSource` class, it will bind the Jdbc connection properties, eg. `url`, `username`, `password`, and `driver-class-name` to a `ViburDBCPDataSource` instance through the methods of `ViburDBCPDataSource` that registered in the `DataSourceBuilder`.
 
 Let's create a simple Entity to taste the Jdbc functionality.
@@ -164,7 +114,45 @@ public class JdbcProductRepository implements ProductRepository {
 
 The `JdbcClient` bean is available when `Jdbc Starter` is added to the project dependencies.
 
-Create a simple test to verify the functionality of `ProductRepository`.
+Add a simple `CommandLineRunner` bean to print the data inserted in the database at the application startup.
+
+```java
+@SpringBootApplication
+public class DemoApplication {
+    // ...
+    @Bean
+    public CommandLineRunner commandLineRunner(ProductRepository productRepository) {
+        return args -> productRepository.findAll().
+                forEach(System.out::println);
+    }
+}
+```
+
+Create a *docker-compose.yml* file to serve a running Postgres database.
+
+```yml
+services:
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: testdb
+      POSTGRES_USER: user
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql
+      - ./pg-initdb.d:/docker-entrypoint-initdb.d
+```
+
+Click and run the `DemoApplication.main` method in IDE or execute `mvn spring-boot:run` in a terminal to build and run the application. You should see the product info in the console similar to the following.
+
+```bash
+Product[id=1, name=Apple, price=1.0]
+```
+
+Alternatively, create a simple test to verify the functionality of `ProductRepository`.
 
 ```java
 @Autowired
@@ -179,4 +167,69 @@ void contextLoads() {
 }
 ```
 
-Check out [the example project](https://github.com/hantsy/spring6-sandbox/tree/master/boot-vibur-dbcp) from my GitHub account.
+At the moment I am writing this post, Spring Boot does not provide an `AutoConfiguration` class for Vibur DBCP as the existing Hiarku, Commons Dbcp, etc.
+So no `spring.datasource.vibur` prefix-based properties are ready to configure Vibur DBCP via *application.properties*.
+
+You can create a simple Vibur-specific Properties class and add the extra properties to configure the `ViburDBCPDataSource`.
+
+Create a `record` class to hold all Vibur-specific properties.
+
+```java
+@ConfigurationProperties(prefix = "spring.datasource.vibur")
+record ViburProperties(
+        String name,
+        int poolInitialSize,
+        int poolMaxSize,
+        int connectionTimeoutInMs,
+        int loginTimeoutInSeconds,
+        int logQueryExecutionLongerThanMs,
+        int logConnectionLongerThanMs,
+        boolean clearSQLWarnings
+) {}
+```
+
+Change the above `DataSource` bean declaration to the following.
+
+```java
+@Bean(initMethod = "start", destroyMethod = "close")
+DataSource virbDataSource(DataSourceProperties dataSourceProperties,
+                          ViburProperties viburProperties) {
+    log.debug("vibur properties: {}", viburProperties);
+    var dataSource = DataSourceBuilder.create()
+            .type(ViburDBCPDataSource.class)
+            .url(dataSourceProperties.getUrl())
+            .username(dataSourceProperties.getUsername())
+            .password(dataSourceProperties.getPassword())
+            .driverClassName(dataSourceProperties.getDriverClassName())
+            .build();
+
+    dataSource.setPoolInitialSize(viburProperties.poolInitialSize());
+    dataSource.setPoolMaxSize(viburProperties.poolMaxSize());
+    dataSource.setLoginTimeout(viburProperties.loginTimeoutInSeconds());
+    dataSource.setConnectionTimeoutInMs(viburProperties.connectionTimeoutInMs());
+    dataSource.setLogConnectionLongerThanMs(viburProperties.logConnectionLongerThanMs());
+    dataSource.setLogQueryExecutionLongerThanMs(viburProperties.logQueryExecutionLongerThanMs());
+    dataSource.setClearSQLWarnings(viburProperties.clearSQLWarnings());
+    dataSource.setName(viburProperties.name());
+    return dataSource;
+}
+```
+
+Add a `@ConfigurationPropertiesScan` annotation to the `DemoApplication` class to activate the `ViburProperities`.
+
+Now all the vibur-specific properties are bound to the prefix `spring.datasource.vibur`. You can customize them in the *application.properties*.
+
+```properties
+spring.datasource.vibur.pool-initial-size=2
+spring.datasource.vibur.pool-max-size=10
+spring.datasource.vibur.connection-timeout-in-ms=5000
+spring.datasource.vibur.login-timeout-in-seconds=3
+spring.datasource.vibur.log-query-execution-longer-than-ms=5
+spring.datasource.vibur.log-connection-longer-than-ms=5
+spring.datasource.vibur.clear-SQL-warnings=true
+spring.datasource.vibur.name=viburPool
+```
+
+The above custom vibur properties feature is included in a [test class](https://github.com/hantsy/spring6-sandbox/blob/master/boot-vibur-dbcp/src/test/java/com/example/demo/ViburDatasourceTests.java).
+
+Check out [the complete example project](https://github.com/hantsy/spring6-sandbox/tree/master/boot-vibur-dbcp) from my GitHub account.
