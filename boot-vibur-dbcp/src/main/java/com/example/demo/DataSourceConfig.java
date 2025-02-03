@@ -24,9 +24,9 @@ public class DataSourceConfig {
     public DataSource viburDataSource(DataSourceProperties dataSourceProperties,
                                       ObjectProvider<JdbcConnectionDetails> connectionDetailsObjectProvider) {
         if (dataSourceProperties.getUrl() == null) {
-            log.debug("No url provided, it should start testcontainers Postgres service");
+            log.debug("No url property provided, try to read connection details from Testcontainers service");
             connectionDetailsObjectProvider.ifAvailable(jdbcConnectionDetails -> {
-                log.debug("Datasource url is null, fill it with Jdbc connection details: {}", jdbcConnectionDetails);
+                log.debug("fill it with Jdbc connection details: {}", jdbcConnectionDetails);
                 dataSourceProperties.setUrl(jdbcConnectionDetails.getJdbcUrl());
                 dataSourceProperties.setUsername(jdbcConnectionDetails.getUsername());
                 dataSourceProperties.setPassword(jdbcConnectionDetails.getPassword());
