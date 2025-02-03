@@ -24,20 +24,25 @@ public class DataSourceConfig {
     public DataSource viburDataSource(DataSourceProperties dataSourceProperties,
                                       ObjectProvider<JdbcConnectionDetails> connectionDetailsObjectProvider) {
         if (dataSourceProperties.getUrl() == null) {
-            log.debug("No url provided, it should start testcontainers Postgres service");
-            connectionDetailsObjectProvider.ifAvailable(jdbcConnectionDetails -> {
-                log.debug("Datasource url is null, fill it with Jdbc connection details: {}", jdbcConnectionDetails);
-                dataSourceProperties.setUrl(jdbcConnectionDetails.getJdbcUrl());
-                dataSourceProperties.setUsername(jdbcConnectionDetails.getUsername());
-                dataSourceProperties.setPassword(jdbcConnectionDetails.getPassword());
-                dataSourceProperties.setDriverClassName(jdbcConnectionDetails.getDriverClassName());
-            });
+            log.debug("No url property provided, try to read connection details from Testcontainers service");
+            var jdbcConnectionDetails = connectionDetailsObjectProvider.getIfAvailable();
+            if (jdbcConnectionDetails != null) {
+                log.debug("Build datasource from connection details: {}", jdbcConnectionDetails);
+                return DataSourceBuilder.create()
+                        .type(ViburDBCPDataSource.class)
+                        .url(jdbcConnectionDetails.getJdbcUrl())
+                        .username(jdbcConnectionDetails.getUsername())
+                        .password(jdbcConnectionDetails.getPassword())
+                        .driverClassName(jdbcConnectionDetails.getDriverClassName())
+                        .build();
+            }
         }
+
         String url = dataSourceProperties.getUrl();
         String username = dataSourceProperties.getUsername();
         String password = dataSourceProperties.getPassword();
         String driverClassName = dataSourceProperties.getDriverClassName();
-        log.debug("Final merged DataSourceProperties: url={}, username={}, password={}, driverClassName={}",
+        log.debug("Build DataSource from properties: url={}, username={}, password={}, driverClassName={}",
                 url,
                 username,
                 password,
