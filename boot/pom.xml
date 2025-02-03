@@ -19,7 +19,7 @@
         <querydsl.version>5.1.0</querydsl.version>
         <!-- see: https://github.com/rest-assured/rest-assured/issues/1728 -->
         <rest-assured.version>5.2.1</rest-assured.version>
-        <hibernate.version>6.6.4.Final</hibernate.version>
+        <hibernate.version>6.6.6.Final</hibernate.version>
 
         <!-- maven plugins -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
