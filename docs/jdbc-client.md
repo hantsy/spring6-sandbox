@@ -7,7 +7,7 @@ and [`NamedParameterJdbcTemplate`](https://docs.spring.io/spring-framework/docs/
 > [!NOTE]
 > If you have used the [DatabaseClient](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/r2dbc/core/DatabaseClient.html) from the `spring-r2dbc` module, you should be impressed with the convenient methods provided in `DatabasClient`. In my opinion, the new `JdbcClient` in Spring 6.1 could be considered as a blocking variant of `DatabaseClient`.
 
-`JdbcClient` is located in the `spring-jdbc` module, to use it in your project, just need to create a bean using the factory method `JdbcClient.create(...)`, which accepts a `DataSource`, `JdbcTemplate` or `NamedParameterJdbcTemplate` bean as the parameters. If you are using Spring Boot, add `spring-boot-starter-jdbc` or `spring-boot-starter-data-jdbc` in the project dependencies, and the `JdbcClient` bean is ready for you.
+`JdbcClient` is located in the `spring-jdbc` module, to use it in your project, just need to create a bean using the factory method `JdbcClient.create(...)`, which accepts a `DataSource`, `JdbcTemplate` or `NamedParameterJdbcTemplate` bean as the parameters. If you are using Spring Boot, add `spring-boot-starter-jdbc` or `spring-boot-starter-data-jdbc` in the project dependencies, and the `JdbcClient` bean is autoconfigured and ready at runtime.
 
 Let's create a Spring Boot project to demonstrate the usage of `JdbcClient`. Open your browser and navigate to [Spring Initializr](https://start.spring.io), generate a project using the following options.
 
@@ -157,6 +157,25 @@ The above code snippets are easy to understand.
    * The `StatementSpec.query(RowMapper)` returns a `MappedQuerySpec` which contains some methods on the converted type-safe data, the `RowMapper` parameter is used to convert Jdbc `ResultSet` to a type-safe class. According to the SQL execution results, calls `MappedQuerySpec.list()` and `MappedQuerySpec.single()` to return a `List` or a single type-safe object.
    * The usage of other variant methods, please refer to [JdbcClient Javadoc](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/jdbc/core/simple/JdbcClient.html).
 * Alternatively, you can use the `StatementSpec.update` method to perform mutations, generally it returns the affected rows count. Optionally it accepts `KeyHolder` to hold the newly inserted ID when executing an `INSERT` SQL statement.
+
+Add a test case to verify the functionality.
+
+```java
+@Autowired
+PostRepository posts;
+
+@Test
+public void testInsertAndQuery() {
+	var id = this.posts.save(Post.of("test title", "test content"));
+	var saved = this.posts.findById(id);
+	assertThat(saved.status()).isEqualTo(Status.DRAFT);
+
+	var updatedCnt = this.posts.update(new Post(saved.id(), "updated test", "updated content", Status.PENDING_MODERATION, saved.createdAt()));
+	assertThat(updatedCnt).isEqualTo(1);
+	var updated = this.posts.findById(id);
+	assertThat(updated.status()).isEqualTo(Status.PENDING_MODERATION);
+}
+```
 
 Get [the complete example projects using Spring](https://github.com/hantsy/spring6-sandbox/tree/master/jdbc-client) and [Spring Boot](https://github.com/hantsy/spring6-sandbox/blob/master/boot-vibur-dbcp) from my GitHub account.  
 
