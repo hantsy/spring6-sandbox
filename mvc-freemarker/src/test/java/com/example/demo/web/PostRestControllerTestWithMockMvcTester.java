@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * @author hantsy
  */
 @SpringJUnitWebConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, TestDataConfig.class})
-public class PostRestControllerTestWithAssertableMockMvc {
+public class PostRestControllerTestWithMockMvcTester {
 
     @Autowired
     WebApplicationContext ctx;

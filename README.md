@@ -12,6 +12,7 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 * [Spring Jdbc and Vibur DBCP](./docs/boot-vibur-dbcp.md)
 * [An Introduction to Spring JdbcClient API](./docs/jdbc-client.md)
 ## Test
+* [Testing Restful APIs with Spring AssertJ aware MockMvcTester](./docs/mockmvc-tester.md)
 ## Misc  
 
 
