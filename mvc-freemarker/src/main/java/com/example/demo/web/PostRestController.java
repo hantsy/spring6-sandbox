@@ -74,5 +74,10 @@ public class PostRestController {
             return notFound().build();
         }
     }
+
+    @ExceptionHandler(exception = PostNotFoundException.class)
+    public ResponseEntity handleException(Exception ex) {
+        return ResponseEntity.notFound().build();
+    }
 }
 
