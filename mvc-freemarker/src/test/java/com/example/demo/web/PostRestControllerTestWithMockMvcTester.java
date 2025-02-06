@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
  * @author hantsy
  */
 @SpringJUnitWebConfig(classes = {WebConfig.class, Jackson2ObjectMapperConfig.class, TestDataConfig.class})
-public class PostRestControllerTestWithAssertableMockMvc {
+public class PostRestControllerTestWithMockMvcTester {
 
     @Autowired
     WebApplicationContext ctx;
@@ -56,7 +56,7 @@ public class PostRestControllerTestWithAssertableMockMvc {
                         Optional.of(Post.of("test", "content of test1"))
                 );
 
-        assertThat(this.mvc.perform(get("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)))
+        assertThat(this.mvc.get().uri("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
                 .hasStatusOk()
                 .bodyJson().hasPath("$.title");
 
@@ -66,14 +66,14 @@ public class PostRestControllerTestWithAssertableMockMvc {
 
     @Test
     public void getGetPostByIdNotFoundException() {
-        when(this.posts.findById(any(UUID.class)))
-                .thenReturn(
-                        Optional.ofNullable(null)
-                );
+        when(this.posts.findById(any(UUID.class))).thenReturn(Optional.empty());
 
         assertThat(this.mvc.perform(get("/api/posts/{id}", UUID.randomUUID()).accept(MediaType.APPLICATION_JSON)))
-                // it throws a ServletException
-                .hasFailed().failure().hasCauseInstanceOf(PostNotFoundException.class);
+                .hasStatus4xxClientError()
+                // throws PostNotFoundException
+                .hasFailed().failure()
+                .isInstanceOf(PostNotFoundException.class)
+                .hasMessageContaining("not found");
 
         verify(this.posts, times(1)).findById(any(UUID.class));
         verifyNoMoreInteractions(this.posts);
@@ -91,8 +91,9 @@ public class PostRestControllerTestWithAssertableMockMvc {
 
         assertThat(this.mvc.perform(get("/api/posts").accept(MediaType.APPLICATION_JSON)))
                 .hasStatusOk()
-                .bodyJson().hasPathSatisfying("$.size()", v -> v.assertThat().isEqualTo(2));
-        //       .has(new Condition<MvcTestResult>());
+                .bodyJson()
+                .hasPathSatisfying("$.size()", v -> v.assertThat().isEqualTo(2))
+                .extractingPath("$[0].title").isEqualTo("test");
 
         verify(this.posts, times(1)).findAll();
         verifyNoMoreInteractions(this.posts);
