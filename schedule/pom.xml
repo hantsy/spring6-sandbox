@@ -32,7 +32,7 @@
         <logback.version>1.5.16</logback.version>
         <junit.version>5.11.4</junit.version>
         <mockito.version>5.14.2</mockito.version>
-        <kotlinx-coroutines.version>1.9.0</kotlinx-coroutines.version>
+        <kotlinx-coroutines.version>1.10.1</kotlinx-coroutines.version>
         <jackson.version>2.18.2</jackson.version>
         <reactor.version>2024.0.2</reactor.version>
     </properties>
