@@ -32,7 +32,7 @@
         <lombok.version>1.18.36</lombok.version>
         <reactor-netty.version>1.2.2</reactor-netty.version>
         <mockito.version>5.14.2</mockito.version>
-        <assertj-core.version>3.26.3</assertj-core.version>
+        <assertj-core.version>3.27.3</assertj-core.version>
         <json-path.version>2.9.0</json-path.version>
         <hamcrest.version>3.0</hamcrest.version>
         <postgresql.version>42.7.5</postgresql.version>
