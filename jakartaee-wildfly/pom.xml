@@ -33,8 +33,8 @@
         <testcontainers.version>1.20.4</testcontainers.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>34.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.1.Final</wildfly-maven-plugin.version>
+        <wildfly.version>35.0.1.Final</wildfly.version>
+        <wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
@@ -174,7 +174,7 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>artemis-jakarta-client</artifactId>
-            <version>2.38.0</version>
+            <version>2.39.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -286,13 +286,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.14.2</version>
+            <version>5.15.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.26.3</version>
+            <version>3.27.3</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>

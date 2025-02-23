@@ -26,7 +26,7 @@
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.2</spring-framework.version>
         <postgresql.version>42.7.5</postgresql.version>
-        <hibernate.version>6.6.6.Final</hibernate.version>
+        <hibernate.version>6.6.9.Final</hibernate.version>
         <lombok.version>1.18.36</lombok.version>
         <slf4j.version>2.0.16</slf4j.version>
         <logback.version>1.5.16</logback.version>
@@ -36,21 +36,21 @@
         <reactor.version>2024.0.2</reactor.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>11.0.2</tomcat.version>
+        <tomcat.version>11.0.4</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.16</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>34.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.1.Final</wildfly-maven-plugin.version>
+        <wildfly.version>35.0.1.Final</wildfly.version>
+        <wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
 
-        <mockito.version>5.14.2</mockito.version>
+        <mockito.version>5.15.2</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -247,7 +247,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.26.3</version>
+            <version>3.27.3</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
@@ -314,7 +314,7 @@
                             <version>${lombok.version}</version>
                         </annotationProcessorPath>
                         <annotationProcessorPath>
-                            <groupId>org.hibernate</groupId>
+                            <groupId>org.hibernate.orm</groupId>
                             <artifactId>hibernate-jpamodelgen</artifactId>
                             <version>${hibernate.version}</version>
                         </annotationProcessorPath>

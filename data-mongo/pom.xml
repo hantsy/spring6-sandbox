@@ -29,19 +29,19 @@
         <spring-framework.version>6.2.2</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
-        <mongo-driver.version>5.2.1</mongo-driver.version>
+        <mongo-driver.version>5.3.1</mongo-driver.version>
         <spring-data.version>2024.1.2</spring-data.version>
         <reactor.version>2024.0.2</reactor.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>11.0.2</tomcat.version>
+        <tomcat.version>11.0.4</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.16</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>34.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.1.Final</wildfly-maven-plugin.version>
+        <wildfly.version>35.0.1.Final</wildfly.version>
+        <wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
@@ -250,13 +250,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.14.2</version>
+            <version>5.15.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.26.3</version>
+            <version>3.27.3</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>

@@ -34,14 +34,14 @@
         <lombok.version>1.18.36</lombok.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>11.0.2</tomcat.version>
+        <tomcat.version>11.0.4</tomcat.version>
 
         <!-- Eclipse Jetty -->
         <jetty.version>12.0.16</jetty.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
-        <wildfly.version>34.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.1.Final</wildfly-maven-plugin.version>
+        <wildfly.version>35.0.1.Final</wildfly.version>
+        <wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
@@ -222,13 +222,13 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>5.14.2</version>
+            <version>5.15.2</version>
             <scope>test</scope>
         </dependency>      
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.26.3</version>
+            <version>3.27.3</version>
         </dependency>
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>
