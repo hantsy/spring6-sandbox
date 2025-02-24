@@ -4,7 +4,7 @@ Spring Framework 6.1 introduces a new synchronous HttpClient - [`RestClient`](ht
 > [!NOTE]
 > If you have some experience with [`WebClient`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/reactive/function/client/WebClient.html) from the Spring WeFlux module, you can consider `RestClient` as the blocking version of `WebClient`.
 
-There are several convenient methods available in `RestClient` used to create a `RestClient` instance quickly. 
+`RestClient` provides several convenient methods to create an instance quickly. 
 
 * `RestClient.create()`
 * `RestClient.baseUrl()` to setup a *baseUrl* that to be connected 
@@ -12,7 +12,7 @@ There are several convenient methods available in `RestClient` used to create a 
 
 Alternatively, it also provides a convenient `builder()` method to get a `RestClient.Builder` that can be used to customize the properties, such as the default URI (via *baseUrl()*), the underlay HttpClient engine (via *requestFactory()*), and the message converters (via *messageConverters()*) used to encode/decode Http message body, etc. when building the `RestClient` instance.
 
-The following is an example using `RestClient.builder` to declare a `RestClient` bean in Spring configuration.
+The following is an example using `RestClient.Builder` to declare a `RestClient` bean in Spring `Configuration`.
 
 ```java
 @Bean
@@ -90,19 +90,18 @@ public class PostClient {
 
         log.debug("deleted post status:" + response.getStatusCode());
     }
-
 }
 ```
 
-In the above codes, we use `RestClient` to shake hands with APIs we defined formerly. 
+In the above codes, we use `RestClient` to shake hands with the APIs we defined formerly. 
 
-Firstly `RestClinet` use `method` or `get`/`post`/`put`/`delete` to setup HTTP method, the use `uri`/`header`/`accept`/`contentType`, etc. to prepare HTTP request content, finally call `retrieve`/`exchange` to make the request. 
+Firstly `RestClinet` uses `method` or `get`/`post`/`put`/`delete` to set the HTTP method, then uses `uri`/`header`/`accept`/`contentType`, etc. to prepare HTTP request content, finally call `retrieve`/`exchange` to make the request. 
 * The `retrieve` returns a `ResponseSpec` that is easier to extract the HTTP response body and headers or the entire HTTP entity.
 * The `exchange` provides more options to control the raw HTTP request and response data.
 
-If the target APIs are not accessible or not ready at the moment when you are building the client codes, you can use [`MockRestServiceServer`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/client/MockRestServiceServer.html) or [`WireMock`](https://wiremock.org/) or [Spring Cloud Contract](https://spring.io/projects/spring-cloud-contract) to mock the remote APIs, and test the functionality of this client in an isolated environment.
+If the target APIs are not accessible or not ready at the moment you are building the client codes, you can use [`MockRestServiceServer`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/client/MockRestServiceServer.html) or [`WireMock`](https://wiremock.org/) or [Spring Cloud Contract](https://spring.io/projects/spring-cloud-contract) to mock the remote APIs and verify the functionality of this client in an isolated environment.
 
-The following is an example using `WireMock` to setup a mock environment which provides APIs in the testing codes.
+The following is an example using `WireMock` to set up a mock environment that provides APIs in the testing codes.
 
 ```java
 @SpringJUnitConfig(
@@ -267,5 +266,5 @@ public class PostClientTest {
 }
 ```
 
-Check out the [source codes](https://github.com/hantsy/spring6-sandbox/tree/master/rest-client) from Github account and explore it yourself.
+Check out the [example project](https://github.com/hantsy/spring6-sandbox/tree/master/rest-client) from my GitHub account and explore the source codes yourself.
 
