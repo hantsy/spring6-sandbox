@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringJUnitConfig(
         classes = {
@@ -95,6 +96,25 @@ public class PostClientTest {
         assertThat(post.status()).isEqualTo(data.status());
         assertThat(post.createdAt()).isEqualTo(data.createdAt());
 
+
+        verify(getRequestedFor(urlEqualTo("/posts/" + id))
+                .withHeader("Accept", equalTo("application/json"))
+        );
+    }
+
+    @Test
+    public void testGetPostById_NotFound() {
+        var id = UUID.randomUUID();
+        stubFor(get("/posts/" + id)
+                .willReturn(
+                        aResponse()
+                                .withHeader("Content-Type", "application/json")
+                                .withStatus(404)
+                                .withResponseBody(Body.none())
+                )
+        );
+
+        assertThatThrownBy(() -> postClient.getById(id)).isInstanceOf(PostNotFoundException.class);
 
         verify(getRequestedFor(urlEqualTo("/posts/" + id))
                 .withHeader("Accept", equalTo("application/json"))

@@ -4,8 +4,11 @@ package com.example.demo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
@@ -28,8 +31,13 @@ public class PostClient {
     Post getById(UUID id) {
         var response = restClient.get().uri("/posts/{id}", id).accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus((HttpStatusCode s) -> s == HttpStatus.NOT_FOUND,
+                        (HttpRequest req, ClientHttpResponse res) -> {
+                            throw new PostNotFoundException(id);
+                        }
+                )
                 .toEntity(Post.class);
-        if (response.getStatusCode() == HttpStatusCode.valueOf(404)) return null;
+        log.debug("response status code: {}", response.getStatusCode());
         return response.getBody();
     }
 
