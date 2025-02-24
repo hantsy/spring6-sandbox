@@ -9,7 +9,7 @@ Spring Framework 6.1 introduces a new synchronous HttpClient - [`RestClient`](ht
 * `RestClient.baseUrl()` to accept a *baseUrl* 
 * `RestClient.create(RestTemplate)` to reuse the existing `RestTemplate`
 
-Alternatively, it provides a convenient `builder()` method that returns a `RestClient.Builder` that can be used to customize the properties, such as *baseUrl*, *HttpClientRequestFactory*, *HttpMessageConverters*, etc. when building the `RestClient` instance.
+Alternatively, it also provides a convenient `builder()` method to get a `RestClient.Builder` that can be used to customize the properties, such as the default URI (via *baseUrl()*), the underlay HttpClient engine (via *requestFactory()*), and the message converters (via *messageConverters()*) used to encode/decode Http message body, etc. when building the `RestClient` instance.
 
 The following is an example using `RestClient.builder` to declare a `RestClient` bean in Spring configuration.
 
@@ -29,7 +29,7 @@ RestClient restClient(ObjectMapper objectMapper) {
 
 `RestClient` can be used to interact with remote 3rd party HTTP APIs, and also can be used for lightweight service-to-service communication in a Microservice architecture.
 
-To demonstrate the usage of `RestClient`, assume a collection of RESTful APIs served at *http://localhost:8080*.  
+To demonstrate the usage of `RestClient`, let's assume a collection of RESTful APIs served at *http://localhost:8080* that provide the following functionalities.  
 
 * `GET /posts` - Get all posts
 * `POST /posts` - Create a new post, return a 201 status, and set the new URI in the `Location` header
@@ -37,3 +37,7 @@ To demonstrate the usage of `RestClient`, assume a collection of RESTful APIs se
 * `PUT /posts/{id}` - Update a post
 * `DELETE /posts/{id}` - Delete a post by id
 
+Create a `PostClient` bean to interact with the above APIs.
+
+```java
+```
