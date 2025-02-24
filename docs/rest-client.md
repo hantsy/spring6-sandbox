@@ -6,11 +6,16 @@ Spring Framework 6.1 introduces a new synchronous HttpClient - [`RestClient`](ht
 
 `RestClient` provides several convenient methods to create an instance quickly. 
 
-* `RestClient.create()`
+* `RestClient.create()` to create an instance with the default configuration in the background
 * `RestClient.baseUrl()` to set up a *baseUrl* that to be connected 
-* `RestClient.create(RestTemplate)` to reuse the existing `RestTemplate`
+* `RestClient.create(RestTemplate)` to reuse the settings in the existing `RestTemplate`
 
-Alternatively, it also provides another convenient `builder()` method to get a `RestClient.Builder` that can be used to customize the properties, such as the default URI (via *baseUrl()*), the underlay HttpClient engine (via *requestFactory()*), and the message converters (via *messageConverters()*) used to encode/decode HTTP message payload, etc. when initializing a `RestClient` instance.
+Alternatively, it also provides another convenient `builder()` method to get a `RestClient.Builder` that can be used to customize the common properties when initializing a `RestClient` instance. eg. 
+* The default URI (via *baseUrl()*)/default header/default cookie
+* The underlay HttpClient engine (via *requestFactory()*)
+* The message converters used to encode/decode HTTP message payload(via *messageConverters()*)
+* The HttpClient *interceptor* to filter out client requests/responses globally
+* etc. 
 
 The following codes use `RestClient.Builder` to declare a `RestClient` bean in Spring `Configuration`.
 
@@ -28,9 +33,9 @@ RestClient restClient(ObjectMapper objectMapper) {
 }
 ```
 
-`RestClient` can be used to interact with remote 3rd party HTTP APIs, and also can be used for lightweight service-to-service communication in a Microservice architecture.
+`RestClient` can interact with remote third-party HTTP/REST APIs, and is also useful for lightweight service-to-service communication in a Microservice architecture.
 
-To demonstrate the usage of `RestClient`, let's assume a collection of RESTful APIs served at *http://localhost:8080* that provide the following functionalities.  
+To demonstrate how to use `RestClient` in real-world Spring projects, let's assume a collection of REST APIs served at *http://localhost:8080* that provide the following functionalities.  
 
 * `GET /posts` - Get all posts
 * `POST /posts` - Create a new post, return a 201 status, and set the new URI in the `Location` header
@@ -97,7 +102,7 @@ In the above codes, we use the `RestClient` bean to shake hands with the APIs we
 
 Firstly `RestClinet` calls `method` or `get`/`post`/`put`/`delete` to set the HTTP method, then calls `uri`/`header`/`accept`/`contentType`, etc. to prepare HTTP request content, finally calls `retrieve`/`exchange` to send the request. 
 * The `retrieve` returns a `ResponseSpec` that is easier to extract the HTTP response body and headers or the entire HTTP response entity.
-* The `exchange` provides more options to control the raw HTTP request and response data.
+* The `exchange` provides more room to control the raw HTTP request and response data.
 
 If the remote APIs are not accessible or not ready at the moment you are building the client codes, try to use [`MockRestServiceServer`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/web/client/MockRestServiceServer.html) or [`WireMock`](https://wiremock.org/) or [Spring Cloud Contract](https://spring.io/projects/spring-cloud-contract) to mock the remote APIs and verify the client functionality in an isolated environment.
 
