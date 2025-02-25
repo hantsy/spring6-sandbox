@@ -36,6 +36,9 @@ CustomerService externalCustomerService;
 ```
 Alternatively, you can specify an alternative bean by setting the `name` or `value` property of the `@TestBean` annotation.
 
+> [!NOTE]
+> Note that the `name` or `value` property can also accept a factory method name, which might be a bit confusing.
+
 If you set the `enforceOverride` property to `true`, and no corresponding beans are found in the context, an exception will be thrown.
 
 ## MockitoBean and MockitoSpyBean
@@ -86,7 +89,7 @@ public class Config {
 }
 ```
 
-Firstly, we create a test using `MockitoBean`.
+Firstly, we create a test using `@MockitoBean`.
 
 ```java
 @SpringJUnitConfig(classes = Config.class)
@@ -150,6 +153,99 @@ class CustomerServiceMockitoSpyTest {
 In this test, we partially stub the methods, leaving the `findAll` method unstubbed. When running the tests, it will invoke the real `findAll` method of the default implementation class.
 
 > [!NOTE]
-> Starting with Spring Boot 3.4, the `MockBean` and `SpyBean` annotations are marked as `@Deprecated` and will be removed in a future version. It is recommended to use the new annotations provided in Spring Framework 6.2 instead.
+> Starting with Spring Boot 3.4, the `@MockBean` and `@SpyBean` annotations are marked as `@Deprecated` and will be removed in a future version. It is recommended to use the new annotations provided in Spring Framework 6.2 instead.
 
+## Building Your Own Bean Overriding Strategy
 
+If you explore the source code of the `@TestBean`, `@MockitoBean`, and `@MockitoSpyBean` annotations, you will find that they are all meta-annotations of `@BeanOverride`. This annotation accepts a parameter to specify a `BeanOverrideProcessor` that handles these annotations at runtime.
+
+As an example, we will create a simple `@StubBean` annotation to replace the real bean with a stub class in the testing codes.
+
+Firstly, define a new annotation, `@StubBean`, that uses `@BeanOverride` to specify a custom `BeanOverrideProcessor`.
+
+```java
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@BeanOverride(StubBeanOverrideProcessor.class)
+public @interface StubBean {
+    Class<?> value();
+}
+```
+
+Then create a `StubBeanOverrideProcessor` class that implements `BeanOverrideProcessor` and handles the custom annotation.
+
+```java
+class StubBeanOverrideProcessor implements BeanOverrideProcessor {
+    @Override
+    public BeanOverrideHandler createHandler(Annotation overrideAnnotation, Class<?> testClass, Field field) {
+        if (overrideAnnotation instanceof StubBean stubBean) {
+            return new StubBeanOverrideHandler(stubBean, field, ResolvableType.forField(field, testClass));
+        }
+        throw new IllegalArgumentException("Make sure the bean to override is annotated with @StubBean");
+    }
+}
+```
+
+Implement a `StubBeanOverrideHandler` class that extends `BeanOverrideHandler` to create and track the override instance.
+
+```java
+public class StubBeanOverrideHandler extends BeanOverrideHandler {
+    private static Logger log = LoggerFactory.getLogger(StubBeanOverrideHandler.class);
+    private StubBean stubBean;
+
+    public StubBeanOverrideHandler(StubBean stubBean, Field field, ResolvableType resolvableType) {
+        super(field, resolvableType, null, BeanOverrideStrategy.REPLACE_OR_CREATE);
+        this.stubBean = stubBean;
+    }
+
+    @SneakyThrows
+    @Override
+    protected Object createOverrideInstance(String beanName, BeanDefinition existingBeanDefinition, Object existingBeanInstance) {
+        // create a stub object...
+        return stubBean.value().getDeclaredConstructor().newInstance();
+    }
+
+    @Override
+    protected void trackOverrideInstance(Object override, SingletonBeanRegistry singletonBeanRegistry) {
+        log.debug("track override instance, override: {}, singleton bean registry: {}", override, singletonBeanRegistry);
+    }
+}
+```
+
+Do not forget to register the `StubBeanOverrideProcessor` as a Spring bean in a configuration class.
+
+```java
+@Configuration
+public class CustomConfig {
+
+    @Bean
+    public BeanOverrideProcessor stubBeanOverrideProcessor() {
+        return new StubBeanOverrideProcessor();
+    }
+}
+```
+
+Lastly, create tests to verify the functionality of the custom bean overriding rule using the new `@StubBean` annotation.
+
+```java
+@SpringJUnitConfig(classes = {Config.class, CustomConfig.class})
+class CustomerServiceStubBeanTest {
+
+    @StubBean(DummyCustomerService.class)
+    CustomerService testCustomerService;
+
+    @Test
+    public void testCustomerService() {
+        var testCustomer = testCustomerService.findByEmail("dummy@example.com");
+        assertThat(testCustomer.firstName()).isEqualTo("dummy first");
+        assertThat(testCustomer.lastName()).isEqualTo("dummy last");
+        assertThat(testCustomerService.findAll().size()).isEqualTo(0);
+    }
+}
+```
+
+> [!NOTE]
+> In a real-world project, you can use a fixture data generation library to easily create dummy stub classes for testing purposes.
+
+Check out the complete [example project](https://github.com/hantsy/spring6-sandbox/tree/master/test-bean) from my Github account and explore the source codes yourself.
