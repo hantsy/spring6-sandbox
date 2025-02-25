@@ -25,7 +25,7 @@ static CustomerService dummyCustomerService(){
     return new DummyCustomerService();
 }
 ```
-
+> [!NOTE]
 > The factory method must be a no-argument method.
 
 Or you can specify a static factory method from an external class using the format `<class FQN>#<method name>`. For example:
