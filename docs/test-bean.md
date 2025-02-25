@@ -40,7 +40,7 @@ If you set the `enforceOverride` property to `true`, and no corresponding beans 
 
 ## MockitoBean and MockitoSpyBean
 
-Spring Framework 6.2 introduces two meta-annotations based on `@TestBean`:
+Spring Framework 6.2 introduces two additional annotations similar to `@TestBean`:
 
 * `@MockitoBean` - a replacement for Spring Boot's `@MockBean`
 * `@MockitoSpyBean` - a replacement for Spring Boot's `@SpyBean`
