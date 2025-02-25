@@ -19,6 +19,6 @@ class CustomerServiceStubBeanTest {
         var testCustomer = testCustomerService.findByEmail("dummy@example.com");
         assertThat(testCustomer.firstName()).isEqualTo("dummy first");
         assertThat(testCustomer.lastName()).isEqualTo("dummy last");
-        assertThat(testCustomerService.findAll().size()).isEqualTo(0);
+        assertThat(testCustomerService.findAll()).isEmpty();
     }
 }
