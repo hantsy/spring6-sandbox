@@ -68,6 +68,7 @@ public class DataConfig {
 
 Unlike Spring Data JPA, which depends on general JPA stateful persistence, Hibernate implements Jakarta Data using `StatelessSession`, meaning there is no first-level cache. Every change applied to the database will be flushed immediately.
 
+> [!NOTE] 
 > For more information about Jakarta Data support in Hibernate, read the new [Hibernate Data Repositories](https://docs.jboss.org/hibernate/orm/6.6/repositories/html_single/Hibernate_Data_Repositories.html).
 
 Create a simple `@Entity` class for testing purposes.
