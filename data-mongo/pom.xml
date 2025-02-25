@@ -26,7 +26,7 @@
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.2</spring-framework.version>
+        <spring-framework.version>6.2.3</spring-framework.version>
         <postgresql.version>42.3.1</postgresql.version>
         <querydsl.version>5.1.0</querydsl.version>
         <mongo-driver.version>5.3.1</mongo-driver.version>
