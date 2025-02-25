@@ -1,19 +1,17 @@
-# Overriding Spring Beans with `@TestBean`
+If you have been using Spring Boot since version 2.0, you might be familiar with the [`@MockBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/MockBean.html) and [`@SpyBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/SpyBean.html) annotations provided in the Spring Boot `test` starter. These annotations help isolate dependencies and test target beans in a mock environment.
 
-If you have used Spring Boot since 2.0, you should be impressed by the [`@MockBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/MockBean.html) and [`@SpyBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/SpyBean.html) provided in the Spring Boot `test` starter, which help you to isolate the dependencies and test the target beans in a mock environment.
-
-Spring Framework 6.2 introduces a new annotation [`@TestBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/bean/override/convention/TestBean.html) which allows you to override the existing beans in the Spring test `ApplicationContext` with a static factory method or an alternative bean.
+With the release of Spring Framework 6.2, a new annotation, [`@TestBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/bean/override/convention/TestBean.html), has been introduced. This annotation allows you to override existing beans in the Spring test `ApplicationContext` using a static factory method or an alternative bean.
 
 ## TestBean
 
-There are some conventions when using `@TestBean` in your projects.
+There are some conventions to follow when using `@TestBean` in your projects:
 
-* The `@TestBean` can only be annotated on a non-static field in the test class.
-* The `@TestBean` can only override `singleton` beans. If you try to apply it to other scoped beans, it will throw exceptions. And if the bean is created from a `BeanFactory`, it will replace the `BeanFactory` at runtime.
+* The `@TestBean` annotation can only be applied to non-static fields in the test class.
+* The `@TestBean` can only override `singleton` beans. Attempting to apply it to beans with other scopes will result in exceptions. If the bean is created from a `BeanFactory`, it will replace the `BeanFactory` at runtime.
 
 By default, `@TestBean` will look up the candidate bean by type that is compatible with the annotated field.
 
-By setting the `methodName` property explicitly, you can specify the static method name in the test class or derived class. For example:
+By setting the `methodName` property explicitly, you can specify the static method name in the test class or a derived class. For example:
 
 ```java
 @TestBean(methodName="dummyCustomerService")
@@ -26,28 +24,26 @@ static CustomerService dummyCustomerService(){
 }
 ```
 
-> [!NOTE]
-> The factory method should be a no-arguments method.
+> The factory method must be a no-argument method.
 
-Or you can specify a static factory method from an external class with the form `<class FQN>#<method name>`, for example:
+Or you can specify a static factory method from an external class using the format `<class FQN>#<method name>`. For example:
 
 ```java
 @TestBean(methodName="com.example.TestUtils#dummyCustomerService")
 CustomerService externalCustomerService;
 ```
+Alternatively, you can specify an alternative bean by setting the `name` or `value` property of the `@TestBean` annotation.
 
-Alternatively, you can specify an alternative bean by setting the `name` or `value` property.
-
-If you set `enforceOverride` to `true`, and there are no corresponding beans in the context, it will throw exceptions.
+If you set the `enforceOverride` property to `true`, and no corresponding beans are found in the context, an exception will be thrown.
 
 ## MockitoBean and MockitoSpyBean
 
-Spring framework 6.2 provides two meta annotations based on the `TestBean`.
+Spring Framework 6.2 introduces two meta-annotations based on `@TestBean`:
 
-* `MockitoBean` - the replacement of the Spring Boot's `MockBean`
-* `MockitoSpyBean` - the replacement of the Spring Boot's `SpyBean` 
+* `@MockitoBean` - a replacement for Spring Boot's `@MockBean`
+* `@MockitoSpyBean` - a replacement for Spring Boot's `@SpyBean`
 
-Assume there is a `CustomerService` interface which includes two methods.
+Assume there is a `CustomerService` interface that includes two methods:
 
 ```java
 public interface CustomerService {
@@ -56,7 +52,7 @@ public interface CustomerService {
 }
 ```
 
-And a simple class implements this interface.
+Here is a simple class that implements this interface.
 
 ```java
 public class DefaultCustomerService implements CustomerService {
@@ -75,7 +71,7 @@ public class DefaultCustomerService implements CustomerService {
 }
 ```
 
-We declare the implemenation class as a `Bean` in the config class.
+We declare the implementation class as a `Bean` in the configuration class.
 
 ```java
 @Configuration
@@ -118,9 +114,9 @@ class CustomerServiceMockitoTest {
 }
 ```
 
-As you see, when applying `@MockitoBean` on `CustomerService`, and stubing the behivors in the bean, it relace the behivors in the default implementation.
+When applying `@MockitoBean` to `CustomerService` and stubbing the behaviors in the bean, it replaces the behaviors in the default implementation.
 
-Let's have a look at the usage of `@MockitoSpyBean`.
+Now, let's look at the usage of `@MockitoSpyBean`.
 
 ```java
 @SpringJUnitConfig(classes = Config.class)
@@ -149,9 +145,9 @@ class CustomerServiceMockitoSpyTest {
 }
 ```
 
-In this test, we stub the methods partially, not stub the `findAll` method. When running the tests, it will call the real `findAll` method of the default implementation class.
+In this test, we partially stub the methods, leaving the `findAll` method unstubbed. When running the tests, it will invoke the real `findAll` method of the default implementation class.
 
 > [!NOTE]
-> Since Spring Boot 3.4, the `MockBean` and `SpyBean` are marked as `@Deprecated` which will be remove in a future version, it is better to use the new annotations provided in Spring 6.2 instead.
+> Starting with Spring Boot 3.4, the `MockBean` and `SpyBean` annotations are marked as `@Deprecated` and will be removed in a future version. It is recommended to use the new annotations provided in Spring Framework 6.2 instead.
 
 
