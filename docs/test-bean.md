@@ -1,3 +1,5 @@
+# Overriding Spring Beans with `@TestBean`
+
 If you have been using Spring Boot since version 2.0, you might be familiar with the [`@MockBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/MockBean.html) and [`@SpyBean`](https://docs.spring.io/spring-boot/api/java/org/springframework/boot/test/mock/mockito/SpyBean.html) annotations provided in the Spring Boot `test` starter. These annotations help isolate dependencies and test target beans in a mock environment.
 
 With the release of Spring Framework 6.2, a new annotation, [`@TestBean`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/test/context/bean/override/convention/TestBean.html), has been introduced. This annotation allows you to override existing beans in the Spring test `ApplicationContext` using a static factory method or an alternative bean.
