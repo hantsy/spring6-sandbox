@@ -37,7 +37,7 @@ RestClient restClient(ObjectMapper objectMapper) {
 
 `RestClient` can interact with remote third-party HTTP/REST APIs and is also useful for lightweight service-to-service communication in a microservice architecture.
 
-To demonstrate how to use `RestClient` in real-world Spring projects, let's assume a collection of REST APIs served at `http://localhost:8080` that provide the following functionalities:
+To demonstrate the usage of `RestClient` in real-world Spring projects, let's consider a collection of REST APIs served at `http://localhost:8080` offering the following functionalities:
 
 * `GET /posts` - Get all posts.
 * `POST /posts` - Create a new post, return a 201 status, and set the new URI in the `Location` header.
@@ -45,7 +45,7 @@ To demonstrate how to use `RestClient` in real-world Spring projects, let's assu
 * `PUT /posts/{id}` - Update a post.
 * `DELETE /posts/{id}` - Delete a post by ID.
 
-To interact with the above APIs, you can create a `PostClient` bean as shown below:
+To interact with the above APIs, you can define a `PostClient` bean as shown below:
 
 ```java
 @Bean
@@ -54,7 +54,7 @@ public PostClient postClient(RestClient restClient) {
 }
 ```
 
-This bean can then be used to perform CRUD operations on the `Post` resources as demonstrated in the `PostClient` class.
+With this bean, you can perform CRUD operations on `Post` resources, as demonstrated in the `PostClient` class.
 
 ```java
 @Component
