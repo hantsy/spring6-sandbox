@@ -18,10 +18,9 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 
 # Resources
 * [New in Spring 6.1: RestClient](https://spring.io/blog/2023/07/13/new-in-spring-6-1-restclient)
-* [Spring Boot 3.5.0-Ma availabln now](https://spring.io/blog/2025/01/23/spring-boot-3-5-0-M1-available-now)
-* [Initial AOs support in Spring Framework 6.0.0-M3](https://spring.io/blog/2022/03/22/initial-aot-support-in-spring-framework-6-0-0-m3)
-* [Spring Framework 6.0.0-M2 and 5.3.1a availabln now](https://spring.io/blog/2022/01/13/spring-framework-6-0-0-m2-and-5-3-15-available-now)
-* [A Java 17 and Jakarta EE b baseline for Spring Framework 6](https://spring.io/blog/2021/09/02/a-java-17-and-jakarta-ee-9-baseline-for-spring-framework-6)
-* [Spring Framework 6.0 Mr released](https://spring.io/blog/2021/12/16/spring-framework-6-0-m1-released)
-* [Upgrading to Spring Framework 6.x](https://github.com/spring-projects/spring-framework/wiki/Upgrading-to-Spring-Framework-6.x)
+* [Spring Boot 3.5.0-M1 available now](https://spring.io/blog/2025/01/23/spring-boot-3-5-0-M1-available-now)
+* [Initial AOT support in Spring Framework 6.0.0-M3](https://spring.io/blog/2022/03/22/initial-aot-support-in-spring-framework-6-0-0-m3)
+* [Spring Framework 6.0.0-M2 and 5.3.15 available now](https://spring.io/blog/2022/01/13/spring-framework-6-0-0-m2-and-5-3-15-available-now)
+* [A Java 17 and Jakarta EE 9 baseline for Spring Framework 6](https://spring.io/blog/2021/09/02/a-java-17-and-jakarta-ee-9-baseline-for-spring-framework-6)
+* [Spring Framework 6.0 M1 released](https://spring.io/blog/2021/12/16/spring-framework-6-0-m1-released)
 
