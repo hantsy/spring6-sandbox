@@ -171,7 +171,246 @@ Open it in your editor. It should look like this:
 @Generated("org.hibernate.processor.HibernateProcessor")
 public class PostRepository_ implements PostRepository {
 
-    // ...
+	/**
+	 * Find {@link Post} by {@link Post#id id}.
+	 *
+	
+ * @see com.example.demo.repository.PostRepository#deleteById(UUID)
+	 **/
+	@Override
+	public void deleteById(@Nonnull UUID id) {
+		if (id == null) throw new IllegalArgumentException("Null id");
+		var _builder = session.getFactory().getCriteriaBuilder();
+		var _query = _builder.createCriteriaDelete(Post.class);
+		var _entity = _query.from(Post.class);
+		_query.where(
+				_builder.equal(_entity.get(Post_.id), id)
+		);
+		try {
+			session.createMutationQuery(_query)
+				.executeUpdate();
+		}
+		catch (NoResultException exception) {
+			throw new EmptyResultException(exception.getMessage(), exception);
+		}
+		catch (NonUniqueResultException exception) {
+			throw new jakarta.data.exceptions.NonUniqueResultException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	protected @Nonnull StatelessSession session;
+
+	@Inject
+	public PostRepository_(@Nonnull StatelessSession session) {
+		this.session = session;
+	}
+
+	public @Nonnull StatelessSession session() {
+		return session;
+	}
+
+	@Override
+	public void delete(@Nonnull Post entity) {
+		if (entity == null) throw new IllegalArgumentException("Null entity");
+		try {
+			session.delete(entity);
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public void deleteAll(@Nonnull List<? extends Post> entities) {
+		if (entities == null) throw new IllegalArgumentException("Null entities");
+		try {
+			for (var _entity : entities) {
+				session.delete(_entity);
+			}
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	/**
+	 * Find {@link Post}.
+	 *
+	 * @see com.example.demo.repository.PostRepository#findAll(PageRequest,Order)
+	 **/
+	@Override
+	public Page<Post> findAll(PageRequest pageRequest, Order<Post> sortBy) {
+		var _builder = session.getFactory().getCriteriaBuilder();
+		var _query = _builder.createQuery(Post.class);
+		var _entity = _query.from(Post.class);
+		_query.where(
+		);
+		var _orders = new ArrayList<org.hibernate.query.Order<? super Post>>();
+		for (var _sort : sortBy.sorts()) {
+			_orders.add(by(Post.class, _sort.property(),
+							_sort.isAscending() ? ASCENDING : DESCENDING,
+							_sort.ignoreCase()));
+		}
+		try {
+			long _totalResults = 
+					pageRequest.requestTotal()
+							? session.createSelectionQuery(_query)
+									.getResultCount()
+							: -1;
+			var _results = session.createSelectionQuery(_query)
+				.setFirstResult((int) (pageRequest.page()-1) * pageRequest.size())
+				.setMaxResults(pageRequest.size())
+				.setOrder(_orders)
+				.getResultList();
+			return new PageRecord(pageRequest, _results, _totalResults);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public Post update(@Nonnull Post entity) {
+		if (entity == null) throw new IllegalArgumentException("Null entity");
+		try {
+			session.update(entity);
+			return entity;
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public Post save(@Nonnull Post entity) {
+		if (entity == null) throw new IllegalArgumentException("Null entity");
+		try {
+			session.upsert(entity);
+			return entity;
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	/**
+	 * Find {@link Post}.
+	 *
+	 * @see com.example.demo.repository.PostRepository#findAll()
+	 **/
+	@Override
+	public Stream<Post> findAll() {
+		var _builder = session.getFactory().getCriteriaBuilder();
+		var _query = _builder.createQuery(Post.class);
+		var _entity = _query.from(Post.class);
+		_query.where(
+		);
+		try {
+			return session.createSelectionQuery(_query)
+				.getResultStream();
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public List updateAll(@Nonnull List entities) {
+		if (entities == null) throw new IllegalArgumentException("Null entities");
+		try {
+			for (var _entity : entities) {
+				session.update(_entity);
+			}
+			return entities;
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+
+	@Override
+	public List saveAll(@Nonnull List entities) {
+		if (entities == null) throw new IllegalArgumentException("Null entities");
+		try {
+			for (var _entity : entities) {
+				session.upsert(_entity);
+			}
+			return entities;
+		}
+		catch (StaleStateException exception) {
+			throw new OptimisticLockingFailureException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public List insertAll(@Nonnull List entities) {
+		if (entities == null) throw new IllegalArgumentException("Null entities");
+		try {
+			for (var _entity : entities) {
+				session.insert(_entity);
+			}
+			return entities;
+		}
+		catch (ConstraintViolationException exception) {
+			throw new EntityExistsException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	/**
+	 * Find {@link Post} by {@link Post#id id}.
+	 *
+	 * @see com.example.demo.repository.PostRepository#findById(UUID)
+	 **/
+	@Override
+	public Optional<Post> findById(@Nonnull UUID id) {
+		if (id == null) throw new IllegalArgumentException("Null id");
+		try {
+			return ofNullable(session.get(Post.class, id));
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	@Override
+	public Post insert(@Nonnull Post entity) {
+		if (entity == null) throw new IllegalArgumentException("Null entity");
+		try {
+			session.insert(entity);
+			return entity;
+		}
+		catch (ConstraintViolationException exception) {
+			throw new EntityExistsException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
 }
 ```
 
@@ -304,7 +543,50 @@ Compile the project again, and it will generate a `Blogger_` implementation clas
 @Generated("org.hibernate.processor.HibernateProcessor")
 public class Blogger_ implements Blogger {
 
-    // ...
+    static final String ALL_PUBLISHED_POSTS = "SELECT p.id, p.title FROM Post p\nWHERE p.status = 'PUBLISHED'\nORDER BY p.createdAt DESC\n";
+
+
+	/**
+	 * Execute the query {@value #ALL_PUBLISHED_POSTS}.
+	 *
+	 * @see com.example.demo.Blogger#allPublishedPosts()
+	 **/
+	@Override
+	public List<PostSummary> allPublishedPosts() {
+		try {
+			return session.createSelectionQuery(ALL_PUBLISHED_POSTS, PostSummary.class)
+				.getResultList();
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}
+
+	protected @Nonnull StatelessSession session;
+
+	@Inject
+	public Blogger_(@Nonnull StatelessSession session) {
+		this.session = session;
+	}
+
+	public @Nonnull StatelessSession session() {
+		return session;
+	}
+
+	@Override
+	public Post newPost(@Nonnull Post post) {
+		if (post == null) throw new IllegalArgumentException("Null post");
+		try {
+			session.insert(post);
+			return post;
+		}
+		catch (ConstraintViolationException exception) {
+			throw new EntityExistsException(exception.getMessage(), exception);
+		}
+		catch (PersistenceException exception) {
+			throw new DataException(exception.getMessage(), exception);
+		}
+	}	
 }
 ```
 
