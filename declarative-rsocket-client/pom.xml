@@ -26,7 +26,7 @@
         <rsocket.version>1.1.5</rsocket.version>
         <netty.version>4.1.118.Final</netty.version>
         <jackson.version>2.18.2</jackson.version>
-        <junit.version>5.11.4</junit.version>
+        <junit.version>5.12.0</junit.version>
         <testcontainers.version>1.20.5</testcontainers.version>
     </properties>
 
