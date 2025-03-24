@@ -41,7 +41,7 @@
         <assertj-core.version>3.27.3</assertj-core.version>
         <json-path.version>2.9.0</json-path.version>
         <hamcrest.version>3.0</hamcrest.version>
-        <wiremock.version>3.12.0</wiremock.version>
+        <wiremock.version>3.12.1</wiremock.version>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
