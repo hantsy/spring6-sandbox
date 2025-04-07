@@ -30,7 +30,7 @@
         <lombok.version>1.18.38</lombok.version>
         <slf4j.version>2.0.16</slf4j.version>
         <logback.version>1.5.16</logback.version>
-        <jackson.version>2.18.2</jackson.version>
+        <jackson.version>2.18.3</jackson.version>
         <testcontainers.version>1.20.5</testcontainers.version>
         <junit.version>5.12.0</junit.version>
         <reactor.version>2024.0.3</reactor.version>
