@@ -40,9 +40,9 @@ This setup is similar to Spring’s `@RequestMapping` or `@GetMapping`, but with
 
 ---
 
-## Modeling the Data: `Post` and `Status`
+## `Post` and `Status`
 
-We’ll use a simple `Post` record to represent the data, and an `enum` for `Status`.
+We’ll use a simple `Post` record type to represent the HTTP entity data.
 
 ```java
 // Post.java
@@ -53,7 +53,11 @@ public record Post(UUID id,
        LocalDateTime createdAt
 ) {
 }
+```
 
+And the `Post` staus is an `enum`.
+
+```java
 // Status.java
 public enum Status {
     DRAFT,
@@ -61,6 +65,7 @@ public enum Status {
     PUBLISHED;
 }
 ```
+We configured Jackson to serialize/deserialize HTTP messages.
 
 ---
 
@@ -76,6 +81,8 @@ public class ClientConfig {
     WebClient webClient() {
         return WebClient.builder()
                 .baseUrl("http://localhost:8080")
+                // .codecs...
+                // .httpStatusHandler...
                 .build();
     }
 
@@ -93,7 +100,8 @@ The key points in the above configuration.
 
 - **`WebClient`**: The base client used to make HTTP requests.
 - **`HttpServiceProxyFactory`**: Bridges the interface (`PostClient`) and the underlying HTTP client (`WebClient`).
-
+- **`.codec`**: Customize the HTTP messages encoding/decoding.
+- **`.httpStatusHadler`**: Handling HTTP error status (and convert it to general Exceptions) 
 ---
 
 ## Using the Client
