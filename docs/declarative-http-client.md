@@ -102,7 +102,7 @@ The key points in the above configuration.
 - **`WebClient`**: The base client used to make HTTP requests.
 - **`HttpServiceProxyFactory`**: Bridges the interface (`PostClient`) and the underlying HTTP client (`WebClient`).
 - **`.codec`**: The hook used to customize the HTTP messages encoding/decoding.
-- **`.httpStatusHadler`**: The hook used to handle HTTP error status (and convert it to general Exceptions) 
+- **`.httpStatusHadler`**: The hook used to handle HTTP error status (and convert it to general exceptions) 
 ---
 
 ## Using the Client
