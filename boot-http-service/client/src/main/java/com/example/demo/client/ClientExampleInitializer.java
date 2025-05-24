@@ -1,25 +1,29 @@
-package com.example.demo;
+package com.example.demo.client;
 
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import com.example.demo.shared.Post;
+import com.example.demo.shared.PostApi;
+import com.example.demo.shared.Status;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@ComponentScan
-@Configuration
-@Slf4j
-public class Application {
-    public static void main(String[] args) {
-        var applicationContext = new AnnotationConfigApplicationContext(Application.class);
-        var postClient = applicationContext.getBean(PostClient.class);
+@Component
+public class ClientExampleInitializer {
+    private static final Logger log = LoggerFactory.getLogger(ClientExampleInitializer.class);
+    private final PostApi client;
 
-        postClientExample(postClient);
+    public ClientExampleInitializer(PostApi client) {
+        this.client = client;
     }
 
-    static void postClientExample(PostClient client) {
+    @EventListener(ContextRefreshedEvent.class)
+    void postClientExample() {
         client.allPosts().subscribe(
                 data -> log.debug("The existing post: {}", data)
         );

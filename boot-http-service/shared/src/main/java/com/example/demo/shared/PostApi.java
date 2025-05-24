@@ -1,5 +1,4 @@
-package com.example.demo;
-
+package com.example.demo.shared;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 @HttpExchange(url = "/posts", accept = "application/json", contentType = "application/json")
-public interface PostClient {
+public interface PostApi {
     @GetExchange("")
     Flux<Post> allPosts();
 
