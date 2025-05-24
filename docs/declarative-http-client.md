@@ -1,4 +1,4 @@
-# A Friendly Introduction to Spring's Built-in Declarative HTTP Client
+# An Introduction to Spring Declarative HTTP Client
 
 If you're familiar with [Feign Client](https://github.com/OpenFeign/feign), you probably love its declarative approach to creating HTTP/REST clients. Spring Cloud has embraced this too, integrating Feign into its ecosystem with [Spring Cloud OpenFeign](https://spring.io/projects/spring-cloud-openfeign).
 
