@@ -16,25 +16,25 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
-        <cargo-maven3-plugin.version>1.10.17</cargo-maven3-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
+        <cargo-maven3-plugin.version>1.10.19</cargo-maven3-plugin.version>
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.3</spring-framework.version>
+        <spring-framework.version>6.2.6</spring-framework.version>
         <postgresql.version>42.7.5</postgresql.version>
-		<reactor.version>2024.0.3</reactor.version>
-		<junit-jupiter.version>5.11.4</junit-jupiter.version>
-		<jackson.version>2.18.2</jackson.version>
-		<testcontainers.version>1.20.4</testcontainers.version>
+		<reactor.version>2024.0.5</reactor.version>
+		<junit-jupiter.version>5.12.2</junit-jupiter.version>
+		<jackson.version>2.18.3</jackson.version>
+		<testcontainers.version>1.20.5</testcontainers.version>
 
         <!-- Apache Tomcat -->
-        <tomcat.version>11.0.4</tomcat.version>
+        <tomcat.version>11.0.7</tomcat.version>
 
         <!-- Eclipse Jetty  -->
-        <jetty.version>12.0.16</jetty.version>
+        <jetty.version>12.0.21</jetty.version>
 
         <!-- Skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -157,7 +157,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
         </dependency>
 
         <!-- logging with logback -->
@@ -247,7 +247,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

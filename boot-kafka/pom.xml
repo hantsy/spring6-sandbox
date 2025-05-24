@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
+		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.36</version>
+			<version>1.18.38</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>org.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
-			<version>4.2.2</version>
+			<version>4.3.0</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

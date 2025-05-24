@@ -1,0 +1,26 @@
+name: boot-http-service
+
+on:
+  push:
+    paths:
+      - "boot-http-service/**"
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: "corretto"
+          cache: "maven"
+      - name: Build with Maven
+        run: mvn -B package --file boot-http-service/pom.xml

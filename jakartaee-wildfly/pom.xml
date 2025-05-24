@@ -17,30 +17,30 @@
         <maven.compiler.parameters>true</maven.compiler.parameters>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
         <cargo-maven3-plugin.version>1.10.5</cargo-maven3-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.3</spring-framework.version>
+        <spring-framework.version>6.2.6</spring-framework.version>
         <postgresql.version>42.7.5</postgresql.version>
-        <spring-data.version>2024.1.3</spring-data.version>
-        <hibernate.version>6.6.9.Final</hibernate.version>
-        <reactor.version>2024.0.3</reactor.version>
-        <jackson.version>2.18.2</jackson.version>
-        <testcontainers.version>1.20.4</testcontainers.version>
+        <spring-data.version>2024.1.5</spring-data.version>
+        <hibernate.version>6.6.15.Final</hibernate.version>
+        <reactor.version>2024.0.5</reactor.version>
+        <jackson.version>2.18.3</jackson.version>
+        <testcontainers.version>1.20.5</testcontainers.version>
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>35.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.2.Final</wildfly-maven-plugin.version>
+        <wildfly-maven-plugin.version>5.1.3.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
-        <junit.version>5.11.4</junit.version>
+        <junit.version>5.12.2</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -258,7 +258,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
         </dependency>
 
         <!-- logging with logback -->
@@ -351,7 +351,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

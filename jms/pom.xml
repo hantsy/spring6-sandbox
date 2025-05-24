@@ -16,16 +16,16 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.2</maven-failsafe-plugin.version>
         <cargo-maven3-plugin.version>1.10.3</cargo-maven3-plugin.version>
         <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
 
         <!-- API and frameworks -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.3</spring-framework.version>
+        <spring-framework.version>6.2.6</spring-framework.version>
         <postgresql.version>42.5.0</postgresql.version>
-        <testcontainers.version>1.20.4</testcontainers.version>
+        <testcontainers.version>1.20.5</testcontainers.version>
     </properties>
 
     <dependencyManagement>
@@ -48,7 +48,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.11.4</version>
+                <version>5.12.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -82,7 +82,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
         </dependency>
 
         <!-- logging with logback -->
@@ -146,7 +146,7 @@
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
-            <version>4.2.2</version>
+            <version>4.3.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -163,7 +163,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -15,18 +15,18 @@
         <maven.compiler.release>21</maven.compiler.release>
 
         <!-- maven plugins -->
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.2.2</maven-failsafe-plugin.version>
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
 
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
-        <spring-framework.version>6.2.3</spring-framework.version>
+        <spring-framework.version>6.2.6</spring-framework.version>
         <r2dbc.version>Borca-SR2</r2dbc.version>
-        <reactor.version>2024.0.3</reactor.version>
+        <reactor.version>2024.0.5</reactor.version>
         <netty.version>5.0.0.Alpha5</netty.version>
-        <junit.version>5.11.4</junit.version>
-        <jackson.version>2.18.2</jackson.version>
+        <junit.version>5.12.2</junit.version>
+        <jackson.version>2.18.3</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -89,7 +89,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.20.4</version>
+                <version>1.20.5</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -144,7 +144,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
         </dependency>
 
         <!-- logging with logback -->

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.2</version>
+        <version>3.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
@@ -15,16 +15,16 @@
     <description>Spring6 WebMvc/Spring Boot 3 example</description>
     <properties>
         <java.version>21</java.version>
-        <testcontainers.version>1.20.4</testcontainers.version>
+        <testcontainers.version>1.20.5</testcontainers.version>
         <querydsl.version>5.1.0</querydsl.version>
         <!-- see: https://github.com/rest-assured/rest-assured/issues/1728 -->
         <rest-assured.version>5.2.1</rest-assured.version>
-        <hibernate.version>6.6.9.Final</hibernate.version>
+        <hibernate.version>6.6.15.Final</hibernate.version>
 
         <!-- maven plugins -->
-        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-        <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
-        <maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.5.3</maven-failsafe-plugin.version>
 
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
@@ -76,7 +76,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.36</version>
+            <version>1.18.38</version>
             <optional>true</optional>
         </dependency>
 
