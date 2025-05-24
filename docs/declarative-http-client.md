@@ -2,7 +2,7 @@
 
 If you're familiar with [Feign Client](https://github.com/OpenFeign/feign), you probably love its declarative approach to creating HTTP/REST clients. Spring Cloud has embraced this too, integrating Feign into its ecosystem with [Spring Cloud OpenFeign](https://spring.io/projects/spring-cloud-openfeign).
 
-Now, starting from **Spring 6**, the Spring Framework brings its own built-in declarative HTTP client. Unlike other solutions, it leverages existing tools like `WebClient`, `RestClient`, and the classic `RestTemplate`. This means you can create HTTP clients by simply defining a Java interface and using annotations—clean, efficient, and powerful!
+Now, starting from **Spring 6**, the Spring Framework brings its own built-in declarative HTTP client mechanism. Unlike other solutions, it leverages existing tools like `WebClient`, `RestClient`, and the classic `RestTemplate`. This means you can create HTTP clients by simply defining a Java interface and using annotations.
 
 ---
 
@@ -55,7 +55,7 @@ public record Post(UUID id,
 }
 ```
 
-And the `Post` staus is an `enum`.
+And define the `Post` status as an `enum`.
 
 ```java
 // Status.java
@@ -65,6 +65,7 @@ public enum Status {
     PUBLISHED;
 }
 ```
+
 We configured Jackson to serialize/deserialize HTTP messages.
 
 ---
@@ -100,8 +101,8 @@ The key points in the above configuration.
 
 - **`WebClient`**: The base client used to make HTTP requests.
 - **`HttpServiceProxyFactory`**: Bridges the interface (`PostClient`) and the underlying HTTP client (`WebClient`).
-- **`.codec`**: Customize the HTTP messages encoding/decoding.
-- **`.httpStatusHadler`**: Handling HTTP error status (and convert it to general Exceptions) 
+- **`.codec`**: The hook used to customize the HTTP messages encoding/decoding.
+- **`.httpStatusHadler`**: The hook used to handle HTTP error status (and convert it to general Exceptions) 
 ---
 
 ## Using the Client
@@ -123,7 +124,7 @@ client.save(new Post(null, "test", "test content", Status.DRAFT, null))
     );
 ```
 
-You can perform CRUD operations declaratively without manually handling HTTP requests—just focus on your business logic!
+You can perform CRUD operations declaratively without manually handling HTTP requests. Just focus on your business logic!
 
 ---
 
@@ -172,4 +173,4 @@ Spring's declarative HTTP client in **Spring 6** offers a modern, streamlined wa
 
 If you’ve been using Feign or other declarative clients, you’ll feel right at home. And if you haven’t, this is the perfect time to explore the simplicity and power of declarative HTTP clients!
 
-Get the [complete code](https://github.com/hantsy/spring6-sandbox/tree/master/declarative-http-client) on my GitHub. Feel free to fork and experiment. Happy coding!
+Get the [complete example codes](https://github.com/hantsy/spring6-sandbox/tree/master/declarative-http-client) on my GitHub. Feel free to fork and experiment. Happy coding!
