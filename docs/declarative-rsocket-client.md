@@ -125,11 +125,12 @@ spring.rsocket.server.port=7000
 spring.rsocket.server.transport=tcp
 ```
 
-> [!NOTE]: Unlike the general web application, it does not need to serve an HTTP/Web server when using TCP as transport protocol.
+> [!NOTE]
+> Unlike the general web application, it does not need to serve an HTTP/Web server when using TCP as the transport protocol.
 
-Run the application, now the RSocket server is ready to accept client connections. Spring provides a simple `RSocketRequester` to simplfy the client connection and sending requests.
+Run the application, now the RSocket server is ready to accept client connections. Spring provides a simple `RSocketRequester` to simplify the client connection and sending requests.
 
-Define a `RSocketRequester` bean.
+Define an `RSocketRequester` bean.
 
 ```java
 @Bean
@@ -140,7 +141,7 @@ RSocketRequester rSocketRequester(RSocketStrategies strategies) {
 }
 ```
 
-You can simplfy using `RScoketRequester` to send a request like this:
+You can simply using `RScoketRequester` to send a request like this:
 
 ```java
 
@@ -161,5 +162,52 @@ return this.requester.route("posts.deleteById."+ id).send();
 
 Since Spring 6, you can use a solution similar to [Declarative HTTP Client](./declarative-http-client.md) to define the operatins by a Java interface.
 
+```java
+public interface PostClient {
 
+    @RSocketExchange("posts.findAll")
+    public Flux<Post> all();
 
+    @RSocketExchange("posts.titleContains")
+    public Flux<Post> titleContains(@Payload String title);
+
+    @RSocketExchange("posts.findById.{id}")
+    public Mono<Post> get(@DestinationVariable("id") UUID id);
+
+    @RSocketExchange("posts.save")
+    public Mono<UUID> create(@Payload Post post);
+
+    @RSocketExchange("posts.update.{id}")
+    public Mono<Boolean> update(@DestinationVariable("id") UUID id, @Payload Post post);
+
+    @RSocketExchange("posts.deleteById.{id}")
+    public Mono<Boolean> delete(@DestinationVariable("id") UUID id);
+}
+```
+
+And create a `PostClient` bean using `RSocketServiceProxyFactory`.
+
+```java
+@Bean
+public PostClient postClientService(RSocketRequester requester) {
+    RSocketServiceProxyFactory rSocketServiceProxyFactory =
+            RSocketServiceProxyFactory.builder()
+                    .rsocketRequester(requester)
+                    .blockTimeout(Duration.ofMillis(5000))
+                    .build();
+    return rSocketServiceProxyFactory.createClient(PostClient.class);
+}
+```
+
+Then you can inject it in Spring components and use it like this.
+
+```java
+@Inject PostClient client;
+
+this.client.all()
+    .as(StepVerifier::create)
+    .expectNextCount(2)
+    .verifyComplete();
+```
+
+Get the complete example codes from my Github account, and explore it yourself.
