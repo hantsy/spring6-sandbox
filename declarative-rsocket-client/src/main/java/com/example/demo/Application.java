@@ -38,11 +38,6 @@ public class Application {
     }
 
     @Bean
-    RSocketServer rSocketServer(RSocketMessageHandler handler) {
-        return RSocketServer.create(handler.responder());
-    }
-
-    @Bean
     public RSocketStrategies rsocketStrategies() {
         return RSocketStrategies.builder()
                 .encoders(encoders -> encoders.add(new Jackson2CborEncoder()))

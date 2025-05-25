@@ -40,11 +40,11 @@ public class PostRepositoryTest {
 
         @Override
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
-            var container = new PostgreSQLContainer<>("postgres:12")
-                    .withCopyFileToContainer(
-                            MountableFile.forClasspathResource("init.sql"),
-                            "/docker-entrypoint-initdb.d/init.sql"
-                    );
+            var container = new PostgreSQLContainer<>("postgres");
+//                    .withCopyFileToContainer(
+//                            MountableFile.forClasspathResource("init.sql"),
+//                            "/docker-entrypoint-initdb.d/init.sql"
+//                    );
             container.start();
             configurableApplicationContext.addApplicationListener((ApplicationListener<ContextClosedEvent>) event ->
                     container.stop()

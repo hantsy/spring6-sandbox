@@ -80,7 +80,7 @@ public class R2dbcPostRepository implements PostRepository {
                 .filter((statement, executeFunction) -> statement.returnGeneratedValues("id").execute())
                 .bind("title", p.title())
                 .bind("content", p.content())
-                .bind("status", p.status())
+                .bind("status", p.status().name())
                 .fetch()
                 .first()
                 .map(r -> (UUID) r.get("id"));
@@ -105,7 +105,7 @@ public class R2dbcPostRepository implements PostRepository {
                 for (Post p : data.subList(0, len - 1)) {
                     statement.bind(0, p.title())
                             .bind(1, p.content())
-                            .bind(2, p.status())
+                            .bind(2, p.status().name())
                             .add();
                 }
             }
@@ -113,7 +113,7 @@ public class R2dbcPostRepository implements PostRepository {
 
             statement.bind(0, last.title())
                     .bind(1, last.content())
-                    .bind(2, last.status());
+                    .bind(2, last.status().name());
             // .add(); // remove add in the last binding.
 
             return Flux.from(statement.execute()).flatMap(result -> result.map((row, rowMetadata) -> row.get("id", UUID.class)));
@@ -130,7 +130,7 @@ public class R2dbcPostRepository implements PostRepository {
         return this.databaseClient.sql(sql)
                 .bind("title", p.title())
                 .bind("content", p.content())
-                .bind("status", p.status())
+                .bind("status", p.status().name())
                 .bind("id", p.id())
                 .fetch()
                 .rowsUpdated();

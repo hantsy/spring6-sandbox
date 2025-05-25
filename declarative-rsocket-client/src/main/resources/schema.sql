@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- create posts table
 CREATE TABLE IF NOT EXISTS posts (
  id UUID DEFAULT uuid_generate_v4(),
