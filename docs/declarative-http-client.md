@@ -40,7 +40,7 @@ This setup is similar to Spring’s `@RequestMapping` or `@GetMapping`, but with
 
 ---
 
-## `Post` and `Status`
+## Creating Data Models: `Post` and `Status`
 
 We’ll use a simple `Post` record type to represent the HTTP entity data.
 
@@ -66,7 +66,7 @@ public enum Status {
 }
 ```
 
-We configured Jackson to serialize/deserialize HTTP messages.
+We configured Jackson to serialize/deserialize HTTP messages. The newest Jackson can automatically handle Java record type and enum.
 
 ---
 
