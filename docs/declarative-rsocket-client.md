@@ -9,6 +9,10 @@ To get started, add the following dependencies to your Maven project:
 ```xml
 <dependency>
     <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
     <artifactId>spring-webflux</artifactId>
 </dependency>
 <dependency>
@@ -23,6 +27,7 @@ To get started, add the following dependencies to your Maven project:
     <groupId>io.rsocket</groupId>
     <artifactId>rsocket-transport-netty</artifactId>
 </dependency>
+// and Jackson for messaging encoding/decoding.
 ```
 
 ## Defining an RSocket Controller
@@ -69,7 +74,6 @@ class PostController {
         return this.posts.deleteById(id)
                 .map(deleted -> deleted > 0);
     }
-
 }
 ```
 
@@ -121,7 +125,7 @@ rSocketServer.bind(TcpServerTransport.create("localhost", 7000))
         .block();
 ```
 
-If you’re using Spring Boot, running an RSocket server is even easier! Just add the `spring-boot-starter-rsocket` dependency and configure the transport protocol and port in your `application.properties`:
+If you’re using Spring Boot, running an RSocket server is even easier! Just add the `spring-boot-starter-rsocket` dependency and configure the RSocket transport protocol and port in your `application.properties`:
 
 ```properties
 spring.rsocket.server.port=7000
@@ -166,7 +170,7 @@ this.requester.route("posts.update." + id)
 return this.requester.route("posts.deleteById." + id).send();
 ```
 
-## Declarative RSocket Client (Spring 6+)
+## Declarative RSocket Client
 
 Similar to the solution described in [Declarative HTTP Client](./declarative-http-client.md), starting with Spring 6, you can define RSocket operations declaratively using a simple Java interface:
 
@@ -220,4 +224,4 @@ this.client.all()
 
 ---
 
-For the complete example, clone [the source codes from my GitHub](https://github.com/hantsy/spring6-sandbox/tree/master/declarative-rsocket-client) and explore the code yourself!
+For the complete example project, check out [the source code from my GitHub](https://github.com/hantsy/spring6-sandbox/tree/master/declarative-rsocket-client) and explore the code yourself!
