@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 
-public interface PostClientService {
+public interface PostClient {
 
     @RSocketExchange("posts.findAll")
     public Flux<Post> all();

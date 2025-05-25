@@ -22,12 +22,12 @@ public class ClientConfig {
 
     @SneakyThrows
     @Bean
-    public PostClientService postClientService(RSocketRequester requester) {
+    public PostClient postClientService(RSocketRequester requester) {
         RSocketServiceProxyFactory rSocketServiceProxyFactory =
                 RSocketServiceProxyFactory.builder()
                         .rsocketRequester(requester)
                         .blockTimeout(Duration.ofMillis(5000))
                         .build();
-        return rSocketServiceProxyFactory.createClient(PostClientService.class);
+        return rSocketServiceProxyFactory.createClient(PostClient.class);
     }
 }

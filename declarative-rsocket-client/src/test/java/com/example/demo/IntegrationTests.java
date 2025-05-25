@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.client.PostClientService;
+import com.example.demo.client.PostClient;
 import io.rsocket.Closeable;
 import io.rsocket.core.RSocketServer;
 import io.rsocket.transport.netty.server.TcpServerTransport;
@@ -20,7 +20,7 @@ public class IntegrationTests {
     int port;
 
     @Autowired
-    PostClientService client;
+    PostClient client;
 
     @Autowired
     RSocketServer rSocketServer;

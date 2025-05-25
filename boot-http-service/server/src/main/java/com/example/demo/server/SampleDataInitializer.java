@@ -24,7 +24,7 @@ public class SampleDataInitializer {
     @EventListener(ApplicationReadyEvent.class)
     public void init() {
         Flux.just("First", "Second")
-                .map(it -> new Post(null, it + "Post", "Content of " + it + " Post", Status.DRAFT, LocalDateTime.now()))
+                .map(it -> new Post(null, it + " Post", "Content of " + it + " Post", Status.DRAFT, LocalDateTime.now()))
                 .flatMap(posts::save)
                 .subscribe(
                         data -> log.debug("saved post: {}", data),
