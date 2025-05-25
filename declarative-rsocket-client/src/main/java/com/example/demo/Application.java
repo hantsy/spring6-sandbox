@@ -26,9 +26,12 @@ public class Application {
                             c -> {
                                 System.out.println("Server is up on: " + c.address());
                                 try {
-                                 System.out.println("Hint any key to exit");
+                                 System.out.println("Enter q to exit");
                                  var exit = (char)System.in.read();
-                                 System.out.println("Exiting...");
+                                 if (exit == 'q') {
+                                     System.out.println("Exiting...");
+                                     System.exit(0);
+                                 }
                                 } catch (IOException e) {
                                     throw new RuntimeException(e);
                                 }
