@@ -1,11 +1,10 @@
 # An Introduction to Spring Declarative RSocket Client
 
+[RSocket](https://rsocket.io) is an application protocol designed for multiplexed, duplex communication over transports like TCP and WebSocket. Since Spring 5.x, Spring has provided support for RSocket, building on the RSocket Java implementations. On the server side, RSocket message handling leverages Spring’s existing Messaging infrastructure.
 
-[RSocket](https://rsocket.io) is an application protocol for multiplexed, duplex communication over TCP, WebSocket, and other byte stream transports. 
+## Getting Started: Adding Dependencies
 
-Since Spring 5.x, Spring includes RSocket support based on the RSocket Java implementations. On the server side, the RSocket messages handling is based on the existing Spring Messaging infrastructure. 
-
-Add the following dependencies into project.
+To get started, add the following dependencies to your project:
 
 ```xml
 <dependency>
@@ -26,7 +25,9 @@ Add the following dependencies into project.
 </dependency>
 ```
 
-You can simplly the define a compoennt to process the incoming requests like this.
+## Defining an RSocket Controller
+
+You can easily define a component to process incoming requests. Here’s a simple example:
 
 ```java
 @Controller
@@ -72,12 +73,14 @@ class PostController {
 }
 ```
 
-In the above the codes, 
-* **`MessageMapping`** defines the message path matching rules.
-* **`DestinationVariable`** to resovle the path varibles in the path.
-* **`Payload`** indicate it reads the incoming messages as type-safe class.
+**What’s happening above?**
+- `@MessageMapping` specifies the RSocket route for each handler.
+- `@DestinationVariable` extracts path variables from the route.
+- `@Payload` binds the incoming message to a type-safe Java object.
 
-To make it work, define an `RSocketServer` bean to serve the server-side message handling.
+## Setting Up the RSocket Server
+
+To enable server-side RSocket message handling, define an `RSocketServer` bean:
 
 ```java
 @Configuration
@@ -97,7 +100,7 @@ class ServerConfig {
 }
 ```
 
-The `RSocketStrategies` bean defines the message encoders and decoders, route matches, etc. 
+The `RSocketStrategies` bean configures message encoders, decoders, and route matching strategies, etc.
 
 ```java
 @Bean
@@ -110,27 +113,31 @@ public RSocketStrategies rsocketStrategies() {
 }
 ```
 
-Run the RSocket server using the `RSocketServer` bean.
+The following is an example of retrieving `RSocketServer` bean from the Spring `ApplicationContext` and starting the RSocket server:
 
 ```java
 var rSocketServer = context.getBean(RSocketServer.class);
 rSocketServer.bind(TcpServerTransport.create("localhost", 7000))
         .block();
 ```
-  
-If you are using Spring Boot, to run an RSocket application, just need to add `spring-boot-starter-rsocket` and set the transport protocol type and server port in the *application.properties*. 
+
+If you’re using Spring Boot, running an RSocket server is even easier! Just add the `spring-boot-starter-rsocket` dependency and configure the transport protocol and port in your `application.properties`:
 
 ```properties
 spring.rsocket.server.port=7000
 spring.rsocket.server.transport=tcp
 ```
 
-> [!NOTE]
-> Unlike the general web application, it does not need to serve an HTTP/Web server when using TCP as the transport protocol.
+> [!NOTE]  
+> Unlike a typical web application, you don’t need to run an HTTP or Web server when using TCP as the RSocket transport.
 
-Run the application, now the RSocket server is ready to accept client connections. Spring provides a simple `RSocketRequester` to simplify the client connection and sending requests.
+Now, your RSocket server is ready to accept client connections.
 
-Define an `RSocketRequester` bean.
+## Connecting with RSocketRequester
+
+Spring provides the `RSocketRequester` to streamline client connections and messaging. 
+
+Define an `RSocketRequester` bean as follows:
 
 ```java
 @Bean
@@ -141,51 +148,52 @@ RSocketRequester rSocketRequester(RSocketStrategies strategies) {
 }
 ```
 
-You can simply using `RScoketRequester` to send a request like this:
+You can now use `RSocketRequester` to send requests, for example:
 
 ```java
-
-// get all posts
+// Get all posts
 this.requester.route("posts.findAll").retrieveFlux(Post.class);
 
-// get post by id
+// Get post by ID
 this.requester.route("posts.findById." + id).retrieveMono(Post.class);
 
-// update post
-this.requester.route("posts.update."+ id)
+// Update post
+this.requester.route("posts.update." + id)
                 .data(post)
                 .retrieveMono(Post.class);
 
-// delete post by id
-return this.requester.route("posts.deleteById."+ id).send();
+// Delete post by ID
+return this.requester.route("posts.deleteById." + id).send();
 ```
 
-Since Spring 6, you can use a solution similar to [Declarative HTTP Client](./declarative-http-client.md) to define the operatins by a Java interface.
+## Declarative RSocket Client (Spring 6+)
+
+Similar to the solution described in [Declarative HTTP Client](./declarative-http-client.md), starting with Spring 6, you can define RSocket operations declaratively using a simple Java interface:
 
 ```java
 public interface PostClient {
 
     @RSocketExchange("posts.findAll")
-    public Flux<Post> all();
+    Flux<Post> all();
 
     @RSocketExchange("posts.titleContains")
-    public Flux<Post> titleContains(@Payload String title);
+    Flux<Post> titleContains(@Payload String title);
 
     @RSocketExchange("posts.findById.{id}")
-    public Mono<Post> get(@DestinationVariable("id") UUID id);
+    Mono<Post> get(@DestinationVariable("id") UUID id);
 
     @RSocketExchange("posts.save")
-    public Mono<UUID> create(@Payload Post post);
+    Mono<UUID> create(@Payload Post post);
 
     @RSocketExchange("posts.update.{id}")
-    public Mono<Boolean> update(@DestinationVariable("id") UUID id, @Payload Post post);
+    Mono<Boolean> update(@DestinationVariable("id") UUID id, @Payload Post post);
 
     @RSocketExchange("posts.deleteById.{id}")
-    public Mono<Boolean> delete(@DestinationVariable("id") UUID id);
+    Mono<Boolean> delete(@DestinationVariable("id") UUID id);
 }
 ```
 
-And create a `PostClient` bean using `RSocketServiceProxyFactory`.
+Create a `PostClient` bean using the `RSocketServiceProxyFactory` builder tools:
 
 ```java
 @Bean
@@ -199,7 +207,7 @@ public PostClient postClientService(RSocketRequester requester) {
 }
 ```
 
-Then you can inject it in Spring components and use it like this.
+You can now inject and use your `PostClient` in any Spring component:
 
 ```java
 @Inject PostClient client;
@@ -210,4 +218,6 @@ this.client.all()
     .verifyComplete();
 ```
 
-Get the complete example codes from my Github account, and explore it yourself.
+---
+
+For the complete example, clone [the source codes from my GitHub]() and explore the code yourself!
