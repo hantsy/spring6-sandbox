@@ -11,19 +11,6 @@
     <groupId>com.example.demo</groupId>
     <artifactId>client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
     <properties>
         <java.version>21</java.version>
     </properties>

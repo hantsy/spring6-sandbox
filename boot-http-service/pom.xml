@@ -13,19 +13,6 @@
 	<artifactId>demo-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<modules>
 		<module>client</module>
 		<module>shared</module>
