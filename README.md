@@ -15,7 +15,8 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 ## Testing
 * [Testing RESTful APIs with AssertJ-aware MockMvcTester](./docs/mockmvc-tester.md)
 * [Overriding Spring Beans with @TestBean](./docs/test-bean.md)
-## Miscellaneous
+## Others
+* [An Introduction to Spring Declarative RSocket Client](./docs/declarative-rsocket-client.md)
 
 # Resources
 * [New in Spring 6.1: RestClient](https://spring.io/blog/2023/07/13/new-in-spring-6-1-restclient)
