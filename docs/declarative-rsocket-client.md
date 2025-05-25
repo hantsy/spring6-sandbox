@@ -2,9 +2,9 @@
 
 [RSocket](https://rsocket.io) is an application protocol designed for multiplexed, duplex communication over transports like TCP and WebSocket. Since Spring 5.x, Spring has provided support for RSocket, building on the RSocket Java implementations. On the server side, RSocket message handling leverages Spring’s existing Messaging infrastructure.
 
-## Getting Started: Adding Dependencies
+## Getting Started
 
-To get started, add the following dependencies to your project:
+To get started, add the following dependencies to your Maven project:
 
 ```xml
 <dependency>
@@ -100,7 +100,7 @@ class ServerConfig {
 }
 ```
 
-The `RSocketStrategies` bean configures message encoders, decoders, and route matching strategies, etc.
+The `RSocketStrategies` bean configures message encoders, decoders, route matching strategies, etc.
 
 ```java
 @Bean
@@ -220,4 +220,4 @@ this.client.all()
 
 ---
 
-For the complete example, clone [the source codes from my GitHub]() and explore the code yourself!
+For the complete example, clone [the source codes from my GitHub](https://github.com/hantsy/spring6-sandbox/tree/master/declarative-rsocket-client) and explore the code yourself!
