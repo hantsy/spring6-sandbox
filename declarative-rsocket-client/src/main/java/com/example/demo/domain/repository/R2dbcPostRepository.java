@@ -26,7 +26,7 @@ public class R2dbcPostRepository implements PostRepository {
                     row.get("id", UUID.class),
                     row.get("title", String.class),
                     row.get("content", String.class),
-                    row.get("status", Status.class),
+                    Status.valueOf(row.get("status", String.class)),
                     row.get("created_at", LocalDateTime.class)
             );
 

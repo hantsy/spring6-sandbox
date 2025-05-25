@@ -9,15 +9,32 @@ import org.springframework.messaging.rsocket.RSocketStrategies;
 import org.springframework.messaging.rsocket.annotation.support.RSocketMessageHandler;
 import org.springframework.web.util.pattern.PathPatternRouteMatcher;
 
+import java.io.IOException;
+
 @Configuration
 @ComponentScan
 @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true)
 public class Application {
     public static void main(String[] args) throws Exception {
         try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-            Application.class)) {
+                Application.class)) {
             var rSocketServer = context.getBean(RSocketServer.class);
-            rSocketServer.bind(TcpServerTransport.create("localhost", 7000)).block();
+            rSocketServer.bind(TcpServerTransport.create("localhost", 7000))
+                    .doOnTerminate(() -> System.out.println("Server is shutting down"))
+                    .blockOptional()
+                    .ifPresentOrElse(
+                            c -> {
+                                System.out.println("Server is up on: " + c.address());
+                                try {
+                                 System.out.println("Hint any key to exit");
+                                 var exit = (char)System.in.read();
+                                 System.out.println("Exiting...");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            },
+                            () -> System.out.println("Closing...")
+                    );
         }
     }
 
@@ -29,9 +46,9 @@ public class Application {
     @Bean
     public RSocketStrategies rsocketStrategies() {
         return RSocketStrategies.builder()
-            .encoders(encoders -> encoders.add(new Jackson2CborEncoder()))
-            .decoders(decoders -> decoders.add(new Jackson2CborDecoder()))
-            .routeMatcher(new PathPatternRouteMatcher())
-            .build();
+                .encoders(encoders -> encoders.add(new Jackson2CborEncoder()))
+                .decoders(decoders -> decoders.add(new Jackson2CborDecoder()))
+                .routeMatcher(new PathPatternRouteMatcher())
+                .build();
     }
 }

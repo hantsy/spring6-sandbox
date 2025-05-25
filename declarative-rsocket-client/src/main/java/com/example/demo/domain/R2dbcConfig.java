@@ -56,7 +56,7 @@ public class R2dbcConfig {
                         .database(database)
                         .username(username)
                         .password(password)
-                        .codecRegistrar(EnumCodec.builder().withEnum("post_status", Status.class).build())
+                        //.codecRegistrar(EnumCodec.builder().withEnum("post_status", Status.class).build())
                         .build()
         );
     }
