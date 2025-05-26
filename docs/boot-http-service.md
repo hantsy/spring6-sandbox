@@ -166,9 +166,9 @@ Here’s the *pom.xml* configuration for the server module:
 </project>
 ```
 
-#### Implementing PostApi in the Server Module
+#### Implementing `PostApi`
  
-We implement the `PostApi` interface from the shared module and declare it as a Spring-managed `@RestController`. The routing annotations in the interface are automatically recognized, eliminating the need for explicit path matching rules.
+We implement the `PostApi` interface from the shared module and declare it as a Spring `@RestController`. The routing annotations in the interface are automatically recognized, eliminating the need for explicit path mapping rules.
 
 ```java
 @RestController
@@ -350,8 +350,7 @@ Now that we have the server module set up, let's move on to building the client 
 
 ### Client Module
 
-In a Microservices architecture, the **server** module operates as an independent service exposing **Post API**, while the **client** module serves as an SDK that enables other services to interact with the **post service**. Ideally, the **client&& module should be a `non-web` application designed to function as a reusable *library*.
-
+In a Microservices architecture, the **server** module operates as an independent service exposing **Post API**, while the **client** module serves as an SDK that enables other services to interact with the **post service**. Ideally, the **client** module should be a `non-web` application designed to function as a reusable *library*.
 
 #### Add Shared Module as Dependency
 
@@ -404,7 +403,7 @@ Here’s the *pom.xml* configuration for the client module
 </project>
 ```
 
-To ensure the client module does not start a web server (unlike the server module), configure application.properties
+To ensure the client module does not start a web server (unlike the server module), configure *application.properties*.
 
 ```properties
 spring.main.web-application-type=none
@@ -412,7 +411,7 @@ spring.main.web-application-type=none
 
 #### Creating a Declarative HTTP Client
 
-Following the [Declarative HTTP Client](./docs/declarative-http-client.md), we configure a `PostApi` client using HttpServiceProxyFactory:
+Following the [Declarative HTTP Client](./docs/declarative-http-client.md), we configure a `PostApi` client using `HttpServiceProxyFactory`:
 
 ```java
 @Configuration
@@ -439,7 +438,7 @@ public class ClientConfig {
 ```
 #### Interacting with the Post API
 
-Using an `@EventListener`, we trigger interactions with the server module's APIs:
+Using an `@EventListener`, we trigger interactions with the **server** module's APIs:
 
 ```java
 @Component
@@ -515,10 +514,9 @@ public class ClientConfig {
 }
 ```
 
-With this handler, all 4xx HTTP status codes will trigger a WebClientResponseException within the reactive flow.
+With this handler, all 4xx HTTP status codes will trigger a `WebClientResponseException` within the reactive flow.
 
-
-In the caller module, exceptions can be handled in the onError callback:
+In the caller module, exceptions can be handled in the `onError` callback:
 
 ```java
 postService.getById(id).onError().subscrbe(...);
