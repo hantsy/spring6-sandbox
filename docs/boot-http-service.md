@@ -55,7 +55,7 @@ Now, let's take a closer look at each module—**shared**, **client**, and **ser
 
 The shared module serves as the foundation for communication between the client and server. It contains simple POJOs that define the API contract but does not include any business logic or implementation details.
 
-### Defining the PostApi Interface
+#### Defining PostApi Interface
 
 The `PostApi` is a pure Java interface that follows the same structure as the one introduced in the Declarative HTTP Client. It defines RESTful operations for managing posts, ensuring consistency between the client and server.
 
