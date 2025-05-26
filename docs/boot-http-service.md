@@ -167,7 +167,7 @@ Here’s the *pom.xml* configuration for the server module:
 
 #### Implementing `PostApi`
  
-We implement the `PostApi` interface from the shared module and declare it as a Spring `@RestController`. The routing annotations in the interface are automatically recognized, eliminating the need for explicit path mapping rules.
+We implement the `PostApi` interface from the shared module and declare it as a Spring `@RestController`. The routing annotations in the interface are automatically recognized, eliminating the need for explicit request mapping rules.
 
 ```java
 @RestController
@@ -349,7 +349,7 @@ Now that we have the server module set up, let's move on to building the client 
 
 ### Client Module
 
-In a Microservices architecture, the **server** module operates as an independent service exposing **Post API**, while the **client** module serves as an SDK that enables other services to interact with the **post service**. Ideally, the **client** module should be a `non-web` application designed to function as a reusable *library*.
+In a Microservices architecture, the **server** module operates as an independent service exposing **Post Service**, while the **client** module serves as an SDK that enables other services to interact with the **Post Service**. Ideally, the **client** module should be a `non-web` application designed to function as a reusable *library*.
 
 #### Add Shared Module as Dependency
 
