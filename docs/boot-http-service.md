@@ -1,10 +1,11 @@
 # Utilizing HTTP Service Interfaces to Define API Contracts Between Web Servers and Clients
 
-In the [Declarative HTTP Client](./docs/declarative-http-client.md), we explored how to create an HTTP/REST client using simple Java interfaces along with new annotations introduced in Spring 6. On the server side, when these interfaces are implemented and registered as Spring controllers, Spring automatically recognizes the annotations applied to the interface class and methods. This setup allows the server to expose RESTful APIs in the same way as traditional @RestController classes.
+In the [Declarative HTTP Client](./docs/declarative-http-client.md), we explored how to create an HTTP/REST client using simple Java interfaces along with new annotations introduced in Spring 6. On the server side, when these interfaces are implemented and registered as Spring controllers, Spring automatically recognizes the annotations applied to the interface class and methods. This setup allows the server to expose RESTful APIs in the same way as traditional `@RestController` classes.
 
 By leveraging HTTP service interfaces, we establish unified API contracts that can be shared between clients and servers, ensuring consistency, maintainability, and ease of development.
 
 ## Refactoring the Example Code
+
 To better structure our application, we will refactor the example used in the Declarative HTTP Client and divide it into three separate projects:
 
 ```bash
@@ -15,7 +16,7 @@ To better structure our application, we will refactor the example used in the De
 \-- pom.xml
 ```
 
-The *pom.xml* file in the project’s root directory serves as a simple POM declaration, organizing the following three modules:
+The *pom.xml* file in the project’s root directory works as a simple BOM, organizing the following three modules:
 - **shared**: Contains the HTTP service interfaces and data models, which will be used by both the client and server.
 - **client**: Represents the client application that consumes the server’s APIs.
 - **server**: Implements the server-side logic and exposes RESTful endpoints.
