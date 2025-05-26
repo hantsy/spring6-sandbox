@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
@@ -25,10 +26,18 @@ public class ClientConfig {
     WebClient webClient(WebClient.Builder builder, ObjectMapper objectMapper) {
         return builder
                 .baseUrl("http://localhost:8080")
+                // 1. throw exception and handle in the certain calling process
                 //.defaultStatusHandler(HttpStatusCode::is4xxClientError,ClientResponse::createError)
+
+                // 2. wrap it into a client friendly exception
+                //.defaultStatusHandler(HttpStatusCode::is4xxClientError,
+                //        response -> response.createException()
+                //                 .map(it -> new PostServiceException(it.getResponseBodyAsString()))
+
+                // 3. restore it into the original exception in the shared module
                 .defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
                         response -> response.createException()
-                               // .map(it -> new PostClientServiceException(it.getResponseBodyAsString()))
+                               // .map(it -> new PostServiceException(it.getResponseBodyAsString()))
                                 .map(it -> {
                                     ProblemDetail problemDetails = null;
                                     try {
