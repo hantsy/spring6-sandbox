@@ -1,8 +1,11 @@
-# Utilizing HTTP Service interfaces to Create API Contracts between Web Servers and Clients
+# Utilizing HTTP Service Interfaces to Define API Contracts Between Web Servers and Clients
 
-In the [Declarative HTTP Client](./docs/declarative-http-client.md), we discussed how to create an HTTP/REST client using simple Java interfaces and new annotations introduced in Spring 6. On the server side, if you implement the interfaces and register it as a Spring controller, it will recognize the annotations on the interface class and method level, and expose RESTful APIs that work well as the classic `@RestController` we created before. Thus the HTTP service interfaces can be worked as united API contracts shared between the servers and clients.
+In the [Declarative HTTP Client](./docs/declarative-http-client.md), we explored how to create an HTTP/REST client using simple Java interfaces along with new annotations introduced in Spring 6. On the server side, when these interfaces are implemented and registered as Spring controllers, Spring automatically recognizes the annotations applied to the interface class and methods. This setup allows the server to expose RESTful APIs in the same way as traditional @RestController classes.
 
-Let's refactor the example codes used in the [Declarative HTTP Client](./docs/declarative-http-client.md), and split it into 3 projects.
+By leveraging HTTP service interfaces, we establish unified API contracts that can be shared between clients and servers, ensuring consistency, maintainability, and ease of development.
+
+## Refactoring the Example Code
+To better structure our application, we will refactor the example used in the Declarative HTTP Client and divide it into three separate projects:
 
 ```bash
 + demo
@@ -12,13 +15,12 @@ Let's refactor the example codes used in the [Declarative HTTP Client](./docs/de
 \-- pom.xml
 ```
 
-The pom.xml in the project root folder is a simple POM declarative, including 3 modules: `shared`, `client`, and `server`.
+The *pom.xml* file in the project’s root directory serves as a simple POM declaration, organizing the following three modules:
+- **shared**: Contains the HTTP service interfaces and data models, which will be used by both the client and server.
+- **client**: Represents the client application that consumes the server’s APIs.
+- **server**: Implements the server-side logic and exposes RESTful endpoints.
 
-*  `shared` includes the HTTP service interfaces and data models
-*  `client` is the client application that calls the server APIs.
-*  `server` is the server side that exposes the RESTful APIs.
-
-Let's have a look at the POM.xml in the project root folder.
+Let's examine the *pom.xml* file located in the root directory:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -44,9 +46,12 @@ Let's have a look at the POM.xml in the project root folder.
 </project>
 ```
 
-The `client` and `server` depends on `shared` module.  Let's explore the `shared`, `client` and `server` respectively.
+Both the **client** and **server** modules depend on **shared**, ensuring the API contract is consistently enforced across the application.
 
-##  Shared Module
+## Exploring the Modules
+Now, let's take a closer look at each module—**shared**, **client**, and **server**—to understand their roles and implementations.
+
+###  Shared Module
 
 The shared module just contains some simple POJO that works as the contract between servers and clients, and does not include any business-related implementations.
 
