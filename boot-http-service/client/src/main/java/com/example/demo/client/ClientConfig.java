@@ -1,7 +1,6 @@
 package com.example.demo.client;
 
 import com.example.demo.shared.PostApi;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.support.DefaultFormattingConversionService;
@@ -15,8 +14,8 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class ClientConfig {
 
     @Bean
-    WebClient webClient(ObjectMapper objectMapper) {
-        return WebClient.builder()
+    WebClient webClient(WebClient.Builder builder) {
+        return builder
                 .baseUrl("http://localhost:8080")
                 .defaultStatusHandler(HttpStatusCode::is4xxClientError, ClientResponse::createException)
                 .build();

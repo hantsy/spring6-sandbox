@@ -1,5 +1,6 @@
 package com.example.demo.shared;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,20 +10,20 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
-@HttpExchange(url = "/posts", accept = "application/json", contentType = "application/json")
+@HttpExchange(url = "/posts")
 public interface PostApi {
-    @GetExchange("")
+    @GetExchange(accept = MediaType.APPLICATION_JSON_VALUE)
     Flux<Post> allPosts();
 
-    @GetExchange("/{id}")
+    @GetExchange(value = "/{id}", accept = MediaType.APPLICATION_JSON_VALUE)
     Mono<Post> getById(@PathVariable("id") UUID id);
 
-    @PostExchange("")
+    @PostExchange(contentType = MediaType.APPLICATION_JSON_VALUE)
     Mono<ResponseEntity<Void>> save(@RequestBody Post post);
 
-    @PutExchange("/{id}")
+    @PutExchange(value = "/{id}", contentType = MediaType.APPLICATION_JSON_VALUE)
     Mono<ResponseEntity<Void>> update(@PathVariable UUID id, @RequestBody Post post);
 
-    @DeleteExchange("/{id}")
+    @DeleteExchange(value = "/{id}")
     Mono<ResponseEntity<Void>> delete(@PathVariable UUID id);
 }
