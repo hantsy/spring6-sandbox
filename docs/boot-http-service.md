@@ -353,11 +353,14 @@ curl -X GET http://localhost:8080/posts/19578802-e666-4ea5-a351-ce753f4c14d7 -H 
 
 Now that we have the server module set up, let's move on to building the client module.
 
-## Client Module
+### Client Module
 
-In a Microservice architecture, the *server* module could be deployed as a standalone small service that serves the **Post APIs**,  and the *client* could be shared as an SDK in other services to call the posts APIs in the *Post service*. Ideally, the *client* module should be a non-web application and can be used as a library. 
+In a Microservices architecture, the **server** module operates as an independent service exposing **Post API**, while the **client** module serves as an SDK that enables other services to interact with the **post service**. Ideally, the **client&& module should be a `non-web` application designed to function as a reusable *library*.
 
-The POM of the client project is like the following:
+
+#### Add Shared Module as Dependency
+
+Here’s the *pom.xml* configuration for the client module
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -403,13 +406,18 @@ The POM of the client project is like the following:
             </plugin>
         </plugins>
     </build>
-
 </project>
 ```
 
-And in the *application.properties*, we set the `spring.main.web-application-type=none` and it will not start a web server as the *server* module.
+To ensure the client module does not start a web server (unlike the server module), configure application.properties
 
-As described in the [Declarative HTTP Client](./docs/declarative-http-client.md), create a `PostApi` client using `HttpServiceProxyFactory` builder.
+```properties
+spring.main.web-application-type=none
+```
+
+#### Creating a Declarative HTTP Client
+
+Following the [Declarative HTTP Client](./docs/declarative-http-client.md), we configure a `PostApi` client using HttpServiceProxyFactory:
 
 ```java
 @Configuration
@@ -434,8 +442,9 @@ public class ClientConfig {
     }
 }
 ```
+#### Interacting with the Post API
 
-Similarly, we can listen to  `ContextRefreshedEvent` to interact with the Post APIs exposed in the *server* module.
+Using an `@EventListener`, we trigger interactions with the server module's APIs:
 
 ```java
 @Component
@@ -481,10 +490,10 @@ public class ClientExampleInitializer {
 }
 ```
 
-Make sure the *server* application is running, and start the *client* application. 
+#### Handling Errors: Post Not Found Exception
 
-To handle the *Post Not Found* exception in the *client* application, add a new code snippet in the listener method. 
-
+To gracefully handle scenarios where a requested post does not exist, add this snippet to the listener method:
+ 
 ```java
 log.debug("get post by id that not existed.");
 client.getById(UUID.randomUUID())
@@ -511,13 +520,16 @@ public class ClientConfig {
 }
 ```
 
-The above handler will track the HTTP status, all 4xx status will throw a `WebClientResponseException` in the reactive flow. In a caller module, you can handle the exception in the `onError` callback like this.
+With this handler, all 4xx HTTP status codes will trigger a WebClientResponseException within the reactive flow.
+
+
+In the caller module, exceptions can be handled in the onError callback:
 
 ```java
 postService.getById(id).onError().subscrbe(...);
 ```
 
-Or define a global exception, for example - `PostServiceException` and convert `WebClientResponseException` into this *client* module-friendly exception.
+Alternatively, define a custom global exception like `PostServiceException`:
 
 ```java
 .defaultStatusHandler(HttpStatusCode::is4xxClientError,
@@ -525,9 +537,7 @@ Or define a global exception, for example - `PostServiceException` and convert `
                 .map(it -> new PostServiceException(it.getResponseBodyAsString()))
 ```
 
-In the caller module, it can use a global exception handler to handle this exception.
-
-Or restore the original exception defined in the *server* posts APIs, 
+Or, restore the original exception from the server APIs:
 
 ```java
 .defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
@@ -545,9 +555,9 @@ Or restore the original exception defined in the *server* posts APIs,
 		})
 )
 ```
-For every exception, you can apply different handling strategies. 
+
 
 >[!WARNING]
->I found there is an issue when adding the status handler here, if we set the application type as none web, it will raise a `WebClientRequestException` instead.
+>I noticed an issue when adding the status handler: if the application type is set to non-web, it raises a `WebClientRequestException` instead.
 
-Get the [complete example codes](https://github.com/hantsy/spring6-sandbox/tree/master/boot-http-service) from my Github, and explore it yourself. 
+Get the [complete example codes](https://github.com/hantsy/spring6-sandbox/tree/master/boot-http-service) from Github, and explore it yourself. 
