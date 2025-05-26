@@ -72,7 +72,6 @@ public interface PostApi {
     @DeleteExchange(value = "/{id}")
     Mono<ResponseEntity<Void>> delete(@PathVariable UUID id);
 }
-
 ```
 
 #### Post and Status Classes
@@ -114,7 +113,7 @@ public class PostNotFoundException extends RuntimeException {
 
 ### Server Module
 
-To set up the server module, we add the shared module as a dependency and include spring-boot-starter-webflux to run a web server using Reactor Netty.
+To set up the server module, we add the *shared* module as a dependency and include `spring-boot-starter-webflux` to run a web server using Reactor Netty.
 
 #### Add Shared Module as Dependency
 
