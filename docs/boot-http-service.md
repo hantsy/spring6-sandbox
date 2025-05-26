@@ -53,9 +53,11 @@ Now, let's take a closer look at each module—**shared**, **client**, and **ser
 
 ###  Shared Module
 
-The shared module just contains some simple POJO that works as the contract between servers and clients, and does not include any business-related implementations.
+The shared module serves as the foundation for communication between the client and server. It contains simple POJOs that define the API contract but does not include any business logic or implementation details.
 
-The `PostApi` is a pure Java interace, that contain the same codes we did in the [Declarative HTTP Client](./docs/declarative-http-client.md).
+### Defining the PostApi Interface
+
+The `PostApi` is a pure Java interface that follows the same structure as the one introduced in the Declarative HTTP Client. It defines RESTful operations for managing posts, ensuring consistency between the client and server.
 
 ```java
 @HttpExchange(url = "/posts")
@@ -78,7 +80,8 @@ public interface PostApi {
 
 ```
 
-The is no changes in `Post` and `Status` class, copy them into shared.
+#### Post and Status Classes
+No modifications are needed for the `Post` and `Status` classes. These classes define the structure of a post and its associated status. Simply copy them into the shared module.
 
 ```java
 public record Post(UUID id,
@@ -96,10 +99,10 @@ public enum Status {
 }
 ```
 
-Create a `PostNotFoundExcpetion` which is raised when the post was not found by ID.
+#### Handling Post Not Found Errors
+To manage cases where a requested post is not found, create a custom exception class called `PostNotFoundException`. This exception provides a meaningful error message when a post lookup fails.
 
 ```java
-
 public class PostNotFoundException extends RuntimeException {
     private final UUID id;
 
@@ -112,12 +115,15 @@ public class PostNotFoundException extends RuntimeException {
         return id;
     }
 }
-
 ```
 
-## Server Module
+### Server Module
 
-Add the above the shared module as an dependency, also add `spring-boot-starter-webflux` to serve a WebServer based on the Reactor Netty.
+To set up the server module, we add the shared module as a dependency and include spring-boot-starter-webflux to run a web server using Reactor Netty.
+
+#### Add Shared Module as Dependency
+
+Here’s the *pom.xml* configuration for the server module:
 
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -165,8 +171,9 @@ Add the above the shared module as an dependency, also add `spring-boot-starter-
 </project>
 ```
 
-Implements `PostApi` defined in the shared module, and declares it as `@RestController`. No need to add route path matching rules, it will resolve the 
-annotations in the `PostApi` interface.
+#### Implementing PostApi in the Server Module
+ 
+We implement the `PostApi` interface from the shared module and declare it as a Spring-managed `@RestController`. The routing annotations in the interface are automatically recognized, eliminating the need for explicit path matching rules.
 
 ```java
 @RestController
@@ -207,8 +214,10 @@ public class PostApiController implements PostApi {
 }
 ```
 
-The `PostRepository` behaves as a *Repository* pattern.  
+#### Implementing the PostRepository
 
+The `PostRepository` follows the Repository pattern for managing posts.
+ 
 ```java
 public interface PostRepository {
     Mono<Post> findById(UUID id);
@@ -219,7 +228,7 @@ public interface PostRepository {
 }
 ```
 
-And there we use a dummy implementation by `Map` instead of the real database.
+Instead of integrating a real database, we use a `Map` as an in-memory store.
 
 ```java
 @Repository
@@ -271,7 +280,9 @@ public class InMemoryPostRepository implements PostRepository {
 }
 ```
 
-Add a simple `SampleDataInitializer` to listen the `ApplicationReadyEvent` and insert some sample data at the application startup stage. 
+#### Initializing Sample Data at Startup
+
+A simple initializer listens for the ApplicationReadyEvent and inserts sample data when the application starts.
 
 ```java
 @Component
@@ -298,7 +309,9 @@ public class SampleDataInitializer {
 }
 ```
 
-To handle the `PostNotFoundException`, we added a `RestExceptionHandler` to archive it.
+#### Handling `PostNotFoundException`
+
+To handle errors gracefully, we define a REST exception handler and return responses following [Problem Details for HTTP APIs ](https://datatracker.ietf.org/doc/html/rfc7807).
 
 ```java
 @RestControllerAdvice
@@ -314,22 +327,31 @@ public class RestExceptionHandler {
 }
 ```
 
-Here we tried to convert the exception to friendly error messages defined in [Problem Details for HTTP APIs ](https://datatracker.ietf.org/doc/html/rfc7807).
+#### Running the Server Application
 
-Now run the *Application* main method in IDE or run `mvn clean spring-boot:run` to build and run the application.
+Start the application using your IDE or run:
 
-Let's try to access the endpoints by `cURL` command line.
+```bash
+mvn clean spring-boot:run
+```
+
+When the application is started successfully, you can use `cURL` to test the endpoints.
+
+To fetch all posts:
 
 ```bash
 curl -X GET http://localhost:8080/posts -H "Accept: application/json"
 [{"id":"b387888f-abb9-47ae-9f52-c5691c1a151a","title":"Second Post","content":"Content of Second Post","status":"DRAFT","createdAt":"2025-05-26T10:07:22.0166966"},{"id":"2da20365-089f-4a4f-8335-86b7516e6e14","title":"First Post","content":"Content of First Post","status":"DRAFT","createdAt":"2025-05-26T10:07:22.0156964"}]
-
-curl -X GET http://localhost:8080/posts/19578802-e666-4ea5-a351-ce753f4c14d7 -H "Accept: application/json"
-{"type":"http://localhost:8080/errors/404","title":"Not Found","status":404,"detail":"Post: 19578802-e666-4ea5-a351-ce753f4c14d7 not found","instance":"/posts/19578802-e666-4ea5-a351-ce753f4c14d7","id":"19578802-e666-4ea5-a351-ce753f4c14d7"}
-
 ```
 
-Let's build the *client* module.
+Try retrieving a non-existent post:
+
+```bash
+curl -X GET http://localhost:8080/posts/19578802-e666-4ea5-a351-ce753f4c14d7 -H "Accept: application/json"
+{"type":"http://localhost:8080/errors/404","title":"Not Found","status":404,"detail":"Post: 19578802-e666-4ea5-a351-ce753f4c14d7 not found","instance":"/posts/19578802-e666-4ea5-a351-ce753f4c14d7","id":"19578802-e666-4ea5-a351-ce753f4c14d7"}
+```
+
+Now that we have the server module set up, let's move on to building the client module.
 
 ## Client Module
 
