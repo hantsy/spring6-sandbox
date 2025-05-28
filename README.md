@@ -8,6 +8,7 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 ## Web
 * [An Introduction to Spring RestClient API](./docs/rest-client.md)
 * [An Introduction to Spring Declarative HTTP Client](./docs/declarative-http-client.md)
+* [Utilizing HTTP Service interfaces to Create API Contracts Between Web Servers and Clients](./docs/boot-http-service.md)
 ## Persistence
 * [Integrating Jakarta Data](./docs/jakarta-data.md)
 * [Spring JDBC and Vibur DBCP](./docs/boot-vibur-dbcp.md)
