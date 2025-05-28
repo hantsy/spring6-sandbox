@@ -37,7 +37,6 @@ public class ClientConfig {
                 // 3. restore it into the original exception in the shared module
                 .defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
                         response -> response.createException()
-                               // .map(it -> new PostServiceException(it.getResponseBodyAsString()))
                                 .map(it -> {
                                     ProblemDetail problemDetails = null;
                                     try {
