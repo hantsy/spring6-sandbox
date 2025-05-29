@@ -11,6 +11,7 @@ import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ProblemDetail;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
@@ -27,7 +28,7 @@ public class ClientConfig {
         return builder
                 .baseUrl("http://localhost:8080")
                 // 1. throw exception and handle in the certain calling process
-                //.defaultStatusHandler(HttpStatusCode::is4xxClientError,ClientResponse::createError)
+                .defaultStatusHandler(HttpStatusCode::is4xxClientError, ClientResponse::createError)
 
                 // 2. wrap it into a client friendly exception
                 //.defaultStatusHandler(HttpStatusCode::is4xxClientError,
@@ -35,20 +36,20 @@ public class ClientConfig {
                 //                 .map(it -> new PostServiceException(it.getResponseBodyAsString()))
 
                 // 3. restore it into the original exception in the shared module
-                .defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
-                        response -> response.createException()
-                                .map(it -> {
-                                    ProblemDetail problemDetails = null;
-                                    try {
-                                        problemDetails = objectMapper.readValue(it.getResponseBodyAsByteArray(), ProblemDetail.class);
-                                    } catch (IOException e) {
-                                        throw new RuntimeException(e);
-                                    }
-                                    log.debug("extracting exception body to problem details: {}", problemDetails);
-
-                                    return new PostNotFoundException(UUID.fromString(problemDetails.getProperties().get("id").toString()));
-                                })
-                )
+                //.defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
+                //        response -> response.createException()
+                //                .map(it -> {
+                //                    ProblemDetail problemDetails = null;
+                //                    try {
+                //                        problemDetails = objectMapper.readValue(it.getResponseBodyAsByteArray(), ProblemDetail.class);
+                //                    } catch (IOException e) {
+                //                        throw new RuntimeException(e);
+                //                    }
+                //                    log.debug("extracting exception body to problem details: {}", problemDetails);
+                //
+                //                    return new PostNotFoundException(UUID.fromString(problemDetails.getProperties().get("id").toString()));
+                //                })
+                //)
                 .build();
     }
 
