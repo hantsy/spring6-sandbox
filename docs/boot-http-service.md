@@ -485,7 +485,13 @@ public class ClientExampleInitializer {
 
 #### Handling Errors: Post Not Found Exception
 
-To gracefully handle scenarios where a requested post does not exist, add this snippet to the listener method:
+In the caller module, exceptions can be handled in the `onError()` callback or using an error handler in `subscribe()`:
+
+```java
+postService.getById(id).doOnError(...).subscrbe(...);
+```
+
+To demonstrate how to handle scenarios where a requested post does not exist, add this snippet to the listener method:
  
 ```java
 log.debug("get post by id that not existed.");
@@ -496,7 +502,7 @@ client.getById(UUID.randomUUID())
 );
 ```
 
-And add a custom status handler in the `WebClient` bean like this.
+Add a custom status handler to the `WebClient` bean as follows.
 
 ```java
 @Configuration
@@ -515,13 +521,7 @@ public class ClientConfig {
 
 With this handler, all 4xx HTTP status codes will trigger a `WebClientResponseException` within the reactive flow.
 
-In the caller module, exceptions can be handled in the `onError` callback:
-
-```java
-postService.getById(id).onError().subscrbe(...);
-```
-
-Alternatively, define a custom global exception like `PostServiceException`:
+Alternatively, define a custom global exception like `PostServiceException` and wrap the exception messages:
 
 ```java
 .defaultStatusHandler(HttpStatusCode::is4xxClientError,
@@ -529,7 +529,7 @@ Alternatively, define a custom global exception like `PostServiceException`:
                 .map(it -> new PostServiceException(it.getResponseBodyAsString()))
 ```
 
-Or, restore the original exception from the server APIs:
+Or, restore to use the original exception that was used in the server APIs:
 
 ```java
 .defaultStatusHandler(status -> status == HttpStatus.NOT_FOUND,
@@ -550,6 +550,6 @@ Or, restore the original exception from the server APIs:
 
 
 >[!WARNING]
->I noticed an issue when adding the status handler: if the application type is set to non-web, it raises a `WebClientRequestException` instead.
+>I encountered an issue in my example codes when adding the status handler. If the application type is set to `none`, it raises a `WebClientRequestException` instead in the client `ContextRefreshedEvent` handler.
 
 Get the [complete example codes](https://github.com/hantsy/spring6-sandbox/tree/master/boot-http-service) from Github, and explore it yourself. 
