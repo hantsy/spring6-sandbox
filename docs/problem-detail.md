@@ -6,7 +6,7 @@ When building REST API backends, developers often create custom wrappers, such a
 
 Another widely accepted format is **Problem Details for HTTP APIs**(also known as Problem Details), standardized by the IETF as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html). Problem Details defines a consistent, human-friendly, and readable structure for representing error conditions in HTTP responses. This specification enables clients to interpret and handle errors uniformly, simplifying integration and improving interoperability across different systems.
 
-Finally, Spring 6 adds native support for ProblemDetails, making it easier for developers to adopt this consistent error format in their applications.
+Spring 6 adds native support for ProblemDetails, making it easier for developers to adopt this consistent error format in their applications.
 
 Let’s take a closer look at the new [`ProblemDetail`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ProblemDetail.html) class introduced in Spring 6. This POJO includes several fields defined by RFC 9457:
 
