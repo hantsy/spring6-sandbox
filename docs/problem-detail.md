@@ -1,12 +1,12 @@
 # An Introduction to Spring ProblemDetails Support
 
-When building REST API backends, developers often create custom wrappers, such as `ApiResult` or `ErrorResponse` to standardize response formats within their projects. However, these solutions are rarely portable across different systems. As a developer, I find it frustrating to handle various response formats when integrating with third-party APIs.
+When building REST API backends, developers often create custom wrappers, such as `ApiResult` or `ErrorResponse`, to standardize response formats within their projects. However, these solutions are rarely portable across different systems. As a developer, I find it frustrating to handle various response formats when integrating with third-party APIs.
 
-[Spring HATEOAS](https://spring.io/projects/spring-hateoas) adopts the [VndError draft proposal](https://github.com/blongden/vnd.error) to represent REST response messages. While Spring HATEOAS primarily focuses on building hypermedia-driven APIs, it also helps applications reach Level 3 of the Richardson Maturity Model.
+[Spring HATEOAS](https://spring.io/projects/spring-hateoas) adopts the [VndError draft proposal](https://github.com/blongden/vnd.error) to represent REST response messages. While Spring HATEOAS primarily focuses on building hypermedia-driven APIs, it also helps applications reach Level 3 of the [Richardson Maturity Model](https://martinfowler.com/articles/richardsonMaturityModel.html).
 
-Another widely accepted format is Problem Details, standardized by the IETF as [RFC9457](https://www.rfc-editor.org/rfc/rfc9457.html). Problem Details for HTTP APIs defines a consistent, human being friendly and readable structure for representing error conditions in HTTP responses. This specification enables clients to interpret and handle errors uniformly, simplifying integration and improving interoperability across different systems.
+Another widely accepted format is **Problem Details for HTTP APIs**(also known as Problem Details), standardized by the IETF as [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457.html). Problem Details defines a consistent, human-friendly, and readable structure for representing error conditions in HTTP responses. This specification enables clients to interpret and handle errors uniformly, simplifying integration and improving interoperability across different systems.
 
-Finally Spring 6 adds native support for ProblemDetails, making it easier for developers to adopt this consistent error format in their applications.
+Finally, Spring 6 adds native support for ProblemDetails, making it easier for developers to adopt this consistent error format in their applications.
 
 Let’s take a closer look at the new [`ProblemDetail`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ProblemDetail.html) class introduced in Spring 6. This POJO includes several fields defined by RFC 9457:
 
@@ -92,12 +92,12 @@ spring.webflux.problemdetails.enabled=true
 
 Once enabled, you can use ProblemDetails as demonstrated above. Additionally, Spring Boot’s built-in error handling will also return errors in the ProblemDetails format.
 
-Before the introduction of native support in Spring 6, developers who wanted to adopt the Problem Details format often turned to [Zalando Problem](https://github.com/zalando/problem). This library, along with its [Spring Web integration](https://github.com/zalando/problem-spring-web), provides comprehensive support for both WebMvc and WebFlux applications.
+Before Spring 6, developers who wanted to adopt the Problem Details format often turned to [Zalando Problem](https://github.com/zalando/problem). This library, along with its [Spring Web integration](https://github.com/zalando/problem-spring-web), provides comprehensive support for both WebMvc and WebFlux applications.
 
 > [!NOTE]
-> Zalando’s Problem library and its Spring integration module offer more extensive integration with the Spring ecosystem than the current built-in support in Spring Boot. For instance, it can automatically handle security-related exceptions and Jakarta Validation errors, among other advanced features.
+> Zalando’s Problem library and its Spring integration module offer more extensive integration with the Spring ecosystem than the current built-in support in Spring Boot. For instance, it can automatically handle Spring Security-related exceptions and Jakarta Validation errors, among other advanced features.
 
 ---
 
 **Summary:**  
-Spring 6 and Spring Boot now offer native support for the standardized ProblemDetails error format, making error handling more consistent and interoperable across applications. For advanced integration, especially in areas such as security and validation, Zalando's solution remains a strong alternative.
+Spring 6 and Spring Boot now offer native support for the standardized ProblemDetails error format, making error handling more consistent and interoperable across applications. For advanced integration, especially in areas such as Spring Security and Jakarta Validation, Zalando's solution remains a strong alternative.
