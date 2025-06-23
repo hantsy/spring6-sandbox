@@ -7,7 +7,7 @@ Another widely accepted format is Problem Details, standardized by the IETF as [
 
 Building on these industry standards, Spring 6 has introduced native support for ProblemDetails, making it easier for developers to adopt this consistent error format in their applications.
 
-Let's take a closer look at the new [`ProblemDetail`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ProblemDetail.html) class that was introduced in Spring 6, which includes several fields defined by RFC9457:
+Let's take a closer look at the new [`ProblemDetail`](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/http/ProblemDetail.html) class that was introduced in Spring 6, which is just a POJO and includes several fields defined by RFC 9457:
 
 * `type` – A URI identifying the problem type
 * `status` – The HTTP status code
@@ -46,7 +46,7 @@ When an exception is handled, the response is rendered with the content type `ap
     "type": "http://example.com/apidoc/error/404",
     "status": 404,
     "title": "Post Not Found",
-    "detail": "Post is not found, the id : xxxx",
+    "detail": "Post is not found, the id: xxxx",
     "instance": "/api/posts/xxxx"
 }
 ```
@@ -67,7 +67,7 @@ Once enabled, you can use ProblemDetails as demonstrated above. Additionally, Sp
 Before Spring 6, if you wanted to use Problem Details in your projects, you could consider using [`zalando/problem`](https://github.com/zalando/problem), which provides out-of-the-box [Spring Web integration](https://github.com/zalando/problem-spring-web) for both WebMvc and WebFlux stacks.
 
 > [!NOTE]
-> Zalando's Problem and Spring integration module offers deeper integration with Spring components than the current Spring Boot built-in support. It handles security exceptions and Jakarta Validation violations, among other features.
+> Zalando's Problem and Spring integration module offers deeper integration with components in the Spring ecosystem than the current Spring Boot built-in Problem Details support. For example, it handles security exceptions and Jakarta Validation violations, among other features.
 
 ---
 
