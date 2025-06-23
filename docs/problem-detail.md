@@ -18,7 +18,7 @@ Let's take a closer look at the new [`ProblemDetail`](https://docs.spring.io/spr
 
 The `ProblemDetail` class provides two convenient factory methods: `forStatus(HttpStatus status)` and `forStatusAndDetail(HttpStatusCode status, String detail)`, making it easy to create ProblemDetail objects.
 
-In a Spring WebMvc or WebFlux project, you can assemble error responses using `@ExceptionHandler` methods in a `@ControllerAdvice/@RestControllerAdvice` bean:
+In a Spring WebMvc or WebFlux project, you can assemble error responses using `@ExceptionHandler` methods in a `@ControllerAdvice/@RestControllerAdvice` bean, update the method returns a `ResponseEntity<ProblemDetail>` or `ProblemDetail`.
 
 ```java
 @RestControllerAdvice
