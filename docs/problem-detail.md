@@ -64,10 +64,10 @@ spring.webflux.problemdetails.enabled=true
 
 Once enabled, you can use ProblemDetails as demonstrated above. Additionally, Spring Boot's built-in error handling will also return errors in the ProblemDetails format.
 
-Before Spring 6, if you wanted to use Problem Details in your projects, you could consider using [`zalando/problem`](https://github.com/zalando/problem), which provides out-of-the-box [Spring Web integration](https://github.com/zalando/problem-spring-web) for both WebMvc and WebFlux stacks.
+Before the introduction of native support in Spring 6, developers who wanted to adopt the Problem Details format often turned to [Zalando Problem](https://github.com/zalando/problem). This library, along with its [Spring Web integration](https://github.com/zalando/problem-spring-web), provides comprehensive support for both WebMvc and WebFlux applications.
 
 > [!NOTE]
-> Zalando's Problem and Spring integration module offers deeper integration with components in the Spring ecosystem than the current Spring Boot built-in Problem Details support. For example, it handles security exceptions and Jakarta Validation violations, among other features.
+> Zalando's Problem library and its Spring integration module offer more extensive integration with the Spring ecosystem than the current built-in support in Spring Boot. For instance, it can automatically handle security-related exceptions and Jakarta Validation errors, among other advanced features.
 
 ---
 
