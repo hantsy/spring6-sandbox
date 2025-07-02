@@ -11,7 +11,6 @@ Spring 6 (and Spring Boot 3) upgrades to use Jakarta EE 9+ and Java 17 as the ne
 * [Utilizing HTTP Service Interfaces to Create API Contracts Between Web Servers and Clients](./docs/boot-http-service.md)
 * [An Introduction to Spring Problem Detail Support](./docs/problem-detail.md)
 ## Persistence
-* [Integrating Jakarta Data](./docs/jakarta-data.md)
 * [Spring JDBC and Vibur DBCP](./docs/boot-vibur-dbcp.md)
 * [An Introduction to Spring JdbcClient API](./docs/jdbc-client.md)
 ## Testing
