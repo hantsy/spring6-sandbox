@@ -22,14 +22,9 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: "corretto"
+          distribution: "temurin"
           java-version: 21
-      - name: Cache Maven packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          cache: "maven"
 
       - name: Build with Maven
         run: mvn -B -q clean package --file jdbc/pom.xml
