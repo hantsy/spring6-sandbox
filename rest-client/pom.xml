@@ -28,7 +28,7 @@
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.6</spring-framework.version>
-        <reactor.version>2024.0.11</reactor.version>
+        <reactor.version>2024.0.12</reactor.version>
         <jackson.version>2.18.3</jackson.version>
         <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
         <lombok.version>1.18.42</lombok.version>
