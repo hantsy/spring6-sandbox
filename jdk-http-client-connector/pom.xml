@@ -24,7 +24,7 @@
         <!-- runtime deps -->
         <jakartaee-api.version>10.0.0</jakartaee-api.version>
         <spring-framework.version>6.2.6</spring-framework.version>
-        <reactor.version>2024.0.11</reactor.version>
+        <reactor.version>2024.0.12</reactor.version>
         <!-- skip tests by default -->
         <skip.unit.tests>true</skip.unit.tests>
         <skip.integration.tests>true</skip.integration.tests>
