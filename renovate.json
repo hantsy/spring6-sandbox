@@ -21,6 +21,12 @@
       "matchManagers": ["maven-versions"],
       "allowedVersions": "<3.6.0",
       "groupName": "Spring Boot 3.5.x"
+    }, 
+     {
+      "matchPackageNames": ["org.hibernate.orm:*"],
+      "matchManagers": ["maven-versions"],
+      "allowedVersions": "<7.0.0",
+      "groupName": "Hibernate 6.x"
     }
   ]
 }
