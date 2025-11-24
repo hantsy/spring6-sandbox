@@ -9,6 +9,18 @@
       "matchPackageNames": [
         "*"
       ]
+    },
+    {
+      "matchPackageNames": ["org.springframework:spring-core", "org.springframework:*"],
+      "matchManagers": ["maven-versions"],
+      "allowedVersions": "<7.0.0",
+      "groupName": "Spring Framework 6.x"
+    },
+    {
+      "matchPackageNames": ["org.springframework.boot:spring-boot", "org.springframework.boot:*"],
+      "matchManagers": ["maven-versions"],
+      "allowedVersions": "<3.6.0",
+      "groupName": "Spring Boot 3.5.x"
     }
   ]
 }
