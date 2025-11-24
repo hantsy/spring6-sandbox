@@ -43,7 +43,7 @@
 
         <!-- WildFly preview for Jakarta EE 10 -->
         <wildfly.version>35.0.1.Final</wildfly.version>
-        <wildfly-maven-plugin.version>5.1.3.Final</wildfly-maven-plugin.version>
+        <wildfly-maven-plugin.version>5.1.5.Final</wildfly-maven-plugin.version>
         <wildfly.artifactId>wildfly-preview-dist</wildfly.artifactId>
 
         <!-- skip tests by default -->
