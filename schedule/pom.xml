@@ -257,6 +257,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
                 <extensions>true</extensions> <!-- You can set this option
             to automatically take information about lifecycles -->
                 <executions>
