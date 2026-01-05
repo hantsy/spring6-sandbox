@@ -29,7 +29,7 @@
         <querydsl.version>5.1.0</querydsl.version>
         <hibernate.version>6.6.15.Final</hibernate.version>
         <reactor.version>2024.0.13</reactor.version>
-        <spring-data.version>2024.1.5</spring-data.version>
+        <spring-data.version>2024.1.13</spring-data.version>
 
         <!-- Apache Tomcat -->
         <tomcat.version>11.0.15</tomcat.version>
