@@ -29,7 +29,7 @@
         <spring-framework.version>6.2.15</spring-framework.version>
         <postgresql.version>42.7.8</postgresql.version>
         <reactor.version>2024.0.13</reactor.version>
-        <spring-data.version>2024.1.5</spring-data.version>
+        <spring-data.version>2024.1.13</spring-data.version>
         <spring-security.version>6.4.5</spring-security.version>
         <freemarker.version>2.3.34</freemarker.version>
         <hibernate-validator.version>8.0.3.Final</hibernate-validator.version>
