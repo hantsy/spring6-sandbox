@@ -1,0 +1,65 @@
+site_name: Spring 6 Sandbox
+site_description: Spring 6 & Spring Boot 3 Examples and Guides
+repo_url: https://github.com/hantsy/spring6-sandbox
+repo_name: hantsy/spring6-sandbox
+docs_dir: docs
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - toc:
+      permalink: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Core:
+      - RestClient: rest-client.md
+  - Web:
+      - Declarative HTTP Client: declarative-http-client.md
+      - HTTP Service Interfaces: boot-http-service.md
+      - Problem Detail Support: problem-detail.md
+  - Persistence:
+      - JdbcClient API: jdbc-client.md
+      - Vibur DBCP: boot-vibur-dbcp.md
+  - Testing:
+      - MockMvcTester: mockmvc-tester.md
+      - "@TestBean": test-bean.md
+  - Others:
+      - Declarative RSocket Client: declarative-rsocket-client.md

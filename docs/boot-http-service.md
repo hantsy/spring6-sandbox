@@ -1,6 +1,6 @@
 # Utilizing HTTP Service Interfaces to Define API Contracts Between Web Servers and Clients
 
-In the [Declarative HTTP Client](./docs/declarative-http-client.md), we explored how to create an HTTP/REST client using simple Java interfaces along with new annotations introduced in Spring 6. On the server side, when these interfaces are implemented and registered as Spring controllers, Spring automatically recognizes the annotations applied to the interface class and methods. This setup allows the server to expose RESTful APIs in the same way as traditional `@RestController` classes.
+In the [Declarative HTTP Client](declarative-http-client.md), we explored how to create an HTTP/REST client using simple Java interfaces along with new annotations introduced in Spring 6. On the server side, when these interfaces are implemented and registered as Spring controllers, Spring automatically recognizes the annotations applied to the interface class and methods. This setup allows the server to expose RESTful APIs in the same way as traditional `@RestController` classes.
 
 By leveraging HTTP service interfaces, we establish unified API contracts that can be shared between clients and servers, ensuring consistency, maintainability, and ease of development.
 
@@ -410,7 +410,7 @@ spring.main.web-application-type=none
 
 #### Creating a Declarative HTTP Client
 
-Following the [Declarative HTTP Client](./docs/declarative-http-client.md), we configure a `PostApi` client using `HttpServiceProxyFactory`:
+Following the [Declarative HTTP Client](declarative-http-client.md), we configure a `PostApi` client using `HttpServiceProxyFactory`:
 
 ```java
 @Configuration
